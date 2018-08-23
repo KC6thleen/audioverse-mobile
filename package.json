@@ -1,14 +1,14 @@
 {
-  "name": "AudioVerse",
-  "version": "0.0.1",
+  "name": "audioverse-mobile",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.3.1",
-    "react-native": "0.55.4",
+    "react": "16.4.1",
+    "react-native": "0.56.0",
     "react-native-i18n": "^2.0.12",
     "react-native-swiper": "^1.5.13",
     "react-native-track-player": "^0.2.4",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "babel-jest": "23.0.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native": "5.0.0",
     "jest": "23.0.1",
     "react-test-renderer": "16.3.1"
   },
