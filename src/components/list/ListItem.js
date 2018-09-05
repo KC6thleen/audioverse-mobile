@@ -56,11 +56,16 @@ const elementOrObject = PropTypes.oneOfType([
   PropTypes.object
 ])
 
+const elementOrString = PropTypes.oneOfType([
+  PropTypes.element,
+  PropTypes.string
+])
+
 ListItem.propTypes = {
   avatar: elementOrObject,
   icon: elementOrObject,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
+  title: elementOrString,
+  subtitle: elementOrString,
   rightElement: PropTypes.element,
   chevron: PropTypes.bool,
   chevronColor: PropTypes.string,
