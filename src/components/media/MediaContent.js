@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Swiper from 'react-native-swiper'
 
-import I18n from '../../locales'
-import { MediaTypes } from '../constants'
-import defaultImage from '../../assets/av-logo.png'
-import Slide from './Slide'
+import I18n from '../../../locales'
+import { MediaTypes } from '../../constants'
+import defaultImage from '../../../assets/av-logo.png'
+import Slide from '../slide/Slide'
 
 const getSlides = (data, language) => {
 

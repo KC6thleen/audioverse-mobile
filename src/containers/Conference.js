@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import List from '../components/List'
-import ListItem from '../components/ListItem'
-import MiniPlayer from '../components/MiniPlayer'
+import List from '../components/list/List'
+import ListItem from '../components/list/ListItem'
+import MiniPlayer from '../components/miniplayer'
 import { loadConference, resetAndPlayTrack } from '../actions'
 import { getConference, getConferencePagination } from '../reducers/selectors'
 

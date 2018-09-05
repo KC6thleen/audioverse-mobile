@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import MiniPlayer from '../components/MiniPlayer'
+import MiniPlayer from '../components/miniplayer'
 import defaultImage from '../../assets/av-logo.png'
 import { loadBibleChapters, bibleChapter, resetAndPlayTrack } from '../actions'
 import { getBibleChapters, getBibleChaptersPagination, getBible } from '../reducers/selectors'

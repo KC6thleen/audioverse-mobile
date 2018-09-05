@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <RCTSlider
+    accessible={true}
+    disabled={false}
+    enabled={true}
+    maximumValue={1}
+    minimumTrackTintColor="#E53935"
+    minimumValue={0}
+    onChange={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onSlidingComplete={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onValueChange={[Function]}
+    step={1}
+    style={
+      Array [
+        Object {
+          "height": 40,
+        },
+        Object {
+          "marginBottom": -20,
+          "width": "100%",
+          "zIndex": 10,
+        },
+      ]
+    }
+    thumbImage={1}
+    thumbTintColor="#E53935"
+    value={0}
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#E0E0E080",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingTop": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "marginLeft": 10,
+        }
+      }
+    >
+      NaN:NaN
+    </Text>
+    <Text
+      style={
+        Object {
+          "marginRight": 10,
+        }
+      }
+    >
+      NaN:NaN
+    </Text>
+  </View>
+</View>
+`;

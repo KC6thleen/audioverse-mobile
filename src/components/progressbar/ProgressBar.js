@@ -2,7 +2,8 @@ import React from 'react'
 import { View, Text, TouchableWithoutFeedback, Slider, Platform, StyleSheet } from 'react-native'
 import TrackPlayer, { ProgressComponent } from 'react-native-track-player'
 
-import { formatTime } from '../utils'
+import { formatTime } from '../../utils'
+import flatDot from '../../../assets/flat_dot.png'
 
 class ProgressBar extends ProgressComponent {
 
@@ -30,7 +31,7 @@ class ProgressBar extends ProgressComponent {
             step={1}
             minimumTrackTintColor="#E53935"
             thumbTintColor="#E53935"
-            thumbImage={require('../../assets/flat_dot.png')}
+            thumbImage={flatDot}
             style={styles.slider}
             onValueChange={this.handleValueChange}
             onSlidingComplete={this.handleSlidingComplete} />

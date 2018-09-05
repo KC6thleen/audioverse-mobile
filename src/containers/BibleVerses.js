@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View, WebView, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-import MiniPlayer from '../components/MiniPlayer'
+import MiniPlayer from '../components/miniplayer'
 import { getBible } from '../reducers/selectors'
 import { Endpoints } from '../constants'
 

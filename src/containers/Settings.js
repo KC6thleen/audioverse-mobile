@@ -4,8 +4,8 @@ import { View, Text, Modal, Picker, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
 import I18n from '../../locales'
-import ListItem from '../components/ListItem'
-import MiniPlayer from '../components/MiniPlayer'
+import ListItem from '../components/list/ListItem'
+import MiniPlayer from '../components/miniplayer'
 import { changeLanguage } from '../actions'
 import { getLanguage } from '../reducers/selectors'
 

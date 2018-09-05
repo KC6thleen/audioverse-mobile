@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { View, Platform, StyleSheet } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
-import ImageButton from '../components/ImageButton'
-import iconPlay from '../../assets/ic_play.png'
-import iconPause from '../../assets/pause.png'
-import iconPrevious from '../../assets/previous.png'
-import iconNext from '../../assets/next.png'
-import iconReplay from '../../assets/ic_replay_10.png'
-import iconForward from '../../assets/ic_forward_30.png'
+import ImageButton from '../buttons/ImageButton'
+import iconPlay from '../../../assets/ic_play.png'
+import iconPause from '../../../assets/pause.png'
+import iconPrevious from '../../../assets/previous.png'
+import iconNext from '../../../assets/next.png'
+import iconReplay from '../../../assets/ic_replay_10.png'
+import iconForward from '../../../assets/ic_forward_30.png'
 
 const MediaControls = ({ state, playPause, skipToPrevious, skipToNext, replay, forward }) => (
   <View style={styles.container}>

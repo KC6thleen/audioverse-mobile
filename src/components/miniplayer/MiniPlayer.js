@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Platform, StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
 import TrackPlayer from 'react-native-track-player'
 
-import ListItem from '../components/ListItem'
-import ImageButton from '../components/ImageButton'
-import ProgressBarMini from '../components/ProgressBarMini'
-import { playPause } from '../actions'
-import { getCurrentTrack, getPlaybackState } from '../reducers/selectors'
-import iconPlay from '../../assets/ic_play.png'
-import iconPause from '../../assets/pause.png'
+import ListItem from '../list/ListItem'
+import ImageButton from '../buttons/ImageButton'
+import ProgressBarMini from '../progressbar/ProgressBarMini'
+import iconPlay from '../../../assets/ic_play.png'
+import iconPause from '../../../assets/pause.png'
 
 const MiniPlayer = ({ onPressMetaData, track, state, playPause}) => {
 
@@ -67,13 +64,4 @@ MiniPlayer.propTypes = {
   playPause: PropTypes.func.isRequired
 }
 
-const  mapStateToProps = state => ({
-  state: getPlaybackState(state),
-  track: getCurrentTrack(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  playPause: () => dispatch(playPause())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MiniPlayer)
+export default MiniPlayer

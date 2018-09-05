@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Feather'
 
 import I18n from '../../locales'
 import { getLanguage, getBible } from '../reducers/selectors'
-import IconButton from '../components/IconButton'
+import IconButton from '../components/buttons/IconButton'
 import CustomDrawerContent from '../containers/CustomDrawerContent'
 import Login from '../containers/Login'
 import Signup from '../containers/Signup'
