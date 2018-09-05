@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadBook, resetAndPlayTrack } from '../../../actions'
-import { getBook, getBookPagination } from '../../../reducers/selectors'
+import { loadBook, resetAndPlayTrack } from 'src/actions'
+import { getBook, getBookPagination } from 'src/reducers/selectors'
 
 import Book from './Book'
 

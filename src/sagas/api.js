@@ -1,9 +1,9 @@
 import { put, select, call } from 'redux-saga/effects'
 
-import { Endpoints } from '../constants'
-import * as api from '../services'
-import * as actions from '../actions'
-import * as selectors from '../reducers/selectors'
+import { Endpoints } from 'src/constants'
+import * as api from 'src/services'
+import * as actions from 'src/actions'
+import * as selectors from 'src/reducers/selectors'
 
 /**
  * Reusable fetch subroutine

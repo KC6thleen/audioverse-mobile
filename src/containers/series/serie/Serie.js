@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 
-import List from '../../../components/list/List'
-import ListItem from '../../../components/list/ListItem'
-import MiniPlayer from '../../../components/miniplayer'
+import List from 'src/components/list/List'
+import ListItem from 'src/components/list/ListItem'
+import MiniPlayer from 'src/components/miniplayer'
 
 class Serie extends PureComponent {
 

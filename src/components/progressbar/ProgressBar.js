@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Text, TouchableWithoutFeedback, Slider, Platform, StyleSheet } from 'react-native'
 import TrackPlayer, { ProgressComponent } from 'react-native-track-player'
 
-import { formatTime } from '../../utils'
-import flatDot from '../../../assets/flat_dot.png'
+import { formatTime } from 'src/utils'
+import flatDot from 'assets/flat_dot.png'
 
 class ProgressBar extends ProgressComponent {
 

@@ -3,7 +3,7 @@ import {
   createReduxBoundAddListener,
 } from 'react-navigation-redux-helpers'
 
-import { getNav } from '../reducers/selectors'
+import { getNav } from 'src/reducers/selectors'
 
 const middleware = createReactNavigationReduxMiddleware(
   "root",

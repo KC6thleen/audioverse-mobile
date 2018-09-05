@@ -1,4 +1,4 @@
-import { parseRecording } from '../utils'
+import { parseRecording } from 'src/utils'
 
 /**
  * Fetches an API response and parses the result

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { playPause, skipToPrevious, skipToNext, replay, forward, setRate } from '../../actions'
-import { getCurrentTrack, getPlaybackState, getRate, getLanguage } from '../../reducers/selectors'
+import { playPause, skipToPrevious, skipToNext, replay, forward, setRate } from 'src/actions'
+import { getCurrentTrack, getPlaybackState, getRate, getLanguage } from 'src/reducers/selectors'
 
 import NowPlaying from './NowPlaying'
 

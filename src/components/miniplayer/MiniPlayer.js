@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { View, Platform, StyleSheet } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
-import ListItem from '../list/ListItem'
-import ImageButton from '../buttons/ImageButton'
-import ProgressBarMini from '../progressbar/ProgressBarMini'
-import iconPlay from '../../../assets/ic_play.png'
-import iconPause from '../../../assets/pause.png'
+import ListItem from 'src/components/list/ListItem'
+import ImageButton from 'src/components/buttons/ImageButton'
+import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
+import iconPlay from 'assets/ic_play.png'
+import iconPause from 'assets/pause.png'
 
 const MiniPlayer = ({ onPressMetaData, track, state, playPause}) => {
 

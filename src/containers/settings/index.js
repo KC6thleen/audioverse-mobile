@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { changeLanguage } from '../../actions'
-import { getLanguage } from '../../reducers/selectors'
+import { changeLanguage } from 'src/actions'
+import { getLanguage } from 'src/reducers/selectors'
 
 import Settings from './Settings'
 

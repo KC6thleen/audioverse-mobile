@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadSerie, resetAndPlayTrack } from '../../../actions'
-import { getSerie, getSeriePagination } from '../../../reducers/selectors'
+import { loadSerie, resetAndPlayTrack } from 'src/actions'
+import { getSerie, getSeriePagination } from 'src/reducers/selectors'
 
 import Serie from './Serie'
 

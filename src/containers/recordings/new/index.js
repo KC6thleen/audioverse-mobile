@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadNewRecordings, resetAndPlayTrack } from '../../../actions'
-import { getNewRecordings, getNewRecordingsPagination } from '../../../reducers/selectors'
+import { loadNewRecordings, resetAndPlayTrack } from 'src/actions'
+import { getNewRecordings, getNewRecordingsPagination } from 'src/reducers/selectors'
 
 import NewRecordings from './NewRecordings'
 

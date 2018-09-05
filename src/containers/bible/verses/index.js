@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { getBible } from '../../../reducers/selectors'
+import { getBible } from 'src/reducers/selectors'
 
 import BibleVerses from './BibleVerses'
 

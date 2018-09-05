@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { addNavigationHelpers, NavigationActions } from 'react-navigation'
 
 import AppNavigator from './AppNavigator'
-import { addListener } from '../utils/react-navigation-redux'
-import { getNav } from '../reducers/selectors'
+import { addListener } from 'src/utils/react-navigation-redux'
+import { getNav } from 'src/reducers/selectors'
 
 class ReduxNavigator extends PureComponent {
 

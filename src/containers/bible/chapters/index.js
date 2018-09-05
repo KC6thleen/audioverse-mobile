@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadBibleChapters, bibleChapter, resetAndPlayTrack } from '../../../actions'
-import { getBibleChapters, getBibleChaptersPagination, getBible } from '../../../reducers/selectors'
+import { loadBibleChapters, bibleChapter, resetAndPlayTrack } from 'src/actions'
+import { getBibleChapters, getBibleChaptersPagination, getBible } from 'src/reducers/selectors'
 
 import BibleChapters from './BibleChapters'
 

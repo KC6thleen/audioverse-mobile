@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import ListItem from './ListItem'
-import defaultImage from '../../../assets/av-logo.png'
+import defaultImage from 'assets/av-logo.png'
 
 import renderer from 'react-test-renderer'
 

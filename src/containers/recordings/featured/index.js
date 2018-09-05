@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadFeaturedRecordings, resetAndPlayTrack } from '../../../actions'
-import { getFeaturedRecordings, getFeaturedRecordingsPagination } from '../../../reducers/selectors'
+import { loadFeaturedRecordings, resetAndPlayTrack } from 'src/actions'
+import { getFeaturedRecordings, getFeaturedRecordingsPagination } from 'src/reducers/selectors'
 
 import FeaturedRecordings from './FeaturedRecordings'
 

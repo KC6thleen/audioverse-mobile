@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadSponsors } from '../../actions'
-import { getSponsors, getSponsorsPagination } from '../../reducers/selectors'
+import { loadSponsors } from 'src/actions'
+import { getSponsors, getSponsorsPagination } from 'src/reducers/selectors'
 
 import Sponsors from './Sponsors'
 

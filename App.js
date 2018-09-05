@@ -9,11 +9,11 @@ import { AppState } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { setupPlayer, playbackUpdate } from './src/actions'
+import { setupPlayer, playbackUpdate } from 'src/actions'
 // react-navigation no redux
-import AppNavigator from './src/navigators/AppNavigator'
+import AppNavigator from 'src/navigators/AppNavigator'
 // react-navigation with redux
-// import AppNavigator from './src/navigators/ReduxNavigator'
+// import AppNavigator from 'src/navigators/ReduxNavigator'
 
 class App extends PureComponent {
   

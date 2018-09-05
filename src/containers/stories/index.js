@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadStories } from '../../actions'
-import { getStories, getStoriesPagination } from '../../reducers/selectors'
+import { loadStories } from 'src/actions'
+import { getStories, getStoriesPagination } from 'src/reducers/selectors'
 
 import Stories from './Stories'
 

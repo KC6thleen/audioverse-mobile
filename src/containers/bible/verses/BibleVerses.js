@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, WebView, StyleSheet } from 'react-native'
 
-import MiniPlayer from '../../../components/miniplayer'
-import { Endpoints } from '../../../constants'
+import MiniPlayer from 'src/components/miniplayer'
+import { Endpoints } from 'src/constants'
 
 class BibleVerses extends PureComponent {
 

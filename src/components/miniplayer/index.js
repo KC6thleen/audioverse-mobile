@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { playPause } from '../../actions'
-import { getCurrentTrack, getPlaybackState } from '../../reducers/selectors'
+import { playPause } from 'src/actions'
+import { getCurrentTrack, getPlaybackState } from 'src/reducers/selectors'
 
 import MiniPlayer from './MiniPlayer'
 

@@ -1,7 +1,7 @@
 import { select, put } from 'redux-saga/effects'
 
-import * as actions from '../actions'
-import * as selectors from '../reducers/selectors'
+import * as actions from 'src/actions'
+import * as selectors from 'src/reducers/selectors'
 
 /**
  * Process startup actions

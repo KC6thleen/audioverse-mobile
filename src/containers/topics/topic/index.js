@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadTopic, resetAndPlayTrack } from '../../../actions'
-import { getTopic, getTopicPagination } from '../../../reducers/selectors'
+import { loadTopic, resetAndPlayTrack } from 'src/actions'
+import { getTopic, getTopicPagination } from 'src/reducers/selectors'
 
 import Topic from './Topic'
 

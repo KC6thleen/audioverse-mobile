@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, Modal, Picker, StyleSheet } from 'react-native'
 
-import I18n from '../../../locales'
-import ListItem from '../../components/list/ListItem'
-import MiniPlayer from '../../components/miniplayer'
+import I18n from 'locales'
+import ListItem from 'src/components/list/ListItem'
+import MiniPlayer from 'src/components/miniplayer'
 
 class Settings extends PureComponent {
 

@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 // use next import to use react-navigation with redux
-// import { middleware as reactNavigationMiddleware } from '../utils/react-navigation-redux'
+// import { middleware as reactNavigationMiddleware } from 'src/utils/react-navigation-redux'
 import { persistStore } from 'redux-persist'
 
 import reducer from './index'
-import mySaga from '../sagas'
+import mySaga from 'src/sagas'
 
 export default () => {
   // create the saga middleware

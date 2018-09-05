@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { getTopics, getTopicsPagination } from '../../reducers/selectors'
-import { loadTopics } from '../../actions'
+import { getTopics, getTopicsPagination } from 'src/reducers/selectors'
+import { loadTopics } from 'src/actions'
 
 import Topics from './Topics'
 

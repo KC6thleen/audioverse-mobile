@@ -1,4 +1,4 @@
-import defaultImage from '../../assets/av-logo.png'
+import defaultImage from 'assets/av-logo.png'
 
 /**
  * Format number to two digits

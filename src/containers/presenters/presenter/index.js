@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadPresenter, resetAndPlayTrack } from '../../../actions'
-import { getPresenter, getPresenterPagination } from '../../../reducers/selectors'
+import { loadPresenter, resetAndPlayTrack } from 'src/actions'
+import { getPresenter, getPresenterPagination } from 'src/reducers/selectors'
 
 import Presenter from './Presenter'
 

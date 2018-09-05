@@ -1,7 +1,7 @@
 import { all, put } from 'redux-saga/effects'
 
-import I18n from '../../locales'
-import * as actions from '../actions'
+import I18n from 'locales'
+import * as actions from 'src/actions'
 
 /**
  * Changes app language

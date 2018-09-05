@@ -8,7 +8,7 @@ import {
   forward,
   skipToPrevious,
   skipToNext
-} from '../actions'
+} from 'src/actions'
 
 async function eventHandler(store, data) {
   switch(data.type) {

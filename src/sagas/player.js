@@ -1,8 +1,8 @@
 import { call, put, select } from 'redux-saga/effects'
 import TrackPlayer from 'react-native-track-player'
 
-import * as actions from '../actions'
-import * as selectors from '../reducers/selectors'
+import * as actions from 'src/actions'
+import * as selectors from 'src/reducers/selectors'
 
 /**
  * Setup player with all the capabilities needed

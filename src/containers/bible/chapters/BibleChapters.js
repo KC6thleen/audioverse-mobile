@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native'
 
-import MiniPlayer from '../../../components/miniplayer'
-import defaultImage from '../../../../assets/av-logo.png'
-import { Endpoints } from '../../../constants'
+import MiniPlayer from 'src/components/miniplayer'
+import defaultImage from 'assets/av-logo.png'
+import { Endpoints } from 'src/constants'
 
 class BibleChapters extends PureComponent {
 

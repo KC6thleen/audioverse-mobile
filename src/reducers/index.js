@@ -3,11 +3,11 @@ import { NavigationActions } from 'react-navigation'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import I18n from '../../locales'
-import * as ActionTypes from '../actions'
+import I18n from 'locales'
+import * as ActionTypes from 'src/actions'
 import paginate from './paginate'
 // use this to use react-navigation with redux
-// import AppNavigator from '../navigators/AppNavigator'
+// import AppNavigator from 'src/navigators/AppNavigator'
 // function nav(state, action) {
 //   const nextState = AppNavigator.router.getStateForAction(action, state)
 //   return nextState || state

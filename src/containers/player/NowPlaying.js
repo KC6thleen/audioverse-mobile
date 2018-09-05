@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { ImageBackground, View, TouchableOpacity, StatusBar, Platform, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import ListItem from '../../components/list/ListItem'
-import MediaContent from '../../components/media/MediaContent'
-import ProgressBar from '../../components/progressbar/ProgressBar'
-import MediaControls from '../../components/media/MediaControls'
-import MediaOptions from '../../components/media/MediaOptions'
-import imageBg from '../../../assets/bg.png'
+import ListItem from 'src/components/list/ListItem'
+import MediaContent from 'src/components/media/MediaContent'
+import ProgressBar from 'src/components/progressbar/ProgressBar'
+import MediaControls from 'src/components/media/MediaControls'
+import MediaOptions from 'src/components/media/MediaOptions'
+import imageBg from 'assets/bg.png'
 
 class NowPlaying extends PureComponent {
 

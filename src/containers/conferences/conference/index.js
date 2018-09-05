@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { loadConference, resetAndPlayTrack } from '../../../actions'
-import { getConference, getConferencePagination } from '../../../reducers/selectors'
+import { loadConference, resetAndPlayTrack } from 'src/actions'
+import { getConference, getConferencePagination } from 'src/reducers/selectors'
 
 import Conference from './Conference'
 

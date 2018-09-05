@@ -1,6 +1,6 @@
 import { all, takeLatest } from 'redux-saga/effects'
 
-import * as actions from '../actions'
+import * as actions from 'src/actions'
 import { startup } from './startup'
 import { changeLanguage } from './settings'
 import * as player from './player'

@@ -1,6 +1,6 @@
 import React from 'react'
 import MediaContent from './MediaContent'
-import defaultImage from '../../../assets/av-logo.png'
+import defaultImage from 'assets/av-logo.png'
 
 import renderer from 'react-test-renderer'
 
