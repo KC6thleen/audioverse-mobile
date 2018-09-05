@@ -44,7 +44,7 @@ export const parseRecording = item => {
     if (item.presenters && item.presenters.length) {
       if (item.presenters.length == 1 && item.presenters[0].photo != "default.png" ) {
         item.artwork = item.presenters[0].photo256
-      } else if (item.conference.length && item.conference[0].logo != "" ) {
+      } else if (item.conference && item.conference.length && item.conference[0].logo != "" ) {
         item.artwork = item.presenters[0].photo256
       }
     }
