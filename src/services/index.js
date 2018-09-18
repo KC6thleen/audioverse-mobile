@@ -6,7 +6,7 @@ import { parseRecording } from 'src/utils'
  * @param {function} parse 
  */
 async function callApi(endpoint, parse) {
-  const fullUrl = (endpoint.indexOf(process.env['BASE_URL']) === -1) ? process.env['BASE_URL'] + endpoint : endpoint
+  const fullUrl = !endpoint.startsWith('http') ? process.env['BASE_URL'] + endpoint : endpoint
   const response = await fetch(fullUrl, {
     headers: {
       Authorization: 'Basic ' + process.env['BASIC_TOKEN']
