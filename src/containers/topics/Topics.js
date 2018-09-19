@@ -22,7 +22,7 @@ class Topics extends PureComponent {
       <ListItem
         avatar={{source: defaultImage}}
         title={item.title}
-        onPress={() => this.props.navigation.navigate({ routeName: 'Topic', params: { url: item.recordingsURI } })}
+        onPress={() => this.props.navigation.navigate({ routeName: 'Topic', params: { url: item.recordingsURI, title: item.title } })}
       />
     )
   }

@@ -21,7 +21,7 @@ class Series extends PureComponent {
       <ListItem
         avatar={{source: item.photo86}}
         title={item.title}
-        onPress={() => this.props.navigation.navigate({ routeName: 'Serie', params: { url: item.recordingsURI } })}
+        onPress={() => this.props.navigation.navigate({ routeName: 'Serie', params: { url: item.recordingsURI, title: item.title } })}
       />
     )
   }
