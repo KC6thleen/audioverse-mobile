@@ -1,6 +1,7 @@
 import { Alert } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
+import I18n from 'locales'
 import {
   playbackState,
   playbackTrackId,
@@ -51,7 +52,8 @@ async function eventHandler(store, data) {
       store.dispatch(playbackTrackId(data.nextTrack))
       break
     case 'playback-error':
-      Alert.alert(data.error)
+      Alert.alert(I18n.t('Unable_to_download_this_media._Try_again_later.'))
+      console.log('playback-error', data.error)
       break
   }
 }
