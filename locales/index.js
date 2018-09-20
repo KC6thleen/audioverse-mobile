@@ -21,4 +21,6 @@ I18n.translations = {
   zh
 }
 
+I18n.defaultSeparator = '/'
+
 export default I18n
