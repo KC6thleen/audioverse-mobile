@@ -104,19 +104,11 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-<<<<<<< ours
         applicationId "org.audioverse.exodus"
-        minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 56
-        versionName "3.0.0-beta.1"
-=======
-        applicationId "com.audioverse"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
->>>>>>> theirs
+        versionCode 56
+        versionName "3.0.0-beta.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

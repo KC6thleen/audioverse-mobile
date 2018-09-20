@@ -4587,7 +4587,7 @@ react-native-tab-view@^1.0.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-track-player@^0.2.4:
+react-native-track-player@^0.2.5:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-0.2.5.tgz#b758b527ccf7ba218bcb7e2b3955b441077d6418"
 

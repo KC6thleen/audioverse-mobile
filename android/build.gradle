@@ -38,3 +38,15 @@ ext {
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
 }
+
+// Fix for SDK Build Tools revision is too low for sub projects (dependencies)
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 26
+                buildToolsVersion "26.0.3"
+            }
+        }
+    }
+}
