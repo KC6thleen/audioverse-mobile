@@ -50,7 +50,7 @@ export const parseRecording = item => {
     }
     item.artwork = item.artwork ? item.artwork : defaultImage
 
-    item.url = item.mediaFiles[item.mediaFiles.length - 1].streamURL
+    item.url = item.mediaFiles.length ? item.mediaFiles[item.mediaFiles.length - 1].streamURL : ''
 
     item.duration = formatTime(item.duration)
 
