@@ -3,6 +3,8 @@ package com.audioverse;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.actionsheet.ActionSheetPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import guichaguri.trackplayer.TrackPlayer;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ActionSheetPackage(),
+            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new TrackPlayer(),
             new RNI18nPackage()

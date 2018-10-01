@@ -14,6 +14,7 @@ export const SKIP_TO_PREVIOUS = 'SKIP_TO_PREVIOUS'
 export const SKIP_TO_NEXT = 'SKIP_TO_NEXT'
 export const REPLAY = 'REPLAY'
 export const FORWARD = 'FORWARD'
+export const DOWNLOAD = 'DOWNLOAD'
 export const SET_RATE = 'SET_RATE'
 export const PLAYBACK_RATE = 'PLAYBACK_RATE'
 
@@ -246,9 +247,23 @@ export const skipToPrevious = () => action(SKIP_TO_PREVIOUS)
 export const skipToNext = () => action(SKIP_TO_NEXT)
 export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
+export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
 export const setRate = () => action(SET_RATE)
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
 export const bibleBook = (testament, book) => action(BIBLE_BOOK, {testament, book})
 export const bibleChapter = chapter => action(BIBLE_CHAPTER, {chapter})
+
+export const ADD_TO_DOWNLOADS = 'ADD_TO_DOWNLOADS'
+export const REMOVE_FROM_DOWNLOADS = 'REMOVE_FROM_DOWNLOADS'
+export const ADD_TO_DOWNLOADS_QUEUE = 'ADD_TO_DOWNLOADS_QUEUE'
+export const REMOVE_FROM_DOWNLOADS_QUEUE = 'REMOVE_FROM_DOWNLOADS_QUEUE'
+export const SET_DOWNLOADING = 'SET_DOWNLOADING'
+export const DOWNLOAD_PROGRESS = 'DOWNLOAD_PROGRESS'
+export const addToDownloads = (item) => action(ADD_TO_DOWNLOADS, {item})
+export const removeFromDownloads = (item) => action(REMOVE_FROM_DOWNLOADS, {item})
+export const addToDownloadsQueue = (item) => action(ADD_TO_DOWNLOADS_QUEUE, {item})
+export const removeFromDownloadsQueue = (item) => action(REMOVE_FROM_DOWNLOADS_QUEUE, {item})
+export const setDownloading = (downloading) => action(SET_DOWNLOADING, {downloading})
+export const downloadProgress = (item, progress) => action(DOWNLOAD_PROGRESS, {item, progress})

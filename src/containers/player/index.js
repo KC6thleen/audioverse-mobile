@@ -1,9 +1,10 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { playPause, skipToPrevious, skipToNext, replay, forward, setRate } from 'src/actions'
+import { playPause, skipToPrevious, skipToNext, replay, forward, download, setRate } from 'src/actions'
 import { getCurrentTrack, getPlaybackState, getRate, getLanguage } from 'src/reducers/selectors'
 
-import NowPlaying from './NowPlaying'
+import Player from './Player'
 
 const  mapStateToProps = state => ({
   state: getPlaybackState(state),
@@ -12,13 +13,14 @@ const  mapStateToProps = state => ({
   language: getLanguage(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-  playPause: () => dispatch(playPause()),
-  skipToPrevious: () => dispatch(skipToPrevious()),
-  skipToNext: () => dispatch(skipToNext()),
-  replay: () => dispatch(replay()),
-  forward: () => dispatch(forward()),
-  setRate: () => dispatch(setRate())
-})
+const mapDispatchToProps = dispatch => bindActionCreators({
+  playPause,
+  skipToPrevious,
+  skipToNext,
+  replay,
+  forward,
+  download,
+  setRate,
+}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(NowPlaying)
+export default connect(mapStateToProps, mapDispatchToProps)(Player)

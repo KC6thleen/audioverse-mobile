@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native
 
 import MiniPlayer from 'src/components/miniplayer'
 import defaultImage from 'assets/av-logo.png'
-import { Endpoints } from 'src/constants'
+import { Endpoints, MediaTypes } from 'src/constants'
 
 class BibleChapters extends PureComponent {
 
@@ -19,14 +19,16 @@ class BibleChapters extends PureComponent {
     const { items, bible, resetAndPlayTrack } = this.props
 
     const tracks = items.map(item => ({
-      id: bible.version.id + '_' + item.book_id + '_' + item.chapter_id,
-      title: item.book_id + ' ' + item.chapter_id,
+      id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
+      title: `${item.book_id} ${item.chapter_id}`,
       artist: bible.version.name,
       artwork: defaultImage,
-      url: Endpoints.bibleCDN + bible.version.id + '_' + item.book_id + '_chapter_' + item.chapter_id + '.mp3' + '/' + encodeURIComponent(item.path)
+      fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
+      url: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
+      mediaType: MediaTypes.bible
     }))
 
-    const track = tracks.find(el => el.id === bible.version.id + '_' + item.book_id + '_' + item.chapter_id)
+    const track = tracks.find(el => el.id === `${bible.version.id}_${item.book_id}_${item.chapter_id}`)
 
     resetAndPlayTrack(tracks, track)
   }

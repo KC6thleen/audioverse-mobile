@@ -8,6 +8,7 @@ import DrawerLabel from './drawer/drawerlabel'
 import Login from 'src/containers/login/Login'
 import Signup from 'src/containers/signup/Signup'
 import BibleNavigator from './BibleNavigator'
+import ListsNavigator from './ListsNavigator'
 import PresentationsNavigator from './PresentationsNavigator'
 import BooksNavigator from './BooksNavigator'
 import StoriesNavigator from './StoriesNavigator'
@@ -17,7 +18,8 @@ import SponsorsNavigator from './SponsorsNavigator'
 import SeriesNavigator from './SeriesNavigator'
 import TopicsNavigator from './TopicsNavigator'
 import SettingsNavigator from './SettingsNavigator'
-import NowPlaying from 'src/containers/player'
+import DownloadsQueueNavigator from './DownloadsQueueNavigator'
+import Player from 'src/containers/player'
 
 const AuthStack = createStackNavigator({
   Login: Login,
@@ -36,7 +38,7 @@ const screenNavigationOptions = (title, icon) => ({
 })
 
 const AppDrawer = createDrawerNavigator({
-  MyLists: {screen: generateScreen(), navigationOptions: screenNavigationOptions('my_lists', 'list')},
+  MyLists: {screen: ListsNavigator, navigationOptions: screenNavigationOptions('my_lists', 'list')},
   Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'mic')},
   Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'plus-square')},
   Books: {screen: BooksNavigator, navigationOptions: screenNavigationOptions('books', 'book')},
@@ -46,7 +48,7 @@ const AppDrawer = createDrawerNavigator({
   Sponsors: {screen: SponsorsNavigator, navigationOptions: screenNavigationOptions('sponsors', 'users')},
   Series: {screen: SeriesNavigator, navigationOptions: screenNavigationOptions('series', 'tag')},
   Topics: {screen: TopicsNavigator, navigationOptions: screenNavigationOptions('topics', 'target')},
-  DownloadQueue: {screen: generateScreen(), navigationOptions: screenNavigationOptions('download_queue', 'download')},
+  DownloadsQueue: {screen: DownloadsQueueNavigator, navigationOptions: screenNavigationOptions('download_queue', 'download')},
   Settings: {screen: SettingsNavigator, navigationOptions: screenNavigationOptions('settings', 'sliders')},
   About: {screen: generateScreen(), navigationOptions: screenNavigationOptions('about', 'info')}
 }, {
@@ -57,7 +59,7 @@ const AppDrawer = createDrawerNavigator({
 const AppNavigator = createStackNavigator({
   AuthStack,
   AppDrawer,
-  NowPlaying
+  NowPlaying: { screen: Player }
 },{
   headerMode: 'none',
   mode: 'modal',

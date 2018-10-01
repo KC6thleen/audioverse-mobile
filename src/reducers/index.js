@@ -13,10 +13,16 @@ import paginate from './paginate'
 //   return nextState || state
 // }
 
-function language(state = I18n.locale.substr(0,2), action) {
+function settings(state = {
+  language: I18n.locale.substr(0,2),
+  bitrate: 16
+}, action) {
   switch(action.type) {
     case ActionTypes.CHANGE_LANGUAGE:
-      return action.language
+      return {
+        ...state,
+        language: action.language
+      }
     default:
       return state
   }
@@ -86,11 +92,67 @@ function bible(state = {
   }
 }
 
+function downloads(state = [], action) {
+  switch(action.type) {
+    case ActionTypes.ADD_TO_DOWNLOADS:
+      return [
+        ...state,
+        action.item
+      ]
+    case ActionTypes.REMOVE_FROM_DOWNLOADS:
+      return state.filter( el => el.id != action.item.id )
+    default:
+      return state
+  }
+}
+
+function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, action) {
+  switch(action.type) {
+    case ActionTypes.ADD_TO_DOWNLOADS_QUEUE:
+      if (!state.queue.some(el => el.id == action.item.id)) {
+        return {
+          ...state,
+          queue: [
+            ...state.queue,
+            action.item
+          ]
+        }
+      }
+      return state
+    case ActionTypes.REMOVE_FROM_DOWNLOADS_QUEUE:
+      return {
+        ...state,
+        queue: state.queue.filter( el => el.id != action.item.id )
+      }
+    case ActionTypes.DOWNLOAD_PROGRESS:
+      return {
+        ...state,
+        queue: state.queue.map( el => {
+          if (el.id == action.item.id) {
+            el.progress = action.progress
+          }
+          return el
+        })
+      }
+    case ActionTypes.SET_DOWNLOADING:
+      return {
+        ...state,
+        downloading: action.downloading
+      }
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   // nav, // use this to use react-navigation with redux
-  language,
+  settings,
   playback,
   bible,
+  lists: combineReducers({
+    downloads
+  }),
+  downloadsQueue,
   bibleBooks: paginate({
     types: [
       ActionTypes.BIBLE_BOOKS.REQUEST,
@@ -249,7 +311,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['language'],
+  whitelist: ['settings', 'lists'],
   debug: true
 }
 

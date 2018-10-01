@@ -5,6 +5,7 @@ import { startup } from './startup'
 import { changeLanguage } from './settings'
 import * as player from './player'
 import * as api from './api'
+import * as downloads from './downloads'
 
 function* rootSaga() {
   yield all([
@@ -37,7 +38,8 @@ function* rootSaga() {
     takeLatest(actions.LOAD_SERIES, api.loadSeries),
     takeLatest(actions.LOAD_SERIE, api.loadSerie),
     takeLatest(actions.LOAD_TOPICS, api.loadTopics),
-    takeLatest(actions.LOAD_TOPIC, api.loadTopic)
+    takeLatest(actions.LOAD_TOPIC, api.loadTopic),
+    takeLatest(actions.DOWNLOAD, downloads.download)
   ])
 }
 

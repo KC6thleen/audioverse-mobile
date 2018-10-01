@@ -1,4 +1,4 @@
-export const getLanguage = state => state.language
+export const getLanguage = state => state.settings.language
 
 export const getCurrentTrack = state => state.playback.currentTrack
 export const getCurrentTrackId = state => state.playback.currentTrackId
@@ -45,3 +45,7 @@ export const getTopics = state => state.topics.data
 export const getTopicsPagination = state => state.topics
 export const getTopic = state => state.topic.data
 export const getTopicPagination = state => state.topic
+
+export const getDownloads = state => state.lists.downloads
+export const getDownloadsQueue = state => state.downloadsQueue.queue
+export const getDownloading = state => state.downloadsQueue.downloading

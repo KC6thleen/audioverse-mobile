@@ -22,7 +22,7 @@ const getSlides = (data, language) => {
 	
 	// conference
 	// don't show conference for books/stories
-	if (data.mediaCategory != MediaTypes.book && data.conference && data.conference.length) {
+	if (data.mediaType != MediaTypes.book && data.conference && data.conference.length) {
 		image = data.conference[0].logo != '' ? data.conference[0].photo86 : defaultImage
 		slides.push({type: 'conference', image: image, title: data.conference[0].title})
 	}
@@ -36,7 +36,7 @@ const getSlides = (data, language) => {
 	return slides
 }
 
-const MediaContent = ({ data, language }) => {
+const PlayerContent = ({ data, language }) => {
 
   const slides = getSlides(data, language)
   const recordingDate = (!data.recordingDate || data.recordingDate == '0000-00-00 00:00:00') ? '' : I18n.t('Recorded', {locale: language}) + ' ' + data.recordingDate
@@ -129,9 +129,9 @@ const styles = StyleSheet.create({
   },
 })
 
-MediaContent.propTypes = {
+PlayerContent.propTypes = {
   data: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired
 }
 
-export default MediaContent
+export default PlayerContent

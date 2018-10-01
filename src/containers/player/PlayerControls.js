@@ -11,7 +11,7 @@ import iconNext from 'assets/next.png'
 import iconReplay from 'assets/ic_replay_10.png'
 import iconForward from 'assets/ic_forward_30.png'
 
-const MediaControls = ({ state, playPause, skipToPrevious, skipToNext, replay, forward }) => (
+const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, forward }) => (
   <View style={styles.container}>
     <ImageButton
       source={iconReplay}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   }
 })
 
-MediaControls.propTypes = {
+PlayerControls.propTypes = {
   state: Platform.OS == 'ios' ? PropTypes.string : PropTypes.number,
   playPause: PropTypes.func.isRequired,
   skipToPrevious: PropTypes.func.isRequired,
@@ -81,4 +81,4 @@ MediaControls.propTypes = {
   forward: PropTypes.func.isRequired
 }
 
-export default MediaControls
+export default PlayerControls
