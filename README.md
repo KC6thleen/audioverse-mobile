@@ -28,12 +28,12 @@ We'll be updating the App Stores with this new version as soon as we reach versi
 
 ## TODOs
 - [x] Bible
-- [ ] Download Queue
-- [ ] Offline support
+- [x] Download Queue
+- [x] Offline support
 - [ ] My Lists
   - [ ] Favorites,
   - [ ] History,
-  - [ ] Downloads,
+  - [x] Downloads,
   - [ ] Playlists
 - [ ] Login and Signup
 - [ ] Video support
