@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   load: (url) => dispatch(loadBook(false, false, url)),
   refresh: (url) => dispatch(loadBook(false, true, url)),
-  resetAndPlayTrack: (tracks, track) => dispatch(resetAndPlayTrack(tracks, track))
+  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Book)

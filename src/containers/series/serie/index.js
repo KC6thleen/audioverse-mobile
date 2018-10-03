@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   load: (url) => dispatch(loadSerie(false, false, url)),
   loadMore: (url) => dispatch(loadSerie(true, false, url)),
   refresh: (url) => dispatch(loadSerie(false, true, url)),
-  resetAndPlayTrack: (tracks, track) => dispatch(resetAndPlayTrack(tracks, track))
+  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Serie)

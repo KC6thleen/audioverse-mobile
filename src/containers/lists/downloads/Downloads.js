@@ -17,7 +17,7 @@ class Downloads extends PureComponent {
         avatar={{source: item.artwork}}
         title={item.title}
         subtitle={`${item.artist} \u00B7 ${item.bitRate} kbps`}
-        onPress={() => this.props.resetAndPlayTrack(null, item)}
+        onPress={() => this.props.resetAndPlayTrack([item])}
       />
     )
   }

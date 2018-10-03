@@ -153,43 +153,36 @@ function* getBibleChapterUrl(item) {
 }
 
 /**
- * Resets the player, adds the array of tracks or one track to the playlist and starts playing it
+ * Resets the player, adds the array of tracks to the playlist and starts playing it
  * @param {array} tracks 
  * @param {object} track
  */
-export function* resetAndPlayTrack({ tracks, track }) {
+export function* resetAndPlayTrack({ tracks, id }) {
   yield call(TrackPlayer.reset)
 
+  const selectedTrack = !id ? tracks[0] : tracks.find(el => el.id === id)
+
   let getUrl = null
-  if (track.mediaType === MediaTypes.sermon) {
+  if (selectedTrack.mediaType === MediaTypes.sermon) {
     getUrl = getSermonUrl
-  } else if (track.mediaType === MediaTypes.bible) {
+  } else if (selectedTrack.mediaType === MediaTypes.bible) {
     getUrl = getBibleChapterUrl
-  } else if (track.mediaType === MediaTypes.book) {
+  } else if (selectedTrack.mediaType === MediaTypes.book) {
     getUrl = getBookChapterUrl
   }
 
-  const newTrack = {
-    ...track,
-    url: yield call(getUrl, track)
+  yield put(actions.playbackTrack(selectedTrack))
+  
+  const newTracks = []
+  for (let i of tracks) {
+    newTracks.push({
+      ...i,
+      url: yield call(getUrl, i)
+    })
   }
-
-  yield put(actions.playbackTrack(newTrack))
-  if (tracks) {
-    const newTracks = []
-    for (let i of tracks) {
-      newTracks.push({
-        ...i,
-        url: yield call(getUrl, i)
-      })
-    }
-    
-    yield call(TrackPlayer.add, newTracks)
-    yield call(TrackPlayer.skip, newTrack.id)
-  } else {
-    yield call(TrackPlayer.add, newTrack)
-    yield call(TrackPlayer.play)
-  }
+  
+  yield call(TrackPlayer.add, newTracks)
+  yield call(TrackPlayer.skip, selectedTrack.id)
 }
 
 /** 

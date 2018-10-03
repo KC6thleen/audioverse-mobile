@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   load: () => dispatch(loadFeaturedRecordings(false, false)),
   loadMore: () => dispatch(loadFeaturedRecordings(true, false)),
   refresh: () => dispatch(loadFeaturedRecordings(false, true)),
-  resetAndPlayTrack: (tracks, track) => dispatch(resetAndPlayTrack(tracks, track))
+  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeaturedRecordings)

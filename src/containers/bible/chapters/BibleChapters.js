@@ -30,7 +30,7 @@ class BibleChapters extends PureComponent {
 
     const track = tracks.find(el => el.id === `${bible.version.id}_${item.book_id}_${item.chapter_id}`)
 
-    resetAndPlayTrack(tracks, track)
+    resetAndPlayTrack(tracks, track.id)
   }
 
   renderItem({ item }) {

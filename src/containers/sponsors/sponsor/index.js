@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   load: (url) => dispatch(loadSponsor(false, false, url)),
   loadMore: (url) => dispatch(loadSponsor(true, false, url)),
   refresh: (url) => dispatch(loadSponsor(false, true, url)),
-  resetAndPlayTrack: (tracks, track) => dispatch(resetAndPlayTrack(tracks, track))
+  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sponsor)

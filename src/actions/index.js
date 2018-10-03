@@ -240,7 +240,7 @@ export const playbackTrackId = trackId => action(PLAYBACK_TRACK_ID, {trackId})
 export const playbackTrack = track => action(PLAYBACK_TRACK, {track})
 export const playbackUpdate = () => action(PLAYBACK_UPDATE)
 
-export const resetAndPlayTrack = (tracks, track) => action(RESET_AND_PLAY_TRACK, {tracks, track})
+export const resetAndPlayTrack = (tracks, id) => action(RESET_AND_PLAY_TRACK, {tracks, id})
 export const playPause = () => action(PLAY_PAUSE)
 
 export const skipToPrevious = () => action(SKIP_TO_PREVIOUS)
