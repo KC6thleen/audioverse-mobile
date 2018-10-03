@@ -24,7 +24,7 @@ class BibleChapters extends PureComponent {
       artist: bible.version.name,
       artwork: defaultImage,
       fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
-      url: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
+      downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
       mediaType: MediaTypes.bible
     }))
 

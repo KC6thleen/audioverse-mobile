@@ -34,7 +34,7 @@ class Player extends PureComponent {
     // video
     if ( track.videoFiles.length ) {
       bitratesIndex.push(track.videoFiles[0])
-      bitratesOptions.push(`MP4 ${getSize(json_data.videoFiles[0].filesize)}`)
+      bitratesOptions.push(`MP4 ${getSize(track.videoFiles[0].filesize)}`)
     }
     
     bitratesOptions.push(I18n.t('Cancel', {locale: language}))

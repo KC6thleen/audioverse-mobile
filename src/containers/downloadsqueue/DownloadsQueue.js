@@ -36,7 +36,7 @@ class DownloadsQueue extends PureComponent {
         <FlatList
           data={items}
           renderItem={this.renderItem.bind(this)}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.fileName}
         />
         <MiniPlayer onPressMetaData={this.handlePressMetaData} />
       </View>

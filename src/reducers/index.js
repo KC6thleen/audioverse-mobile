@@ -15,7 +15,7 @@ import paginate from './paginate'
 
 function settings(state = {
   language: I18n.locale.substr(0,2),
-  bitrate: 16
+  bitRate: "16"
 }, action) {
   switch(action.type) {
     case ActionTypes.CHANGE_LANGUAGE:

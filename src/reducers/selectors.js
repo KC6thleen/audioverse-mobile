@@ -1,4 +1,5 @@
 export const getLanguage = state => state.settings.language
+export const getBitRate = state => state.settings.bitRate
 
 export const getCurrentTrack = state => state.playback.currentTrack
 export const getCurrentTrackId = state => state.playback.currentTrackId
@@ -47,5 +48,7 @@ export const getTopic = state => state.topic.data
 export const getTopicPagination = state => state.topic
 
 export const getDownloads = state => state.lists.downloads
+export const getDownloadsById = (state, id) => state.lists.downloads.filter(el => el.id === id)
+export const getDownloadById = (state, id) => state.lists.downloads.find(el => el.id === id)
 export const getDownloadsQueue = state => state.downloadsQueue.queue
 export const getDownloading = state => state.downloadsQueue.downloading

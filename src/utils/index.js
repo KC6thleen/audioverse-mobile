@@ -21,3 +21,13 @@ export const formatTime = seconds => {
     return formatTwoDigits(mm) + ':' + formatTwoDigits(ss)
   }
 }
+
+/**
+ * Get media file
+ * @param {object} item 
+ * @param {string} bitRate 
+ */
+export const getMediaFile = (mediaFiles, bitRate) => {
+  const index = mediaFiles.findIndex(el => el.bitrate === bitRate)
+  return mediaFiles[index !== -1 ? index : mediaFiles.length - 1]
+}

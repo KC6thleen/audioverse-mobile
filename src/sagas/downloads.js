@@ -17,7 +17,7 @@ const fetchBlob = (item) => {
   return eventChannel(emitter => {
     RNFetchBlob
     .config({
-      path: `${item.downloadPath}/${item.fileName}`
+      path: `${RNFetchBlob.fs.dirs.DocumentDir}/${item.downloadPath}/${item.fileName}`
     })
     // .fetch('GET', item.downloadUrl)
     .fetch('GET', 'https://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3')
@@ -34,7 +34,7 @@ const fetchBlob = (item) => {
       emitter(END)
     })
     return () => {
-      console.log('cancelled')
+      console.log('unsubscribe')
     }
   }, buffers.sliding(2))
 }

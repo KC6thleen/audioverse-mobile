@@ -1,8 +1,11 @@
 import { call, put, select } from 'redux-saga/effects'
 import TrackPlayer from 'react-native-track-player'
+import RNFetchBlob from 'rn-fetch-blob'
 
+import { MediaTypes, Dirs } from 'src/constants'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
+import { getMediaFile } from 'src/utils'
 
 /**
  * Setup player with all the capabilities needed
@@ -50,6 +53,98 @@ export function* playbackUpdate() {
   }
 }
 
+const fileExists = async (file) => {
+  try {
+    return await RNFetchBlob.fs.exists(file)
+  } catch(err) {
+    return false
+  }
+}
+
+/**
+ * Get sermon url
+ * @param {object} item
+ */
+function* getSermonUrl(item) {
+
+  const downloads = yield select(selectors.getDownloadsById, item.id)
+
+  // get the media file using the bit rate from the settings
+  const bitRate = yield select(selectors.getBitRate)
+  const mediaFile = getMediaFile(item.mediaFiles, bitRate)
+
+  let url = mediaFile.downloadURL
+
+  const download = downloads.find( el => el.bitRate === mediaFile.bitrate )
+
+  let currentUrl = null, exists = false
+
+  if (download) {
+    currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.presentations}/${download.fileName}`
+    exists = yield call(fileExists, currentUrl)
+    if (exists) {
+      url = `file://${currentUrl}`
+    }
+  }
+
+  // if it doesn't exist, look for a different bit rate available
+  if (!exists) {
+    const others = downloads.filter( el => el.bitRate !== mediaFile.bitrate )
+    for (let i of others) {
+      currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.presentations}/${i.fileName}`
+      exists = yield call(fileExists, currentUrl)
+      if (exists) {
+        url = `file://${currentUrl}`
+        break
+      }
+    }
+  }
+  console.log('url', url)
+  return url
+}
+
+/**
+ * Get book chapter url
+ * @param {object} item
+ */
+function* getBookChapterUrl(item) {
+
+  const download = yield select(selectors.getDownloadById, item.id)
+
+  let url = item.mediaFiles && item.mediaFiles.length ? item.mediaFiles[0].downloadURL : ''
+
+  if (download) {
+    const currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.audiobooks}/${download.fileName}`
+    const exists = yield call(fileExists, currentUrl)
+    if (exists) {
+      url = `file://${currentUrl}`
+    }
+  }
+  console.log('url', url)
+  return url
+}
+
+/**
+ * Get Bible chapter url
+ * @param {object} item
+ */
+function* getBibleChapterUrl(item) {
+
+  const download = yield select(selectors.getDownloadById, item.id)
+
+  let url = item.downloadURL
+
+  if (download) {
+    const currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.bible}/${download.fileName}`
+    const exists = yield call(fileExists, currentUrl)
+    if (exists) {
+      url = `file://${currentUrl}`
+    }
+  }
+  console.log('url', url)
+  return url
+}
+
 /**
  * Resets the player, adds the array of tracks or one track to the playlist and starts playing it
  * @param {array} tracks 
@@ -57,14 +152,37 @@ export function* playbackUpdate() {
  */
 export function* resetAndPlayTrack({ tracks, track }) {
   yield call(TrackPlayer.reset)
-  yield put(actions.playbackTrack(track))
-  if (tracks) {
-    yield call(TrackPlayer.add, [...tracks])
-    yield call(TrackPlayer.skip, track.id)
-  } else {
-    yield call(TrackPlayer.add, track)
+
+  let getUrl = null
+  if (track.mediaType === MediaTypes.sermon) {
+    getUrl = getSermonUrl
+  } else if (track.mediaType === MediaTypes.bible) {
+    getUrl = getBibleChapterUrl
+  } else if (track.mediaType === MediaTypes.book) {
+    getUrl = getBookChapterUrl
   }
-  yield call(TrackPlayer.play)
+
+  const newTrack = {
+    ...track,
+    url: yield call(getUrl, track)
+  }
+
+  yield put(actions.playbackTrack(newTrack))
+  if (tracks) {
+    const newTracks = []
+    for (let i of tracks) {
+      newTracks.push({
+        ...i,
+        url: yield call(getUrl, i)
+      })
+    }
+    
+    yield call(TrackPlayer.add, newTracks)
+    yield call(TrackPlayer.skip, newTrack.id)
+  } else {
+    yield call(TrackPlayer.add, newTrack)
+    yield call(TrackPlayer.play)
+  }
 }
 
 /** 
