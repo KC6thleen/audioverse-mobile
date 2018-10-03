@@ -69,8 +69,15 @@ function* getSermonUrl(item) {
 
   const downloads = yield select(selectors.getDownloadsById, item.id)
 
-  // get the media file using the bit rate from the settings
-  const bitRate = yield select(selectors.getBitRate)
+  let bitRate = null
+  if (!item.bitRate) {
+    // get the bit rate from the settings
+    bitRate = yield select(selectors.getBitRate)
+  } else {
+    // use the bit rate provided in the object
+    bitRate = item.bitRate
+  }
+  
   const mediaFile = getMediaFile(item.mediaFiles, bitRate)
 
   let url = mediaFile.downloadURL

@@ -16,7 +16,7 @@ class Downloads extends PureComponent {
       <ListItem
         avatar={{source: item.artwork}}
         title={item.title}
-        subtitle={item.artist + ' \u00B7 ' + item.duration}
+        subtitle={`${item.artist} \u00B7 ${item.bitRate} kbps`}
         onPress={() => this.props.resetAndPlayTrack(null, item)}
       />
     )
