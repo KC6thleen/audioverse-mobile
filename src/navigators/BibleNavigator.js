@@ -11,7 +11,7 @@ import Chapters from 'src/containers/bible/chapters'
 import Verses from 'src/containers/bible/verses'
 
 const BibleTab = createMaterialTopTabNavigator({
-  Books: {
+  BibleBooks: {
     screen: Books,
     navigationOptions: {
       tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="books" />
