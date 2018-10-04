@@ -59,7 +59,7 @@ const AppDrawer = createDrawerNavigator({
 const AppNavigator = createStackNavigator({
   AuthStack,
   AppDrawer,
-  NowPlaying: { screen: Player }
+  Player
 },{
   headerMode: 'none',
   mode: 'modal',

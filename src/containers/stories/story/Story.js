@@ -12,10 +12,6 @@ class Story extends PureComponent {
     this.props.load(this.props.navigation.state.params.url)
   }
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-
   renderItem({ item }) {
     return (
       <ListItem
@@ -33,7 +29,7 @@ class Story extends PureComponent {
     return (
       <View style={styles.container}>
         <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onRefresh={refresh} />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

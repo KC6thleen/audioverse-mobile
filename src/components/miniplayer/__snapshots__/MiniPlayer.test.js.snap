@@ -23,7 +23,7 @@ exports[`MiniPlayer component renders correctly when there is a track 1`] = `
       }
     }
     chevronColor="#D1D1D6"
-    onPress={[MockFunction]}
+    onPress={[Function]}
     rightElement={
       <ImageButton
         imageStyle={

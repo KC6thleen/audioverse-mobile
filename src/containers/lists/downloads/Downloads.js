@@ -7,10 +7,6 @@ import MiniPlayer from 'src/components/miniplayer'
 
 class Downloads extends PureComponent {
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-
   renderItem({ item }) {
     return (
       <ListItem
@@ -32,7 +28,7 @@ class Downloads extends PureComponent {
           renderItem={this.renderItem.bind(this)}
           keyExtractor={item => item.fileName}
         />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

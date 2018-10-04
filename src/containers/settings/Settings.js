@@ -16,10 +16,6 @@ class Settings extends PureComponent {
     this.setState({modalVisible: visible})
   }
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-  
   render() {
     const { language, changeLanguage } = this.props
     const languageOptions = Object.keys(I18n.translations).map((lang, i) => (
@@ -46,7 +42,7 @@ class Settings extends PureComponent {
             </View>
           </Modal>
         </View>
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

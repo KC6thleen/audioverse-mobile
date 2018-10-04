@@ -8,10 +8,6 @@ import { Endpoints, MediaTypes } from 'src/constants'
 
 class BibleChapters extends PureComponent {
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-
   handlePressItem(item) {
     this.props.bibleChapter(item.chapter_id)
     this.props.navigation.pop()
@@ -55,7 +51,7 @@ class BibleChapters extends PureComponent {
           onRefresh={refresh}
           numColumns={4}
         />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

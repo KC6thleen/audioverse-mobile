@@ -8,11 +8,13 @@ const middlewares = []
 const mockStore = configureStore(middlewares)
 
 describe('MiniPlayer component', () => {
+  const navigation = { navigate: jest.fn() }
+  
   it('renders empty component when no track', () => {
     const initialState = {
       playback: { state: '' }
     }
-    const wrapper = shallow(<MiniPlayer onPressMetaData={jest.fn()} />, { context: { store: mockStore(initialState) } })
+    const wrapper = shallow(<MiniPlayer navigation={navigation} />, { context: { store: mockStore(initialState) } })
     expect(wrapper.dive()).toMatchSnapshot()
   })
 
@@ -20,7 +22,7 @@ describe('MiniPlayer component', () => {
     const initialState = {
       playback: { state: '', currentTrack: {} }
     }
-    const wrapper = shallow(<MiniPlayer onPressMetaData={jest.fn()} />, { context: { store: mockStore(initialState) } })
+    const wrapper = shallow(<MiniPlayer navigation={navigation} />, { context: { store: mockStore(initialState) } })
     expect(wrapper.dive()).toMatchSnapshot()
   })
 })

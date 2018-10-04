@@ -9,10 +9,6 @@ import IconButton from 'src/components/buttons/IconButton'
 
 class DownloadsQueue extends PureComponent {
 
-  handlePressMetaData = () => {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-
   handleRemoveFromDownloadsQueue = (item) => {
     this.props.removeFromDownloadsQueue(item)
   }
@@ -38,7 +34,7 @@ class DownloadsQueue extends PureComponent {
           renderItem={this.renderItem.bind(this)}
           keyExtractor={item => item.fileName}
         />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

@@ -7,10 +7,6 @@ import { Endpoints } from 'src/constants'
 
 class BibleVerses extends PureComponent {
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-  
   render() {
     const { version, testament, book, chapter } = this.props.bible
     const uri = process.env['BASE_URL'] + Endpoints.audiobibles + '/books/' + book + '?volume=' + version.id + '&testament=' + testament + '&text=true&chapter=' + chapter
@@ -19,7 +15,7 @@ class BibleVerses extends PureComponent {
     return (
       <View style={styles.container}>
         <WebView source={{uri: uri, headers: headers}} />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }

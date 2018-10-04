@@ -12,10 +12,6 @@ class BibleBooks extends PureComponent {
     this.props.load()
   }
 
-  handlePressMetaData() {
-    this.props.navigation.navigate({ routeName: 'NowPlaying' })
-  }
-
   handlePressItem(item) {
     this.props.loadBibleChapters(item.testament, item.book_id)
     this.props.navigation.navigate({ routeName: 'Chapters' })
@@ -37,7 +33,7 @@ class BibleBooks extends PureComponent {
     return (
       <View style={styles.container}>
         <List renderItem={this.renderItem.bind(this)} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={refresh} />
-        <MiniPlayer onPressMetaData={this.handlePressMetaData.bind(this)} />
+        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
