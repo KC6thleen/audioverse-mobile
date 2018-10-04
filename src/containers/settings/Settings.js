@@ -12,7 +12,7 @@ class Settings extends PureComponent {
     modalVisible: false,
   }
 
-  setModalVisible(visible) {
+  setModalVisible = visible => {
     this.setState({modalVisible: visible})
   }
 

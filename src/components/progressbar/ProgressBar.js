@@ -7,12 +7,12 @@ import flatDot from 'assets/flat_dot.png'
 
 class ProgressBar extends ProgressComponent {
 
-  handleValueChange(value) {
+  handleValueChange = (value) => {
     TrackPlayer.pause()
     TrackPlayer.seekTo(value)
   }
 
-  handleSlidingComplete() {
+  handleSlidingComplete = () => {
     TrackPlayer.play()
   }
 

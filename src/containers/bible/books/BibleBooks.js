@@ -16,12 +16,12 @@ class BibleBooks extends PureComponent {
     this.props.actions.loadBibleBooks(false, true)
   }
 
-  handlePressItem(item) {
+  handlePressItem = item => {
     this.props.actions.loadBibleChapters(false, false, item.testament, item.book_id)
     this.props.navigation.navigate({ routeName: 'Chapters' })
   }
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <ListItem
         icon={{name: 'volume-2'}}
@@ -36,7 +36,7 @@ class BibleBooks extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={this.handleRefresh} />
+        <List renderItem={this.renderItem} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )

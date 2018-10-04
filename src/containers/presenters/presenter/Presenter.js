@@ -16,7 +16,7 @@ class Presenter extends PureComponent {
     this.props.actions.loadPresenter(false, true, this.props.navigation.state.params.url)
   }
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <ListItem
         avatar={{source: item.artwork}}
@@ -32,7 +32,7 @@ class Presenter extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onRefresh={this.handleRefresh} />
+        <List renderItem={this.renderItem} items={items} {...pagination} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )

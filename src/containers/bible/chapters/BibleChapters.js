@@ -8,7 +8,7 @@ import { Endpoints, MediaTypes } from 'src/constants'
 
 class BibleChapters extends PureComponent {
 
-  handlePressItem(item) {
+  handlePressItem = item => {
     this.props.actions.bibleChapter(item.chapter_id)
     this.props.navigation.pop()
 
@@ -29,7 +29,7 @@ class BibleChapters extends PureComponent {
     actions.resetAndPlayTrack(tracks, track.id)
   }
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={this.handlePressItem.bind(this, item)} style={styles.item}>
         <Text style={styles.chapter}>{item.chapter_id}</Text>
@@ -45,7 +45,7 @@ class BibleChapters extends PureComponent {
       <View style={styles.container}>
         <FlatList
           data={items}
-          renderItem={this.renderItem.bind(this)}
+          renderItem={this.renderItem}
           keyExtractor={item => item.chapter_id}
           refreshing={pagination.isFetching}
           numColumns={4}

@@ -20,7 +20,7 @@ class Sponsors extends PureComponent {
     this.props.actions.loadSponsors(false, true)
   }
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <ListItem
         avatar={{source: item.photo86}}
@@ -35,7 +35,7 @@ class Sponsors extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
+        <List renderItem={this.renderItem} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )

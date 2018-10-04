@@ -15,7 +15,7 @@ import { MediaTypes, Dirs } from 'src/constants'
 
 class Player extends PureComponent {
 
-  _downloadSermon = () => {
+  downloadSermon = () => {
 	
     let bitratesIndex = [], bitratesOptions = []
 
@@ -60,7 +60,7 @@ class Player extends PureComponent {
   handleDownload = () => {
     const { track, actions } = this.props
     if ( track.mediaType == MediaTypes.sermon ) {
-      this._downloadSermon()
+      this.downloadSermon()
     } else if ( track.mediaType == MediaTypes.book ) {
       const mediaFile = track.mediaFiles[0]
       actions.download(

@@ -9,11 +9,11 @@ import IconButton from 'src/components/buttons/IconButton'
 
 class DownloadsQueue extends PureComponent {
 
-  handleRemoveFromDownloadsQueue = (item) => {
+  handleRemoveFromDownloadsQueue = item => {
     this.props.actions.removeFromDownloadsQueue(item)
   }
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <ListItem
         avatar={{source: item.artwork}}
@@ -31,7 +31,7 @@ class DownloadsQueue extends PureComponent {
       <View style={styles.container}>
         <FlatList
           data={items}
-          renderItem={this.renderItem.bind(this)}
+          renderItem={this.renderItem}
           keyExtractor={item => item.fileName}
         />
         <MiniPlayer navigation={this.props.navigation} />

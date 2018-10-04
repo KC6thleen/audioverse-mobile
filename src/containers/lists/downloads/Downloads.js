@@ -7,7 +7,7 @@ import MiniPlayer from 'src/components/miniplayer'
 
 class Downloads extends PureComponent {
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <ListItem
         avatar={{source: item.artwork}}
@@ -25,7 +25,7 @@ class Downloads extends PureComponent {
       <View style={styles.container}>
         <FlatList
           data={items}
-          renderItem={this.renderItem.bind(this)}
+          renderItem={this.renderItem}
           keyExtractor={item => item.fileName}
         />
         <MiniPlayer navigation={this.props.navigation} />
