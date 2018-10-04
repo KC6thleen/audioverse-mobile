@@ -9,7 +9,7 @@ import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
 import iconPlay from 'assets/ic_play.png'
 import iconPause from 'assets/pause.png'
 
-const MiniPlayer = ({ navigation, track, state, playPause}) => {
+const MiniPlayer = ({ navigation, track, state, actions}) => {
 
   if (!track || state == TrackPlayer.STATE_NONE || state == TrackPlayer.STATE_STOPPED) {
     return <View />
@@ -20,7 +20,7 @@ const MiniPlayer = ({ navigation, track, state, playPause}) => {
   const rightElement = <ImageButton
     source={state == TrackPlayer.STATE_PAUSED ? iconPlay : iconPause}
     imageStyle={styles.playPause}
-    onPress={playPause}
+    onPress={actions.playPause}
   />
 
   return (
@@ -63,7 +63,9 @@ MiniPlayer.propTypes = {
   navigation: PropTypes.object.isRequired,
   state: Platform.OS == 'ios' ? PropTypes.string : PropTypes.number,
   track: PropTypes.object,
-  playPause: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    playPause: PropTypes.func.isRequired
+  })
 }
 
 export default MiniPlayer

@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { getTopics, getTopicsPagination } from 'src/reducers/selectors'
@@ -11,9 +12,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(loadTopics(false, false)),
-  loadMore: () => dispatch(loadTopics(true, false)),
-  refresh: () => dispatch(loadTopics(false, true))
+  actions: bindActionCreators({
+    loadTopics
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Topics)

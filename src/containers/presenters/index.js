@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadPresenters } from 'src/actions'
@@ -11,9 +12,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(loadPresenters(false, false)),
-  loadMore: () => dispatch(loadPresenters(true, false)),
-  refresh: () => dispatch(loadPresenters(false, true))
+  actions: bindActionCreators({
+    loadPresenters
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Presenters)

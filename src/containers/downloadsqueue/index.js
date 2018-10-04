@@ -10,8 +10,10 @@ const mapStateToProps = (state) => ({
   items: getDownloadsQueue(state)
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  removeFromDownloadsQueue
-}, dispatch)
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({
+    removeFromDownloadsQueue
+  }, dispatch)
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadsQueue)

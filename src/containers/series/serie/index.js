@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadSerie, resetAndPlayTrack } from 'src/actions'
@@ -11,10 +12,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: (url) => dispatch(loadSerie(false, false, url)),
-  loadMore: (url) => dispatch(loadSerie(true, false, url)),
-  refresh: (url) => dispatch(loadSerie(false, true, url)),
-  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
+  actions: bindActionCreators({
+    loadSerie,
+    resetAndPlayTrack
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Serie)

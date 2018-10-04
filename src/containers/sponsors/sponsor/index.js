@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadSponsor, resetAndPlayTrack } from 'src/actions'
@@ -11,10 +12,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: (url) => dispatch(loadSponsor(false, false, url)),
-  loadMore: (url) => dispatch(loadSponsor(true, false, url)),
-  refresh: (url) => dispatch(loadSponsor(false, true, url)),
-  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
+  actions: bindActionCreators({
+    loadSponsor,
+    resetAndPlayTrack
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sponsor)

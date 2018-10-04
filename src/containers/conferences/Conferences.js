@@ -9,7 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class Conferences extends PureComponent {
 
   componentDidMount() {
-    this.props.load()
+    this.props.actions.loadConferences()
+  }
+
+  handleEndReached = () => {
+    this.props.actions.loadConferences(true, false)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadConferences(false, true)
   }
 
   renderItem({ item }) {
@@ -23,11 +31,11 @@ class Conferences extends PureComponent {
   }
 
   render() {
-    const { items, pagination, loadMore, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={loadMore} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -46,9 +54,9 @@ Conferences.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  loadMore: PropTypes.func,
-  refresh: PropTypes.func
+  actions: PropTypes.shape({
+    loadConferences: PropTypes.func.isRequired
+  })
 }
 
 export default Conferences

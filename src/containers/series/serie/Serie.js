@@ -9,7 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class Serie extends PureComponent {
 
   componentDidMount() {
-    this.props.load(this.props.navigation.state.params.url)
+    this.props.actions.loadSerie(false, false, this.props.navigation.state.params.url)
+  }
+
+  handleEndReached = () => {
+    this.props.actions.loadSerie(true, false, this.props.navigation.state.params.url)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadSerie(false, true, this.props.navigation.state.params.url)
   }
 
   renderItem({ item }) {
@@ -24,12 +32,12 @@ class Serie extends PureComponent {
   }
   
   render() {
-    const { items, pagination, loadMore, refresh } = this.props
+    const { items, pagination } = this.props
     const url = this.props.navigation.state.params.url
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={loadMore.bind(null, url)} onRefresh={refresh.bind(null, url)} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -48,10 +56,10 @@ Serie.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  loadMore: PropTypes.func,
-  refresh: PropTypes.func,
-  resetAndPlayTrack: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    loadSerie: PropTypes.func.isRequired,
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default Serie

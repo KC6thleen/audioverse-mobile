@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadSponsors } from 'src/actions'
@@ -11,9 +12,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(loadSponsors(false, false)),
-  loadMore: () => dispatch(loadSponsors(true, false)),
-  refresh: () => dispatch(loadSponsors(false, true))
+  actions: bindActionCreators({
+    loadSponsors
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sponsors)

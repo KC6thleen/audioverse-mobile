@@ -23,7 +23,7 @@ class Player extends PureComponent {
       parseInt(size) > 0 ? `${Math.round((parseInt(size)/8)/100000)} MB` : ''
     )
 
-    const { track, language, download } = this.props
+    const { track, language, actions } = this.props
       
     // audio
     for ( let i = track.mediaFiles.length - 1; i >= 0; i-- ) {
@@ -46,7 +46,7 @@ class Player extends PureComponent {
     }, buttonIndex => {
       console.log('buttonIndex', buttonIndex, typeof buttonIndex)
       if (buttonIndex !== bitratesOptions.length - 1) {
-        download(
+        actions.download(
           track,
           Dirs.presentations,
           bitratesIndex[buttonIndex].downloadURL,
@@ -58,12 +58,12 @@ class Player extends PureComponent {
   }
 
   handleDownload = () => {
-    const { track, download } = this.props
+    const { track, actions } = this.props
     if ( track.mediaType == MediaTypes.sermon ) {
       this._downloadSermon()
     } else if ( track.mediaType == MediaTypes.book ) {
       const mediaFile = track.mediaFiles[0]
-      download(
+      actions.download(
         track,
         Dirs.audiobooks,
         mediaFile.downloadURL,
@@ -71,7 +71,7 @@ class Player extends PureComponent {
         mediaFile.bitrate,
       )
     } else if ( track.mediaType == MediaTypes.bible ) {
-      download(
+      actions.download(
         track,
         Dirs.bible,
         track.url,
@@ -89,12 +89,7 @@ class Player extends PureComponent {
       track,
       rate,
       language,
-      playPause,
-      skipToPrevious,
-      skipToNext,
-      replay,
-      forward,
-      setRate
+      actions
     } = this.props
 
     if (!track) {
@@ -121,10 +116,10 @@ class Player extends PureComponent {
           />
         </View>
         <PlayerContent data={track} language={language} />
-        <PlayerOptions onDownload={this.handleDownload} rate={rate} onSetRate={setRate} />
+        <PlayerOptions onDownload={this.handleDownload} rate={rate} onSetRate={actions.setRate} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
-          <PlayerControls state={state} playPause={playPause} skipToPrevious={skipToPrevious} skipToNext={skipToNext} replay={replay} forward={forward} />
+          <PlayerControls state={state} playPause={actions.playPause} skipToPrevious={actions.skipToPrevious} skipToNext={actions.skipToNext} replay={actions.replay} forward={actions.forward} />
         </View>
       </ImageBackground>
     )

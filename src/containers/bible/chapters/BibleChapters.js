@@ -9,10 +9,10 @@ import { Endpoints, MediaTypes } from 'src/constants'
 class BibleChapters extends PureComponent {
 
   handlePressItem(item) {
-    this.props.bibleChapter(item.chapter_id)
+    this.props.actions.bibleChapter(item.chapter_id)
     this.props.navigation.pop()
 
-    const { items, bible, resetAndPlayTrack } = this.props
+    const { items, bible, actions } = this.props
 
     const tracks = items.map(item => ({
       id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
@@ -26,7 +26,7 @@ class BibleChapters extends PureComponent {
 
     const track = tracks.find(el => el.id === `${bible.version.id}_${item.book_id}_${item.chapter_id}`)
 
-    resetAndPlayTrack(tracks, track.id)
+    actions.resetAndPlayTrack(tracks, track.id)
   }
 
   renderItem({ item }) {
@@ -39,7 +39,7 @@ class BibleChapters extends PureComponent {
   
   render() {
     
-    const { items, pagination, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
@@ -48,7 +48,6 @@ class BibleChapters extends PureComponent {
           renderItem={this.renderItem.bind(this)}
           keyExtractor={item => item.chapter_id}
           refreshing={pagination.isFetching}
-          onRefresh={refresh}
           numColumns={4}
         />
         <MiniPlayer navigation={this.props.navigation} />
@@ -78,9 +77,10 @@ BibleChapters.propTypes = {
   items: PropTypes.array,
   pagination: PropTypes.object,
   bible: PropTypes.object,
-  refresh: PropTypes.func,
-  bibleChapter: PropTypes.func,
-  resetAndPlayTrack: PropTypes.func
+  actions: PropTypes.shape({
+    bibleChapter: PropTypes.func.isRequired,
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default BibleChapters

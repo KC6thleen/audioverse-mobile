@@ -9,7 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class Sponsors extends PureComponent {
 
   componentDidMount() {
-    this.props.load()
+    this.props.actions.loadSponsors()
+  }
+
+  handleEndReached = () => {
+    this.props.actions.loadSponsors(true, false)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadSponsors(false, true)
   }
 
   renderItem({ item }) {
@@ -23,11 +31,11 @@ class Sponsors extends PureComponent {
   }
 
   render() {
-    const { items, pagination, loadMore, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={loadMore} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -46,9 +54,9 @@ Sponsors.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  loadMore: PropTypes.func,
-  refresh: PropTypes.func
+  actions: PropTypes.shape({
+    loadSponsors: PropTypes.func.isRequired
+  })
 }
 
 export default Sponsors

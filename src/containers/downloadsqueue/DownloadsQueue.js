@@ -10,7 +10,7 @@ import IconButton from 'src/components/buttons/IconButton'
 class DownloadsQueue extends PureComponent {
 
   handleRemoveFromDownloadsQueue = (item) => {
-    this.props.removeFromDownloadsQueue(item)
+    this.props.actions.removeFromDownloadsQueue(item)
   }
 
   renderItem({ item }) {
@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
 DownloadsQueue.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  removeFromDownloadsQueue: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    removeFromDownloadsQueue: PropTypes.func.isRequired
+  })
 }
 
 const RightElement = ({ data, onPress }) => {

@@ -17,7 +17,7 @@ class Settings extends PureComponent {
   }
 
   render() {
-    const { language, changeLanguage } = this.props
+    const { language, actions } = this.props
     const languageOptions = Object.keys(I18n.translations).map((lang, i) => (
       <Picker.Item key={i} label={I18n.translations[lang].id} value={lang} />
     ))
@@ -35,7 +35,7 @@ class Settings extends PureComponent {
               <Picker
                 selectedValue={language}
                 style={{ width: 100, backgroundColor: '#CCCCCC' }}
-                onValueChange={(itemValue, itemIndex) => changeLanguage(itemValue)}>
+                onValueChange={(itemValue, itemIndex) => actions.changeLanguage(itemValue)}>
                 {languageOptions}
               </Picker>
               <Text onPress={() => this.setModalVisible(false)}>{I18n.t('Cancel', {locale: language})}</Text>
@@ -59,7 +59,9 @@ const styles = StyleSheet.create({
 Settings.propTypes = {
   navigation: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
-  changeLanguage: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    changeLanguage: PropTypes.func.isRequired
+  })
 }
 
 export default Settings

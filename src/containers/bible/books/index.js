@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadBibleBooks, loadBibleChapters } from 'src/actions'
@@ -11,9 +12,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(loadBibleBooks(false, false)),
-  refresh: () => dispatch(loadBibleBooks(false, true)),
-  loadBibleChapters: (testament, book) => dispatch(loadBibleChapters(false, false, testament, book)),
+  actions: bindActionCreators({
+    loadBibleBooks,
+    loadBibleChapters
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BibleBooks)

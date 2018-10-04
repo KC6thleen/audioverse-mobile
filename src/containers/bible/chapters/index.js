@@ -1,6 +1,7 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadBibleChapters, bibleChapter, resetAndPlayTrack } from 'src/actions'
+import { bibleChapter, resetAndPlayTrack } from 'src/actions'
 import { getBibleChapters, getBibleChaptersPagination, getBible } from 'src/reducers/selectors'
 
 import BibleChapters from './BibleChapters'
@@ -12,9 +13,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  refresh: (testament, book) => dispatch(loadBibleChapters(false, true, testament, book)),
-  bibleChapter: (chapter) => dispatch(bibleChapter(chapter)),
-  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
+  actions: bindActionCreators({
+    bibleChapter,
+    resetAndPlayTrack
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BibleChapters)

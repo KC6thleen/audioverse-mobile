@@ -9,7 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class TrendingRecordings extends PureComponent {
 
   componentDidMount() {
-    this.props.load()
+    this.props.actions.loadTrendingRecordings()
+  }
+
+  handleEndReached = () => {
+    this.props.actions.loadTrendingRecordings(true, false)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadTrendingRecordings(false, true)
   }
 
   renderItem({ item }) {
@@ -24,11 +32,11 @@ class TrendingRecordings extends PureComponent {
   }
 
   render() {
-    const { items, pagination, loadMore, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={loadMore} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -47,10 +55,10 @@ TrendingRecordings.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  loadMore: PropTypes.func,
-  refresh: PropTypes.func,
-  resetAndPlayTrack: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    loadTrendingRecordings: PropTypes.func.isRequired,
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default TrendingRecordings

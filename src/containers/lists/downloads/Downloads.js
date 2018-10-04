@@ -13,7 +13,7 @@ class Downloads extends PureComponent {
         avatar={{source: item.artwork}}
         title={item.title}
         subtitle={`${item.artist} \u00B7 ${item.bitRate} kbps`}
-        onPress={() => this.props.resetAndPlayTrack([item])}
+        onPress={() => this.props.actions.resetAndPlayTrack([item])}
       />
     )
   }
@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
 Downloads.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
-  resetAndPlayTrack: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default Downloads

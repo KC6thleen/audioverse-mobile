@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { playPause } from 'src/actions'
@@ -11,7 +12,9 @@ const  mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  playPause: () => dispatch(playPause())
+  actions: bindActionCreators({
+    playPause
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniPlayer)

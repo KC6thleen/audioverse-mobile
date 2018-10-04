@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { changeLanguage } from 'src/actions'
@@ -10,7 +11,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  changeLanguage: (language) => dispatch(changeLanguage(language))
+  actions: bindActionCreators({
+    changeLanguage
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

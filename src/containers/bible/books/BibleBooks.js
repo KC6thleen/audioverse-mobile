@@ -9,11 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class BibleBooks extends PureComponent {
 
   componentDidMount() {
-    this.props.load()
+    this.props.actions.loadBibleBooks()
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadBibleBooks(false, true)
   }
 
   handlePressItem(item) {
-    this.props.loadBibleChapters(item.testament, item.book_id)
+    this.props.actions.loadBibleChapters(false, false, item.testament, item.book_id)
     this.props.navigation.navigate({ routeName: 'Chapters' })
   }
 
@@ -28,11 +32,11 @@ class BibleBooks extends PureComponent {
   }
 
   render() {
-    const { items, pagination, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -51,9 +55,10 @@ BibleBooks.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  refresh: PropTypes.func,
-  loadBibleChapters: PropTypes.func
+  actions: PropTypes.shape({
+    loadBibleBooks: PropTypes.func.isRequired,
+    loadBibleChapters: PropTypes.func.isRequired
+  })
 }
 
 export default BibleBooks

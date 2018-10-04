@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadStories } from 'src/actions'
@@ -11,9 +12,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  load: () => dispatch(loadStories(false, false)),
-  loadMore: () => dispatch(loadStories(true, false)),
-  refresh: () => dispatch(loadStories(false, true))
+  actions: bindActionCreators({
+    loadStories
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stories)

@@ -9,7 +9,11 @@ import MiniPlayer from 'src/components/miniplayer'
 class Book extends PureComponent {
 
   componentDidMount() {
-    this.props.load(this.props.navigation.state.params.url)
+    this.props.actions.loadBook(false, false, this.props.navigation.state.params.url)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadBook(false, true, this.props.navigation.state.params.url)
   }
 
   renderItem({ item }) {
@@ -24,11 +28,11 @@ class Book extends PureComponent {
   }
   
   render() {
-    const { items, pagination, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -47,9 +51,10 @@ Book.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  refresh: PropTypes.func,
-  resetAndPlayTrack: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    loadBook: PropTypes.func.isRequired,
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default Book

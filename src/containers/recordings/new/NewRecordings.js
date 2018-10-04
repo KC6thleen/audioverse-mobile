@@ -9,7 +9,15 @@ import MiniPlayer from 'src/components/miniplayer'
 class NewRecordings extends PureComponent {
 
   componentDidMount() {
-    this.props.load()
+    this.props.actions.loadNewRecordings()
+  }
+
+  handleEndReached = () => {
+    this.props.actions.loadNewRecordings(true, false)
+  }
+
+  handleRefresh = () => {
+    this.props.actions.loadNewRecordings(false, true)
   }
 
   renderItem({ item }) {
@@ -18,17 +26,17 @@ class NewRecordings extends PureComponent {
         avatar={{source: item.artwork}}
         title={item.title}
         subtitle={item.artist + ' \u00B7 ' + item.duration}
-        onPress={() => this.props.resetAndPlayTrack([item])}
+        onPress={() => this.props.actions.resetAndPlayTrack([item])}
       />
     )
   }
 
   render() {
-    const { items, pagination, loadMore, refresh } = this.props
+    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={loadMore} onRefresh={refresh} />
+        <List renderItem={this.renderItem.bind(this)} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -47,10 +55,10 @@ NewRecordings.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  load: PropTypes.func.isRequired,
-  loadMore: PropTypes.func,
-  refresh: PropTypes.func,
-  resetAndPlayTrack: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    loadNewRecordings: PropTypes.func.isRequired,
+    resetAndPlayTrack: PropTypes.func.isRequired
+  })
 }
 
 export default NewRecordings

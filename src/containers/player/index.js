@@ -13,14 +13,16 @@ const  mapStateToProps = state => ({
   language: getLanguage(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  playPause,
-  skipToPrevious,
-  skipToNext,
-  replay,
-  forward,
-  download,
-  setRate,
-}, dispatch)
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
+    playPause,
+    skipToPrevious,
+    skipToNext,
+    replay,
+    forward,
+    download,
+    setRate,
+  }, dispatch)
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player)

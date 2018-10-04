@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { loadTrendingRecordings, resetAndPlayTrack } from 'src/actions'
@@ -11,10 +12,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  load: (loadMore, refresh) => dispatch(loadTrendingRecordings(loadMore, refresh)),
-  loadMore: () => dispatch(loadTrendingRecordings(true, false)),
-  refresh: () => dispatch(loadTrendingRecordings(false, true)),
-  resetAndPlayTrack: (tracks, id) => dispatch(resetAndPlayTrack(tracks, id))
+  actions: bindActionCreators({
+    loadTrendingRecordings,
+    resetAndPlayTrack
+  }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrendingRecordings)
