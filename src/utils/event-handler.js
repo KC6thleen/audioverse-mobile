@@ -27,7 +27,7 @@ async function eventHandler(store, data) {
       store.dispatch(skipToNext())
       break
     case 'remote-previous':
-      store.dispatch(skipToNext())
+      store.dispatch(skipToPrevious())
       break
     case 'remote-seek':
       TrackPlayer.seekTo(data.position)
