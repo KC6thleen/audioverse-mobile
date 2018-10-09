@@ -161,13 +161,15 @@ Player.propTypes = {
   track: PropTypes.object,
   rate: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
-  playPause: PropTypes.func.isRequired,
-  skipToPrevious: PropTypes.func.isRequired,
-  skipToNext: PropTypes.func.isRequired,
-  replay: PropTypes.func.isRequired,
-  forward: PropTypes.func.isRequired,
-  setRate: PropTypes.func.isRequired,
-  download: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    playPause: PropTypes.func.isRequired,
+    skipToPrevious: PropTypes.func.isRequired,
+    skipToNext: PropTypes.func.isRequired,
+    replay: PropTypes.func.isRequired,
+    forward: PropTypes.func.isRequired,
+    setRate: PropTypes.func.isRequired,
+    download: PropTypes.func.isRequired
+  })
 }
 
 export default Player
