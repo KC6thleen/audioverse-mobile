@@ -1,3 +1,4 @@
+import { PermissionsAndroid, Platform } from 'react-native'
 import { call, put, select, take } from 'redux-saga/effects'
 import { eventChannel, buffers, END } from 'redux-saga'
 import RNFetchBlob from 'rn-fetch-blob'
@@ -5,19 +6,45 @@ import RNFetchBlob from 'rn-fetch-blob'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 
+async function requestReadExternalStoragePermission() {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+    )
+    return granted === PermissionsAndroid.RESULTS.GRANTED
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 /** 
  * Download
 */
-export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }) {
-  yield put(actions.addToDownloadsQueue({...item, downloadPath, downloadUrl, fileName, bitRate}))
-  yield call(downloadNext)
+export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }) { 
+  const permission = Platform.OS === 'ios' ? true : yield call(requestReadExternalStoragePermission)
+  if (permission) {
+    const dir = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
+    yield put(actions.addToDownloadsQueue({
+      ...item,
+      downloadPath: `${dir}/${downloadPath}/`,
+      downloadUrl,
+      fileName,
+      bitRate
+    }))
+    yield call(downloadNext)
+  }
 }
 
 const fetchBlob = (item) => {
   return eventChannel(emitter => {
     RNFetchBlob
     .config({
-      path: `${RNFetchBlob.fs.dirs.DocumentDir}/${item.downloadPath}/${item.fileName}`
+      path: `${item.downloadPath}${item.fileName}`, // when using DownloadManager on android 'path' will not take effect
+      addAndroidDownloads : {
+        useDownloadManager : true,
+        notification: true,
+        path: `${item.downloadPath}${item.fileName}`
+      }
     })
     // .fetch('GET', item.downloadUrl)
     .fetch('GET', 'https://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3')
@@ -53,13 +80,13 @@ export function* downloadNext() {
     const channel = yield call(fetchBlob, item)
     while(true) {
       const { progress = 0, err, res } = yield take(channel)
+      console.log('progress', progress, 'err', err, 'res', res)
       if (progress) {
         yield put(actions.downloadProgress(item, progress))
       } else if (res) {
-        console.log('File saved to ', res.path())
         yield put(actions.setDownloading(false))
         yield put(actions.removeFromDownloadsQueue(item))
-        yield put(actions.addToDownloads(item))
+        yield put(actions.downloads.add([item]))
         yield call(downloadNext)
       } else { // err
         yield put(actions.setDownloading(false))
@@ -67,4 +94,12 @@ export function* downloadNext() {
       }
     }
   }
+}
+
+/** 
+ * Download next
+*/
+export function* remove({ item }) {
+  yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${item.fileName}`)
+  yield put(actions.downloads.remove(item))
 }

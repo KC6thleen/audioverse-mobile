@@ -255,15 +255,55 @@ export const bibleVersion = version => action(BIBLE_VERSION, {version})
 export const bibleBook = (testament, book) => action(BIBLE_BOOK, {testament, book})
 export const bibleChapter = chapter => action(BIBLE_CHAPTER, {chapter})
 
-export const ADD_TO_DOWNLOADS = 'ADD_TO_DOWNLOADS'
-export const REMOVE_FROM_DOWNLOADS = 'REMOVE_FROM_DOWNLOADS'
 export const ADD_TO_DOWNLOADS_QUEUE = 'ADD_TO_DOWNLOADS_QUEUE'
 export const REMOVE_FROM_DOWNLOADS_QUEUE = 'REMOVE_FROM_DOWNLOADS_QUEUE'
 export const SET_DOWNLOADING = 'SET_DOWNLOADING'
 export const DOWNLOAD_PROGRESS = 'DOWNLOAD_PROGRESS'
-export const addToDownloads = (item) => action(ADD_TO_DOWNLOADS, {item})
-export const removeFromDownloads = (item) => action(REMOVE_FROM_DOWNLOADS, {item})
 export const addToDownloadsQueue = (item) => action(ADD_TO_DOWNLOADS_QUEUE, {item})
 export const removeFromDownloadsQueue = (item) => action(REMOVE_FROM_DOWNLOADS_QUEUE, {item})
 export const setDownloading = (downloading) => action(SET_DOWNLOADING, {downloading})
 export const downloadProgress = (item, progress) => action(DOWNLOAD_PROGRESS, {item, progress})
+
+
+const ADD = 'ADD'
+const REMOVE = 'REMOVE'
+
+function createMyListsTypes(base) {
+  return [ADD, REMOVE].reduce((acc, type) => {
+    acc[type] = `${base}_${type}`
+    return acc
+  }, {})
+}
+
+export const DOWNLOADS = createMyListsTypes('DOWNLOADS')
+export const downloads = {
+  add: items => action(DOWNLOADS.ADD, {items}),
+  remove: item => action(DOWNLOADS.REMOVE, {item})
+}
+
+export const REMOVE_DOWNLOAD = 'REMOVE_DOWNLOAD'
+export const removeDownload = item => action(REMOVE_DOWNLOAD, {item})
+
+export const FAVORITES = createMyListsTypes('FAVORITES')
+export const favorites = {
+  add: items => action(FAVORITES.ADD, {items}),
+  remove: item => action(FAVORITES.REMOVE, {item})
+}
+
+export const PLAYLISTS = createMyListsTypes('PLAYLISTS')
+export const playlists = {
+  add: items => action(PLAYLISTS.ADD, {items}),
+  remove: item => action(PLAYLISTS.REMOVE, {item})
+}
+
+export const PLAYLIST_ITEMS = createMyListsTypes('PLAYLIST_ITEMS')
+export const playlistItems = {
+  add: items => action(PLAYLIST_ITEMS.ADD, {items}),
+  remove: item => action(PLAYLIST_ITEMS.REMOVE, {item})
+}
+
+export const HISTORY = createMyListsTypes('HISTORY')
+export const history = {
+  add: items => action(HISTORY.ADD, {items}),
+  remove: item => action(HISTORY.REMOVE, {item})
+}

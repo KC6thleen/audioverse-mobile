@@ -92,19 +92,47 @@ function bible(state = {
   }
 }
 
-function downloads(state = [], action) {
-  switch(action.type) {
-    case ActionTypes.ADD_TO_DOWNLOADS:
-      return [
-        ...state,
-        action.item
-      ]
-    case ActionTypes.REMOVE_FROM_DOWNLOADS:
-      return state.filter( el => el.id != action.item.id )
-    default:
-      return state
+function myLists(types) {
+  const [ ADD, REMOVE ] = types
+  return function update(state = [], action) {
+    switch(action.type) {
+      case ADD:
+        return [
+          ...action.items,
+          ...state
+        ]
+      case REMOVE:
+        return state.filter( el => el.id != action.item.id )
+      default:
+        return state
+    }
   }
 }
+
+const downloads = myLists([
+  ActionTypes.DOWNLOADS.ADD,
+  ActionTypes.DOWNLOADS.REMOVE
+])
+
+const favorites = myLists([
+  ActionTypes.FAVORITES.ADD,
+  ActionTypes.FAVORITES.REMOVE
+])
+
+const playlists = myLists([
+  ActionTypes.PLAYLISTS.ADD,
+  ActionTypes.PLAYLISTS.REMOVE
+])
+
+const playlistItems = myLists([
+  ActionTypes.PLAYLIST_ITEMS.ADD,
+  ActionTypes.PLAYLIST_ITEMS.REMOVE
+])
+
+const history = myLists([
+  ActionTypes.HISTORY.ADD,
+  ActionTypes.HISTORY.REMOVE
+])
 
 function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, action) {
   switch(action.type) {
@@ -150,7 +178,11 @@ const rootReducer = combineReducers({
   playback,
   bible,
   lists: combineReducers({
-    downloads
+    downloads,
+    favorites,
+    playlists,
+    playlistItems,
+    history
   }),
   downloadsQueue,
   bibleBooks: paginate({

@@ -10,6 +10,7 @@
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-i18n": "^2.0.12",
+    "react-native-sqlite-storage": "^3.3.6",
     "react-native-swiper": "^1.5.13",
     "react-native-track-player": "^0.2.5",
     "react-native-vector-icons": "^4.6.0",

@@ -87,7 +87,7 @@ function* getSermonUrl(item) {
   let currentUrl = null, exists = false
 
   if (download) {
-    currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.presentations}/${download.fileName}`
+    currentUrl = `${download.downloadPath}${download.fileName}`
     exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`
@@ -98,7 +98,7 @@ function* getSermonUrl(item) {
   if (!exists) {
     const others = downloads.filter( el => el.bitRate !== mediaFile.bitrate )
     for (let i of others) {
-      currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.presentations}/${i.fileName}`
+      currentUrl = `${i.downloadPath}${i.fileName}`
       exists = yield call(fileExists, currentUrl)
       if (exists) {
         url = `file://${currentUrl}`
@@ -121,7 +121,7 @@ function* getBookChapterUrl(item) {
   let url = item.mediaFiles && item.mediaFiles.length ? item.mediaFiles[0].downloadURL : ''
 
   if (download) {
-    const currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.audiobooks}/${download.fileName}`
+    const currentUrl = `${download.downloadPath}${download.fileName}`
     const exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`
@@ -142,7 +142,7 @@ function* getBibleChapterUrl(item) {
   let url = item.downloadURL
 
   if (download) {
-    const currentUrl = `${RNFetchBlob.fs.dirs.DocumentDir}/${Dirs.bible}/${download.fileName}`
+    const currentUrl = `${download.downloadPath}${download.fileName}`
     const exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`

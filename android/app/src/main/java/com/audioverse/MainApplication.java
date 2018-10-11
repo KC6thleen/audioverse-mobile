@@ -8,6 +8,7 @@ import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import guichaguri.trackplayer.TrackPlayer;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import org.pgsqlite.SQLitePluginPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -32,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new TrackPlayer(),
-            new RNI18nPackage()
+            new RNI18nPackage(),
+            new SQLitePluginPackage()
       );
     }
 

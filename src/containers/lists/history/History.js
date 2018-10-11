@@ -8,7 +8,7 @@ import IconButton from 'src/components/buttons/IconButton'
 import { getPresenterName, getPresenterPicture } from 'src/utils'
 import I18n from 'locales'
 
-class Downloads extends PureComponent {
+class History extends PureComponent {
 
   handleRemove = item => {
     Alert.alert(
@@ -26,7 +26,7 @@ class Downloads extends PureComponent {
       <ListItem
         avatar={{source: getPresenterPicture(item)}}
         title={item.title}
-        subtitle={`${getPresenterName(item)} \u00B7 ${item.bitRate} kbps`}
+        subtitle={`${getPresenterName(item)}`}
         onPress={() => this.props.actions.resetAndPlayTrack([item])}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
       />
@@ -41,7 +41,7 @@ class Downloads extends PureComponent {
         <FlatList
           data={items}
           renderItem={this.renderItem}
-          keyExtractor={item => item.fileName}
+          keyExtractor={item => item.id}
         />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   }
 })
 
-Downloads.propTypes = {
+History.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   actions: PropTypes.shape({
@@ -71,4 +71,4 @@ const RightElement = ({ data, onPress }) => {
   return <IconButton onPress={_onPress} name="x" size={24} />
 }
 
-export default Downloads
+export default History

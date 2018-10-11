@@ -6,8 +6,9 @@ import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Downloads from 'src/containers/lists/downloads'
-import Trending from 'src/containers/recordings/trending'
-import Featured from 'src/containers/recordings/featured'
+import Favorites from 'src/containers/lists/favorites'
+import Playlists from 'src/containers/lists/playlists'
+import History from 'src/containers/lists/history'
 
 const ListsTab = createMaterialTopTabNavigator({
   Downloads: {
@@ -15,11 +16,30 @@ const ListsTab = createMaterialTopTabNavigator({
     navigationOptions: {
       tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="downloads" />
     }
+  },
+  Favorites: {
+    screen: Favorites,
+    navigationOptions: {
+      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="favorites" />
+    }
+  },
+  Playlists: {
+    screen: Playlists,
+    navigationOptions: {
+      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="playlists" />
+    }
+  },
+  History: {
+    screen: History,
+    navigationOptions: {
+      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="history" />
+    }
   }
 }, {
   lazy: true,
   tabBarOptions: {
     style: GlobalStyles.tab,
+    scrollEnabled: true,
     indicatorStyle: GlobalStyles.tabIndicator
   }
 })

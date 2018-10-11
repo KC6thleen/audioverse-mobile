@@ -30,11 +30,11 @@ We'll be updating the App Stores with this new version as soon as we reach versi
 - [x] Bible
 - [x] Download Queue
 - [x] Offline support
-- [ ] My Lists
-  - [ ] Favorites,
-  - [ ] History,
+- [x] My Lists
+  - [x] Favorites,
+  - [x] History,
   - [x] Downloads,
-  - [ ] Playlists
+  - [x] Playlists
 - [ ] Login and Signup
 - [ ] Video support
 - [ ] Chromecast for Android

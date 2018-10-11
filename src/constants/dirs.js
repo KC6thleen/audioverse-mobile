@@ -1,5 +1,5 @@
 export default {
-  presentations: 'downloads',
+  presentations: 'presentations',
   bible: 'bible',
   audiobooks: 'audiobooks'
 }

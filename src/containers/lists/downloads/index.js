@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { resetAndPlayTrack } from 'src/actions'
+import { resetAndPlayTrack, removeDownload } from 'src/actions'
 import { getDownloads } from 'src/reducers/selectors'
 
 import Downloads from './Downloads'
@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    resetAndPlayTrack
+    resetAndPlayTrack,
+    remove: removeDownload
   }, dispatch)
 })
 

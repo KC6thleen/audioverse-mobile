@@ -50,5 +50,8 @@ export const getTopicPagination = state => state.topic
 export const getDownloads = state => state.lists.downloads
 export const getDownloadsById = (state, id) => state.lists.downloads.filter(el => el.id === id)
 export const getDownloadById = (state, id) => state.lists.downloads.find(el => el.id === id)
+export const getFavorites = state => state.lists.favorites
+export const getPlaylists = state => state.lists.playlists
+export const getHistory = state => state.lists.history
 export const getDownloadsQueue = state => state.downloadsQueue.queue
 export const getDownloading = state => state.downloadsQueue.downloading
