@@ -44,8 +44,7 @@ class Player extends PureComponent {
       options: bitratesOptions,
       cancelButtonIndex: bitratesOptions.length - 1,
     }, buttonIndex => {
-      console.log('buttonIndex', buttonIndex, typeof buttonIndex)
-      if (buttonIndex !== bitratesOptions.length - 1) {
+      if (buttonIndex && buttonIndex !== bitratesOptions.length - 1) {
         actions.download(
           track,
           Dirs.presentations,
