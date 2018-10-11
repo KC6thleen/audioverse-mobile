@@ -9,7 +9,7 @@ import * as selectors from 'src/reducers/selectors'
 async function requestReadExternalStoragePermission() {
   try {
     const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
     )
     return granted === PermissionsAndroid.RESULTS.GRANTED
   } catch (err) {
@@ -100,6 +100,14 @@ export function* downloadNext() {
  * Download next
 */
 export function* remove({ item }) {
-  yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${item.fileName}`)
+  const exists = yield call(RNFetchBlob.fs.exists, `${item.downloadPath}${item.fileName}`)
+  console.log('exists', exists)
+  try {
+    if (exists) {
+      yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${item.fileName}`)
+    }
+  } catch(err) {
+    console.log(err)
+  }
   yield put(actions.downloads.remove(item))
 }
