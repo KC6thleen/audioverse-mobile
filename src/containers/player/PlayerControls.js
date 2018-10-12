@@ -24,7 +24,7 @@ const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, 
       onPress={skipToPrevious}
     />
     <ImageButton
-      source={state === TrackPlayer.STATE_PAUSED ? iconPlay : iconPause}
+      source={state === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
       style={styles.playPauseButton}
       imageStyle={[styles.playPauseIcon, {marginLeft: state === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
       onPress={playPause}

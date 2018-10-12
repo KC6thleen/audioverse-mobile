@@ -49,7 +49,9 @@ async function eventHandler(store, data) {
       store.dispatch(playbackState(data.state))
       break
     case 'playback-track-changed':
-      store.dispatch(playbackTrackId(data.nextTrack))
+      if (data.nextTrack) {
+        store.dispatch(playbackTrackId(data.nextTrack))
+      }
       break
     case 'playback-error':
       Alert.alert(I18n.t('Unable_to_download_this_media._Try_again_later.'))

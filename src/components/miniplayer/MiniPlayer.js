@@ -18,7 +18,7 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
   const _onPress = () => { navigation.navigate({ routeName: 'Player' }) }
 
   const rightElement = <ImageButton
-    source={state == TrackPlayer.STATE_PAUSED ? iconPlay : iconPause}
+    source={state == TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
     imageStyle={styles.playPause}
     onPress={actions.playPause}
   />

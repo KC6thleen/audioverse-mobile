@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { setupPlayer, playbackUpdate } from 'src/actions'
 // react-navigation no redux
 import AppNavigator from 'src/navigators/AppNavigator'
+import NavigationService from 'src/utils/navigation-service'
 // react-navigation with redux
 // import AppNavigator from 'src/navigators/ReduxNavigator'
 
@@ -37,7 +38,9 @@ class App extends PureComponent {
     return (
       <Provider store={this.props.store}>
         <PersistGate loading={null} persistor={this.props.persistor}>
-          <AppNavigator />
+          <AppNavigator
+            ref={navigatorRef => { NavigationService.setTopLevelNavigator(navigatorRef) }}
+          />
         </PersistGate>
       </Provider>
     )

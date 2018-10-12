@@ -6,6 +6,7 @@ import { MediaTypes, Dirs } from 'src/constants'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 import { getMediaFile } from 'src/utils'
+import NavigationService from 'src/utils/navigation-service'
 
 /**
  * Setup player with all the capabilities needed
@@ -41,12 +42,13 @@ export function* setupPlayer() {
  */
 export function* playbackUpdate() {
   try {
-    const state = yield call(TrackPlayer.setupPlayer)
+    yield call(TrackPlayer.setupPlayer)
+    const state = yield call(TrackPlayer.getState)
+    const tracks = yield call(TrackPlayer.getQueue)
     const trackId = yield call(TrackPlayer.getCurrentTrack)
-    const track = yield call(TrackPlayer.getTrack, trackId)
     yield put(actions.playbackState(state))
+    yield put(actions.playbackTracks(tracks))
     yield put(actions.playbackTrackId(trackId))
-    yield put(actions.playbackTrack(track))
   } catch (e) {
     // the player is probably not yet initialized
     // which means we don't have to update anything
@@ -155,24 +157,41 @@ function* getBibleChapterUrl(item) {
 /**
  * Resets the player, adds the array of tracks to the playlist and starts playing it
  * @param {array} tracks 
- * @param {object} track
+ * @param {object} id
  */
 export function* resetAndPlayTrack({ tracks, id }) {
   yield call(TrackPlayer.reset)
 
   const selectedTrack = !id ? tracks[0] : tracks.find(el => el.id === id)
 
+  yield put(actions.playbackTracks(tracks))
+  yield put(actions.playbackTrackId(selectedTrack.id))
+
+  const autoPlay = yield select(selectors.getAutoPlay)
+  if (autoPlay) {
+    yield call(playTracks)
+  } else {
+    yield call(NavigationService.navigate, 'Player')
+  }
+}
+
+/** 
+ * Plays or pauses the current track
+*/
+export function* playTracks() {
+
+  const tracks = yield select(selectors.getTracks)
+  const currentTrack = yield select(selectors.getCurrentTrack)
+
   let getUrl = null
-  if (selectedTrack.mediaType === MediaTypes.sermon) {
+  if (currentTrack.mediaType === MediaTypes.sermon) {
     getUrl = getSermonUrl
-  } else if (selectedTrack.mediaType === MediaTypes.bible) {
+  } else if (currentTrack.mediaType === MediaTypes.bible) {
     getUrl = getBibleChapterUrl
-  } else if (selectedTrack.mediaType === MediaTypes.book) {
+  } else if (currentTrack.mediaType === MediaTypes.book) {
     getUrl = getBookChapterUrl
   }
 
-  yield put(actions.playbackTrack(selectedTrack))
-  
   const newTracks = []
   for (let i of tracks) {
     newTracks.push({
@@ -180,20 +199,25 @@ export function* resetAndPlayTrack({ tracks, id }) {
       url: yield call(getUrl, i)
     })
   }
-  
   yield call(TrackPlayer.add, newTracks)
-  yield call(TrackPlayer.skip, selectedTrack.id)
+  yield call(TrackPlayer.skip, currentTrack.id)
+  yield call(TrackPlayer.play)
 }
 
 /** 
  * Plays or pauses the current track
 */
 export function* playPause() {
-  const playbackState = yield select(selectors.getPlaybackState)
-  if (playbackState == TrackPlayer.STATE_PAUSED) {
-    yield call(TrackPlayer.play)
+  const tracks = yield call(TrackPlayer.getQueue)
+  if (!tracks.length) {
+    yield call(playTracks)
   } else {
-    yield call(TrackPlayer.pause)
+    const playbackState = yield select(selectors.getPlaybackState)
+    if (playbackState === TrackPlayer.STATE_PLAYING) {
+      yield call(TrackPlayer.pause)
+    } else {
+      yield call(TrackPlayer.play)
+    }
   }
 }
 
@@ -206,7 +230,6 @@ export function* skipToPrevious() {
   const index = queue.findIndex(item => item.id === currentTrackId )
   
   if (index > 0) {
-    yield put(actions.playbackTrack(queue[index-1]))
     yield call(TrackPlayer.skipToPrevious)
   }
 }
@@ -220,7 +243,6 @@ export function* skipToNext() {
   const index = queue.findIndex(item => item.id === currentTrackId )
   
   if (queue.length > index + 1) {
-    yield put(actions.playbackTrack(queue[index+1]))
     yield call(TrackPlayer.skipToNext)
   }
 }

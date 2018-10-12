@@ -4,7 +4,7 @@ export const SETUP_PLAYER = 'SETUP_PLAYER'
 export const PLAYBACK_INIT = 'PLAYBACK_INIT'
 export const PLAYBACK_STATE = 'PLAYBACK_STATE'
 export const PLAYBACK_TRACK_ID = 'PLAYBACK_TRACK_ID'
-export const PLAYBACK_TRACK = 'PLAYBACK_TRACK'
+export const PLAYBACK_TRACKS = 'PLAYBACK_TRACKS'
 export const PLAYBACK_UPDATE = 'PLAYBACK_UPDATE'
 
 export const RESET_AND_PLAY_TRACK = 'RESET_AND_PLAY_TRACK'
@@ -237,7 +237,7 @@ export const setupPlayer = () => action(SETUP_PLAYER)
 export const playbackInit = () => action(PLAYBACK_INIT)
 export const playbackState = state => action(PLAYBACK_STATE, {state})
 export const playbackTrackId = trackId => action(PLAYBACK_TRACK_ID, {trackId})
-export const playbackTrack = track => action(PLAYBACK_TRACK, {track})
+export const playbackTracks = tracks => action(PLAYBACK_TRACKS, {tracks})
 export const playbackUpdate = () => action(PLAYBACK_UPDATE)
 
 export const resetAndPlayTrack = (tracks, id) => action(RESET_AND_PLAY_TRACK, {tracks, id})

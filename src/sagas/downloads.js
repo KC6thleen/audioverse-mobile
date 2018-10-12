@@ -46,8 +46,8 @@ const fetchBlob = (item) => {
         path: `${item.downloadPath}${item.fileName}`
       }
     })
-    // .fetch('GET', item.downloadUrl)
-    .fetch('GET', 'https://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3')
+    .fetch('GET', item.downloadUrl)
+    // .fetch('GET', 'https://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3')
     // listen to download progress event, every 5%
     .progress({ count : 5 }, (received, total) => {
       emitter({ progress: (received / total).toFixed(2) })

@@ -15,7 +15,8 @@ import paginate from './paginate'
 
 function settings(state = {
   language: I18n.locale.substr(0,2),
-  bitRate: "16"
+  bitRate: "16",
+  autoPlay: false
 }, action) {
   switch(action.type) {
     case ActionTypes.CHANGE_LANGUAGE:
@@ -28,7 +29,13 @@ function settings(state = {
   }
 }
 
-function playback(state = { rate: 1 }, action) {
+function playback(state = {
+  init: false,
+  state: null,
+  currentTrackId: null,
+  tracks: [],
+  rate: 1
+}, action) {
   switch(action.type) {
     case ActionTypes.PLAYBACK_INIT:
       return {
@@ -45,10 +52,10 @@ function playback(state = { rate: 1 }, action) {
         ...state,
         currentTrackId: action.trackId
       }
-    case ActionTypes.PLAYBACK_TRACK:
+    case ActionTypes.PLAYBACK_TRACKS:
       return {
         ...state,
-        currentTrack: action.track
+        tracks: action.tracks
       }
     case ActionTypes.PLAYBACK_RATE:
       return {
