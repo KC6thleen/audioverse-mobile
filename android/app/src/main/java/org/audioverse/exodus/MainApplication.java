@@ -1,4 +1,4 @@
-package com.audioverse;
+package org.audioverse.exodus;
 
 import android.app.Application;
 

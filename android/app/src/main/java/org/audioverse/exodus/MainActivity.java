@@ -1,4 +1,4 @@
-package com.audioverse;
+package org.audioverse.exodus;
 
 import com.facebook.react.ReactActivity;
 
