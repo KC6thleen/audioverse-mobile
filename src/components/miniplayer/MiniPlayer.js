@@ -8,6 +8,7 @@ import ImageButton from 'src/components/buttons/ImageButton'
 import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
 import iconPlay from 'assets/ic_play.png'
 import iconPause from 'assets/pause.png'
+import { getPresenterName, getPresenterPicture } from 'src/utils'
 
 const MiniPlayer = ({ navigation, track, state, actions}) => {
 
@@ -15,7 +16,7 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
     return <View />
   }
 
-  const _onPress = () => { navigation.navigate({ routeName: 'Player' }) }
+  const handlePress = () => { navigation.navigate({ routeName: 'Player' }) }
 
   const rightElement = <ImageButton
     source={state == TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
@@ -26,10 +27,10 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
   return (
     <View style={styles.container}>
       <ListItem
-        avatar={{source: track.artwork}}
+        avatar={{source: getPresenterPicture(track)}}
         title={track.title}
-        subtitle={track.artist}
-        onPress={_onPress}
+        subtitle={getPresenterName(track)}
+        onPress={handlePress}
         rightElement={rightElement}
         style={{backgroundColor: 'transparent'}}
       />
