@@ -19,8 +19,8 @@
   "favorites":"FAVORITOS",
   "playlists":"REPRODUCCION",
   "history":"HISTORIAL",
-  "chapter":"Capítulo",
-  "verse":"Versículo",
+  "chapters":"Capítulos",
+  "verses":"Versículos",
   "Recorded":"Grabado",
   "Description":"Descripción",
   "Select_a_bitrate_to_download":"Seleccione la calidad a descargar",
@@ -84,5 +84,6 @@
   "submit_testimony":"Enviar su testimonio",
   "rate_us":"Calificanos en la tienda de aplicaciones",
   "about":"Acerca de",
-  "share_app":"Compartir app"
+  "share_app":"Compartir app",
+  "Autoplay":"Auto reproducir"
 }

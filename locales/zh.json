@@ -19,8 +19,8 @@
   "favorites":"最愛",
   "playlists":"播放列表",
   "history":"歷史",
-  "chapter":"章節",
-  "verse":"詩",
+  "chapters":"章",
+  "verses":"經文",
   "Recorded":"記錄",
   "Description":"描述",
   "Select_a_bitrate_to_download":"選擇質量下載",
@@ -84,5 +84,6 @@
   "submit_testimony":"提交你的見證",
   "rate_us":"給我們的應用商店評分",
   "about":"關於",
-  "share_app":"分享應用程式"
+  "share_app":"分享應用程式",
+  "Autoplay":"自動播放"
 }

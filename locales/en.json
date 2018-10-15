@@ -19,8 +19,8 @@
   "favorites":"FAVORITES",
   "playlists":"PLAYLISTS",
   "history":"HISTORY",
-  "chapter":"Chapter",
-  "verse":"Verse",
+  "chapters":"Chapters",
+  "verses":"Verses",
   "Recorded":"Recorded",
   "Description":"Description",
   "Select_a_bitrate_to_download":"Select quality to download",
@@ -84,5 +84,6 @@
   "submit_testimony":"Submit your testimony",
   "rate_us":"Rate us on the app store",
   "about":"About",
-  "share_app":"Share app"
+  "share_app":"Share app",
+  "Autoplay":"Autoplay"
 }

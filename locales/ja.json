@@ -19,8 +19,8 @@
   "favorites":"お気に入り",
   "playlists":"プレイリスト",
   "history":"歴史",
-  "chapter":"章",
-  "verse":"詩",
+  "chapters":"章",
+  "verses":"詩",
   "Recorded":"記録された",
   "Description":"説明",
   "Select_a_bitrate_to_download":"ダウンロードする品質を選択する",
@@ -84,5 +84,6 @@
   "submit_testimony":"あなたの証言を提出する",
   "rate_us":"アプリストアで評価する",
   "about":"約",
-  "share_app":"アプリを共有する"
+  "share_app":"アプリを共有する",
+  "Autoplay":"自動再生"
 }

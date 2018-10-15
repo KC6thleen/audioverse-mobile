@@ -19,8 +19,8 @@
   "favorites":"FAVORITEN",
   "playlists":"WIEDERGABELISTEN",
   "history":"GESCHICHTE",
-  "chapter":"Kapitel",
-  "verse":"Vers",
+  "chapters":"Kapitel",
+  "verses":"Verse",
   "Recorded":"Verzeichnet",
   "Description":"Beschreibung",
   "Select_a_bitrate_to_download":"Wählen Sie die Qualität zum Download aus",
@@ -84,5 +84,6 @@
   "submit_testimony":"Übermitteln Sie Ihr Zeugnis",
   "rate_us":"Bewerten Sie uns im App Store",
   "about":"Über",
-  "share_app":"App teilen"
+  "share_app":"App teilen",
+  "Autoplay":"Automatisches Abspielen"
 }

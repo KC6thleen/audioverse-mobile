@@ -19,8 +19,8 @@
   "favorites":"FAVORIS",
   "playlists":"PLAYLISTS",
   "history":"HISTOIRE",
-  "chapter":"Chapitre",
-  "verse":"Verset",
+  "chapters":"Chapitres",
+  "verses":"Vers",
   "Recorded":"Enregistré",
   "Description":"La description",
   "Select_a_bitrate_to_download":"Sélectionnez la qualité à télécharger",
@@ -84,5 +84,6 @@
   "submit_testimony":"Soumettez votre témoignage",
   "rate_us":"Évaluez-nous sur l'application",
   "about":"Sur",
-  "share_app":"Partager l'application"
+  "share_app":"Partager l'application",
+  "Autoplay":"Lecture automatique"
 }
