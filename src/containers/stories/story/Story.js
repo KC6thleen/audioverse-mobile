@@ -22,7 +22,7 @@ class Story extends PureComponent {
         avatar={{source: item.artwork}}
         title={item.title}
         subtitle={item.artist + ' \u00B7 ' + item.duration}
-        onPress={() => this.props.resetAndPlayTrack(this.props.items, item.id)}
+        onPress={() => this.props.actions.resetAndPlayTrack(this.props.items, item.id)}
       />
     )
   }
