@@ -10,7 +10,6 @@ class BibleChapters extends PureComponent {
 
   handlePressItem = item => {
     this.props.actions.bibleChapter(item.chapter_id)
-    this.props.navigation.pop()
 
     const { items, bible, actions } = this.props
 
