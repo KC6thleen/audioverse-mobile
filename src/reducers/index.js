@@ -24,6 +24,11 @@ function settings(state = {
         ...state,
         language: action.language
       }
+    case ActionTypes.AUTOPLAY:
+      return {
+        ...state,
+        autoPlay: action.autoPlay
+      }
     default:
       return state
   }
@@ -350,7 +355,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['settings', 'lists'],
+  whitelist: ['settings', 'playback', 'bible', 'lists'],
   debug: true
 }
 

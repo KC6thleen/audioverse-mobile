@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, Modal, Picker, StyleSheet } from 'react-native'
+import { View, Switch, StyleSheet } from 'react-native'
+import ActionSheet from 'react-native-action-sheet'
 
 import I18n from 'locales'
 import ListItem from 'src/components/list/ListItem'
@@ -8,39 +9,36 @@ import MiniPlayer from 'src/components/miniplayer'
 
 class Settings extends PureComponent {
 
-  state = {
-    modalVisible: false,
+  showLanguages = () => {
+    const { language, actions } = this.props
+
+    const options = Object.keys(I18n.translations).map(el => I18n.translations[el].id)
+
+    ActionSheet.showActionSheetWithOptions({
+      title: I18n.t('Language', {locale: language}),
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        actions.changeLanguage(Object.keys(I18n.translations).find(el => I18n.translations[el].id === options[buttonIndex]))
+      }
+    })
   }
 
-  setModalVisible = visible => {
-    this.setState({modalVisible: visible})
+  setAutoPlay = value => {
+    console.log('value', value)
+    this.props.actions.setAutoPlay(value)
   }
 
   render() {
-    const { language, actions } = this.props
-    const languageOptions = Object.keys(I18n.translations).map((lang, i) => (
-      <Picker.Item key={i} label={I18n.translations[lang].id} value={lang} />
-    ))
+    const { language, autoPlay } = this.props
 
     return (
       <View style={styles.container}>
         <View>
           <ListItem icon={{name: 'pocket'}} title={I18n.t('Login', {locale: language})} chevron />
-          <ListItem icon={{name: 'map-pin'}} title={I18n.t('Language', {locale: language})} subtitle={I18n.t('id', {locale: language})} chevron onPress={() => this.setModalVisible(true)} />
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.modalVisible}>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-              <Picker
-                selectedValue={language}
-                style={{ width: 100, backgroundColor: '#CCCCCC' }}
-                onValueChange={(itemValue, itemIndex) => actions.changeLanguage(itemValue)}>
-                {languageOptions}
-              </Picker>
-              <Text onPress={() => this.setModalVisible(false)}>{I18n.t('Cancel', {locale: language})}</Text>
-            </View>
-          </Modal>
+          <ListItem icon={{name: 'map-pin'}} title={I18n.t('Language', {locale: language})} subtitle={I18n.t('id', {locale: language})} chevron onPress={this.showLanguages} />
+          <ListItem icon={{name: 'play-circle'}} title={I18n.t('Autoplay', {locale: language})} rightElement={<Switch value={autoPlay} onValueChange={this.setAutoPlay} />} onPress={this.showLanguages} />
         </View>
         <MiniPlayer navigation={this.props.navigation} />
       </View>
@@ -59,8 +57,10 @@ const styles = StyleSheet.create({
 Settings.propTypes = {
   navigation: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
+  autoPlay: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
-    changeLanguage: PropTypes.func.isRequired
+    changeLanguage: PropTypes.func.isRequired,
+    setAutoPlay: PropTypes.func.isRequired
   })
 }
 

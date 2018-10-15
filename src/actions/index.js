@@ -307,3 +307,6 @@ export const history = {
   add: items => action(HISTORY.ADD, {items}),
   remove: item => action(HISTORY.REMOVE, {item})
 }
+
+export const AUTOPLAY = 'AUTOPLAY'
+export const setAutoPlay = autoPlay => action(AUTOPLAY, {autoPlay})
