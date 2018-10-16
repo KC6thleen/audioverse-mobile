@@ -24,7 +24,7 @@ class Playlists extends PureComponent {
     return (
       <ListItem
         title={item.title}
-        onPress={() => this.props.actions.resetAndPlayTrack([item])}
+        onPress={() => {}}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
       />
     )
@@ -58,7 +58,6 @@ Playlists.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   actions: PropTypes.shape({
-    resetAndPlayTrack: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired
   })
 }
