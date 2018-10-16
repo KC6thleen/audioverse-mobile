@@ -1,50 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MiniPlayer component renders correctly when there is a track 1`] = `
-<Component
-  style={
-    Object {
-      "backgroundColor": "#E0E0E0CC",
-      "elevation": 2,
-      "shadowColor": "#000000",
-      "shadowOffset": Object {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0.75,
-      "shadowRadius": 5,
-    }
-  }
->
-  <ListItem
-    avatar={
-      Object {
-        "source": undefined,
-      }
-    }
-    chevronColor="#D1D1D6"
-    onPress={[Function]}
-    rightElement={
-      <ImageButton
-        imageStyle={
-          Object {
-            "height": 42,
-            "tintColor": "#000000",
-            "width": 42,
-          }
-        }
-        onPress={[Function]}
-        source={1}
-      />
-    }
-    style={
-      Object {
-        "backgroundColor": "transparent",
-      }
-    }
-  />
-  <ProgressBarMini />
-</Component>
-`;
+exports[`MiniPlayer component renders correctly when there is a track 1`] = `<Component />`;
 
 exports[`MiniPlayer component renders empty component when no track 1`] = `<Component />`;

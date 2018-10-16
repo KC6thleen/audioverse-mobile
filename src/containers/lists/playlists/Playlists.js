@@ -5,7 +5,6 @@ import { View, FlatList, Alert, StyleSheet } from 'react-native'
 import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
 import IconButton from 'src/components/buttons/IconButton'
-import { getPresenterName, getPresenterPicture } from 'src/utils'
 import I18n from 'locales'
 
 class Playlists extends PureComponent {
@@ -24,7 +23,6 @@ class Playlists extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
-        avatar={{source: getPresenterPicture(item)}}
         title={item.title}
         onPress={() => this.props.actions.resetAndPlayTrack([item])}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}

@@ -1,3 +1,6 @@
+import { parseRecording } from 'src/services'
+import { MediaTypes } from 'src/constants'
+
 export const getLanguage = state => state.settings.language
 export const getBitRate = state => state.settings.bitRate
 export const getAutoPlay = state => state.settings.autoPlay
@@ -49,11 +52,11 @@ export const getTopicsPagination = state => state.topics
 export const getTopic = state => state.topic.data
 export const getTopicPagination = state => state.topic
 
-export const getDownloads = state => state.lists.downloads
-export const getDownloadsById = (state, id) => state.lists.downloads.filter(el => el.id === id)
-export const getDownloadById = (state, id) => state.lists.downloads.find(el => el.id === id)
-export const getFavorites = state => state.lists.favorites
+export const getDownloads = state => state.lists.downloads.map(el => parseRecording(el, MediaTypes.sermon))
+export const getDownloadsById = (state, id) => getDownloads(state).filter(el => el.id === id)
+export const getDownloadById = (state, id) => getDownloads(state).find(el => el.id === id)
+export const getFavorites = state => state.lists.favorites.map(el => parseRecording(el, MediaTypes.sermon))
 export const getPlaylists = state => state.lists.playlists
-export const getHistory = state => state.lists.history
+export const getHistory = state => state.lists.history.map(el => parseRecording(el, MediaTypes.sermon))
 export const getDownloadsQueue = state => state.downloadsQueue.queue
 export const getDownloading = state => state.downloadsQueue.downloading

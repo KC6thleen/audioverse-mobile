@@ -12,7 +12,7 @@ describe('MiniPlayer component', () => {
   
   it('renders empty component when no track', () => {
     const initialState = {
-      playback: { state: '' }
+      playback: { state: '', tracks: [] }
     }
     const wrapper = shallow(<MiniPlayer navigation={navigation} />, { context: { store: mockStore(initialState) } })
     expect(wrapper.dive()).toMatchSnapshot()
@@ -20,7 +20,7 @@ describe('MiniPlayer component', () => {
 
   it('renders correctly when there is a track', () => {
     const initialState = {
-      playback: { state: '', currentTrack: {} }
+      playback: { state: '', tracks: [] }
     }
     const wrapper = shallow(<MiniPlayer navigation={navigation} />, { context: { store: mockStore(initialState) } })
     expect(wrapper.dive()).toMatchSnapshot()

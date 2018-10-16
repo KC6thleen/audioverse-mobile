@@ -8,7 +8,6 @@ import ImageButton from 'src/components/buttons/ImageButton'
 import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
 import iconPlay from 'assets/ic_play.png'
 import iconPause from 'assets/pause.png'
-import { getPresenterName, getPresenterPicture } from 'src/utils'
 
 const MiniPlayer = ({ navigation, track, state, actions}) => {
 
@@ -27,9 +26,9 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
   return (
     <View style={styles.container}>
       <ListItem
-        avatar={{source: getPresenterPicture(track)}}
+        avatar={{source: track.artwork}}
         title={track.title}
-        subtitle={getPresenterName(track)}
+        subtitle={track.artist}
         onPress={handlePress}
         rightElement={rightElement}
         style={{backgroundColor: 'transparent'}}

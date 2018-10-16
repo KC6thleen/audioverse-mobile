@@ -12,7 +12,6 @@ import PlayerOptions from './PlayerOptions'
 import imageBg from 'assets/bg.png'
 import I18n from 'locales'
 import { MediaTypes, Dirs } from 'src/constants'
-import { getPresenterName, getPresenterPicture } from 'src/utils'
 
 class Player extends PureComponent {
 
@@ -108,9 +107,9 @@ class Player extends PureComponent {
             barStyle="light-content"
           />
           <ListItem
-            avatar={{source: getPresenterPicture(track)}}
+            avatar={{source: track.artwork}}
             title={track.title}
-            subtitle={getPresenterName(track)}
+            subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}
           />

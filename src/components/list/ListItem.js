@@ -94,7 +94,7 @@ const renderAvatar = content =>
   content == null ? null : React.isValidElement(content) ? (
     content
   ) : (
-    <Image {...content} source={content.source.toString().startsWith('http') ? {uri: content.source} : content.source} style={[styles.avatar, content.style]} />
+    <Image {...content} source={content.source && content.source.toString().startsWith('http') ? {uri: content.source} : content.source} style={[styles.avatar, content.style]} />
   )
 
 const renderIcon = content =>

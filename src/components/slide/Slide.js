@@ -5,7 +5,7 @@ import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
 const Slide = ({ image, header, subtitle }) => (
   <TouchableOpacity style={styles.container}>
     <Image
-      source={image.toString().startsWith('http') ? {uri: image} : image}
+      source={image && image.toString().startsWith('http') ? {uri: image} : image}
       style={styles.image}
     />
     <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{header}</Text>

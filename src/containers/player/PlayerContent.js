@@ -7,14 +7,13 @@ import I18n from 'locales'
 import { MediaTypes } from 'src/constants'
 import defaultImage from 'assets/av-logo.png'
 import Slide from 'src/components/slide/Slide'
-import { getPresenterName, getPresenterPicture } from 'src/utils'
 
 const getSlides = (data, language) => {
 
   const slides = []
 
   // presenter
-  slides.push({type: 'presenter', image: getPresenterPicture(data), title: data.title, subtitle: getPresenterName(data)})
+  slides.push({type: 'presenter', image: data.artwork, title: data.title, subtitle: data.artist})
   
   // description
 	if (data.description) {

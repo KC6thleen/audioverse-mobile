@@ -33,7 +33,7 @@ export const fetchBibleBooks = url => callApi(url, json => {
  * https://github.com/react-native-kit/react-native-track-player/wiki/Documentation#track-structure
  * @param {object} item 
  */
-const parseRecording = (item, mediaType) => ({
+export const parseRecording = (item, mediaType) => ({
   ...item,
   artist: getPresenterName(item),
   artwork: getPresenterPicture(item),
