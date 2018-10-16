@@ -184,12 +184,12 @@ export function* playTracks() {
   const currentTrack = yield select(selectors.getCurrentTrack)
 
   let getUrl = null
-  if (currentTrack.mediaType === MediaTypes.sermon) {
-    getUrl = getSermonUrl
-  } else if (currentTrack.mediaType === MediaTypes.bible) {
+  if (currentTrack.mediaType === MediaTypes.bible) {
     getUrl = getBibleChapterUrl
   } else if (currentTrack.mediaType === MediaTypes.book) {
     getUrl = getBookChapterUrl
+  } else {
+    getUrl = getSermonUrl
   }
 
   const newTracks = []
