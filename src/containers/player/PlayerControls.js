@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, StyleSheet } from 'react-native'
+import { View, ActivityIndicator, Platform, StyleSheet } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
 import ImageButton from 'src/components/buttons/ImageButton'
@@ -23,12 +23,15 @@ const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, 
       imageStyle={styles.icon}
       onPress={skipToPrevious}
     />
-    <ImageButton
-      source={state === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
-      style={styles.playPauseButton}
-      imageStyle={[styles.playPauseIcon, {marginLeft: state === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
-      onPress={playPause}
-    />
+    { state === TrackPlayer.STATE_BUFFERING ?
+      <ActivityIndicator size="large" /> :
+      <ImageButton
+        source={state === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
+        style={styles.playPauseButton}
+        imageStyle={[styles.playPauseIcon, {marginLeft: state === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
+        onPress={playPause}
+      />
+    }
     <ImageButton
       source={iconNext}
       imageStyle={styles.icon}

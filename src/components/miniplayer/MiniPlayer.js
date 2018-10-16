@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, StyleSheet } from 'react-native'
+import { View, ActivityIndicator, Platform, StyleSheet } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
 import ListItem from 'src/components/list/ListItem'
@@ -17,11 +17,13 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
 
   const handlePress = () => { navigation.navigate({ routeName: 'Player' }) }
 
-  const rightElement = <ImageButton
-    source={state == TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
-    imageStyle={styles.playPause}
-    onPress={actions.playPause}
-  />
+  const rightElement = state === TrackPlayer.STATE_BUFFERING ?
+    <ActivityIndicator size="large" /> :
+    <ImageButton
+      source={state == TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
+      imageStyle={styles.playPause}
+      onPress={actions.playPause}
+    />
 
   return (
     <View style={styles.container}>
