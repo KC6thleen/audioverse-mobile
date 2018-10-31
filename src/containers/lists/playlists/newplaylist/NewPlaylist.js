@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, TextInput, Button, Switch, StyleSheet } from 'react-native'
+import { View, Text, TextInput, Button, TouchableOpacity, Switch, StyleSheet } from 'react-native'
 import Toast from 'react-native-simple-toast'
 
 import I18n from 'locales'
@@ -35,17 +35,21 @@ class NewPlaylist extends PureComponent {
             <Text style={styles.publicText}>{I18n.t('is_public')}</Text>
           </View>
           <View style={styles.options}>
-            <Button
-              title={I18n.t('Cancel').toUpperCase()}
-              onPress={() => { this.props.navigation.goBack() }} />
-            <Button
-              title={I18n.t('Ok').toUpperCase()}
-              disabled={this.state.name === ''}
-              onPress={() => {
-                this.props.actions.addPlaylist({ title: this.state.name, public: this.state.isPublic })
-                this.props.navigation.goBack()
-                Toast.show(I18n.t('added_to_playlist'))
-              }} />
+            <TouchableOpacity style={styles.ok}>
+              <Button
+                title={I18n.t('Cancel').toUpperCase()}
+                onPress={() => { this.props.navigation.goBack() }} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ok}>
+              <Button
+                title={I18n.t('Ok').toUpperCase()}
+                disabled={this.state.name === ''}
+                onPress={() => {
+                  this.props.actions.addPlaylist({ title: this.state.name, public: this.state.isPublic })
+                  this.props.navigation.goBack()
+                  Toast.show(I18n.t('added_to_playlist'))
+                }} />
+              </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -92,6 +96,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 20
+  },
+  ok: {
+    marginLeft: 20
   }
 })
 
