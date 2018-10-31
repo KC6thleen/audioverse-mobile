@@ -21,7 +21,7 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
         <IconButton name="cast" iconStyle={styles.icon} onPress={() => {}} />
       }
       { track.mediaType === MediaTypes.sermon && 
-        <IconButton name="star" iconStyle={[styles.icon, {color: isFavorite ? 'yellow' : '#FFFFFF'}]} onPress={handleOnPressFavorite} />
+        <IconButton name="heart" iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]} onPress={handleOnPressFavorite} />
       }
       { track.mediaType === MediaTypes.sermon && 
         <IconButton name="video" iconStyle={styles.icon} onPress={() => {}} />

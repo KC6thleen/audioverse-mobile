@@ -27,6 +27,8 @@ class Playlists extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
+        style={styles.listItem}
+        icon={{name: 'check'}}
         title={item.title}
         onPress={() => { this.props.navigation.navigate({ routeName: 'PlaylistItems', params: { playlistId: item.id, title: item.title } }) }}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
@@ -55,6 +57,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between'
+  },
+  listItem: {
+    height: 70
   }
 })
 
