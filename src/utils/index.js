@@ -1,3 +1,4 @@
+import { NetInfo } from 'react-native'
 import defaultImage from 'assets/av-logo.png'
 
 /**
@@ -59,7 +60,25 @@ export const getPresenterPicture = (item) => {
   if (item.presenters && item.presenters.length == 1 && item.presenters[0].photo != "default.png" ) {
     return item.presenters[0].photo256
   } else if (item.conference && item.conference.length && item.conference[0].logo != "" ) {
-    return item.presenters[0].photo256
+    return item.conference[0].photo256
   }
   return defaultImage
+}
+
+/**
+ * Gets NetInfo isConnected property
+*/
+export const netInfoIsConnected = async () => {
+  // iOS: NetInfo.isConnected returns always false
+  // workaround https://github.com/facebook/react-native/issues/8615#issuecomment-389358993
+  const onInitialNetConnection = isConnected => {
+    NetInfo.isConnected.removeEventListener(onInitialNetConnection)
+  }
+  NetInfo.isConnected.addEventListener(
+    'connectionChange',
+    onInitialNetConnection
+  );
+
+  await NetInfo.getConnectionInfo()
+  return await NetInfo.isConnected.fetch()
 }

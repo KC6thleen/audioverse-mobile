@@ -26,7 +26,6 @@ class Settings extends PureComponent {
   }
 
   setAutoPlay = value => {
-    console.log('value', value)
     this.props.actions.setAutoPlay(value)
   }
 

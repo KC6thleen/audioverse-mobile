@@ -7,6 +7,9 @@ import { changeLanguage } from './settings'
 import * as player from './player'
 import * as api from './api'
 import * as downloads from './downloads'
+import * as favorites from './favorites'
+import * as playlists from './playlists'
+import * as playlistItems from './playlistItems'
 
 function* rootSaga() {
   yield all([
@@ -42,7 +45,16 @@ function* rootSaga() {
     takeLatest(actions.LOAD_TOPICS, api.loadTopics),
     takeLatest(actions.LOAD_TOPIC, api.loadTopic),
     takeLatest(actions.DOWNLOAD, downloads.download),
-    takeLatest(actions.REMOVE_DOWNLOAD, downloads.remove)
+    takeLatest(actions.REMOVE_DOWNLOAD, downloads.remove),
+    takeLatest(actions.SYNC_FAVORITES, favorites.sync),
+    takeLatest(actions.ADD_FAVORITE, favorites.add),
+    takeLatest(actions.REMOVE_FAVORITE, favorites.remove),
+    takeLatest(actions.SYNC_PLAYLISTS, playlists.sync),
+    takeLatest(actions.ADD_PLAYLIST, playlists.add),
+    takeLatest(actions.REMOVE_PLAYLIST, playlists.remove),
+    takeLatest(actions.SYNC_PLAYLIST_ITEMS, playlistItems.sync),
+    takeLatest(actions.ADD_PLAYLIST_ITEM, playlistItems.add),
+    takeLatest(actions.REMOVE_PLAYLIST_ITEM, playlistItems.remove)
   ])
 }
 

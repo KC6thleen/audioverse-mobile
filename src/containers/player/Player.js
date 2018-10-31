@@ -17,7 +17,7 @@ class Player extends PureComponent {
 
   downloadSermon = () => {
 	
-    let bitratesIndex = [], bitratesOptions = []
+    let bitratesIndex = [], options = []
 
     const getSize = size => (
       parseInt(size) > 0 ? `${Math.round((parseInt(size)/8)/100000)} MB` : ''
@@ -28,23 +28,23 @@ class Player extends PureComponent {
     // audio
     for ( let i = track.mediaFiles.length - 1; i >= 0; i-- ) {
       bitratesIndex.push(track.mediaFiles[i])
-      bitratesOptions.push(`${track.mediaFiles[i].bitrate} kbps ${getSize(track.mediaFiles[i].filesize)}`)
+      options.push(`${track.mediaFiles[i].bitrate} kbps ${getSize(track.mediaFiles[i].filesize)}`)
     }
     
     // video
     if ( track.videoFiles.length ) {
       bitratesIndex.push(track.videoFiles[0])
-      bitratesOptions.push(`MP4 ${getSize(track.videoFiles[0].filesize)}`)
+      options.push(`MP4 ${getSize(track.videoFiles[0].filesize)}`)
     }
     
-    bitratesOptions.push(I18n.t('Cancel', {locale: language}))
+    options.push(I18n.t('Cancel', {locale: language}))
 
     ActionSheet.showActionSheetWithOptions({
       title: I18n.t('Select_a_bitrate_to_download', {locale: language}),
-      options: bitratesOptions,
-      cancelButtonIndex: bitratesOptions.length - 1,
+      options: options,
+      cancelButtonIndex: options.length - 1,
     }, buttonIndex => {
-      if (typeof buttonIndex !== 'undefined' && buttonIndex !== bitratesOptions.length - 1) {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
         actions.download(
           track,
           Dirs.presentations,
@@ -80,6 +80,23 @@ class Player extends PureComponent {
     }
   }
 
+  handleOnSetRate = (rate) => {
+    const { language, actions } = this.props
+    const options = ['0.25', '0.5', '0.75', '1', '1.25', '1.5', '1.75', '2', I18n.t('Cancel', {locale: language})]
+    ActionSheet.showActionSheetWithOptions({
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        actions.setRate(parseFloat(options[buttonIndex]))
+      }
+    })
+  }
+
+  handleAddToPlaylist = () => {
+    this.props.navigation.navigate({ routeName: 'AddToPlaylist' })
+  }
+
   render() {
     
     const {
@@ -88,7 +105,8 @@ class Player extends PureComponent {
       track,
       rate,
       language,
-      actions
+      actions,
+      isFavorite
     } = this.props
 
     if (!track) {
@@ -115,7 +133,7 @@ class Player extends PureComponent {
           />
         </View>
         <PlayerContent data={track} language={language} />
-        <PlayerOptions onDownload={this.handleDownload} rate={rate} onSetRate={actions.setRate} />
+        <PlayerOptions track={track} onDownload={this.handleDownload} rate={rate} onSetRate={this.handleOnSetRate} isFavorite={isFavorite} onAddFavorite={actions.addFavorite} onRemoveFavorite={actions.removeFavorite} onAddToPlaylist={this.handleAddToPlaylist} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
           <PlayerControls state={state} playPause={actions.playPause} skipToPrevious={actions.skipToPrevious} skipToNext={actions.skipToNext} replay={actions.replay} forward={actions.forward} />
@@ -160,6 +178,7 @@ Player.propTypes = {
   track: PropTypes.object,
   rate: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     playPause: PropTypes.func.isRequired,
     skipToPrevious: PropTypes.func.isRequired,
@@ -167,7 +186,9 @@ Player.propTypes = {
     replay: PropTypes.func.isRequired,
     forward: PropTypes.func.isRequired,
     setRate: PropTypes.func.isRequired,
-    download: PropTypes.func.isRequired
+    download: PropTypes.func.isRequired,
+    addFavorite: PropTypes.func.isRequired,
+    removeFavorite: PropTypes.func.isRequired
   })
 }
 

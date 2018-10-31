@@ -55,8 +55,31 @@ export const getTopicPagination = state => state.topic
 export const getDownloads = state => state.lists.downloads.map(el => parseRecording(el, MediaTypes.sermon))
 export const getDownloadsById = (state, id) => getDownloads(state).filter(el => el.id === id)
 export const getDownloadById = (state, id) => getDownloads(state).find(el => el.id === id)
-export const getFavorites = state => state.lists.favorites.map(el => parseRecording(el, MediaTypes.sermon))
-export const getPlaylists = state => state.lists.playlists
+export const isFavorite = state => state.lists.favorites.some(el => el.id === state.playback.currentTrackId && !el.deleted)
+export const getFavorite = (state, id) => state.lists.favorites.find(el => el.id === id)
+export const getAllFavorites = state => state.lists.favorites
+export const getFavorites = state => state.lists.favorites.filter(el => !el.deleted).map(el => parseRecording(el, MediaTypes.sermon))
+export const getLocalFavorites = state => state.lists.favorites.filter(el => !el.favoriteId)
+export const getDeletedFavorites = state => state.lists.favorites.filter(el => el.deleted)
+export const getAllPlaylists = state => state.lists.playlists
+export const getPlaylists = state => state.lists.playlists.filter(el => !el.deleted)
+export const getLocalPlaylists = state => state.lists.playlists.filter(el => el.local)
+export const getDeletedPlaylists = state => state.lists.playlists.filter(el => el.deleted)
+export const getPlaylistsForCurrentTrack = state => state.lists.playlists.filter(el => !el.deleted).map(el => {
+  const selected = state.lists.playlistsItems.some( item => !item.deleted && item.playlistId === el.id && item.id === state.playback.currentTrackId )
+  return {
+    ...el,
+    selected
+  }
+})
+
+export const getAllPlaylistsItems = state => state.lists.playlistsItems
+export const getPlaylistItems = (state, playlistId) => state.lists.playlistsItems.filter(el => !el.deleted && el.playlistId === playlistId).map(el => parseRecording(el, MediaTypes.sermon))
+export const getPlaylistItem = (state, playlistId, id) => state.lists.playlistsItems.find(el => el.playlistId === playlistId && el.id === id)
+export const getLocalPlaylistItems = (state, playlistId) =>state.lists.playlistsItems.filter(el => el.local && el.playlistId === playlistId)
+export const getDeletedPlaylistItems = (state, playlistId) =>state.lists.playlistsItems.filter(el => el.deleted && el.playlistId === playlistId)
+
 export const getHistory = state => state.lists.history.map(el => parseRecording(el, MediaTypes.sermon))
 export const getDownloadsQueue = state => state.downloadsQueue.queue
 export const getDownloading = state => state.downloadsQueue.downloading
+export const getUser = state => state.user

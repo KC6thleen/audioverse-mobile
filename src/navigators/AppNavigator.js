@@ -20,6 +20,8 @@ import TopicsNavigator from './TopicsNavigator'
 import SettingsNavigator from './SettingsNavigator'
 import DownloadsQueueNavigator from './DownloadsQueueNavigator'
 import Player from 'src/containers/player'
+import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
+import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 
 const AuthStack = createStackNavigator({
   Login: Login,
@@ -59,13 +61,19 @@ const AppDrawer = createDrawerNavigator({
 const AppNavigator = createStackNavigator({
   AuthStack,
   AppDrawer,
-  Player
+  Player,
+  AddToPlaylist,
+  NewPlaylist
 },{
   headerMode: 'none',
   mode: 'modal',
   initialRouteName: 'AppDrawer',
   navigationOptions: {
     gesturesEnabled: true
+  },
+  cardStyle: {
+    backgroundColor: 'transparent',
+    opacity: 1,
   },
   transitionConfig: () => ({
     transitionSpec: {

@@ -9,6 +9,7 @@ import Downloads from 'src/containers/lists/downloads'
 import Favorites from 'src/containers/lists/favorites'
 import Playlists from 'src/containers/lists/playlists'
 import History from 'src/containers/lists/history'
+import PlaylistItems from 'src/containers/lists/playlists/playlistitems'
 
 const ListsTab = createMaterialTopTabNavigator({
   Downloads: {
@@ -50,6 +51,12 @@ const ListsStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="my_lists" />,
+    })
+  },
+  PlaylistItems: {
+    screen: PlaylistItems,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.title
     })
   }
 }, {

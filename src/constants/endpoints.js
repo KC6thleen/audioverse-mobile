@@ -10,5 +10,14 @@ export default {
   conferences: 'conferences',
   sponsors: 'sponsors',
   series: 'series',
-  topics: 'topics'
+  topics: 'topics',
+  favorites: 'favorite',
+  postFavorites: 'favorite',
+  deleteFavorites: 'favorite/delete',
+  playlists: 'playlist',
+  postPlaylists: 'playlist',
+  deletePlaylists: 'playlist/0',
+  playlistItems: 'playlist',
+  postPlaylistItems: 'playlist/recording',
+  deletePlaylistItems: 'playlist/recording/0'
 }

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { resetAndPlayTrack, favorites } from 'src/actions'
+import { resetAndPlayTrack, syncFavorites, removeFavorite } from 'src/actions'
 import { getFavorites } from 'src/reducers/selectors'
 
 import Favorites from './Favorites'
@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
     resetAndPlayTrack,
-    remove: favorites.remove
+    sync: syncFavorites,
+    remove: removeFavorite
   }, dispatch)
 })
 

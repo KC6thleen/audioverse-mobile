@@ -6,12 +6,14 @@ import { MediaTypes } from 'src/constants'
  * @param {string} endpoint 
  * @param {function} parse 
  */
-async function callApi(endpoint, parse) {
+async function callApi(endpoint, parse, method, body) {
   const fullUrl = !endpoint.startsWith('http') ? process.env['BASE_URL'] + endpoint : endpoint
   const response = await fetch(fullUrl, {
+    method: method ? method : 'GET',
     headers: {
       Authorization: 'Basic ' + process.env['BASIC_TOKEN']
-    }
+    },
+    body
   })
   const json = await response.json()
   return {
@@ -50,3 +52,15 @@ export const fetchConferences = url => callApi(url, json => json.result.map(item
 export const fetchSponsors = url => callApi(url, json => json.result.map(item => item.sponsors))
 export const fetchSeries = url => callApi(url, json => json.result.map(item => item.series))
 export const fetchTopics = url => callApi(url, json => json.result.map(item => item.topics))
+export const fetchFavorites = url => callApi(url, json => Object.keys(json.result.recording).reverse().map(el => ({
+  ...json.result.recording[el][0].recordings,
+  favoriteId: el
+})))
+export const postFavorites = (url, body) => callApi(url, null, 'POST', body)
+export const deleteFavorites = url => callApi(url, null, 'DELETE')
+export const fetchPlaylists = url => callApi(url, null)
+export const postPlaylists = (url, body) => callApi(url, null, 'POST', body)
+export const deletePlaylists = url => callApi(url, null, 'DELETE')
+export const fetchPlaylistItems = url => callApi(url, null)
+export const postPlaylistItems = (url, body) => callApi(url, null, 'POST', body)
+export const deletePlaylistItems = url => callApi(url, null, 'DELETE')

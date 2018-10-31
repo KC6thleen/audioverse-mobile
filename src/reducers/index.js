@@ -104,47 +104,78 @@ function bible(state = {
   }
 }
 
-function myLists(types) {
-  const [ ADD, REMOVE ] = types
+function user(state = null, action) {
+  switch(action.type) {
+    case ActionTypes.USER:
+      return action.user
+    default:
+      return state
+  }
+}
+
+function myLists(types, filterCB) {
+  const [ SET, ADD, REMOVE ] = types
   return function update(state = [], action) {
     switch(action.type) {
+      case SET:
+        return action.items
       case ADD:
         return [
           ...action.items,
           ...state
         ]
       case REMOVE:
-        return state.filter( el => el.id != action.item.id )
+        return state.filter(filterCB(action.item))
       default:
         return state
     }
   }
 }
 
-const downloads = myLists([
-  ActionTypes.DOWNLOADS.ADD,
-  ActionTypes.DOWNLOADS.REMOVE
-])
+const downloads = myLists(
+  [
+    ActionTypes.DOWNLOADS.SET,
+    ActionTypes.DOWNLOADS.ADD,
+    ActionTypes.DOWNLOADS.REMOVE
+  ],
+  item => el => el.id !== item.id
+)
 
-const favorites = myLists([
-  ActionTypes.FAVORITES.ADD,
-  ActionTypes.FAVORITES.REMOVE
-])
+const favorites = myLists(
+  [
+    ActionTypes.FAVORITES.SET,
+    ActionTypes.FAVORITES.ADD,
+    ActionTypes.FAVORITES.REMOVE
+  ],
+  item => el => el.id !== item.id
+)
 
-const playlists = myLists([
-  ActionTypes.PLAYLISTS.ADD,
-  ActionTypes.PLAYLISTS.REMOVE
-])
+const playlists = myLists(
+  [
+    ActionTypes.PLAYLISTS.SET,
+    ActionTypes.PLAYLISTS.ADD,
+    ActionTypes.PLAYLISTS.REMOVE
+  ],
+  item => el => el.id !== item.id
+)
 
-const playlistItems = myLists([
-  ActionTypes.PLAYLIST_ITEMS.ADD,
-  ActionTypes.PLAYLIST_ITEMS.REMOVE
-])
+const playlistsItems = myLists(
+  [
+    ActionTypes.PLAYLIST_ITEMS.SET,
+    ActionTypes.PLAYLIST_ITEMS.ADD,
+    ActionTypes.PLAYLIST_ITEMS.REMOVE
+  ],
+  item => el => !(el.id === item.id && el.playlistId === item.playlistId)
+)
 
-const history = myLists([
-  ActionTypes.HISTORY.ADD,
-  ActionTypes.HISTORY.REMOVE
-])
+const history = myLists(
+  [
+    ActionTypes.HISTORY.SET,
+    ActionTypes.HISTORY.ADD,
+    ActionTypes.HISTORY.REMOVE
+  ],
+  item => el => el.id !== item.id
+)
 
 function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, action) {
   switch(action.type) {
@@ -189,11 +220,12 @@ const rootReducer = combineReducers({
   settings,
   playback,
   bible,
+  user,
   lists: combineReducers({
     downloads,
     favorites,
     playlists,
-    playlistItems,
+    playlistsItems,
     history
   }),
   downloadsQueue,
@@ -355,7 +387,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['settings', 'playback', 'bible', 'lists'],
+  whitelist: ['settings', 'playback', 'bible', 'user', 'lists'],
   debug: true
 }
 

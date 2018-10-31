@@ -7,10 +7,10 @@ import MiniPlayer from 'src/components/miniplayer'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
-class Playlists extends PureComponent {
+class PlaylistItems extends PureComponent {
 
   componentDidMount() {
-    this.props.actions.sync()
+    this.props.actions.sync(this.props.navigation.state.params.playlistId)
   }
 
   handleRemove = item => {
@@ -19,7 +19,7 @@ class Playlists extends PureComponent {
       '',
       [
         {text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel'},
-        {text: I18n.t('Yes'), onPress: () => { this.props.actions.remove(item) }}
+        {text: I18n.t('Yes'), onPress: () => { this.props.actions.remove(item.playlistId, item.id) }}
       ]
     )
   }
@@ -27,8 +27,10 @@ class Playlists extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
+        avatar={{source: item.artwork}}
         title={item.title}
-        onPress={() => { this.props.navigation.navigate({ routeName: 'PlaylistItems', params: { playlistId: item.id, title: item.title } }) }}
+        subtitle={item.artist + ' \u00B7 ' + item.duration}
+        onPress={() => this.props.actions.resetAndPlayTrack(this.props.items, item.id)}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
       />
     )
@@ -58,10 +60,11 @@ const styles = StyleSheet.create({
   }
 })
 
-Playlists.propTypes = {
+PlaylistItems.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   actions: PropTypes.shape({
+    resetAndPlayTrack: PropTypes.func.isRequired,
     sync: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired
   })
@@ -72,4 +75,4 @@ const RightElement = ({ data, onPress }) => {
   return <IconButton onPress={_onPress} name="x" size={24} />
 }
 
-export default Playlists
+export default PlaylistItems

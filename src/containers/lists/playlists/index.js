@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { playlists } from 'src/actions'
+import { syncPlaylists, removePlaylist } from 'src/actions'
 import { getPlaylists } from 'src/reducers/selectors'
 
 import Playlists from './Playlists'
@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    remove: playlists.remove
+    sync: syncPlaylists,
+    remove: removePlaylist
   }, dispatch)
 })
 

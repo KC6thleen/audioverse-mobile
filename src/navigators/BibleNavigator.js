@@ -20,7 +20,7 @@ const BibleTab = createMaterialTopTabNavigator({
   Chapters: {
     screen: Chapters,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="chapter" />
+      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="chapters" />
     }
   }
 }, {

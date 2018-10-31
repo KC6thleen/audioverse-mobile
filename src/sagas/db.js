@@ -21,8 +21,10 @@ const getDataFromDB = async () => {
         const downloadsRows = data.filter(el => el.data_type === 'downloads')
         const favoritesRows = data.filter(el => el.data_type === 'favorite')
         const playlistsRows = data.filter(el => el.data_type === 'playlists')
-        const playlistItemsRows = data.filter(el => el.data_type === 'playlistItem')
+        const playlistsItemsRows = data.filter(el => el.data_type === 'playlistItem')
         const historyRows = data.filter(el => el.data_type === 'play_history')
+        let user = data.find(el => el.data_type === 'user')
+        user = user ? JSON.parse(user.json_data) : null
 
         const downloads = downloadsRows.map(el => {
           const data = JSON.parse(el.json_data)
@@ -39,7 +41,7 @@ const getDataFromDB = async () => {
 
         const playlists = playlistsRows.map(el => JSON.parse(el.json_data))
 
-        const playlistItems = playlistItemsRows.map(el => {
+        const playlistsItems = playlistsItemsRows.map(el => {
           const playlist = playlistsRows.find(item => item.id === el.reference_id)
           return {
             ...JSON.parse(el.json_data),
@@ -53,8 +55,9 @@ const getDataFromDB = async () => {
           downloads,
           favorites,
           playlists,
-          playlistItems,
-          history
+          playlistsItems,
+          history,
+          user
         })
       })
     })
@@ -72,12 +75,12 @@ export default function* recoverDB(action) {
   if (!status) {
     try {
       const data = yield call(getDataFromDB)
-      console.log('data', data)
-      yield put(actions.downloads.add(data.downloads))
-      yield put(actions.favorites.add(data.favorites))
-      yield put(actions.playlists.add(data.playlists))
-      yield put(actions.playlistItems.add(data.playlistItems))
-      yield put(actions.history.add(data.history))
+      yield put(actions.downloads.set(data.downloads))
+      yield put(actions.favorites.set(data.favorites))
+      yield put(actions.playlists.set(data.playlists))
+      yield put(actions.playlistsItems.set(data.playlistsItems))
+      yield put(actions.history.set(data.history))
+      yield put(actions.setUser(data.user))
       yield call(AsyncStorage.setItem, 'recoveredDBStatus', 'true')
     } catch (err) {
       console.log(err)

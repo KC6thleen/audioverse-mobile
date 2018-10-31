@@ -9,13 +9,17 @@ import I18n from 'locales'
 
 class Favorites extends PureComponent {
 
+  componentDidMount() {
+    this.props.actions.sync()
+  }
+
   handleRemove = item => {
     Alert.alert(
       I18n.t('Are_you_sure'),
       '',
       [
         {text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel'},
-        {text: I18n.t('Yes'), onPress: () => { this.props.actions.remove(item) }}
+        {text: I18n.t('Yes'), onPress: () => { this.props.actions.remove(item.id) }}
       ]
     )
   }
@@ -61,6 +65,7 @@ Favorites.propTypes = {
   items: PropTypes.array,
   actions: PropTypes.shape({
     resetAndPlayTrack: PropTypes.func.isRequired,
+    sync: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired
   })
 }

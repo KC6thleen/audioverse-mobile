@@ -248,7 +248,7 @@ export const skipToNext = () => action(SKIP_TO_NEXT)
 export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
 export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
-export const setRate = () => action(SET_RATE)
+export const setRate = rate => action(SET_RATE, {rate})
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
@@ -264,12 +264,12 @@ export const removeFromDownloadsQueue = (item) => action(REMOVE_FROM_DOWNLOADS_Q
 export const setDownloading = (downloading) => action(SET_DOWNLOADING, {downloading})
 export const downloadProgress = (item, progress) => action(DOWNLOAD_PROGRESS, {item, progress})
 
-
+const SET = 'SET'
 const ADD = 'ADD'
 const REMOVE = 'REMOVE'
 
 function createMyListsTypes(base) {
-  return [ADD, REMOVE].reduce((acc, type) => {
+  return [SET, ADD, REMOVE].reduce((acc, type) => {
     acc[type] = `${base}_${type}`
     return acc
   }, {})
@@ -277,6 +277,7 @@ function createMyListsTypes(base) {
 
 export const DOWNLOADS = createMyListsTypes('DOWNLOADS')
 export const downloads = {
+  set: items => action(DOWNLOADS.SET, {items}),
   add: items => action(DOWNLOADS.ADD, {items}),
   remove: item => action(DOWNLOADS.REMOVE, {item})
 }
@@ -286,27 +287,55 @@ export const removeDownload = item => action(REMOVE_DOWNLOAD, {item})
 
 export const FAVORITES = createMyListsTypes('FAVORITES')
 export const favorites = {
+  set: items => action(FAVORITES.SET, {items}),
   add: items => action(FAVORITES.ADD, {items}),
   remove: item => action(FAVORITES.REMOVE, {item})
 }
 
 export const PLAYLISTS = createMyListsTypes('PLAYLISTS')
 export const playlists = {
+  set: items => action(PLAYLISTS.SET, {items}),
   add: items => action(PLAYLISTS.ADD, {items}),
   remove: item => action(PLAYLISTS.REMOVE, {item})
 }
 
 export const PLAYLIST_ITEMS = createMyListsTypes('PLAYLIST_ITEMS')
-export const playlistItems = {
+export const playlistsItems = {
+  set: items => action(PLAYLIST_ITEMS.SET, {items}),
   add: items => action(PLAYLIST_ITEMS.ADD, {items}),
   remove: item => action(PLAYLIST_ITEMS.REMOVE, {item})
 }
 
 export const HISTORY = createMyListsTypes('HISTORY')
 export const history = {
+  set: items => action(HISTORY.SET, {items}),
   add: items => action(HISTORY.ADD, {items}),
   remove: item => action(HISTORY.REMOVE, {item})
 }
 
 export const AUTOPLAY = 'AUTOPLAY'
 export const setAutoPlay = autoPlay => action(AUTOPLAY, {autoPlay})
+
+export const USER = 'USER'
+export const setUser = user => action(USER, {user})
+
+export const SYNC_FAVORITES = 'SYNC_FAVORITES'
+export const syncFavorites = () => action(SYNC_FAVORITES)
+export const ADD_FAVORITE = 'ADD_FAVORITE'
+export const addFavorite = item => action(ADD_FAVORITE, {item})
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE'
+export const removeFavorite = id => action(REMOVE_FAVORITE, {id})
+
+export const SYNC_PLAYLISTS = 'SYNC_PLAYLISTS'
+export const syncPlaylists = () => action(SYNC_PLAYLISTS)
+export const ADD_PLAYLIST = 'ADD_PLAYLIST'
+export const addPlaylist = item => action(ADD_PLAYLIST, {item})
+export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST'
+export const removePlaylist = item => action(REMOVE_PLAYLIST, {item})
+
+export const SYNC_PLAYLIST_ITEMS = 'SYNC_PLAYLIST_ITEMS'
+export const syncPlaylistItems = (playlistId) => action(SYNC_PLAYLIST_ITEMS, {playlistId})
+export const ADD_PLAYLIST_ITEM = 'ADD_PLAYLIST_ITEM'
+export const addPlaylistItem = (playlistId, item) => action(ADD_PLAYLIST_ITEM, {playlistId, item})
+export const REMOVE_PLAYLIST_ITEM = 'REMOVE_PLAYLIST_ITEM'
+export const removePlaylistItem = (playlistId, id) => action(REMOVE_PLAYLIST_ITEM, {playlistId, id})

@@ -271,10 +271,7 @@ export function* forward() {
 /** 
  * Sets the player rate
 */
-export function* setRate() {
-  const increment = 0.25
-  let rate = yield select(selectors.getRate)
-  rate = rate < 2 ? rate += increment : 1
+export function* setRate({ rate }) {
   yield call(TrackPlayer.setRate, rate)
   yield put(actions.playbackRate(rate))
 }
