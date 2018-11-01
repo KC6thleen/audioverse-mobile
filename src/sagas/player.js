@@ -1,4 +1,3 @@
-import { Platform } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 import { call, put, select } from 'redux-saga/effects'
 import RNFetchBlob from 'rn-fetch-blob'
@@ -202,9 +201,7 @@ export function* playTracks() {
   }
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, currentTrack.id)
-  if (Platform.OS === 'android') {
-    yield call(TrackPlayer.play)
-  }
+  yield call(TrackPlayer.play)
 
   // set position
   const savedPosition = yield select(selectors.getPosition)
