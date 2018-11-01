@@ -2,12 +2,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { playPause, skipToPrevious, skipToNext, replay, forward, download, setRate, addFavorite, removeFavorite } from 'src/actions'
-import { getCurrentTrack, getPlaybackState, getRate, getLanguage, isFavorite } from 'src/reducers/selectors'
+import { getCurrentTrack, getPlayerState, getRate, getLanguage, isFavorite } from 'src/reducers/selectors'
 
 import Player from './Player'
 
 const  mapStateToProps = state => ({
-  state: getPlaybackState(state),
+  state: getPlayerState(state),
   track: getCurrentTrack(state),
   rate: getRate(state),
   language: getLanguage(state),

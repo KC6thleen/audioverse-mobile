@@ -34,23 +34,27 @@ function settings(state = {
   }
 }
 
+function playerState(state = null, action) {
+  switch(action.type) {
+    case ActionTypes.PLAYER_STATE:
+      return action.state
+    default:
+      return state
+  }
+}
+
 function playback(state = {
   init: false,
-  state: null,
   currentTrackId: null,
   tracks: [],
-  rate: 1
+  rate: 1,
+  position: 0
 }, action) {
   switch(action.type) {
     case ActionTypes.PLAYBACK_INIT:
       return {
         ...state,
         init: true
-      }
-    case ActionTypes.PLAYBACK_STATE:
-      return {
-        ...state,
-        state: action.state
       }
     case ActionTypes.PLAYBACK_TRACK_ID:
       return {
@@ -66,6 +70,11 @@ function playback(state = {
       return {
         ...state,
         rate: action.rate
+      }
+    case ActionTypes.PLAYBACK_POSITION:
+      return {
+        ...state,
+        position: action.position
       }
     default:
       return state
@@ -218,6 +227,7 @@ function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, 
 const rootReducer = combineReducers({
   // nav, // use this to use react-navigation with redux
   settings,
+  playerState,
   playback,
   bible,
   user,

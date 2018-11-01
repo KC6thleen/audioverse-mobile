@@ -26,9 +26,7 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
       { track.mediaType === MediaTypes.sermon && 
         <IconButton name="video" iconStyle={styles.icon} onPress={() => {}} />
       }
-      { track.mediaType === MediaTypes.sermon && 
-        <Text style={[styles.icon, {fontSize: 20, width: 86, textAlign: 'center'}]} onPress={onSetRate}>{`${rate}X`}</Text>
-      }
+      <Text style={[styles.icon, {fontSize: 20, width: 86, textAlign: 'center'}]} onPress={onSetRate}>{`${rate}X`}</Text>
       { track.mediaType === MediaTypes.sermon && 
         <IconButton name="folder" iconStyle={styles.icon} onPress={onAddToPlaylist} />
       }

@@ -1,5 +1,6 @@
-import { call, put, select } from 'redux-saga/effects'
+import { Platform } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
+import { call, put, select } from 'redux-saga/effects'
 import RNFetchBlob from 'rn-fetch-blob'
 
 import { MediaTypes, Dirs } from 'src/constants'
@@ -46,7 +47,7 @@ export function* playbackUpdate() {
     const state = yield call(TrackPlayer.getState)
     const tracks = yield call(TrackPlayer.getQueue)
     const trackId = yield call(TrackPlayer.getCurrentTrack)
-    yield put(actions.playbackState(state))
+    yield put(actions.playerState(state))
     yield put(actions.playbackTracks(tracks))
     yield put(actions.playbackTrackId(trackId))
   } catch (e) {
@@ -201,7 +202,15 @@ export function* playTracks() {
   }
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, currentTrack.id)
-  yield call(TrackPlayer.play)
+  if (Platform.OS === 'android') {
+    yield call(TrackPlayer.play)
+  }
+
+  // set position
+  const savedPosition = yield select(selectors.getPosition)
+  if (savedPosition) {
+    yield call(TrackPlayer.seekTo, savedPosition)
+  }
 }
 
 /** 
@@ -212,8 +221,8 @@ export function* playPause() {
   if (!tracks.length) {
     yield call(playTracks)
   } else {
-    const playbackState = yield select(selectors.getPlaybackState)
-    if (playbackState === TrackPlayer.STATE_PLAYING) {
+    const state = yield call(TrackPlayer.getState)
+    if (state === TrackPlayer.STATE_PLAYING) {
       yield call(TrackPlayer.pause)
     } else {
       yield call(TrackPlayer.play)
@@ -274,4 +283,14 @@ export function* forward() {
 export function* setRate({ rate }) {
   yield call(TrackPlayer.setRate, rate)
   yield put(actions.playbackRate(rate))
+}
+
+/** 
+ * Sets the player rate
+*/
+export function* setInitialRate() {
+  const rate = yield select(selectors.getRate)
+  if (rate !== 1) {
+    yield call(TrackPlayer.setRate, rate)
+  }
 }

@@ -1,8 +1,8 @@
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
 
 export const SETUP_PLAYER = 'SETUP_PLAYER'
+export const PLAYER_STATE = 'PLAYER_STATE'
 export const PLAYBACK_INIT = 'PLAYBACK_INIT'
-export const PLAYBACK_STATE = 'PLAYBACK_STATE'
 export const PLAYBACK_TRACK_ID = 'PLAYBACK_TRACK_ID'
 export const PLAYBACK_TRACKS = 'PLAYBACK_TRACKS'
 export const PLAYBACK_UPDATE = 'PLAYBACK_UPDATE'
@@ -16,7 +16,9 @@ export const REPLAY = 'REPLAY'
 export const FORWARD = 'FORWARD'
 export const DOWNLOAD = 'DOWNLOAD'
 export const SET_RATE = 'SET_RATE'
+export const SET_INITIAL_RATE = 'SET_INITIAL_RATE'
 export const PLAYBACK_RATE = 'PLAYBACK_RATE'
+export const PLAYBACK_POSITION = 'PLAYBACK_POSITION'
 
 export const BIBLE_VERSION = 'BIBLE_VERSION'
 export const BIBLE_BOOK = 'BIBLE_BOOK'
@@ -234,8 +236,8 @@ export const loadTopic = (loadMore, refresh, url) => action(LOAD_TOPIC, {loadMor
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
 
 export const setupPlayer = () => action(SETUP_PLAYER)
+export const playerState = state => action(PLAYER_STATE, {state})
 export const playbackInit = () => action(PLAYBACK_INIT)
-export const playbackState = state => action(PLAYBACK_STATE, {state})
 export const playbackTrackId = trackId => action(PLAYBACK_TRACK_ID, {trackId})
 export const playbackTracks = tracks => action(PLAYBACK_TRACKS, {tracks})
 export const playbackUpdate = () => action(PLAYBACK_UPDATE)
@@ -249,7 +251,9 @@ export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
 export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
 export const setRate = rate => action(SET_RATE, {rate})
+export const setInitialRate = () => action(SET_INITIAL_RATE)
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
+export const playbackPosition = position => action(PLAYBACK_POSITION, {position})
 
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
 export const bibleBook = (testament, book) => action(BIBLE_BOOK, {testament, book})

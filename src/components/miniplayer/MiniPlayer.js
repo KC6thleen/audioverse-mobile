@@ -11,7 +11,7 @@ import iconPause from 'assets/pause.png'
 
 const MiniPlayer = ({ navigation, track, state, actions}) => {
 
-  if (!track || state == TrackPlayer.STATE_NONE || state == TrackPlayer.STATE_STOPPED) {
+  if (!track) {
     return <View />
   }
 

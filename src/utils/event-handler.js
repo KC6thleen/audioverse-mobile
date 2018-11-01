@@ -2,14 +2,9 @@ import { Alert } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
 import I18n from 'locales'
-import {
-  playbackState,
-  playbackTrackId,
-  replay,
-  forward,
-  skipToPrevious,
-  skipToNext
-} from 'src/actions'
+import * as actions from 'src/actions'
+
+let interval = null
 
 async function eventHandler(store, data) {
   switch(data.type) {
@@ -24,19 +19,19 @@ async function eventHandler(store, data) {
       TrackPlayer.stop()
       break
     case 'remote-next':
-      store.dispatch(skipToNext())
+      store.dispatch(actions.skipToNext())
       break
     case 'remote-previous':
-      store.dispatch(skipToPrevious())
+      store.dispatch(actions.skipToPrevious())
       break
     case 'remote-seek':
       TrackPlayer.seekTo(data.position)
       break
     case 'remote-jump-backward':
-      store.dispatch(replay())
+      store.dispatch(actions.replay())
       break
     case 'remote-jump-forward':
-      store.dispatch(forward())
+      store.dispatch(actions.forward())
       break
 
     // make ducking smoother by adding a fade in/out
@@ -46,11 +41,29 @@ async function eventHandler(store, data) {
 
     // playback updates
     case 'playback-state':
-      store.dispatch(playbackState(data.state))
+      console.log('playback-state', data.state)
+      if (data.state === TrackPlayer.STATE_BUFFERING) {
+        // set initial rate
+        store.dispatch(actions.setInitialRate())
+        // clear interval
+        clearInterval(interval)
+        // set a new interval to save the current position
+        interval = setInterval(async () => {
+          const position = await TrackPlayer.getPosition()
+          store.dispatch(actions.playbackPosition(position))
+        }, 30000)
+      } else if (data.state === TrackPlayer.STATE_STOPPED) {
+        // clear interval
+        clearInterval(interval)
+        // reset the position
+        store.dispatch(actions.playbackPosition(0))
+      }
+      // player state
+      store.dispatch(actions.playerState(data.state))
       break
     case 'playback-track-changed':
       if (data.nextTrack) {
-        store.dispatch(playbackTrackId(data.nextTrack))
+        store.dispatch(actions.playbackTrackId(data.nextTrack))
       }
       break
     case 'playback-error':
