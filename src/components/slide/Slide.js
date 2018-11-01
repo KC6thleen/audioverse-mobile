@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
 
-const Slide = ({ image, header, subtitle }) => (
-  <TouchableOpacity style={styles.container}>
+const Slide = ({ image, header, subtitle, onPress }) => (
+  <TouchableOpacity style={styles.container} onPress={onPress}>
     <Image
       source={image && image.toString().startsWith('http') ? {uri: image} : image}
       style={styles.image}
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
 Slide.propTypes = {
   image: PropTypes.any.isRequired,
   header: PropTypes.string.isRequired,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+  onPress: PropTypes.func
 }
 
 export default Slide

@@ -130,9 +130,10 @@ class Player extends PureComponent {
             subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}
+            onPress={() => navigation.goBack()}
           />
         </View>
-        <PlayerContent data={track} language={language} />
+        <PlayerContent data={track} language={language} navigation={navigation} />
         <PlayerOptions track={track} onDownload={this.handleDownload} rate={rate} onSetRate={this.handleOnSetRate} isFavorite={isFavorite} onAddFavorite={actions.addFavorite} onRemoveFavorite={actions.removeFavorite} onAddToPlaylist={this.handleAddToPlaylist} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
