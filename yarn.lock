@@ -4811,9 +4811,9 @@ react-native-simple-toast@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.8.tgz#513f4add8d30e4c5109e536bfc6ea5825fea5d83"
 
-react-native-sqlite-storage@^3.3.6:
-  version "3.3.6"
-  resolved "https://registry.yarnpkg.com/react-native-sqlite-storage/-/react-native-sqlite-storage-3.3.6.tgz#c8ab7d2547fcd91332a7bf759c471749a9abd187"
+react-native-sqlite-storage@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/react-native-sqlite-storage/-/react-native-sqlite-storage-3.3.7.tgz#d1156b6a2f77b2c86a87efd0bcf58be9101704ed"
   dependencies:
     xcode "0.8.9"
 
