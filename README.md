@@ -38,4 +38,4 @@ We'll be updating the App Stores with this new version as soon as we reach versi
 - [ ] Login and Signup
 - [ ] Video support
 - [ ] Chromecast for Android
-- [ ] Share
+- [x] Share

@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, Text, StyleSheet } from 'react-native'
+import { View, Platform, Text, Share, StyleSheet } from 'react-native'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
 import { MediaTypes } from 'src/constants'
+import I18n from 'locales'
 
 const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFavorite, onRemoveFavorite, onAddToPlaylist }) => {
   const handleOnPressFavorite = () => {
@@ -16,22 +17,44 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
   }
   return (
     <View style={styles.container}>
-      <IconButton name="download" iconStyle={styles.icon} onPress={onDownload} />
+      <IconButton
+        name="download"
+        iconStyle={styles.icon}
+        onPress={onDownload} />
       { Platform.OS === 'Android' && 
-        <IconButton name="cast" iconStyle={styles.icon} onPress={() => {}} />
+        <IconButton
+          name="cast"
+          iconStyle={styles.icon}
+          onPress={() => {}} />
       }
       { track.mediaType === MediaTypes.sermon && 
-        <IconButton name="heart" iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]} onPress={handleOnPressFavorite} />
+        <IconButton
+          name="heart"
+          iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
+          onPress={handleOnPressFavorite} />
       }
       { track.mediaType === MediaTypes.sermon && 
-        <IconButton name="video" iconStyle={styles.icon} onPress={() => {}} />
+        <IconButton
+          name="video"
+          iconStyle={styles.icon}
+          onPress={() => {}} />
       }
-      <Text style={[styles.icon, {fontSize: 20, width: 86, textAlign: 'center'}]} onPress={onSetRate}>{`${rate}X`}</Text>
+      <Text
+        style={[styles.icon, styles.text]}
+        onPress={onSetRate}>{`${rate}X`}</Text>
       { track.mediaType === MediaTypes.sermon && 
-        <IconButton name="folder" iconStyle={styles.icon} onPress={onAddToPlaylist} />
+        <IconButton
+          name="folder"
+          iconStyle={styles.icon}
+          onPress={onAddToPlaylist} />
       }
       { (track.mediaType === MediaTypes.sermon || track.mediaType === MediaTypes.book) && 
-        <IconButton name="share-2" iconStyle={styles.icon} onPress={() => {}} />
+        <IconButton
+        name="share-2"
+        iconStyle={styles.icon}
+        onPress={() => {
+          Share.share({ message: `${I18n.t("share_this_blessing_with_you.")} ${track.shareUrl}` }) 
+        }} />
       }
     </View>
   )
@@ -48,6 +71,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 24,
     color: '#FFFFFF'
+  },
+  text: {
+    fontSize: 20,
+    width: 86,
+    textAlign: 'center'
   }
 })
 
