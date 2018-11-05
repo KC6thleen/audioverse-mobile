@@ -6,7 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.actionsheet.ActionSheetPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import guichaguri.trackplayer.TrackPlayer;
+import com.guichaguri.trackplayer.TrackPlayer;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import org.pgsqlite.SQLitePluginPackage;
 import com.facebook.react.ReactNativeHost;
