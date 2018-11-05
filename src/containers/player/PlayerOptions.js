@@ -21,12 +21,6 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
         name="download"
         iconStyle={styles.icon}
         onPress={onDownload} />
-      { Platform.OS === 'Android' && 
-        <IconButton
-          name="cast"
-          iconStyle={styles.icon}
-          onPress={() => {}} />
-      }
       { track.mediaType === MediaTypes.sermon && 
         <IconButton
           name="heart"
