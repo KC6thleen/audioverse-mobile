@@ -20,6 +20,7 @@ import TopicsNavigator from './TopicsNavigator'
 import SettingsNavigator from './SettingsNavigator'
 import DownloadsQueueNavigator from './DownloadsQueueNavigator'
 import Player from 'src/containers/player'
+import VideoPlayer from 'src/containers/player/Video'
 import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 
@@ -62,6 +63,7 @@ const AppNavigator = createStackNavigator({
   AuthStack,
   AppDrawer,
   Player,
+  VideoPlayer,
   AddToPlaylist,
   NewPlaylist
 },{

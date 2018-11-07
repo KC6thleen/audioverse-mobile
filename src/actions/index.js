@@ -343,3 +343,6 @@ export const ADD_PLAYLIST_ITEM = 'ADD_PLAYLIST_ITEM'
 export const addPlaylistItem = (playlistId, item) => action(ADD_PLAYLIST_ITEM, {playlistId, item})
 export const REMOVE_PLAYLIST_ITEM = 'REMOVE_PLAYLIST_ITEM'
 export const removePlaylistItem = (playlistId, id) => action(REMOVE_PLAYLIST_ITEM, {playlistId, id})
+
+export const PLAY_VIDEO = 'PLAY_VIDEO'
+export const playVideo = item => action(PLAY_VIDEO, {item})

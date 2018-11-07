@@ -55,7 +55,8 @@ function* rootSaga() {
     takeLatest(actions.REMOVE_PLAYLIST, playlists.remove),
     takeLatest(actions.SYNC_PLAYLIST_ITEMS, playlistItems.sync),
     takeLatest(actions.ADD_PLAYLIST_ITEM, playlistItems.add),
-    takeLatest(actions.REMOVE_PLAYLIST_ITEM, playlistItems.remove)
+    takeLatest(actions.REMOVE_PLAYLIST_ITEM, playlistItems.remove),
+    takeLatest(actions.PLAY_VIDEO, player.playVideo)
   ])
 }
 

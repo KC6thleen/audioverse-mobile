@@ -7,7 +7,7 @@ import { removeFavorite } from '../../actions';
 import { MediaTypes } from 'src/constants'
 import I18n from 'locales'
 
-const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFavorite, onRemoveFavorite, onAddToPlaylist }) => {
+const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFavorite, onRemoveFavorite, onPlayVideo, onAddToPlaylist }) => {
   const handleOnPressFavorite = () => {
     if (!isFavorite) {
       onAddFavorite(track)
@@ -27,11 +27,11 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
           iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
           onPress={handleOnPressFavorite} />
       }
-      { track.mediaType === MediaTypes.sermon && 
+      { track.videoFiles && track.videoFiles.length > 0 &&
         <IconButton
           name="video"
           iconStyle={styles.icon}
-          onPress={() => {}} />
+          onPress={onPlayVideo} />
       }
       <Text
         style={[styles.icon, styles.text]}
@@ -81,6 +81,7 @@ PlayerOptions.propTypes = {
   isFavorite: PropTypes.bool,
   onAddFavorite: PropTypes.func,
   onRemoveFavorite: PropTypes.func,
+  onPlayVideo: PropTypes.func,
   onAddToPlaylist: PropTypes.func
 }
 

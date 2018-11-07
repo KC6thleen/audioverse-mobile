@@ -155,6 +155,38 @@ function* getBibleChapterUrl(item) {
 }
 
 /**
+ * Get video url
+ * @param {object} item
+ */
+function* getVideoUrl(item) {
+
+  let url = item.videoFiles && item.videoFiles.length ? item.videoFiles[0].downloadURL : null
+
+  const downloads = yield select(selectors.getDownloadsById, item.id)
+  let currentUrl = null, exists = false
+
+  for (let i of downloads) {
+    currentUrl = `${i.downloadPath}${i.fileName}`
+    exists = yield call(fileExists, currentUrl)
+    if (exists) {
+      url = `file://${currentUrl}`
+      break
+    }
+  }
+  console.log('url', url)
+  return url
+}
+
+/**
+ * Play video
+ * @param {object} item 
+ */
+export function* playVideo({ item }) {
+  let videoUrl = yield call(getVideoUrl, item)
+  yield call(NavigationService.navigate, 'VideoPlayer', {uri: videoUrl})
+}
+
+/**
  * Resets the player, adds the array of tracks to the playlist and starts playing it
  * @param {array} tracks 
  * @param {object} id

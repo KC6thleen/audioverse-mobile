@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { playPause, skipToPrevious, skipToNext, replay, forward, download, setRate, addFavorite, removeFavorite } from 'src/actions'
+import { playPause, skipToPrevious, skipToNext, replay, forward, download, setRate, addFavorite, removeFavorite, playVideo } from 'src/actions'
 import { getCurrentTrack, getPlayerState, getRate, getLanguage, isFavorite } from 'src/reducers/selectors'
 
 import Player from './Player'
@@ -24,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
     download,
     setRate,
     addFavorite,
-    removeFavorite
+    removeFavorite,
+    playVideo
   }, dispatch)
 })
 

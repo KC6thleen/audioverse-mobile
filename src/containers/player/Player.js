@@ -28,13 +28,17 @@ class Player extends PureComponent {
     // audio
     for ( let i = track.mediaFiles.length - 1; i >= 0; i-- ) {
       bitratesIndex.push(track.mediaFiles[i])
-      options.push(`${track.mediaFiles[i].bitrate} kbps ${getSize(track.mediaFiles[i].filesize)}`)
+      options.push(`${track.mediaFiles[i].bitrate} kbps - ${getSize(track.mediaFiles[i].filesize)}`)
     }
     
     // video
     if ( track.videoFiles.length ) {
-      bitratesIndex.push(track.videoFiles[0])
-      options.push(`MP4 ${getSize(track.videoFiles[0].filesize)}`)
+      for ( let i = track.videoFiles.length - 1; i >= 0; i-- ) {
+        if (track.videoFiles[i].container !== 'm3u8_ios') {
+          bitratesIndex.push(track.videoFiles[i])
+          options.push(`MP4 (${track.videoFiles[i].width} x ${track.videoFiles[i].height}) - ${getSize(track.videoFiles[i].filesize)}`)
+        }
+      }
     }
     
     options.push(I18n.t('Cancel', {locale: language}))
@@ -93,6 +97,10 @@ class Player extends PureComponent {
     })
   }
 
+  handlePlayVideo = () => {
+    this.props.actions.playVideo(this.props.track)
+  }
+
   handleAddToPlaylist = () => {
     this.props.navigation.navigate({ routeName: 'AddToPlaylist' })
   }
@@ -134,7 +142,7 @@ class Player extends PureComponent {
           />
         </View>
         <PlayerContent data={track} language={language} navigation={navigation} />
-        <PlayerOptions track={track} onDownload={this.handleDownload} rate={rate} onSetRate={this.handleOnSetRate} isFavorite={isFavorite} onAddFavorite={actions.addFavorite} onRemoveFavorite={actions.removeFavorite} onAddToPlaylist={this.handleAddToPlaylist} />
+        <PlayerOptions track={track} onDownload={this.handleDownload} rate={rate} onSetRate={this.handleOnSetRate} isFavorite={isFavorite} onAddFavorite={actions.addFavorite} onRemoveFavorite={actions.removeFavorite} onPlayVideo={this.handlePlayVideo} onAddToPlaylist={this.handleAddToPlaylist} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
           <PlayerControls state={state} playPause={actions.playPause} skipToPrevious={actions.skipToPrevious} skipToNext={actions.skipToNext} replay={actions.replay} forward={actions.forward} />
@@ -189,7 +197,8 @@ Player.propTypes = {
     setRate: PropTypes.func.isRequired,
     download: PropTypes.func.isRequired,
     addFavorite: PropTypes.func.isRequired,
-    removeFavorite: PropTypes.func.isRequired
+    removeFavorite: PropTypes.func.isRequired,
+    playVideo: PropTypes.func.isRequired
   })
 }
 
