@@ -19,5 +19,8 @@ export default {
   deletePlaylists: 'playlist/0',
   playlistItems: 'playlist',
   postPlaylistItems: 'playlist/recording',
-  deletePlaylistItems: 'playlist/recording/0'
+  deletePlaylistItems: 'playlist/recording/0',
+  loginSocial: 'user/account/loginsocial',
+  login: 'https://api.audioverse.org/auth/login',
+  signup: 'https://api.audioverse.org/auth/signup'
 }

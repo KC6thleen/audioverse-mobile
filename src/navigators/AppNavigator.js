@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/Feather'
 
 import CustomDrawerContent from './drawer/CustomDrawerContent'
 import DrawerLabel from './drawer/drawerlabel'
-import Login from 'src/containers/login/Login'
-import Signup from 'src/containers/signup/Signup'
+import LoadingScreen from 'src/containers/auth/LoadingScreen'
+import Login from 'src/containers/auth/login'
 import BibleNavigator from './BibleNavigator'
 import ListsNavigator from './ListsNavigator'
 import PresentationsNavigator from './PresentationsNavigator'
@@ -25,10 +25,13 @@ import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 
 const AuthStack = createStackNavigator({
-  Login: Login,
-  Signup: Signup
+  LoadingScreen,
+  Login: Login
 }, {
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+    gesturesEnabled: false
+  }
 })
 
 const generateScreen = () => () => (
@@ -69,7 +72,7 @@ const AppNavigator = createStackNavigator({
 },{
   headerMode: 'none',
   mode: 'modal',
-  initialRouteName: 'AppDrawer',
+  initialRouteName: 'AuthStack',
   navigationOptions: {
     gesturesEnabled: true
   },

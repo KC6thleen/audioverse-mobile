@@ -346,3 +346,6 @@ export const removePlaylistItem = (playlistId, id) => action(REMOVE_PLAYLIST_ITE
 
 export const PLAY_VIDEO = 'PLAY_VIDEO'
 export const playVideo = item => action(PLAY_VIDEO, {item})
+
+export const LOG_OUT = 'LOG_OUT'
+export const logOut = item => action(LOG_OUT)

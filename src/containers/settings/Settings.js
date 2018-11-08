@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Switch, StyleSheet } from 'react-native'
+import {
+  View,
+  Switch,
+  Alert,
+  StyleSheet
+} from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 
 import I18n from 'locales'
@@ -29,13 +34,28 @@ class Settings extends PureComponent {
     this.props.actions.setAutoPlay(value)
   }
 
+  handleLoginLogout = () => {
+    if (this.props.user) {
+      Alert.alert(
+        I18n.t('Are_you_sure'),
+        '',
+        [
+          {text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel'},
+          {text: I18n.t('Yes'), onPress: this.props.actions.logOut}
+        ]
+      )
+    } else {
+      this.props.navigation.navigate('Login')
+    }
+  }
+
   render() {
-    const { language, autoPlay } = this.props
+    const { language, autoPlay, user } = this.props
 
     return (
       <View style={styles.container}>
         <View>
-          <ListItem icon={{name: 'pocket'}} title={I18n.t('Login', {locale: language})} chevron />
+          <ListItem icon={{name: 'pocket'}} title={I18n.t(user ? 'Logout' : 'Login', {locale: language})} chevron onPress={this.handleLoginLogout} />
           <ListItem icon={{name: 'map-pin'}} title={I18n.t('Language', {locale: language})} subtitle={I18n.t('id', {locale: language})} chevron onPress={this.showLanguages} />
           <ListItem icon={{name: 'play-circle'}} title={I18n.t('Autoplay', {locale: language})} rightElement={<Switch value={autoPlay} onValueChange={this.setAutoPlay} />} onPress={this.showLanguages} />
         </View>
@@ -57,9 +77,11 @@ Settings.propTypes = {
   navigation: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
   autoPlay: PropTypes.bool.isRequired,
+  user: PropTypes.object,
   actions: PropTypes.shape({
     changeLanguage: PropTypes.func.isRequired,
-    setAutoPlay: PropTypes.func.isRequired
+    setAutoPlay: PropTypes.func.isRequired,
+    logOut: PropTypes.func.isRequired
   })
 }
 

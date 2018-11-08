@@ -1,4 +1,5 @@
-import { all, put } from 'redux-saga/effects'
+import { AsyncStorage } from 'react-native'
+import { all, put, call } from 'redux-saga/effects'
 
 import I18n from 'locales'
 import * as actions from 'src/actions'
@@ -21,4 +22,15 @@ export function* changeLanguage({ language }) {
     put(actions.series.refresh(null, {result: []})),
     put(actions.topics.refresh(null, {result: []}))
   ])
+}
+
+/**
+ * Log out 
+ */
+export function* logOut() {
+  yield put(actions.favorites.set([]))
+  yield put(actions.playlists.set([]))
+  yield put(actions.playlistsItems.set([]))
+  yield put(actions.setUser(null))
+  yield call(AsyncStorage.removeItem, 'hideLogin')
 }

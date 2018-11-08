@@ -35,6 +35,6 @@ We'll be updating the App Stores with this new version as soon as we reach versi
   - [x] History,
   - [x] Downloads,
   - [x] Playlists
-- [ ] Login and Signup
+- [x] Login and Signup
 - [x] Video support
 - [x] Share

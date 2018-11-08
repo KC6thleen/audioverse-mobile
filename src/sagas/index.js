@@ -3,7 +3,7 @@ import { all, takeLatest } from 'redux-saga/effects'
 import * as actions from 'src/actions'
 import recoverDB from './db'
 import { startup } from './startup'
-import { changeLanguage } from './settings'
+import * as settings from './settings'
 import * as player from './player'
 import * as api from './api'
 import * as downloads from './downloads'
@@ -15,7 +15,8 @@ function* rootSaga() {
   yield all([
     startup(),
     recoverDB(),
-    takeLatest(actions.CHANGE_LANGUAGE, changeLanguage),
+    takeLatest(actions.CHANGE_LANGUAGE, settings.changeLanguage),
+    takeLatest(actions.LOG_OUT, settings.logOut),
     takeLatest(actions.SETUP_PLAYER, player.setupPlayer),
     takeLatest(actions.PLAYBACK_UPDATE, player.playbackUpdate),
     takeLatest(actions.RESET_AND_PLAY_TRACK, player.resetAndPlayTrack),
