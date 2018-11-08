@@ -27,7 +27,7 @@
   "share_this_blessing_with_you.":"Ich möchte diesen Segen mit Ihnen teilen.",
   "Unable_to_connect_to_the_Internet._Check_your_network_connection.":"Kann keine Verbindung zum Internet herstellen. Überprüfen Sie Ihre Netzwerkverbindung.",
   "Error":"Fehler",
-  "Error_retrieving_the_data_from_the_server.":"Fehler beim Abrufen der Daten vom Server.",
+  "Unable_to_connect_to_the_server._Try_again_later.":"Es kann keine Verbindung zum Server hergestellt werden. Versuchen Sie es später noch einmal.",
   "Continue_listening_to":"Weiter zu hören",
   "Bible_version":"Version",
   "Subtopics":"Unterthemen",

@@ -1,9 +1,11 @@
 import { put, select, call } from 'redux-saga/effects'
+import Toast from 'react-native-simple-toast'
 
 import { Endpoints } from 'src/constants'
 import * as api from 'src/services'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
+import I18n from 'locales'
 
 /**
  * Reusable fetch subroutine
@@ -28,6 +30,7 @@ function* fetchEntity(entity, apiFn, id, url, refresh) {
     }
   } catch (e) {
     yield put( entity.failure(id, e.message) )
+    Toast.show(I18n.t('Unable_to_connect_to_the_server._Try_again_later.'))
   }
 }
 

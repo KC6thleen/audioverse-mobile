@@ -27,7 +27,7 @@
   "share_this_blessing_with_you.":"私はあなたにこの祝福を伝えたいと思います。",
   "Unable_to_connect_to_the_Internet._Check_your_network_connection.":"インターネットに接続できません。 ネットワーク接続を確認してください。",
   "Error":"エラー",
-  "Error_retrieving_the_data_from_the_server.":"サーバーからのデータの取得中にエラーが発生しました。",
+  "Unable_to_connect_to_the_server._Try_again_later.":"サーバーに接続できません。 あとでもう一度試してみてください。",
   "Continue_listening_to":"聞き続ける",
   "Bible_version":"バージョン",
   "Subtopics":"サブトピック",

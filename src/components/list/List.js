@@ -4,7 +4,7 @@ import { FlatList, ActivityIndicator } from 'react-native'
 
 const List = ({ renderItem, keyExtractor, items, isFetching, onRefresh, onEndReached, selectItem, nextPageUrl }) => {
 
-  if (!items.length) {
+  if (!items.length && isFetching) {
     return (
       <ActivityIndicator
         size="large"

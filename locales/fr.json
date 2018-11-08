@@ -27,7 +27,7 @@
   "share_this_blessing_with_you.":"J'aimerais partager cette bénédiction avec vous.",
   "Unable_to_connect_to_the_Internet._Check_your_network_connection.":"Impossible de se connecter à internet. Vérifiez votre connexion réseau.",
   "Error":"Erreur",
-  "Error_retrieving_the_data_from_the_server.":"Erreur lors de la récupération des données du serveur.",
+  "Unable_to_connect_to_the_server._Try_again_later.":"Impossible de se connecter au serveur. Réessayez plus tard.",
   "Continue_listening_to":"Continuez à écouter",
   "Bible_version":"Version",
   "Subtopics":"Sous-thèmes",

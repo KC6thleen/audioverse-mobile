@@ -27,7 +27,7 @@
   "share_this_blessing_with_you.":"Я хотел бы поделиться этим благословением с вами.",
   "Unable_to_connect_to_the_Internet._Check_your_network_connection.":"Невозможно подключиться к Интернету. Проверьте сетевое подключение.",
   "Error":"ошибка",
-  "Error_retrieving_the_data_from_the_server.":"Ошибка получения данных с сервера.",
+  "Unable_to_connect_to_the_server._Try_again_later.":"Не удается подключиться к серверу. Попробуйте позже.",
   "Continue_listening_to":"Продолжайте слушать",
   "Bible_version":"Версия",
   "Subtopics":"Подтемы",

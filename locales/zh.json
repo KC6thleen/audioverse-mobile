@@ -27,7 +27,7 @@
   "share_this_blessing_with_you.":"我想和你分享這個祝福。",
   "Unable_to_connect_to_the_Internet._Check_your_network_connection.":"無法連接到互聯網。 檢查您的網絡連接。",
   "Error":"錯誤",
-  "Error_retrieving_the_data_from_the_server.":"從服務器檢索數據時出錯。",
+  "Unable_to_connect_to_the_server._Try_again_later.":"無法連接到服務器。 稍後再試。",
   "Continue_listening_to":"繼續聽",
   "Bible_version":"版",
   "Subtopics":"副題",
