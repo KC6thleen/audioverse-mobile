@@ -18,6 +18,7 @@ class Settings extends PureComponent {
     const { language, actions } = this.props
 
     const options = Object.keys(I18n.translations).map(el => I18n.translations[el].id)
+    options.push(I18n.t('Cancel'))
 
     ActionSheet.showActionSheetWithOptions({
       title: I18n.t('Language', {locale: language}),
