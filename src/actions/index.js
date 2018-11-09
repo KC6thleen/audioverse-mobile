@@ -16,7 +16,7 @@ export const REPLAY = 'REPLAY'
 export const FORWARD = 'FORWARD'
 export const DOWNLOAD = 'DOWNLOAD'
 export const SET_RATE = 'SET_RATE'
-export const SET_INITIAL_RATE = 'SET_INITIAL_RATE'
+export const TRACK_INITIALIZED = 'TRACK_INITIALIZED'
 export const PLAYBACK_RATE = 'PLAYBACK_RATE'
 export const PLAYBACK_POSITION = 'PLAYBACK_POSITION'
 
@@ -251,7 +251,7 @@ export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
 export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
 export const setRate = rate => action(SET_RATE, {rate})
-export const setInitialRate = () => action(SET_INITIAL_RATE)
+export const trackInitialized = () => action(TRACK_INITIALIZED)
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 export const playbackPosition = position => action(PLAYBACK_POSITION, {position})
 

@@ -43,8 +43,8 @@ async function eventHandler(store, data) {
     case 'playback-state':
       console.log('playback-state', data.state)
       if (data.state === TrackPlayer.STATE_BUFFERING) {
-        // set initial rate
-        store.dispatch(actions.setInitialRate())
+        // track initialized
+        store.dispatch(actions.trackInitialized())
         // clear interval
         clearInterval(interval)
         // set a new interval to save the current position

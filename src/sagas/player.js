@@ -213,12 +213,12 @@ export function* resetAndPlayTrack({ tracks, id }) {
 export function* playTracks() {
 
   const tracks = yield select(selectors.getTracks)
-  const currentTrack = yield select(selectors.getCurrentTrack)
+  const track = yield select(selectors.getCurrentTrack)
 
   let getUrl = null
-  if (currentTrack.mediaType === MediaTypes.bible) {
+  if (track.mediaType === MediaTypes.bible) {
     getUrl = getBibleChapterUrl
-  } else if (currentTrack.mediaType === MediaTypes.book) {
+  } else if (track.mediaType === MediaTypes.book) {
     getUrl = getBookChapterUrl
   } else {
     getUrl = getSermonUrl
@@ -232,14 +232,8 @@ export function* playTracks() {
     })
   }
   yield call(TrackPlayer.add, newTracks)
-  yield call(TrackPlayer.skip, currentTrack.id)
+  yield call(TrackPlayer.skip, track.id)
   yield call(TrackPlayer.play)
-
-  // set position
-  const savedPosition = yield select(selectors.getPosition)
-  if (savedPosition) {
-    yield call(TrackPlayer.seekTo, savedPosition)
-  }
 }
 
 /** 
@@ -317,9 +311,25 @@ export function* setRate({ rate }) {
 /** 
  * Sets the player rate
 */
-export function* setInitialRate() {
+export function* trackInitialized() {
+  // if it is a sermon add to history
+  const track = yield select(selectors.getCurrentTrack)
+  track.lastPlayedDate = new Date()
+  const history = yield select(selectors.getHistory)
+  const exists = history.some(el => el.id === track.id)
+  if (track.mediaType === MediaTypes.sermon && !exists) {
+    yield put(actions.history.add([track]))
+  }
+
+  // set rate
   const rate = yield select(selectors.getRate)
   if (rate !== 1) {
     yield call(TrackPlayer.setRate, rate)
+  }
+
+  // set position
+  const position = yield select(selectors.getPosition)
+  if (position) {
+    yield call(TrackPlayer.seekTo, position)
   }
 }
