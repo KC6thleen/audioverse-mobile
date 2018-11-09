@@ -62,6 +62,9 @@ async function eventHandler(store, data) {
       store.dispatch(actions.playerState(data.state))
       break
     case 'playback-track-changed':
+      // reset the position
+      store.dispatch(actions.playbackPosition(0))
+      // next track
       if (data.nextTrack) {
         store.dispatch(actions.playbackTrackId(data.nextTrack))
       }
