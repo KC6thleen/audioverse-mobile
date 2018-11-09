@@ -21,7 +21,7 @@ class Book extends PureComponent {
       <ListItem
         avatar={{source: item.artwork}}
         title={item.title}
-        subtitle={item.artist + ' \u00B7 ' + item.duration}
+        subtitle={item.artist}
         onPress={() => this.props.actions.resetAndPlayTrack(this.props.items, item.id)}
       />
     )
