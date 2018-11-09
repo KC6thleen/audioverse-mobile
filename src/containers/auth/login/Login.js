@@ -28,9 +28,17 @@ class Login extends PureComponent {
     password: ''
   }
 
+  navigate = () => {
+    const { navigation } = this.props
+    navigation.navigate('AppDrawer')
+    if (navigation.state.params.screen) {
+      navigation.navigate(navigation.state.params.screen)
+    }
+  }
+
   handleClose = async () => {
     await AsyncStorage.setItem('hideLogin', "1")
-    this.props.navigation.navigate('AppDrawer')
+    this.navigate()
   }
 
   handleChangeTextEmail = text => {
@@ -79,10 +87,8 @@ class Login extends PureComponent {
       const json = await response.json()
       if (json.data) {
         this.props.actions.setUser(json.data)
-        // remove hideLogin if exists
-        await AsyncStorage.removeItem('hideLogin')
-        // navigate to the app drawer
-        this.props.navigation.navigate('AppDrawer')
+        // navigate to the main screen
+        this.navigate()
       } else {
         Alert.alert(I18n.t('Invalid_username_or_password.'))
       }

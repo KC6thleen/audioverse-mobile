@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather'
 
 import CustomDrawerContent from './drawer/CustomDrawerContent'
 import DrawerLabel from './drawer/drawerlabel'
-import LoadingScreen from 'src/containers/auth/LoadingScreen'
+import Loading from 'src/containers/auth/loading'
 import Login from 'src/containers/auth/login'
 import BibleNavigator from './BibleNavigator'
 import ListsNavigator from './ListsNavigator'
@@ -25,7 +25,7 @@ import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 
 const AuthStack = createStackNavigator({
-  LoadingScreen,
+  Loading,
   Login: Login
 }, {
   headerMode: 'none',

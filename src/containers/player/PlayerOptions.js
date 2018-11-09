@@ -1,20 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, Text, Share, StyleSheet } from 'react-native'
+import { View, Platform, Text, Share, Alert, StyleSheet } from 'react-native'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
 import { MediaTypes } from 'src/constants'
 import I18n from 'locales'
 
-const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFavorite, onRemoveFavorite, onPlayVideo, onAddToPlaylist }) => {
-  const handleOnPressFavorite = () => {
-    if (!isFavorite) {
-      onAddFavorite(track)
+const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, onSetRate, onAddFavorite, onRemoveFavorite, onPlayVideo }) => {
+
+  const logIn = () => {
+    Alert.alert(
+      I18n.t('Would_you_like_to_log_in'),
+      '',
+      [
+        {text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel'},
+        {text: I18n.t('Yes'), onPress: () => { navigation.navigate('Login', { screen: 'Player' }) }}
+      ]
+    )
+  }
+
+  const handlePressFavorite = () => {
+    if (user) {
+      if (!isFavorite) {
+        onAddFavorite(track)
+      } else {
+        onRemoveFavorite(track.id)
+      }
     } else {
-      onRemoveFavorite(track.id)
+      logIn()
     }
   }
+
+  const handleAddToPlaylist = () => {
+    if (user) {
+      navigation.navigate({ routeName: 'AddToPlaylist' })
+    } else {
+      logIn()
+    }
+  }
+
   return (
     <View style={styles.container}>
       <IconButton
@@ -25,7 +50,7 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
         <IconButton
           name="heart"
           iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
-          onPress={handleOnPressFavorite} />
+          onPress={handlePressFavorite} />
       }
       { track.videoFiles && track.videoFiles.length > 0 &&
         <IconButton
@@ -40,7 +65,7 @@ const PlayerOptions = ({ track, onDownload, rate, onSetRate, isFavorite, onAddFa
         <IconButton
           name="folder"
           iconStyle={styles.icon}
-          onPress={onAddToPlaylist} />
+          onPress={handleAddToPlaylist} />
       }
       { (track.mediaType === MediaTypes.sermon || track.mediaType === MediaTypes.book) && 
         <IconButton
@@ -74,15 +99,16 @@ const styles = StyleSheet.create({
 })
 
 PlayerOptions.propTypes = {
+  navigation: PropTypes.object.isRequired,
   track: PropTypes.object,
-  onDownload: PropTypes.func.isRequired,
   rate: PropTypes.number,
-  onSetRate: PropTypes.func.isRequired,
+  user: PropTypes.object,
   isFavorite: PropTypes.bool,
+  onDownload: PropTypes.func.isRequired,
+  onSetRate: PropTypes.func.isRequired,
   onAddFavorite: PropTypes.func,
   onRemoveFavorite: PropTypes.func,
-  onPlayVideo: PropTypes.func,
-  onAddToPlaylist: PropTypes.func
+  onPlayVideo: PropTypes.func
 }
 
 export default PlayerOptions

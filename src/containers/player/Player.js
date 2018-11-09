@@ -101,10 +101,6 @@ class Player extends PureComponent {
     this.props.actions.playVideo(this.props.track)
   }
 
-  handleAddToPlaylist = () => {
-    this.props.navigation.navigate({ routeName: 'AddToPlaylist' })
-  }
-
   render() {
     
     const {
@@ -113,6 +109,7 @@ class Player extends PureComponent {
       track,
       rate,
       language,
+      user,
       actions,
       isFavorite
     } = this.props
@@ -141,11 +138,30 @@ class Player extends PureComponent {
             onPress={() => navigation.goBack()}
           />
         </View>
-        <PlayerContent data={track} language={language} navigation={navigation} />
-        <PlayerOptions track={track} onDownload={this.handleDownload} rate={rate} onSetRate={this.handleOnSetRate} isFavorite={isFavorite} onAddFavorite={actions.addFavorite} onRemoveFavorite={actions.removeFavorite} onPlayVideo={this.handlePlayVideo} onAddToPlaylist={this.handleAddToPlaylist} />
+        <PlayerContent
+          data={track}
+          language={language}
+          navigation={navigation} />
+        <PlayerOptions
+          navigation={navigation}
+          track={track}
+          onDownload={this.handleDownload}
+          rate={rate}
+          user={user}
+          isFavorite={isFavorite}
+          onSetRate={this.handleOnSetRate}
+          onAddFavorite={actions.addFavorite}
+          onRemoveFavorite={actions.removeFavorite}
+          onPlayVideo={this.handlePlayVideo} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
-          <PlayerControls state={state} playPause={actions.playPause} skipToPrevious={actions.skipToPrevious} skipToNext={actions.skipToNext} replay={actions.replay} forward={actions.forward} />
+          <PlayerControls
+            state={state}
+            playPause={actions.playPause}
+            skipToPrevious={actions.skipToPrevious}
+            skipToNext={actions.skipToNext}
+            replay={actions.replay}
+            forward={actions.forward} />
         </View>
       </ImageBackground>
     )
@@ -187,6 +203,7 @@ Player.propTypes = {
   track: PropTypes.object,
   rate: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
+  user: PropTypes.object,
   isFavorite: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     playPause: PropTypes.func.isRequired,

@@ -8,15 +8,16 @@ import {
   StyleSheet
 } from 'react-native'
 
-class LoadingScreen extends PureComponent {
+class Loading extends PureComponent {
   constructor(props) {
     super(props)
     this.navigate()
   }
 
   navigate = async () => {
+    const { navigation, user } = this.props
     const hideLogin = await AsyncStorage.getItem('hideLogin')
-    this.props.navigation.navigate(!hideLogin ? 'Login' : 'AppDrawer')
+    navigation.navigate(!user && !hideLogin ? 'Login' : 'AppDrawer')
   }
 
   render() {
@@ -38,8 +39,9 @@ const styles = StyleSheet.create({
   }
 })
 
-LoadingScreen.propTypes = {
-  navigation: PropTypes.object.isRequired
+Loading.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  user: PropTypes.object
 }
 
-export default LoadingScreen
+export default Loading
