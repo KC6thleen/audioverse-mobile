@@ -35,15 +35,15 @@ const screenNavigationOptions = (title, icon) => ({
 
 const AppDrawer = createDrawerNavigator({
   MyLists: {screen: ListsNavigator, navigationOptions: screenNavigationOptions('my_lists', 'list')},
-  Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'mic')},
-  Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'plus-square')},
+  Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'speaker')},
+  Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'file-plus')},
   Books: {screen: BooksNavigator, navigationOptions: screenNavigationOptions('books', 'book')},
-  Stories: {screen: StoriesNavigator, navigationOptions: screenNavigationOptions('stories', 'radio')},
+  Stories: {screen: StoriesNavigator, navigationOptions: screenNavigationOptions('stories', 'file-text')},
   Presenters: {screen: PresentersNavigator, navigationOptions: screenNavigationOptions('presenters', 'user')},
-  Conferences: {screen: ConferencesNavigator, navigationOptions: screenNavigationOptions('conferences', 'layers')},
+  Conferences: {screen: ConferencesNavigator, navigationOptions: screenNavigationOptions('conferences', 'home')},
   Sponsors: {screen: SponsorsNavigator, navigationOptions: screenNavigationOptions('sponsors', 'users')},
-  Series: {screen: SeriesNavigator, navigationOptions: screenNavigationOptions('series', 'tag')},
-  Topics: {screen: TopicsNavigator, navigationOptions: screenNavigationOptions('topics', 'target')},
+  Series: {screen: SeriesNavigator, navigationOptions: screenNavigationOptions('series', 'package')},
+  Topics: {screen: TopicsNavigator, navigationOptions: screenNavigationOptions('topics', 'folder')},
   DownloadsQueue: {screen: DownloadsQueueNavigator, navigationOptions: screenNavigationOptions('download_queue', 'download')},
   Settings: {screen: SettingsNavigator, navigationOptions: screenNavigationOptions('settings', 'sliders')},
   About: {screen: generateScreen(), navigationOptions: screenNavigationOptions('about', 'info')}
