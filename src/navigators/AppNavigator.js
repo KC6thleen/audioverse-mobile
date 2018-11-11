@@ -23,10 +23,7 @@ import Player from 'src/containers/player'
 import VideoPlayer from 'src/containers/player/Video'
 import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
-
-const generateScreen = () => () => (
-  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} />
-)
+import AboutNavigator from './AboutNavigator'
 
 const screenNavigationOptions = (title, icon) => ({
   drawerLabel: ({ tintColor }) => <DrawerLabel tintColor={tintColor} title={title} />,
@@ -46,7 +43,7 @@ const AppDrawer = createDrawerNavigator({
   Topics: {screen: TopicsNavigator, navigationOptions: screenNavigationOptions('topics', 'folder')},
   DownloadsQueue: {screen: DownloadsQueueNavigator, navigationOptions: screenNavigationOptions('download_queue', 'download')},
   Settings: {screen: SettingsNavigator, navigationOptions: screenNavigationOptions('settings', 'sliders')},
-  About: {screen: generateScreen(), navigationOptions: screenNavigationOptions('about', 'info')}
+  About: {screen: AboutNavigator, navigationOptions: screenNavigationOptions('about', 'info')}
 }, {
   contentComponent: CustomDrawerContent,
   initialRouteName: 'Presentations'
