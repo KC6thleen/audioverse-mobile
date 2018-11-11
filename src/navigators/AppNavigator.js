@@ -49,7 +49,7 @@ const AppDrawer = createDrawerNavigator({
   About: {screen: generateScreen(), navigationOptions: screenNavigationOptions('about', 'info')}
 }, {
   contentComponent: CustomDrawerContent,
-  initialRouteName: 'Bible'
+  initialRouteName: 'Presentations'
 })
 
 const AppNavigator = createStackNavigator({

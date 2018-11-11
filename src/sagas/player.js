@@ -307,12 +307,11 @@ export function* setRate({ rate }) {
 /** 
  * Sets the player rate
 */
-export function* trackInitialized() {
-  // if it is a sermon add to history
-  const track = yield select(selectors.getCurrentTrack)
+export function* trackInitialized({ track }) {
   track.lastPlayedDate = new Date()
   const history = yield select(selectors.getHistory)
   const exists = history.some(el => el.id === track.id)
+  // if it's a sermon and is not in the history list add it
   if (track.mediaType === MediaTypes.sermon && !exists) {
     yield put(actions.history.add([track]))
   }

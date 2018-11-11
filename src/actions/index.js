@@ -252,7 +252,7 @@ export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
 export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
 export const setRate = rate => action(SET_RATE, {rate})
-export const trackInitialized = () => action(TRACK_INITIALIZED)
+export const trackInitialized = (track) => action(TRACK_INITIALIZED, {track})
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 export const playbackPosition = position => action(PLAYBACK_POSITION, {position})
 

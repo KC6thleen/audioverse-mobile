@@ -41,9 +41,8 @@ async function eventHandler(store, data) {
 
     // playback updates
     case 'playback-state':
+      console.log('playback-state', data.state)
       if (data.state === TrackPlayer.STATE_BUFFERING) {
-        // track initialized
-        store.dispatch(actions.trackInitialized())
         // clear interval
         clearInterval(interval)
         // set a new interval to save the current position
@@ -61,13 +60,19 @@ async function eventHandler(store, data) {
       store.dispatch(actions.playerState(data.state))
       break
     case 'playback-track-changed':
+      console.log('playback-track-changed', data)
       // reset the position
       store.dispatch(actions.playbackPosition(0))
       // next track
       if (data.nextTrack) {
+        // set track id
         store.dispatch(actions.playbackTrackId(data.nextTrack))
+
         const track = await TrackPlayer.getTrack(data.nextTrack)
-        if (track.chapter) { // bible chapter
+        // track initialized
+        store.dispatch(actions.trackInitialized(track))
+         // Bible chapter
+        if (track.chapter) {
           store.dispatch(actions.bibleChapter(track.chapter))
         }
       }
