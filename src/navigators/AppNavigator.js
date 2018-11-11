@@ -32,12 +32,12 @@ const screenNavigationOptions = (title, icon) => ({
 
 const AppDrawer = createDrawerNavigator({
   MyLists: {screen: ListsNavigator, navigationOptions: screenNavigationOptions('my_lists', 'list')},
-  Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'speaker')},
-  Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'file-plus')},
+  Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'headphones')},
+  Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'bookmark')},
   Books: {screen: BooksNavigator, navigationOptions: screenNavigationOptions('books', 'book')},
-  Stories: {screen: StoriesNavigator, navigationOptions: screenNavigationOptions('stories', 'file-text')},
+  Stories: {screen: StoriesNavigator, navigationOptions: screenNavigationOptions('stories', 'feather')},
   Presenters: {screen: PresentersNavigator, navigationOptions: screenNavigationOptions('presenters', 'user')},
-  Conferences: {screen: ConferencesNavigator, navigationOptions: screenNavigationOptions('conferences', 'home')},
+  Conferences: {screen: ConferencesNavigator, navigationOptions: screenNavigationOptions('conferences', 'calendar')},
   Sponsors: {screen: SponsorsNavigator, navigationOptions: screenNavigationOptions('sponsors', 'users')},
   Series: {screen: SeriesNavigator, navigationOptions: screenNavigationOptions('series', 'package')},
   Topics: {screen: TopicsNavigator, navigationOptions: screenNavigationOptions('topics', 'folder')},
