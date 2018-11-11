@@ -3,29 +3,22 @@ import PropTypes from 'prop-types'
 import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native'
 
 import MiniPlayer from 'src/components/miniplayer'
-import defaultImage from 'assets/av-logo.png'
-import { Endpoints, MediaTypes } from 'src/constants'
+import { parseBibleChapter } from 'src/services'
 
 class BibleChapters extends PureComponent {
 
   handlePressItem = item => {
     this.props.actions.bibleChapter(item.chapter_id)
 
-    const { items, bible, actions } = this.props
+    const { items, bible, actions, navigation } = this.props
 
-    const tracks = items.map(item => ({
-      id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
-      title: `${item.book_id} ${item.chapter_id}`,
-      artist: bible.version.name,
-      artwork: defaultImage,
-      fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
-      downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
-      mediaType: MediaTypes.bible
-    }))
+    const tracks = items.map(item => parseBibleChapter(item, bible))
 
     const track = tracks.find(el => el.id === `${bible.version.id}_${item.book_id}_${item.chapter_id}`)
 
     actions.resetAndPlayTrack(tracks, track.id)
+    navigation.pop()
+
   }
 
   renderItem = ({ item }) => {

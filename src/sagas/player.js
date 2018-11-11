@@ -139,16 +139,12 @@ function* getBookChapterUrl(item) {
  */
 function* getBibleChapterUrl(item) {
 
-  const download = yield select(selectors.getDownloadById, item.id)
-
   let url = item.downloadURL
-
-  if (download) {
-    const currentUrl = `${download.downloadPath}${download.fileName}`
-    const exists = yield call(fileExists, currentUrl)
-    if (exists) {
-      url = `file://${currentUrl}`
-    }
+  const dir = RNFetchBlob.fs.dirs.DocumentDir
+  const currentUrl = `${dir}/${Dirs.bible}/${item.fileName}`
+  const exists = yield call(fileExists, currentUrl)
+  if (exists) {
+    url = `file://${currentUrl}`
   }
   console.log('url', url)
   return url
@@ -200,9 +196,9 @@ export function* resetAndPlayTrack({ tracks, id }) {
   yield put(actions.playbackTrackId(selectedTrack.id))
 
   const autoPlay = yield select(selectors.getAutoPlay)
-  if (autoPlay) {
+  if (autoPlay || selectedTrack.mediaType === MediaTypes.bible) {
     yield call(playTracks)
-  } else {
+  } else if (selectedTrack.mediaType !== MediaTypes.bible) {
     yield call(NavigationService.navigate, 'Player')
   }
 }

@@ -5,6 +5,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
+import { MediaTypes } from 'src/constants'
 
 async function requestReadExternalStoragePermission() {
   try {
@@ -24,14 +25,17 @@ export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }
   const permission = Platform.OS === 'ios' ? true : yield call(requestReadExternalStoragePermission)
   if (permission) {
     const dir = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
-    yield put(actions.addToDownloadsQueue({
-      ...item,
-      downloadPath: `${dir}/${downloadPath}/`,
-      downloadUrl,
-      fileName,
-      bitRate
-    }))
-    yield call(downloadNext)
+    const exists = yield call(RNFetchBlob.fs.exists, `${dir}/${downloadPath}/${fileName}`)
+    if (!exists) {
+      yield put(actions.addToDownloadsQueue({
+        ...item,
+        downloadPath: `${dir}/${downloadPath}/`,
+        downloadUrl,
+        fileName,
+        bitRate
+      }))
+      yield call(downloadNext)
+    }
   }
 }
 
@@ -86,7 +90,9 @@ export function* downloadNext() {
       } else if (res) {
         yield put(actions.setDownloading(false))
         yield put(actions.removeFromDownloadsQueue(item))
-        yield put(actions.downloads.add([item]))
+        if (item.mediaType === MediaTypes.sermon) {
+          yield put(actions.downloads.add([item]))
+        }
         yield call(downloadNext)
       } else { // err
         yield put(actions.setDownloading(false))

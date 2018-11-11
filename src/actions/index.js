@@ -20,6 +20,7 @@ export const TRACK_INITIALIZED = 'TRACK_INITIALIZED'
 export const PLAYBACK_RATE = 'PLAYBACK_RATE'
 export const PLAYBACK_POSITION = 'PLAYBACK_POSITION'
 
+export const SET_BIBLE_VERSION = 'SET_BIBLE_VERSION'
 export const BIBLE_VERSION = 'BIBLE_VERSION'
 export const BIBLE_BOOK = 'BIBLE_BOOK'
 export const BIBLE_CHAPTER = 'BIBLE_CHAPTER'
@@ -255,6 +256,7 @@ export const trackInitialized = () => action(TRACK_INITIALIZED)
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 export const playbackPosition = position => action(PLAYBACK_POSITION, {position})
 
+export const setBibleVersion = version => action(SET_BIBLE_VERSION, {version})
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
 export const bibleBook = (testament, book) => action(BIBLE_BOOK, {testament, book})
 export const bibleChapter = chapter => action(BIBLE_CHAPTER, {chapter})

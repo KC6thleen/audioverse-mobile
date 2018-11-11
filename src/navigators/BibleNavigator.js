@@ -37,7 +37,7 @@ const BibleStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="bible" />,
-      headerRight: <HeaderRightBibleVerses onPress={() => navigation.navigate('BibleTab')} />
+      headerRight: <HeaderRightBibleVerses navigation={navigation} />
     })
   },
   BibleTab: {

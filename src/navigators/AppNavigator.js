@@ -24,16 +24,6 @@ import VideoPlayer from 'src/containers/player/Video'
 import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 
-const AuthStack = createStackNavigator({
-  Loading,
-  Login: Login
-}, {
-  headerMode: 'none',
-  navigationOptions: {
-    gesturesEnabled: false
-  }
-})
-
 const generateScreen = () => () => (
   <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} />
 )
@@ -59,11 +49,12 @@ const AppDrawer = createDrawerNavigator({
   About: {screen: generateScreen(), navigationOptions: screenNavigationOptions('about', 'info')}
 }, {
   contentComponent: CustomDrawerContent,
-  initialRouteName: 'Presentations'
+  initialRouteName: 'Bible'
 })
 
 const AppNavigator = createStackNavigator({
-  AuthStack,
+  Loading,
+  Login,
   AppDrawer,
   Player,
   VideoPlayer,
@@ -72,7 +63,7 @@ const AppNavigator = createStackNavigator({
 },{
   headerMode: 'none',
   mode: 'modal',
-  initialRouteName: 'AuthStack',
+  initialRouteName: 'Loading',
   navigationOptions: {
     gesturesEnabled: true
   },

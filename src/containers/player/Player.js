@@ -77,7 +77,7 @@ class Player extends PureComponent {
       actions.download(
         track,
         Dirs.bible,
-        track.url,
+        track.downloadURL,
         track.fileName,
         ''
       )

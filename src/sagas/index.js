@@ -10,6 +10,7 @@ import * as downloads from './downloads'
 import * as favorites from './favorites'
 import * as playlists from './playlists'
 import * as playlistItems from './playlistItems'
+import * as bible from './bible'
 
 function* rootSaga() {
   yield all([
@@ -57,7 +58,8 @@ function* rootSaga() {
     takeLatest(actions.SYNC_PLAYLIST_ITEMS, playlistItems.sync),
     takeLatest(actions.ADD_PLAYLIST_ITEM, playlistItems.add),
     takeLatest(actions.REMOVE_PLAYLIST_ITEM, playlistItems.remove),
-    takeLatest(actions.PLAY_VIDEO, player.playVideo)
+    takeLatest(actions.PLAY_VIDEO, player.playVideo),
+    takeLatest(actions.SET_BIBLE_VERSION, bible.setBibleVersion)
   ])
 }
 

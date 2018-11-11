@@ -41,7 +41,6 @@ async function eventHandler(store, data) {
 
     // playback updates
     case 'playback-state':
-      console.log('playback-state', data.state)
       if (data.state === TrackPlayer.STATE_BUFFERING) {
         // track initialized
         store.dispatch(actions.trackInitialized())
@@ -67,6 +66,10 @@ async function eventHandler(store, data) {
       // next track
       if (data.nextTrack) {
         store.dispatch(actions.playbackTrackId(data.nextTrack))
+        const track = await TrackPlayer.getTrack(data.nextTrack)
+        if (track.chapter) { // bible chapter
+          store.dispatch(actions.bibleChapter(track.chapter))
+        }
       }
       break
     case 'playback-error':

@@ -1,5 +1,6 @@
 import { formatTime, getPresenterName, getPresenterPicture } from 'src/utils'
-import { MediaTypes } from 'src/constants'
+import { Endpoints, MediaTypes } from 'src/constants'
+import defaultImage from 'assets/av-logo.png'
 
 /**
  * Fetches an API response and parses the result
@@ -41,6 +42,17 @@ export const parseRecording = (item, mediaType) => ({
   artwork: getPresenterPicture(item),
   duration: formatTime(item.duration),
   mediaType: mediaType
+})
+
+export const parseBibleChapter = (item, bible) => ({
+  id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
+  title: `${item.book_id} ${item.chapter_id}`,
+  artist: bible.version.name,
+  artwork: defaultImage,
+  fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
+  downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
+  chapter: item.chapter_id,
+  mediaType: MediaTypes.bible
 })
 
 export const fetchBibleChapters = url => callApi(url, json => json.result)

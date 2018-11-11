@@ -7,6 +7,7 @@ import {
   StatusBar,
   StyleSheet
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 class Loading extends PureComponent {
   constructor(props) {
@@ -17,7 +18,7 @@ class Loading extends PureComponent {
   navigate = async () => {
     const { navigation, user } = this.props
     const hideLogin = await AsyncStorage.getItem('hideLogin')
-    navigation.navigate(!user && !hideLogin ? 'Login' : 'AppDrawer')
+    navigation.reset([NavigationActions.navigate({ routeName: !user && !hideLogin ? 'Login' : 'AppDrawer' })], 0)
   }
 
   render() {
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#E9E9EF'
   }
 })
 
