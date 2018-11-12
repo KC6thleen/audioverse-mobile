@@ -9,7 +9,6 @@ import { AppState } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { setupPlayer } from 'src/actions'
 // react-navigation no redux
 import AppNavigator from 'src/navigators/AppNavigator'
 import NavigationService from 'src/utils/navigation-service'
@@ -17,10 +16,6 @@ import NavigationService from 'src/utils/navigation-service'
 // import AppNavigator from 'src/navigators/ReduxNavigator'
 
 class App extends PureComponent {
-  
-  componentDidMount() {
-    this.props.store.dispatch(setupPlayer())
-  }
 
   render() {
     return (

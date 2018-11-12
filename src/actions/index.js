@@ -1,6 +1,5 @@
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
 
-export const SETUP_PLAYER = 'SETUP_PLAYER'
 export const PLAYER_STATE = 'PLAYER_STATE'
 export const PLAYBACK_INIT = 'PLAYBACK_INIT'
 export const PLAYBACK_TRACK_ID = 'PLAYBACK_TRACK_ID'
@@ -235,7 +234,6 @@ export const loadTopic = (loadMore, refresh, url) => action(LOAD_TOPIC, {loadMor
 
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
 
-export const setupPlayer = () => action(SETUP_PLAYER)
 export const playerState = state => action(PLAYER_STATE, {state})
 export const playbackInit = () => action(PLAYBACK_INIT)
 export const playbackTrackId = trackId => action(PLAYBACK_TRACK_ID, {trackId})

@@ -213,6 +213,8 @@ export function* playTracks() {
       url: yield call(getUrl, i)
     })
   }
+
+  yield call(setupPlayer)
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, track.id)
   yield call(TrackPlayer.play)
