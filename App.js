@@ -9,7 +9,7 @@ import { AppState } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { setupPlayer, playbackUpdate } from 'src/actions'
+import { setupPlayer } from 'src/actions'
 // react-navigation no redux
 import AppNavigator from 'src/navigators/AppNavigator'
 import NavigationService from 'src/utils/navigation-service'
@@ -19,19 +19,7 @@ import NavigationService from 'src/utils/navigation-service'
 class App extends PureComponent {
   
   componentDidMount() {
-    AppState.addEventListener('change', this._handleStateChange.bind(this))
     this.props.store.dispatch(setupPlayer())
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleStateChange.bind(this))
-  }
-
-  _handleStateChange(appState) {
-    if (appState == 'active') {
-      // update the playback information when the app is back from background mode
-      this.props.store.dispatch(playbackUpdate())
-    }
   }
 
   render() {

@@ -38,23 +38,9 @@ export function* setupPlayer() {
 }
 
 /**
- * Updates the playback state, and the current track
+ * File exists
+ * @param {string} file 
  */
-export function* playbackUpdate() {
-  try {
-    yield call(TrackPlayer.setupPlayer)
-    const state = yield call(TrackPlayer.getState)
-    const tracks = yield call(TrackPlayer.getQueue)
-    const trackId = yield call(TrackPlayer.getCurrentTrack)
-    yield put(actions.playerState(state))
-    yield put(actions.playbackTracks(tracks))
-    yield put(actions.playbackTrackId(trackId))
-  } catch (e) {
-    // the player is probably not yet initialized
-    // which means we don't have to update anything
-  }
-}
-
 const fileExists = async (file) => {
   try {
     return await RNFetchBlob.fs.exists(file)
