@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FlatList, ActivityIndicator } from 'react-native'
 
-const List = ({ renderItem, keyExtractor, items, isFetching, onRefresh, onEndReached, selectItem, nextPageUrl }) => {
+const List = ({ renderItem, keyExtractor, items, isFetching, onRefresh, onEndReached, selectItem, nextPageUrl, ...props }) => {
 
   if (!items.length && isFetching) {
     return (
@@ -25,6 +25,7 @@ const List = ({ renderItem, keyExtractor, items, isFetching, onRefresh, onEndRea
 
   return (
     <FlatList
+      {...props}
       data={items}
       renderItem={renderItem}
       keyExtractor={keyExtractor}

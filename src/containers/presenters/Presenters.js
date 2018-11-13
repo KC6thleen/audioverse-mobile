@@ -1,23 +1,46 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
+import { SearchBar } from 'react-native-elements'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
+import I18n from 'locales'
 
 class Presenters extends PureComponent {
 
-  componentDidMount() {
-    this.props.actions.loadPresenters()
+  state = {
+    data: []
   }
 
-  handleEndReached = () => {
-    this.props.actions.loadPresenters(true, false)
+  componentDidMount() {
+    this.props.actions.loadPresenters()
+    this.search.focus()
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps, this.props.items)
+    if (this.props.items !== prevProps.items) {
+      this.setState({
+        data: this.props.items
+      })
+    }
+  }
+
+  handleChangeText = text => {
+    text = text.toLowerCase()
+    const filteredData = this.props.items.filter(el => {
+      return `${el.surname} ${el.givenName}`.toLowerCase().indexOf(text) > -1
+    })
+    this.setState({
+      data: filteredData
+    })
   }
 
   handleRefresh = () => {
     this.props.actions.loadPresenters(false, true)
+    this.search.clearText()
   }
 
   renderItem = ({ item }) => {
@@ -30,12 +53,30 @@ class Presenters extends PureComponent {
     )
   }
 
+  renderHeader = () => {
+    return(
+      <SearchBar
+        lightTheme
+        round
+        autoCorrect={false}
+        placeholder={I18n.t('search')}
+        focus
+        ref={search => this.search = search}
+        onChangeText={this.handleChangeText} />
+    )
+  }
+
   render() {
     const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
+        <List
+          ListHeaderComponent={this.renderHeader}
+          renderItem={this.renderItem}
+          items={this.state.data}
+          {...pagination}
+          onRefresh={this.handleRefresh} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )

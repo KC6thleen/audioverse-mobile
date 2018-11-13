@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MiniPlayer component renders correctly when there is a track 1`] = `<Component />`;
+exports[`MiniPlayer component renders correctly when there is a track 1`] = `<ForwardRef(View) />`;
 
-exports[`MiniPlayer component renders empty component when no track 1`] = `<Component />`;
+exports[`MiniPlayer component renders empty component when no track 1`] = `<ForwardRef(View) />`;
