@@ -2,10 +2,12 @@ import { PermissionsAndroid, Platform } from 'react-native'
 import { call, put, select, take } from 'redux-saga/effects'
 import { eventChannel, buffers, END } from 'redux-saga'
 import RNFetchBlob from 'rn-fetch-blob'
+import Toast from 'react-native-simple-toast'
 
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 import { MediaTypes } from 'src/constants'
+import I18n from 'locales'
 
 async function requestReadExternalStoragePermission() {
   try {
@@ -34,6 +36,7 @@ export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }
         fileName,
         bitRate
       }))
+      Toast.show(I18n.t('Added_to_download_queue'))
       yield call(downloadNext)
     }
   }
@@ -93,6 +96,7 @@ export function* downloadNext() {
         if (item.mediaType === MediaTypes.sermon) {
           yield put(actions.downloads.add([item]))
         }
+        Toast.show(I18n.t('Downloaded'))
         yield call(downloadNext)
       } else { // err
         yield put(actions.setDownloading(false))
