@@ -42,10 +42,12 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
 
   return (
     <View style={styles.container}>
-      <IconButton
-        name="download"
-        iconStyle={styles.icon}
-        onPress={onDownload} />
+      { (!track.downloadDisabled || track.downloadDisabled === "0") &&
+        <IconButton
+          name="download"
+          iconStyle={styles.icon}
+          onPress={onDownload} />
+      }
       { track.mediaType === MediaTypes.sermon && 
         <IconButton
           name="heart"
