@@ -4,6 +4,7 @@ import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navig
 import TabBarLabel from './tabbarlabel'
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
+import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import New from 'src/containers/recordings/new'
 import Trending from 'src/containers/recordings/trending'
@@ -42,6 +43,7 @@ const PresentationsStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="presentations" />,
+      headerRight: <HeaderRight navigation={navigation} />
     })
   }
 }, {

@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
+import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import DownloadsQueue from 'src/containers/downloadsqueue'
 
@@ -12,6 +13,7 @@ const DownloadsQueueStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="download_queue" />,
+      headerRight: <HeaderRight navigation={navigation} />
     })
   }
 }, {

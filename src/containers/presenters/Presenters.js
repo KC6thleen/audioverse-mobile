@@ -20,7 +20,6 @@ class Presenters extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps, this.props.items)
     if (this.props.items !== prevProps.items) {
       this.setState({
         data: this.props.items

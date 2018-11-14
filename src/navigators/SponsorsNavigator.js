@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
+import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Sponsors from 'src/containers/sponsors'
 import Sponsor from 'src/containers/sponsors/sponsor'
@@ -13,6 +14,7 @@ const SponsorsStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="sponsors" />,
+      headerRight: <HeaderRight navigation={navigation} />
     })
   },
   Sponsor: {

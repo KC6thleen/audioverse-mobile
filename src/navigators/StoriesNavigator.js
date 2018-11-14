@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
+import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Stories from 'src/containers/stories'
 import Story from 'src/containers/stories/story'
@@ -13,6 +14,7 @@ const StoriesStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="stories" />,
+      headerRight: <HeaderRight navigation={navigation} />
     })
   },
   Story: {

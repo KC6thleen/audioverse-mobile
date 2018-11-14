@@ -21,6 +21,9 @@ export default {
   postPlaylistItems: 'playlist/recording',
   deletePlaylistItems: 'playlist/recording/0',
   loginSocial: 'user/account/loginsocial',
-  login: 'https://api.audioverse.org/auth/login',
-  signup: 'https://api.audioverse.org/auth/signup'
+  login: 'auth/login',
+  signup: 'auth/signup',
+  searchPresentations: 'search?query=',
+  searchPresenters: 'presenters?search=',
+  searchConferences: 'conferences?search='
 }

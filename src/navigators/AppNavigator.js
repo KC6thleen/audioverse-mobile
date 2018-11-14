@@ -3,6 +3,7 @@ import { View, Easing, Animated } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Feather'
 
+import { GlobalStyles, headerTintColor } from 'src/styles'
 import CustomDrawerContent from './drawer/CustomDrawerContent'
 import DrawerLabel from './drawer/drawerlabel'
 import Loading from 'src/containers/auth/loading'
@@ -24,6 +25,7 @@ import VideoPlayer from 'src/containers/player/Video'
 import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 import AboutNavigator from './AboutNavigator'
+import Search from 'src/containers/search'
 
 const screenNavigationOptions = (title, icon) => ({
   drawerLabel: ({ tintColor }) => <DrawerLabel tintColor={tintColor} title={title} />,
@@ -49,10 +51,25 @@ const AppDrawer = createDrawerNavigator({
   initialRouteName: 'Presentations'
 })
 
+const AppStack = createStackNavigator({
+  AppDrawer: {
+    screen: AppDrawer,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Search
+}, {
+  navigationOptions: {
+    headerStyle: GlobalStyles.header,
+    headerTintColor: headerTintColor
+  }
+})
+
 const AppNavigator = createStackNavigator({
   Loading,
   Login,
-  AppDrawer,
+  AppStack,
   Player,
   VideoPlayer,
   AddToPlaylist,

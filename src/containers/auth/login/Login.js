@@ -30,8 +30,8 @@ class Login extends PureComponent {
 
   navigate = () => {
     const { navigation } = this.props
-    navigation.navigate('AppDrawer')
-    if (navigation.state.params.screen) {
+    navigation.navigate('AppStack')
+    if (navigation.state.params && navigation.state.params.screen) {
       navigation.navigate(navigation.state.params.screen)
     }
   }
@@ -63,6 +63,10 @@ class Login extends PureComponent {
     }
   }
 
+  handleSubmitEditingEmail = () => {
+    this.passwordRef.focus()
+  }
+
   handleSignInUp = async () => {
     if (this.state.isFormValid) {
       if (this.state.signin) {
@@ -75,7 +79,7 @@ class Login extends PureComponent {
 
   signIn = async () => {
     this.setState({ loading: true })
-    const url = `${Endpoints.login}?email=${this.state.email}&password=${this.state.password}`
+    const url = `${process.env['API_URL']}${Endpoints.login}?email=${this.state.email}&password=${this.state.password}`
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -100,7 +104,7 @@ class Login extends PureComponent {
 
   signUp = async () => {
     this.setState({ loading: true })
-    const url = `${Endpoints.signup}?email=${this.state.email}&password=${this.state.password}&password_confirmation=${this.state.password}&language=${this.props.language}`
+    const url = `${process.env['API_URL']}${Endpoints.signup}?email=${this.state.email}&password=${this.state.password}&password_confirmation=${this.state.password}&language=${this.props.language}`
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -160,6 +164,7 @@ class Login extends PureComponent {
               underlineColorAndroid="transparent"
               autoFocus
               keyboardType="email-address"
+              onSubmitEditing={this.handleSubmitEditingEmail}
             />
           </View>
           <View style={styles.inputWrap}>
@@ -172,6 +177,7 @@ class Login extends PureComponent {
               onChangeText={this.handleChangeTextPassword}
               style={styles.input}
               underlineColorAndroid="transparent"
+              ref={ref => { this.passwordRef = ref }}
               onSubmitEditing={this.handleSignInUp}
               secureTextEntry
             />

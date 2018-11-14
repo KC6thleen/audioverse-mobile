@@ -4,6 +4,7 @@ import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navig
 import TabBarLabel from './tabbarlabel'
 import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
+import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Downloads from 'src/containers/lists/downloads'
 import Favorites from 'src/containers/lists/favorites'
@@ -51,6 +52,7 @@ const ListsStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="my_lists" />,
+      headerRight: <HeaderRight navigation={navigation} />
     })
   },
   PlaylistItems: {
