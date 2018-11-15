@@ -27,18 +27,15 @@ export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }
   const permission = Platform.OS === 'ios' ? true : yield call(requestReadExternalStoragePermission)
   if (permission) {
     const dir = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
-    const exists = yield call(RNFetchBlob.fs.exists, `${dir}/${downloadPath}/${fileName}`)
-    if (!exists) {
-      yield put(actions.addToDownloadsQueue({
-        ...item,
-        downloadPath: `${dir}/${downloadPath}/`,
-        downloadUrl,
-        fileName,
-        bitRate
-      }))
-      Toast.show(I18n.t('Added_to_download_queue'))
-      yield call(downloadNext)
-    }
+    yield put(actions.addToDownloadsQueue({
+      ...item,
+      downloadPath: `${dir}/${downloadPath}/`,
+      downloadUrl,
+      fileName,
+      bitRate
+    }))
+    Toast.show(I18n.t('Added_to_download_queue'))
+    yield call(downloadNext)
   }
 }
 
