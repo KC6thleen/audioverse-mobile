@@ -41,15 +41,19 @@ async function eventHandler(store, data) {
 
     // playback updates
     case 'playback-state':
-      console.log('playback-state', data.state)
+      console.log('playback-state', data)
       if (data.state === TrackPlayer.STATE_BUFFERING) {
         // clear interval
         clearInterval(interval)
+      } else if (data.state === TrackPlayer.STATE_PLAYING) {
         // set a new interval to save the current position
         interval = setInterval(async () => {
           const position = await TrackPlayer.getPosition()
           store.dispatch(actions.playbackPosition(position))
-        }, 30000)
+        }, 10000)
+      } else if (data.state === TrackPlayer.STATE_PAUSED) {
+        // clear interval
+        clearInterval(interval)
       } else if (data.state === TrackPlayer.STATE_STOPPED) {
         // clear interval
         clearInterval(interval)
@@ -61,25 +65,26 @@ async function eventHandler(store, data) {
       break
     case 'playback-track-changed':
       console.log('playback-track-changed', data)
-      // reset the position
-      store.dispatch(actions.playbackPosition(0))
-      // next track
-      if (data.nextTrack) {
-        // set track id
-        store.dispatch(actions.playbackTrackId(data.nextTrack))
-
-        const track = await TrackPlayer.getTrack(data.nextTrack)
-        // track initialized
-        store.dispatch(actions.trackInitialized(track))
-         // Bible chapter
-        if (track.chapter) {
-          store.dispatch(actions.bibleChapter(track.chapter))
-        }
+      // This event is also fired the first time a track is played
+      // we only want to reset the position whenever a track changes
+      // the way to know that is if data.position or data.track has a value
+      if (data.position) {
+        store.dispatch(actions.playbackPosition(0))
+      }
+      // set track id
+      store.dispatch(actions.playbackTrackId(data.nextTrack))
+      // get track
+      const track = await TrackPlayer.getTrack(data.nextTrack)
+      // track initialized
+      store.dispatch(actions.trackInitialized(track))
+        // Bible chapter
+      if (track.chapter) {
+        store.dispatch(actions.bibleChapter(track.chapter))
       }
       break
     case 'playback-error':
       Alert.alert(I18n.t('Unable_to_download_this_media._Try_again_later.'))
-      console.log('playback-error', data.error)
+      console.log('playback-error', data)
       break
   }
 }
