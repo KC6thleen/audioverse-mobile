@@ -390,7 +390,7 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['settings', 'playback', 'bible', 'user', 'lists'],
-  debug: true
+  timeout: 0, // disable timeout https://github.com/rt2zz/redux-persist/issues/717
 }
 
 export default persistReducer(persistConfig, rootReducer)
