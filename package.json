@@ -20,10 +20,10 @@
     "react-native-video": "git+https://github.com/react-native-community/react-native-video",
     "react-native-video-controls": "^2.2.3",
     "react-navigation": "^2.12.1",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
     "redux-persist": "^5.10.0",
-    "redux-saga": "^0.16.0",
+    "redux-saga": "^0.16.2",
     "rn-fetch-blob": "^0.10.13"
   },
   "devDependencies": {
