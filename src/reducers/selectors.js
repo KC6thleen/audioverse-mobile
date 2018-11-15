@@ -12,7 +12,6 @@ export const getCurrentTrack = state => state.playback.tracks.find(el => el.id =
 export const getCurrentTrackId = state => state.playback.currentTrackId
 export const getRate = state => state.playback.rate
 export const getPosition = state => state.playback.position
-export const getNav = state => state.nav
 
 export const getBible = state => state.bible
 export const getBibleBooks = state => state.bibleBooks.data

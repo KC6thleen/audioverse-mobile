@@ -1,17 +1,10 @@
 import { combineReducers } from 'redux'
-import { NavigationActions } from 'react-navigation'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import I18n from 'locales'
 import * as ActionTypes from 'src/actions'
 import paginate from './paginate'
-// use this to use react-navigation with redux
-// import AppNavigator from 'src/navigators/AppNavigator'
-// function nav(state, action) {
-//   const nextState = AppNavigator.router.getStateForAction(action, state)
-//   return nextState || state
-// }
 
 function settings(state = {
   language: I18n.locale.substr(0,2),
@@ -225,7 +218,6 @@ function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, 
 }
 
 const rootReducer = combineReducers({
-  // nav, // use this to use react-navigation with redux
   settings,
   playerState,
   playback,
