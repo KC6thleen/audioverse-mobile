@@ -12,9 +12,6 @@ class BibleBooks extends PureComponent {
     if (!this.props.items.length) {
       this.props.actions.loadBibleBooks()
     }
-    if (this.props.chapters.length) {
-      this.props.navigation.navigate({ routeName: 'Chapters' })
-    }
   }
 
   handleRefresh = () => {
@@ -60,7 +57,6 @@ BibleBooks.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
-  chapters: PropTypes.array,
   actions: PropTypes.shape({
     loadBibleBooks: PropTypes.func.isRequired,
     loadBibleChapters: PropTypes.func.isRequired

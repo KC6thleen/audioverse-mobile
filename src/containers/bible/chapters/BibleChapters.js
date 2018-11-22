@@ -7,6 +7,12 @@ import { parseBibleChapter } from 'src/services'
 
 class BibleChapters extends PureComponent {
 
+  componentDidMount() {
+    if (!this.props.items.length) {
+      this.props.actions.loadBibleChapters(false, false, this.props.bible.testament, this.props.bible.book)
+    }
+  }
+
   handlePressItem = item => {
     this.props.actions.bibleChapter(item.chapter_id)
 
@@ -17,7 +23,7 @@ class BibleChapters extends PureComponent {
     const track = tracks.find(el => el.id === `${bible.version.id}_${item.book_id}_${item.chapter_id}`)
 
     actions.resetAndPlayTrack(tracks, track.id)
-    navigation.pop()
+    this.props.navigation.navigate({ routeName: 'Verses' })
 
   }
 
@@ -71,6 +77,7 @@ BibleChapters.propTypes = {
   bible: PropTypes.object,
   actions: PropTypes.shape({
     bibleChapter: PropTypes.func.isRequired,
+    loadBibleChapters: PropTypes.func.isRequired,
     resetAndPlayTrack: PropTypes.func.isRequired
   })
 }

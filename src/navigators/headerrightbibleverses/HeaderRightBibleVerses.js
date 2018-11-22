@@ -24,7 +24,7 @@ const bibles = [
   }
 ]
 
-const HeaderRightBibleVerses = ({ navigation, bible, actions }) => {
+const HeaderRightBibleVerses = ({ bible, actions }) => {
   const handleOnPressVersion = () => {
     const options = bibles.map(el => el.name)
     options.push(I18n.t('Cancel'))
@@ -42,22 +42,12 @@ const HeaderRightBibleVerses = ({ navigation, bible, actions }) => {
     })
   }
 
-  const handleOnPressBook = () => {
-    navigation.navigate('BibleTab')
-  }
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[styles.container, styles.option]}
         onPress={handleOnPressVersion}>
         <Text style={{color: '#FFFFFF'}}>{bible.version.abbr}</Text>
-        <Icon name="chevron-down" size={24} color="#FFFFFF" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.container, styles.option]}
-        onPress={handleOnPressBook}>
-        <Text style={{color: '#FFFFFF'}}>{bible.book}</Text>
         <Icon name="chevron-down" size={24} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
@@ -75,7 +65,6 @@ const styles = StyleSheet.create({
 })
 
 HeaderRightBibleVerses.propTypes = {
-  navigation: PropTypes.object.isRequired,
   bible: PropTypes.object.isRequired,
   actions: PropTypes.shape({
     setBibleVersion: PropTypes.func.isRequired,

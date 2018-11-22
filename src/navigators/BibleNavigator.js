@@ -22,8 +22,15 @@ const BibleTab = createMaterialTopTabNavigator({
     navigationOptions: {
       tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="chapters" />
     }
+  },
+  Verses: {
+    screen: Verses,
+    navigationOptions: {
+      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="verses" />
+    }
   }
 }, {
+  initialRouteName: 'Verses',
   lazy: true,
   tabBarOptions: {
     style: GlobalStyles.tab,
@@ -32,16 +39,13 @@ const BibleTab = createMaterialTopTabNavigator({
 })
 
 const BibleStack = createStackNavigator({
-  Verses: {
-    screen: Verses,
+  BibleTab: {
+    screen: BibleTab,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="bible" />,
-      headerRight: <HeaderRightBibleVerses navigation={navigation} />
+      headerRight: <HeaderRightBibleVerses />
     })
-  },
-  BibleTab: {
-    screen: BibleTab
   }
 }, {
   navigationOptions: {
