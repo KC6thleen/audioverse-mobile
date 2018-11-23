@@ -58,6 +58,14 @@ export const SERIES = createRequestTypes('SERIES')
 export const SERIE = createRequestTypes('SERIE')
 export const TOPICS = createRequestTypes('TOPICS')
 export const TOPIC = createRequestTypes('TOPIC')
+export const TAGS_BOOKS = createRequestTypes('TAGS_BOOKS')
+export const TAG_BOOK = createRequestTypes('TAG_BOOK')
+export const TAGS_ALBUMS = createRequestTypes('TAGS_ALBUMS')
+export const TAG_ALBUM = createRequestTypes('TAG_ALBUM')
+export const TAGS_SPONSORS = createRequestTypes('TAGS_SPONSORS')
+export const TAG_SPONSOR = createRequestTypes('TAG_SPONSOR')
+export const TAGS = createRequestTypes('TAGS')
+export const TAG = createRequestTypes('TAG')
 
 export const LOAD_BIBLE_BOOKS = 'LOAD_BIBLE_BOOKS'
 export const LOAD_BIBLE_CHAPTERS = 'LOAD_BIBLE_CHAPTERS'
@@ -78,6 +86,14 @@ export const LOAD_SERIES = 'LOAD_SERIES'
 export const LOAD_SERIE = 'LOAD_SERIE'
 export const LOAD_TOPICS = 'LOAD_TOPICS'
 export const LOAD_TOPIC = 'LOAD_TOPIC'
+export const LOAD_TAGS_BOOKS = 'LOAD_TAGS_BOOKS'
+export const LOAD_TAG_BOOK = 'LOAD_TAG_BOOK'
+export const LOAD_TAGS_ALBUMS = 'LOAD_TAGS_ALBUMS'
+export const LOAD_TAG_ALBUM = 'LOAD_TAG_ALBUM'
+export const LOAD_TAGS_SPONSORS = 'LOAD_TAGS_SPONSORS'
+export const LOAD_TAG_SPONSOR = 'LOAD_TAG_SPONSOR'
+export const LOAD_TAGS = 'LOAD_TAGS'
+export const LOAD_TAG = 'LOAD_TAG'
 
 export const bibleBooks = {
   request: id => action(BIBLE_BOOKS.REQUEST, {id}),
@@ -212,6 +228,62 @@ export const topic = {
   failure: (id, error) => action(TOPIC.FAILURE, {id, error})
 }
 
+export const tagsBooks = {
+  request: id => action(TAGS_BOOKS.REQUEST, {id}),
+  success: (id, response) => action(TAGS_BOOKS.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAGS_BOOKS.REFRESH, {id, response}),
+  failure: (id, error) => action(TAGS_BOOKS.FAILURE, {id, error})
+}
+
+export const tagBook = {
+  request: id => action(TAG_BOOK.REQUEST, {id}),
+  success: (id, response) => action(TAG_BOOK.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAG_BOOK.REFRESH, {id, response}),
+  failure: (id, error) => action(TAG_BOOK.FAILURE, {id, error})
+}
+
+export const tagsAlbums = {
+  request: id => action(TAGS_ALBUMS.REQUEST, {id}),
+  success: (id, response) => action(TAGS_ALBUMS.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAGS_ALBUMS.REFRESH, {id, response}),
+  failure: (id, error) => action(TAGS_ALBUMS.FAILURE, {id, error})
+}
+
+export const tagAlbum = {
+  request: id => action(TAG_ALBUM.REQUEST, {id}),
+  success: (id, response) => action(TAG_ALBUM.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAG_ALBUM.REFRESH, {id, response}),
+  failure: (id, error) => action(TAG_ALBUM.FAILURE, {id, error})
+}
+
+export const tagsSponsors = {
+  request: id => action(TAGS_SPONSORS.REQUEST, {id}),
+  success: (id, response) => action(TAGS_SPONSORS.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAGS_SPONSORS.REFRESH, {id, response}),
+  failure: (id, error) => action(TAGS_SPONSORS.FAILURE, {id, error})
+}
+
+export const tagSponsor = {
+  request: id => action(TAG_SPONSOR.REQUEST, {id}),
+  success: (id, response) => action(TAG_SPONSOR.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAG_SPONSOR.REFRESH, {id, response}),
+  failure: (id, error) => action(TAG_SPONSOR.FAILURE, {id, error})
+}
+
+export const tags = {
+  request: id => action(TAGS.REQUEST, {id}),
+  success: (id, response) => action(TAGS.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAGS.REFRESH, {id, response}),
+  failure: (id, error) => action(TAGS.FAILURE, {id, error})
+}
+
+export const tag = {
+  request: id => action(TAG.REQUEST, {id}),
+  success: (id, response) => action(TAG.SUCCESS, {id, response}),
+  refresh: (id, response) => action(TAG.REFRESH, {id, response}),
+  failure: (id, error) => action(TAG.FAILURE, {id, error})
+}
+
 export const loadBibleBooks = (loadMore, refresh) => action(LOAD_BIBLE_BOOKS, {loadMore, refresh})
 export const loadBibleChapters = (loadMore, refresh, testament, book) => action(LOAD_BIBLE_CHAPTERS, {loadMore, refresh, testament, book})
 export const loadNewRecordings = (loadMore, refresh) => action(LOAD_NEW_RECORDINGS, {loadMore, refresh})
@@ -231,6 +303,14 @@ export const loadSeries = (loadMore, refresh) => action(LOAD_SERIES, {loadMore, 
 export const loadSerie = (loadMore, refresh, url) => action(LOAD_SERIE, {loadMore, refresh, url})
 export const loadTopics = (loadMore, refresh) => action(LOAD_TOPICS, {loadMore, refresh})
 export const loadTopic = (loadMore, refresh, url) => action(LOAD_TOPIC, {loadMore, refresh, url})
+export const loadTagsBooks = (loadMore, refresh) => action(LOAD_TAGS_BOOKS, {loadMore, refresh})
+export const loadTagBook = (loadMore, refresh, url) => action(LOAD_TAG_BOOK, {loadMore, refresh, url})
+export const loadTagsAlbums = (loadMore, refresh) => action(LOAD_TAGS_ALBUMS, {loadMore, refresh})
+export const loadTagAlbum = (loadMore, refresh, url) => action(LOAD_TAG_ALBUM, {loadMore, refresh, url})
+export const loadTagsSponsors = (loadMore, refresh) => action(LOAD_TAGS_SPONSORS, {loadMore, refresh})
+export const loadTagSponsor = (loadMore, refresh, url) => action(LOAD_TAG_SPONSOR, {loadMore, refresh, url})
+export const loadTags = (loadMore, refresh) => action(LOAD_TAGS, {loadMore, refresh})
+export const loadTag = (loadMore, refresh, url) => action(LOAD_TAG, {loadMore, refresh, url})
 
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
 

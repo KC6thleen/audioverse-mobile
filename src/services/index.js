@@ -64,6 +64,7 @@ export const fetchConferences = url => callApi(url, json => json.result.map(item
 export const fetchSponsors = url => callApi(url, json => json.result.map(item => item.sponsors))
 export const fetchSeries = url => callApi(url, json => json.result.map(item => item.series))
 export const fetchTopics = url => callApi(url, json => json.result.map(item => item.topics))
+export const fetchTags = url => callApi(url, json => json.result)
 export const fetchFavorites = url => callApi(url, json => Object.keys(json.result.recording).reverse().map(el => ({
   ...json.result.recording[el][0].recordings,
   favoriteId: el

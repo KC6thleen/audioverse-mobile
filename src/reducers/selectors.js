@@ -52,6 +52,22 @@ export const getTopics = state => state.topics.data
 export const getTopicsPagination = state => state.topics
 export const getTopic = state => state.topic.data
 export const getTopicPagination = state => state.topic
+export const getTagsBooks = state => state.tagsBooks.data
+export const getTagsBooksPagination = state => state.tagsBooks
+export const getTagBook = state => state.tagBook.data
+export const getTagBookPagination = state => state.tagBook
+export const getTagsAlbums = state => state.tagsAlbums.data
+export const getTagsAlbumsPagination = state => state.tagsAlbums
+export const getTagAlbum = state => state.tagAlbum.data
+export const getTagAlbumPagination = state => state.tagAlbum
+export const getTagsSponsors = state => state.tagsSponsors.data
+export const getTagsSponsorsPagination = state => state.tagsSponsors
+export const getTagSponsor = state => state.tagSponsor.data
+export const getTagSponsorPagination = state => state.tagSponsor
+export const getTags = state => state.tags.data
+export const getTagsPagination = state => state.tags
+export const getTag = state => state.tag.data
+export const getTagPagination = state => state.tag
 
 export const getDownloads = state => state.lists.downloads.map(el => parseRecording(el, MediaTypes.sermon))
 export const getDownloadsById = (state, id) => getDownloads(state).filter(el => el.id === id)

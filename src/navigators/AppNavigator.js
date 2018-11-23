@@ -10,6 +10,7 @@ import Loading from 'src/containers/auth/loading'
 import Login from 'src/containers/auth/login'
 import BibleNavigator from './BibleNavigator'
 import ListsNavigator from './ListsNavigator'
+import ScriptureSongsNavigator from './ScriptureSongsNavigator'
 import PresentationsNavigator from './PresentationsNavigator'
 import BooksNavigator from './BooksNavigator'
 import StoriesNavigator from './StoriesNavigator'
@@ -36,6 +37,7 @@ const AppDrawer = createDrawerNavigator({
   MyLists: {screen: ListsNavigator, navigationOptions: screenNavigationOptions('my_lists', 'list')},
   Presentations: {screen: PresentationsNavigator, navigationOptions: screenNavigationOptions('presentations', 'headphones')},
   Bible: {screen: BibleNavigator, navigationOptions: screenNavigationOptions('bible', 'bookmark')},
+  ScriptureSongs: {screen: ScriptureSongsNavigator, navigationOptions: screenNavigationOptions('Scripture_Songs', 'music')},
   Books: {screen: BooksNavigator, navigationOptions: screenNavigationOptions('books', 'book')},
   Stories: {screen: StoriesNavigator, navigationOptions: screenNavigationOptions('stories', 'feather')},
   Presenters: {screen: PresentersNavigator, navigationOptions: screenNavigationOptions('presenters', 'user')},

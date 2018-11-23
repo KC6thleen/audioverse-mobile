@@ -382,6 +382,70 @@ const rootReducer = combineReducers({
       ActionTypes.TOPIC.REFRESH,
       ActionTypes.TOPIC.FAILURE
     ]
+  }),
+  tagsBooks: paginate({
+    types: [
+      ActionTypes.TAGS_BOOKS.REQUEST,
+      ActionTypes.TAGS_BOOKS.SUCCESS,
+      ActionTypes.TAGS_BOOKS.REFRESH,
+      ActionTypes.TAGS_BOOKS.FAILURE
+    ]
+  }),
+  tagBook: paginate({
+    types: [
+      ActionTypes.TAG_BOOK.REQUEST,
+      ActionTypes.TAG_BOOK.SUCCESS,
+      ActionTypes.TAG_BOOK.REFRESH,
+      ActionTypes.TAG_BOOK.FAILURE
+    ]
+  }),
+  tagsAlbums: paginate({
+    types: [
+      ActionTypes.TAGS_ALBUMS.REQUEST,
+      ActionTypes.TAGS_ALBUMS.SUCCESS,
+      ActionTypes.TAGS_ALBUMS.REFRESH,
+      ActionTypes.TAGS_ALBUMS.FAILURE
+    ]
+  }),
+  tagAlbum: paginate({
+    types: [
+      ActionTypes.TAG_ALBUM.REQUEST,
+      ActionTypes.TAG_ALBUM.SUCCESS,
+      ActionTypes.TAG_ALBUM.REFRESH,
+      ActionTypes.TAG_ALBUM.FAILURE
+    ]
+  }),
+  tagsSponsors: paginate({
+    types: [
+      ActionTypes.TAGS_SPONSORS.REQUEST,
+      ActionTypes.TAGS_SPONSORS.SUCCESS,
+      ActionTypes.TAGS_SPONSORS.REFRESH,
+      ActionTypes.TAGS_SPONSORS.FAILURE
+    ]
+  }),
+  tagSponsor: paginate({
+    types: [
+      ActionTypes.TAG_SPONSOR.REQUEST,
+      ActionTypes.TAG_SPONSOR.SUCCESS,
+      ActionTypes.TAG_SPONSOR.REFRESH,
+      ActionTypes.TAG_SPONSOR.FAILURE
+    ]
+  }),
+  tags: paginate({
+    types: [
+      ActionTypes.TAGS.REQUEST,
+      ActionTypes.TAGS.SUCCESS,
+      ActionTypes.TAGS.REFRESH,
+      ActionTypes.TAGS.FAILURE
+    ]
+  }),
+  tag: paginate({
+    types: [
+      ActionTypes.TAG.REQUEST,
+      ActionTypes.TAG.SUCCESS,
+      ActionTypes.TAG.REFRESH,
+      ActionTypes.TAG.FAILURE
+    ]
   })
 })
 

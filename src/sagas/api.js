@@ -53,6 +53,14 @@ const fetchSeries = fetchEntity.bind(null, actions.series, api.fetchSeries)
 const fetchSerie = fetchEntity.bind(null, actions.serie, api.fetchRecordings)
 const fetchTopics = fetchEntity.bind(null, actions.topics, api.fetchTopics)
 const fetchTopic = fetchEntity.bind(null, actions.topic, api.fetchRecordings)
+const fetchTagsBooks = fetchEntity.bind(null, actions.tagsBooks, api.fetchTags)
+const fetchTagBook = fetchEntity.bind(null, actions.tagBook, api.fetchRecordings)
+const fetchTagsAlbums = fetchEntity.bind(null, actions.tagsAlbums, api.fetchSeries)
+const fetchTagAlbum = fetchEntity.bind(null, actions.tagAlbum, api.fetchRecordings)
+const fetchTagsSponsors = fetchEntity.bind(null, actions.tagsSponsors, api.fetchSponsors)
+const fetchTagSponsor = fetchEntity.bind(null, actions.tagSponsor, api.fetchRecordings)
+const fetchTags = fetchEntity.bind(null, actions.tags, api.fetchTags)
+const fetchTag = fetchEntity.bind(null, actions.tag, api.fetchRecordings)
 
 /**
  * Reusable fetch data subroutine
@@ -298,4 +306,100 @@ export function* loadTopic({ loadMore, refresh, url }) {
   }
   const pagination = yield select(selectors.getTopicPagination)
   yield call(fetchData, loadMore, refresh, pagination, fetchTopic, url)
+}
+
+/**
+ * Load tags books
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ */
+export function* loadTagsBooks({ loadMore, refresh }) {
+  const pagination = yield select(selectors.getTagsBooksPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagsBooks, Endpoints.tagsBooks)
+}
+
+/**
+ * Load tag book
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ * @param {url} string
+ */
+export function* loadTagBook({ loadMore, refresh, url }) {
+  if (!loadMore && !refresh) {
+    yield put(actions.tagBook.refresh(null, {result: []}))
+  }
+  const pagination = yield select(selectors.getTagBookPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagBook, url)
+}
+
+/**
+ * Load tags albums
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ */
+export function* loadTagsAlbums({ loadMore, refresh }) {
+  const pagination = yield select(selectors.getTagsAlbumsPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagsAlbums, Endpoints.tagsAlbums)
+}
+
+/**
+ * Load tag album
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ * @param {url} string
+ */
+export function* loadTagAlbum({ loadMore, refresh, url }) {
+  if (!loadMore && !refresh) {
+    yield put(actions.tagAlbum.refresh(null, {result: []}))
+  }
+  const pagination = yield select(selectors.getTagAlbumPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagAlbum, url)
+}
+
+/**
+ * Load tags sponsors
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ */
+export function* loadTagsSponsors({ loadMore, refresh }) {
+  const pagination = yield select(selectors.getTagsSponsorsPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagsSponsors, Endpoints.tagsSponsors)
+}
+
+/**
+ * Load tag sponsor
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ * @param {url} string
+ */
+export function* loadTagSponsor({ loadMore, refresh, url }) {
+  if (!loadMore && !refresh) {
+    yield put(actions.tagSponsor.refresh(null, {result: []}))
+  }
+  const pagination = yield select(selectors.getTagSponsorPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTagSponsor, url)
+}
+
+/**
+ * Load tags
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ */
+export function* loadTags({ loadMore, refresh }) {
+  const pagination = yield select(selectors.getTagsPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTags, Endpoints.tags)
+}
+
+/**
+ * Load tag
+ * @param {boolean} loadMore 
+ * @param {boolean} refresh
+ * @param {url} string
+ */
+export function* loadTag({ loadMore, refresh, url }) {
+  if (!loadMore && !refresh) {
+    yield put(actions.tag.refresh(null, {result: []}))
+  }
+  const pagination = yield select(selectors.getTagPagination)
+  yield call(fetchData, loadMore, refresh, pagination, fetchTag, url)
 }
