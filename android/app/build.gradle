@@ -107,7 +107,7 @@ android {
         applicationId "org.audioverse.exodus"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 56
+        versionCode 57
         versionName "3.0.0-beta.5"
         ndk {
             abiFilters "armeabi-v7a", "x86"
