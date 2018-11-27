@@ -48,21 +48,20 @@ const BibleStack = createStackNavigator({
     })
   }
 }, {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor
+  },
+  navigationOptions: ({ navigation }) => {
+    let drawerLockMode = 'unlocked'
+    if (navigation.state.index > 0) {
+      drawerLockMode = 'locked-closed'
+    }
+  
+    return {
+      drawerLockMode
+    }
   }
 })
-
-BibleStack.navigationOptions = ({ navigation }) => {
-  let drawerLockMode = 'unlocked'
-  if (navigation.state.index > 0) {
-    drawerLockMode = 'locked-closed'
-  }
-
-  return {
-    drawerLockMode
-  }
-}
 
 export default BibleStack

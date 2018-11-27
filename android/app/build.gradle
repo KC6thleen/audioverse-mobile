@@ -159,6 +159,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-gesture-handler')
     compile project(':react-native-video')
     compile project(':react-native-action-sheet')
     compile project(':rn-fetch-blob')

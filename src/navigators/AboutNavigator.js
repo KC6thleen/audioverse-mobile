@@ -15,21 +15,20 @@ const AboutStack = createStackNavigator({
     })
   }
 }, {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor
+  },
+  navigationOptions: ({ navigation }) => {
+    let drawerLockMode = 'unlocked'
+    if (navigation.state.index > 0) {
+      drawerLockMode = 'locked-closed'
+    }
+  
+    return {
+      drawerLockMode
+    }
   }
 })
-
-AboutStack.navigationOptions = ({ navigation }) => {
-  let drawerLockMode = 'unlocked'
-  if (navigation.state.index > 0) {
-    drawerLockMode = 'locked-closed'
-  }
-
-  return {
-    drawerLockMode
-  }
-}
 
 export default AboutStack

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Easing, Animated } from 'react-native'
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
+import { createAppContainer, createStackNavigator, createDrawerNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Feather'
 
 import { GlobalStyles, headerTintColor } from 'src/styles'
@@ -62,7 +62,7 @@ const AppStack = createStackNavigator({
   },
   Search
 }, {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor
   }
@@ -77,16 +77,10 @@ const AppNavigator = createStackNavigator({
   AddToPlaylist,
   NewPlaylist
 },{
-  headerMode: 'none',
-  mode: 'modal',
   initialRouteName: 'Loading',
-  navigationOptions: {
-    gesturesEnabled: true
-  },
-  cardStyle: {
-    backgroundColor: 'transparent',
-    opacity: 1,
-  },
+  transparentCard: true,
+  mode: 'modal',
+  headerMode: 'none',
   transitionConfig: () => ({
     transitionSpec: {
       duration: 300,
@@ -104,7 +98,7 @@ const AppNavigator = createStackNavigator({
       })
 
       const opacity = position.interpolate({
-        inputRange: [index - 1, index - 0.99, index],
+        inputRange: [index - 1, index - 0.10, index],
         outputRange: [0, 1, 1],
       })
 
@@ -113,4 +107,4 @@ const AppNavigator = createStackNavigator({
   })
 })
 
-export default AppNavigator
+export default createAppContainer(AppNavigator)
