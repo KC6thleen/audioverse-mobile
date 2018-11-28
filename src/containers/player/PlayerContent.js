@@ -6,31 +6,12 @@ import Swiper from 'react-native-swiper'
 import I18n from 'locales'
 import { MediaTypes } from 'src/constants'
 import defaultImage from 'assets/av-logo.png'
-import Slide from 'src/components/slide/Slide'
+import Slide from './Slide'
 
 const getSlides = (data, language) => {
 
   const slides = []
 
-  // presenter
-  const presenter = {
-    type: 'presenter',
-    image: data.artwork,
-    title: data.title,
-    subtitle: data.artist
-  }
-
-  const presenterUrl = data.presenters && data.presenters.length === 1 ? data.presenters[0].recordingsURI : null
-  if ( data.mediaType === MediaTypes.sermon && presenterUrl ) {
-    presenter.route = 'Presenter'
-    presenter.params = {
-      url: presenterUrl,
-      title: data.artist
-    }
-  }
-
-  slides.push(presenter)
-  
   // description
 	if (data.description) {
     slides.push({
@@ -38,6 +19,25 @@ const getSlides = (data, language) => {
       description: data.description
     })
 	}
+
+  // presenter
+  const presenter = {
+    type: 'presenter',
+    image: data.artwork,
+    title: data.artist,
+    subtitle: ''
+  }
+
+  if ( data.mediaType === MediaTypes.sermon && data.presenters && data.presenters.length === 1 ) {
+    presenter.subtitle = data.presenters[0].description
+    presenter.route = 'Presenter'
+    presenter.params = {
+      url: data.presenters[0].recordingsURI,
+      title: data.artist
+    }
+  }
+
+  slides.push(presenter)
 	
 	// conference
 	// don't show conference for books/stories
@@ -115,6 +115,7 @@ const PlayerContent = ({ data, language, navigation }) => {
           if (slide.type === 'description') {
             return (
               <ScrollView style={styles.descriptionContainer} contentContainerStyle={styles.descriptionContentContainer} key={slide.type}>
+                <Text style={styles.descriptionTitle}>{I18n.t('Description', {locale: language})}</Text>
                 <Text style={styles.description}>{slide.description}</Text>
               </ScrollView>
             )
@@ -145,8 +146,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent : 'center'
   },
+  descriptionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10
+  },
   description: {
-    fontSize: 18
+    fontSize: 18,
+    textAlign: 'center'
   },
   content: {
     flexDirection: 'row',

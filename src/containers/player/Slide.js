@@ -1,16 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
 
 const Slide = ({ image, header, subtitle, onPress }) => (
-  <TouchableOpacity style={styles.container} onPress={onPress}>
+  <View style={styles.container}>
     <Image
       source={image && image.toString().startsWith('http') ? {uri: image} : image}
       style={styles.image}
     />
-    <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{header}</Text>
-    <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{subtitle}</Text>
-  </TouchableOpacity>
+    <TouchableOpacity style={styles.center} onPress={onPress}>
+      <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{header}</Text>
+      <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{subtitle}</Text>
+    </TouchableOpacity>
+  </View>
 )
 
 const styles = StyleSheet.create({
@@ -20,9 +22,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10
   },
+  center: {
+    alignItems: 'center'
+  },
   image: {
     width: 128,
-    height: 128
+    height: 128,
+    borderRadius: 64
   },
   title: {
     fontSize: 26,
