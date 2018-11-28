@@ -162,7 +162,6 @@ class Login extends PureComponent {
               autoCapitalize="none"
               style={styles.input}
               underlineColorAndroid="transparent"
-              autoFocus
               keyboardType="email-address"
               onSubmitEditing={this.handleSubmitEditingEmail}
             />
