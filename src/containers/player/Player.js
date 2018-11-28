@@ -177,12 +177,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD'
   },
   bar: {
-    shadowOpacity: 0.75,
-    shadowRadius: 5,
-    shadowColor: '#000000',
-    shadowOffset: { height: 0, width: 0 },
     elevation: 2,
-    borderTopWidth: Platform.OS === 'ios' ? 20 : 0,
+    borderTopWidth: Platform.OS === 'ios' ? 30 : 0,
     borderTopColor: '#E0E0E080',
     borderBottomWidth: 1,
     borderBottomColor: '#CCCCCC'

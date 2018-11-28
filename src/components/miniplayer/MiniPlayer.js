@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000000',
     shadowOffset: { height: 0, width: 0 },
     elevation: 2,
-    backgroundColor: '#E0E0E0CC'
+    backgroundColor: '#E0E0E0'
   },
   playPause: {
     height: 42,
