@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
@@ -28,11 +28,19 @@ class Presenter extends PureComponent {
   }
   
   render() {
-    const { items, pagination } = this.props
+    const { items, pagination, navigation } = this.props
+    const description = navigation.state.params.description
+    const Bio = description ? <View style={styles.bio}><Text style={styles.bioText}>{description}</Text></View> : null
 
     return (
       <View style={styles.container}>
-        <List renderItem={this.renderItem} items={items} {...pagination} onRefresh={this.handleRefresh} />
+        <List
+          ListHeaderComponent={Bio}
+          renderItem={this.renderItem}
+          items={items}
+          {...pagination}
+          onRefresh={this.handleRefresh}
+        />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -44,6 +52,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between'
+  },
+  bio: {
+    padding: 20,
+    backgroundColor: '#CCCCCC50',
+    textAlign: 'center'
+  },
+  bioText: {
+    textAlign: 'justify'
   }
 })
 
