@@ -81,6 +81,12 @@ const AppNavigator = createStackNavigator({
   transparentCard: true,
   mode: 'modal',
   headerMode: 'none',
+  defaultNavigationOptions: {
+    gesturesEnabled: true,
+    gestureResponseDistance: {
+      vertical: 400
+    }
+  },
   transitionConfig: () => ({
     transitionSpec: {
       duration: 300,
