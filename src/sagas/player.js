@@ -78,7 +78,7 @@ function* getSermonUrl(item) {
   let currentUrl = null, exists = false
 
   if (download) {
-    currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${download.downloadPath}/${download.fileName}`
+    currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${download.downloadPath}/${encodeURIComponent(download.fileName)}`
     exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`
@@ -89,7 +89,7 @@ function* getSermonUrl(item) {
   if (!exists) {
     const others = downloads.filter( el => el.bitRate !== mediaFile.bitrate )
     for (let i of others) {
-      currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${i.downloadPath}/${i.fileName}`
+      currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${i.downloadPath}/${encodeURIComponent(i.fileName)}`
       exists = yield call(fileExists, currentUrl)
       if (exists) {
         url = `file://${currentUrl}`
@@ -107,16 +107,14 @@ function* getSermonUrl(item) {
  */
 function* getBookChapterUrl(item) {
 
-  const download = yield select(selectors.getDownloadById, item.id)
+  const download = item.mediaFiles && item.mediaFiles.length ? item.mediaFiles[0] : {}
 
-  let url = item.mediaFiles && item.mediaFiles.length ? item.mediaFiles[0].downloadURL : ''
+  let url = download.downloadURL
 
-  if (download) {
-    const currentUrl = `${DOWNLOAD_DIR}/${download.downloadPath}/${download.fileName}`
-    const exists = yield call(fileExists, currentUrl)
-    if (exists) {
-      url = `file://${currentUrl}`
-    }
+  const currentUrl = `${DOWNLOAD_DIR}/${Dirs.audiobooks}/${encodeURIComponent(download.filename)}`
+  const exists = yield call(fileExists, currentUrl)
+  if (exists) {
+    url = `file://${currentUrl}`
   }
   console.log('url', url)
   return url
@@ -130,7 +128,7 @@ function* getBibleChapterUrl(item) {
 
   let url = item.downloadURL
   const dir = RNFetchBlob.fs.dirs.DocumentDir
-  const currentUrl = `${dir}/${Dirs.bible}/${item.fileName}`
+  const currentUrl = `${dir}/${Dirs.bible}/${encodeURIComponent(item.fileName)}`
   const exists = yield call(fileExists, currentUrl)
   if (exists) {
     url = `file://${currentUrl}`
@@ -151,7 +149,7 @@ function* getVideoUrl(item) {
   let currentUrl = null, exists = false
 
   for (let i of downloads) {
-    currentUrl = `${i.downloadPath}${i.fileName}`
+    currentUrl = `${i.downloadPath}${encodeURIComponent(i.fileName)}`
     exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`

@@ -44,11 +44,11 @@ const fetchBlob = (item) => {
   return eventChannel(emitter => {
     RNFetchBlob
     .config({
-      path: `${item.dir}/${item.downloadPath}/${item.fileName}`, // when using DownloadManager on android 'path' will not take effect
+      path: `${item.dir}/${item.downloadPath}/${encodeURIComponent(item.fileName)}`, // when using DownloadManager on android 'path' will not take effect
       addAndroidDownloads : {
         useDownloadManager : true,
         notification: true,
-        path: `${item.dir}/${item.downloadPath}/${item.fileName}`
+        path: `${item.dir}/${item.downloadPath}/${encodeURIComponent(item.fileName)}`
       }
     })
     .fetch('GET', item.downloadUrl)
@@ -108,11 +108,11 @@ export function* downloadNext() {
  * Download next
 */
 export function* remove({ item }) {
-  const exists = yield call(RNFetchBlob.fs.exists, `${item.downloadPath}${item.fileName}`)
+  const exists = yield call(RNFetchBlob.fs.exists, `${item.downloadPath}${encodeURIComponent(item.fileName)}`)
   console.log('exists', exists)
   try {
     if (exists) {
-      yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${item.fileName}`)
+      yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${encodeURIComponent(item.fileName)}`)
     }
   } catch(err) {
     console.log(err)
