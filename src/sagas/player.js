@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 import { call, put, select } from 'redux-saga/effects'
 import RNFetchBlob from 'rn-fetch-blob'
@@ -7,6 +8,8 @@ import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 import { getMediaFile } from 'src/utils'
 import NavigationService from 'src/utils/navigation-service'
+
+const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
 
 /**
  * Setup player with all the capabilities needed
@@ -75,7 +78,7 @@ function* getSermonUrl(item) {
   let currentUrl = null, exists = false
 
   if (download) {
-    currentUrl = `${download.downloadPath}${download.fileName}`
+    currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${download.downloadPath}/${download.fileName}`
     exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`
@@ -86,7 +89,7 @@ function* getSermonUrl(item) {
   if (!exists) {
     const others = downloads.filter( el => el.bitRate !== mediaFile.bitrate )
     for (let i of others) {
-      currentUrl = `${i.downloadPath}${i.fileName}`
+      currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${i.downloadPath}/${i.fileName}`
       exists = yield call(fileExists, currentUrl)
       if (exists) {
         url = `file://${currentUrl}`
@@ -109,7 +112,7 @@ function* getBookChapterUrl(item) {
   let url = item.mediaFiles && item.mediaFiles.length ? item.mediaFiles[0].downloadURL : ''
 
   if (download) {
-    const currentUrl = `${download.downloadPath}${download.fileName}`
+    const currentUrl = `${DOWNLOAD_DIR}/${download.downloadPath}/${download.fileName}`
     const exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`

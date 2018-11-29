@@ -29,7 +29,8 @@ export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }
     const dir = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
     yield put(actions.addToDownloadsQueue({
       ...item,
-      downloadPath: `${dir}/${downloadPath}/`,
+      dir: dir,
+      downloadPath: downloadPath,
       downloadUrl,
       fileName,
       bitRate
@@ -43,11 +44,11 @@ const fetchBlob = (item) => {
   return eventChannel(emitter => {
     RNFetchBlob
     .config({
-      path: `${item.downloadPath}${item.fileName}`, // when using DownloadManager on android 'path' will not take effect
+      path: `${item.dir}/${item.downloadPath}/${item.fileName}`, // when using DownloadManager on android 'path' will not take effect
       addAndroidDownloads : {
         useDownloadManager : true,
         notification: true,
-        path: `${item.downloadPath}${item.fileName}`
+        path: `${item.dir}/${item.downloadPath}/${item.fileName}`
       }
     })
     .fetch('GET', item.downloadUrl)

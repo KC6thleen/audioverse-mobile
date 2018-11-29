@@ -14,7 +14,7 @@ const getDataFromDB = async () => {
     const location = Platform.OS === 'ios' ? '../Library/Private Documents/audioverse15.sql' : '/database/audioverse15.sql'
     const db = SQLite.openDatabase({name: "audioverse15", readOnly: true, createFromLocation: location})
     db.transaction(tx => {
-      tx.executeSql(`select * from user_data`, [], (tx, results) => {
+      tx.executeSql(`select * from user_data order by id desc`, [], (tx, results) => {
         console.log('Query completed', results.rows.length)
         const data = results.rows.raw()
 
@@ -28,12 +28,19 @@ const getDataFromDB = async () => {
 
         const downloads = downloadsRows.map(el => {
           const data = JSON.parse(el.json_data)
+          // only keep the absolute dir
+          let dir = data.downloadPath.replace('/downloads/', '')
+          // on Android the path is different than in the old version of the app
+          dir = dir.replace('appdata-private:/', `${RNFetchBlob.fs.dirs.MainBundleDir}/app_appdata`)
+
           return {
             ...data.jsonData,
-            downloadPath: data.downloadPath.replace('appdata-private:/', `${RNFetchBlob.fs.dirs.MainBundleDir}/app_appdata`),
+            dir: dir,
+            downloadPath: 'downloads',
             downloadUrl: data.downloadURL,
             fileName: data.fileName,
-            bitRate: data.bitrate
+            bitRate: data.bitrate,
+            recovered: true
           }
         })
 
@@ -81,7 +88,7 @@ export default function* recoverDB(action) {
       yield put(actions.playlistsItems.set(data.playlistsItems))
       yield put(actions.history.set(data.history))
       yield put(actions.setUser(data.user))
-      yield call(AsyncStorage.setItem, 'recoveredDBStatus', 'true')
+      yield call(AsyncStorage.setItem, 'recoveredDBStatus', '1')
     } catch (err) {
       console.log(err)
     }
