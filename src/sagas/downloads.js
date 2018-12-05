@@ -9,6 +9,8 @@ import * as selectors from 'src/reducers/selectors'
 import { MediaTypes } from 'src/constants'
 import I18n from 'locales'
 
+const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
+
 async function requestReadExternalStoragePermission() {
   try {
     const granted = await PermissionsAndroid.request(
@@ -114,11 +116,12 @@ export function* downloadNext() {
  * Download next
 */
 export function* remove({ item }) {
-  const exists = yield call(RNFetchBlob.fs.exists, `${item.downloadPath}${encodeURIComponent(item.fileName)}`)
+  const file = `${Platform.OS === 'android' && item.recovered ? item.dir : DOWNLOAD_DIR}/${item.downloadPath}/${encodeURIComponent(item.fileName)}`
+  const exists = yield call(RNFetchBlob.fs.exists, file)
   console.log('exists', exists)
   try {
     if (exists) {
-      yield call(RNFetchBlob.fs.unlink, `${item.downloadPath}${encodeURIComponent(item.fileName)}`)
+      yield call(RNFetchBlob.fs.unlink, file)
     }
   } catch(err) {
     console.log(err)
