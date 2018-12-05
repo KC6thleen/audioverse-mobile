@@ -80,6 +80,7 @@ async function eventHandler(store, data) {
         // Bible chapter
       if (track.chapter) {
         store.dispatch(actions.bibleChapter(track.chapter))
+        store.dispatch(actions.loadBibleVerses())
       }
       break
     case 'playback-error':

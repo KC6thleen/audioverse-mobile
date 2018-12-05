@@ -10,6 +10,7 @@ import { getMediaFile } from 'src/utils'
 import NavigationService from 'src/utils/navigation-service'
 
 const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
+const BIBLE_AND_BOOKS_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : `${RNFetchBlob.fs.dirs.MainBundleDir}/app_appdata`
 
 /**
  * Setup player with all the capabilities needed
@@ -111,7 +112,7 @@ function* getBookChapterUrl(item) {
 
   let url = download.downloadURL
 
-  const currentUrl = `${DOWNLOAD_DIR}/${Dirs.audiobooks}/${encodeURIComponent(download.filename)}`
+  const currentUrl = `${BIBLE_AND_BOOKS_DIR}/${Dirs.audiobooks}/${encodeURIComponent(download.filename)}`
   const exists = yield call(fileExists, currentUrl)
   if (exists) {
     url = `file://${currentUrl}`
@@ -127,8 +128,7 @@ function* getBookChapterUrl(item) {
 function* getBibleChapterUrl(item) {
 
   let url = item.downloadURL
-  const dir = RNFetchBlob.fs.dirs.DocumentDir
-  const currentUrl = `${dir}/${Dirs.bible}/${encodeURIComponent(item.fileName)}`
+  const currentUrl = `${BIBLE_AND_BOOKS_DIR}/${Dirs.bible}/${encodeURIComponent(item.fileName)}`
   const exists = yield call(fileExists, currentUrl)
   if (exists) {
     url = `file://${currentUrl}`

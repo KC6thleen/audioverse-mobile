@@ -7,14 +7,17 @@ import { Endpoints } from 'src/constants'
 
 class BibleVerses extends PureComponent {
 
-  render() {
-    const { version, testament, book, chapter } = this.props.bible
-    const uri = process.env['BASE_URL'] + Endpoints.audiobibles + '/books/' + book + '?volume=' + version.id + '&testament=' + testament + '&text=true&chapter=' + chapter
-    const headers = {Authorization: 'Basic ' + process.env['BASIC_TOKEN']}
+  componentDidMount() {
+    if (this.props.bible.verses !== '') {
+      this.props.actions.loadBibleVerses()
+    }
+  }
 
+  render() {
     return (
       <View style={styles.container}>
-        <WebView source={{uri: uri, headers: headers}} />
+        <WebView
+          source={{ html: this.props.bible.verses }} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
@@ -31,7 +34,10 @@ const styles = StyleSheet.create({
 
 BibleVerses.propTypes = {
   navigation: PropTypes.object.isRequired,
-  bible: PropTypes.object
+  bible: PropTypes.object,
+  actions: PropTypes.shape({
+    loadBibleVerses: PropTypes.func.isRequired
+  })
 }
 
 export default BibleVerses

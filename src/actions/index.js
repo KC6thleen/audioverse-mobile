@@ -22,6 +22,7 @@ export const SET_BIBLE_VERSION = 'SET_BIBLE_VERSION'
 export const BIBLE_VERSION = 'BIBLE_VERSION'
 export const BIBLE_BOOK = 'BIBLE_BOOK'
 export const BIBLE_CHAPTER = 'BIBLE_CHAPTER'
+export const BIBLE_VERSES = 'BIBLE_VERSES'
 
 const REQUEST = 'REQUEST'
 const SUCCESS = 'SUCCESS'
@@ -69,6 +70,7 @@ export const TAG = createRequestTypes('TAG')
 
 export const LOAD_BIBLE_BOOKS = 'LOAD_BIBLE_BOOKS'
 export const LOAD_BIBLE_CHAPTERS = 'LOAD_BIBLE_CHAPTERS'
+export const LOAD_BIBLE_VERSES = 'LOAD_BIBLE_VERSES'
 export const LOAD_NEW_RECORDINGS = 'LOAD_NEW_RECORDINGS'
 export const LOAD_TRENDING_RECORDINGS = 'LOAD_TRENDING_RECORDINGS'
 export const LOAD_FEATURED_RECORDINGS = 'LOAD_FEATURED_RECORDINGS'
@@ -285,12 +287,13 @@ export const tag = {
 }
 
 export const loadBibleBooks = (loadMore, refresh) => action(LOAD_BIBLE_BOOKS, {loadMore, refresh})
-export const loadBibleChapters = (loadMore, refresh, testament, book) => action(LOAD_BIBLE_CHAPTERS, {loadMore, refresh, testament, book})
+export const loadBibleChapters = (loadMore, refresh, book) => action(LOAD_BIBLE_CHAPTERS, {loadMore, refresh, book})
+export const loadBibleVerses = () => action(LOAD_BIBLE_VERSES)
 export const loadNewRecordings = (loadMore, refresh) => action(LOAD_NEW_RECORDINGS, {loadMore, refresh})
 export const loadTrendingRecordings = (loadMore, refresh) => action(LOAD_TRENDING_RECORDINGS, {loadMore, refresh})
 export const loadFeaturedRecordings = (loadMore, refresh) => action(LOAD_FEATURED_RECORDINGS, {loadMore, refresh})
 export const loadBooks = (loadMore, refresh) => action(LOAD_BOOKS, {loadMore, refresh})
-export const loadBook = (loadMore, refresh, url) => action(LOAD_BOOK, {loadMore, refresh, url})
+export const loadBook = (loadMore, refresh, url, id) => action(LOAD_BOOK, {loadMore, refresh, url, id})
 export const loadStories = (loadMore, refresh) => action(LOAD_STORIES, {loadMore, refresh})
 export const loadStory = (loadMore, refresh, url) => action(LOAD_STORY, {loadMore, refresh, url})
 export const loadPresenters = (loadMore, refresh) => action(LOAD_PRESENTERS, {loadMore, refresh})
@@ -326,7 +329,7 @@ export const skipToPrevious = () => action(SKIP_TO_PREVIOUS)
 export const skipToNext = () => action(SKIP_TO_NEXT)
 export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
-export const download = (item, downloadPath, downloadUrl, fileName, bitRate) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate})
+export const download = (item, downloadPath, downloadUrl, fileName, bitRate, cb) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate, cb})
 export const setRate = rate => action(SET_RATE, {rate})
 export const trackInitialized = (track) => action(TRACK_INITIALIZED, {track})
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
@@ -334,8 +337,9 @@ export const playbackPosition = position => action(PLAYBACK_POSITION, {position}
 
 export const setBibleVersion = version => action(SET_BIBLE_VERSION, {version})
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
-export const bibleBook = (testament, book) => action(BIBLE_BOOK, {testament, book})
+export const bibleBook = (book) => action(BIBLE_BOOK, {book})
 export const bibleChapter = chapter => action(BIBLE_CHAPTER, {chapter})
+export const bibleVerses = verses => action(BIBLE_VERSES, {verses})
 
 export const ADD_TO_DOWNLOADS_QUEUE = 'ADD_TO_DOWNLOADS_QUEUE'
 export const REMOVE_FROM_DOWNLOADS_QUEUE = 'REMOVE_FROM_DOWNLOADS_QUEUE'
@@ -427,3 +431,12 @@ export const playVideo = item => action(PLAY_VIDEO, {item})
 
 export const LOG_OUT = 'LOG_OUT'
 export const logOut = item => action(LOG_OUT)
+
+export const ADD_LOCAL_FILES = 'ADD_LOCAL_FILES'
+export const addLocalFiles = items => action(ADD_LOCAL_FILES, {items})
+export const REMOVE_LOCAL_FILES = 'REMOVE_LOCAL_FILES'
+export const removeLocalFiles = item => action(REMOVE_LOCAL_FILES, {item})
+export const REMOVE_LOCAL_BIBLE_CHAPTER = 'REMOVE_LOCAL_BIBLE_CHAPTER'
+export const removeLocalBibleChapter = item => action(REMOVE_LOCAL_BIBLE_CHAPTER, {item})
+export const REMOVE_LOCAL_CHAPTER = 'REMOVE_LOCAL_CHAPTER'
+export const removeLocalChapter = item => action(REMOVE_LOCAL_CHAPTER, {item})

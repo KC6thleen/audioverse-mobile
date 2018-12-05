@@ -80,9 +80,16 @@ function bible(state = {
     name: '2001 English Standard',
     abbr: 'ESV'
   },
-  testament: 'O',
-  book: 'Gen',
-  chapter: 1
+  book: {
+    dam_id: 'ENGESV2',
+    name: 'Genesis',
+    book_id: 'Gen',
+    chapters: '50',
+    testament: 'O',
+    drama: 2
+  },
+  chapter: 1,
+  verses: ''
 }, action) {
   switch(action.type) {
     case ActionTypes.BIBLE_VERSION:
@@ -93,13 +100,17 @@ function bible(state = {
     case ActionTypes.BIBLE_BOOK:
       return {
         ...state,
-        testament: action.testament,
         book: action.book
       }
     case ActionTypes.BIBLE_CHAPTER:
       return {
         ...state,
         chapter: action.chapter
+      }
+    case ActionTypes.BIBLE_VERSES:
+      return {
+        ...state,
+        verses: action.verses
       }
     default:
       return state
@@ -110,6 +121,20 @@ function user(state = null, action) {
   switch(action.type) {
     case ActionTypes.USER:
       return action.user
+    default:
+      return state
+  }
+}
+
+function localFiles(state = [], action) {
+  switch(action.type) {
+    case ActionTypes.ADD_LOCAL_FILES:
+      return [
+        ...action.items,
+        ...state
+      ]
+    case ActionTypes.REMOVE_LOCAL_FILES:
+      return state.filter(el => el !== action.item)
     default:
       return state
   }
@@ -223,6 +248,7 @@ const rootReducer = combineReducers({
   playback,
   bible,
   user,
+  localFiles,
   lists: combineReducers({
     downloads,
     favorites,

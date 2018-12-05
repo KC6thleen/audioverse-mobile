@@ -1,5 +1,30 @@
-import { parseRecording } from 'src/services'
-import { MediaTypes } from 'src/constants'
+import { Endpoints, MediaTypes } from 'src/constants'
+import * as utils from 'src/utils'
+import defaultImage from 'assets/av-logo.png'
+
+/**
+ * Parses the data into Track strcutures
+ * https://github.com/react-native-kit/react-native-track-player/wiki/Documentation#track-structure
+ * @param {object} item 
+ */
+const parseRecording = (item, mediaType) => ({
+  ...item,
+  artist: utils.getPresenterName(item),
+  artwork: utils.getPresenterPicture(item),
+  duration: utils.formatTime(item.duration),
+  mediaType: mediaType
+})
+
+const parseBibleChapter = (item, bible) => ({
+  id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
+  title: `${item.book_id} ${item.chapter_id}`,
+  artist: bible.version.name,
+  artwork: defaultImage,
+  fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
+  downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
+  chapter: item.chapter_id,
+  mediaType: MediaTypes.bible
+})
 
 export const getLanguage = state => state.settings.language
 export const getBitRate = state => state.settings.bitRate
@@ -16,57 +41,78 @@ export const getPosition = state => state.playback.position
 export const getBible = state => state.bible
 export const getBibleBooks = state => state.bibleBooks.data
 export const getBibleBooksPagination = state => state.bibleBooks
-export const getBibleChapters = state => state.bibleChapters.data
+export const getBibleChapters = state => state.bibleChapters.data.map(item => {
+  const chapter = parseBibleChapter(item, state.bible)
+  return {
+    ...chapter,
+    local: state.localFiles.indexOf(chapter.id) !== -1
+  }
+})
 export const getBibleChaptersPagination = state => state.bibleChapters
-export const getNewRecordings = state => state.newRecordings.data
+export const getNewRecordings = state => state.newRecordings.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getNewRecordingsPagination = state => state.newRecordings
-export const getTrendingRecordings = state => state.trendingRecordings.data
+export const getTrendingRecordings = state => state.trendingRecordings.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTrendingRecordingsPagination = state => state.trendingRecordings
-export const getFeaturedRecordings = state => state.featuredRecordings.data
+export const getFeaturedRecordings = state => state.featuredRecordings.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getFeaturedRecordingsPagination = state => state.featuredRecordings
-export const getBooks = state => state.books.data
+export const getBooks = state => state.books.data.map(item => item.audiobooks)
 export const getBooksPagination = state => state.books
-export const getBook = state => state.book.data
+export const getBook = state => state.book.data.map(item => {
+  const recording = parseRecording(item.recordings, MediaTypes.book)
+  const mediaFile = { ...recording.mediaFiles[0] }
+  mediaFile.filename = mediaFile.filename.substring(mediaFile.filename.lastIndexOf("/") + 1)
+  if (/^00_/i.test(mediaFile.filename)) {
+    // some chapters have the same file name in other books
+    // like 00_Foreword.mp3 and 00_Preface.mp3
+    // so we need to add some text to avoid to overwrite them
+    mediaFile.filename = `${recording.id}_${mediaFile.filename}`
+  }
+  recording.mediaFiles = [mediaFile]
+  return {
+    ...recording,
+    local: state.localFiles.indexOf(recording.id) !== -1
+  }
+})
 export const getBookPagination = state => state.book
-export const getStories = state => state.stories.data
+export const getStories = state => state.stories.data.map(item => item.audiobooks)
 export const getStoriesPagination = state => state.stories
-export const getStory = state => state.story.data
+export const getStory = state => state.story.data.map(item => parseRecording(item.recordings, MediaTypes.book))
 export const getStoryPagination = state => state.story
-export const getPresenters = state => state.presenters.data
+export const getPresenters = state => state.presenters.data.map(item => item.presenters)
 export const getPresentersPagination = state => state.presenters
-export const getPresenter = state => state.presenter.data
+export const getPresenter = state => state.presenter.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getPresenterPagination = state => state.presenter
-export const getConferences = state => state.conferences.data
+export const getConferences = state => state.conferences.data.map(item => item.conferences)
 export const getConferencesPagination = state => state.conferences
-export const getConference = state => state.conference.data
+export const getConference = state => state.conference.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getConferencePagination = state => state.conference
-export const getSponsors = state => state.sponsors.data
+export const getSponsors = state => state.sponsors.data.map(item => item.sponsors)
 export const getSponsorsPagination = state => state.sponsors
-export const getSponsor = state => state.sponsor.data
+export const getSponsor = state => state.sponsor.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getSponsorPagination = state => state.sponsor
-export const getSeries = state => state.series.data
+export const getSeries = state => state.series.data.map(item => item.series)
 export const getSeriesPagination = state => state.series
-export const getSerie = state => state.serie.data
+export const getSerie = state => state.serie.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getSeriePagination = state => state.serie
-export const getTopics = state => state.topics.data
+export const getTopics = state => state.topics.data.map(item => item.topics)
 export const getTopicsPagination = state => state.topics
-export const getTopic = state => state.topic.data
+export const getTopic = state => state.topic.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTopicPagination = state => state.topic
 export const getTagsBooks = state => state.tagsBooks.data
 export const getTagsBooksPagination = state => state.tagsBooks
-export const getTagBook = state => state.tagBook.data
+export const getTagBook = state => state.tagBook.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagBookPagination = state => state.tagBook
-export const getTagsAlbums = state => state.tagsAlbums.data
+export const getTagsAlbums = state => state.tagsAlbums.data.map(item => item.series)
 export const getTagsAlbumsPagination = state => state.tagsAlbums
-export const getTagAlbum = state => state.tagAlbum.data
+export const getTagAlbum = state => state.tagAlbum.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagAlbumPagination = state => state.tagAlbum
-export const getTagsSponsors = state => state.tagsSponsors.data
+export const getTagsSponsors = state => state.tagsSponsors.data.map(item => item.sponsors)
 export const getTagsSponsorsPagination = state => state.tagsSponsors
-export const getTagSponsor = state => state.tagSponsor.data
+export const getTagSponsor = state => state.tagSponsor.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagSponsorPagination = state => state.tagSponsor
 export const getTags = state => state.tags.data
 export const getTagsPagination = state => state.tags
-export const getTag = state => state.tag.data
+export const getTag = state => state.tag.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagPagination = state => state.tag
 
 export const getDownloads = state => state.lists.downloads.map(el => parseRecording(el, MediaTypes.sermon))

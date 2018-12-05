@@ -19,7 +19,7 @@ class BibleBooks extends PureComponent {
   }
 
   handlePressItem = item => {
-    this.props.actions.loadBibleChapters(false, false, item.testament, item.book_id)
+    this.props.actions.loadBibleChapters(false, false, item)
     this.props.navigation.navigate({ routeName: 'Chapters' })
   }
 

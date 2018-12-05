@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { bibleChapter, loadBibleChapters, resetAndPlayTrack } from 'src/actions'
+import { bibleChapter, loadBibleChapters, download, addLocalFiles, removeLocalBibleChapter, resetAndPlayTrack } from 'src/actions'
 import { getBibleChapters, getBibleChaptersPagination, getBible } from 'src/reducers/selectors'
 
 import BibleChapters from './BibleChapters'
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
     bibleChapter,
     loadBibleChapters,
+    download,
+    addLocalFiles,
+    removeLocalBibleChapter,
     resetAndPlayTrack
   }, dispatch)
 })

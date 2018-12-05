@@ -23,17 +23,20 @@ async function requestReadExternalStoragePermission() {
 /** 
  * Download
 */
-export function* download({ item, downloadPath, downloadUrl, fileName, bitRate }) { 
+export function* download({ item, downloadPath, downloadUrl, fileName, bitRate, cb }) {
   const permission = Platform.OS === 'ios' ? true : yield call(requestReadExternalStoragePermission)
   if (permission) {
     const dir = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
     yield put(actions.addToDownloadsQueue({
-      ...item,
-      dir: dir,
-      downloadPath: downloadPath,
-      downloadUrl,
-      fileName,
-      bitRate
+      data: {
+        ...item,
+        dir: dir,
+        downloadPath: downloadPath,
+        downloadUrl,
+        fileName,
+        bitRate
+      },
+      cb
     }))
     Toast.show(I18n.t('Added_to_download_queue'))
     yield call(downloadNext)
@@ -82,19 +85,22 @@ export function* downloadNext() {
     const item = queue[0]
     yield put(actions.setDownloading(true))
 
-    const channel = yield call(fetchBlob, item)
+    const channel = yield call(fetchBlob, item.data)
     while(true) {
       const { progress = 0, err, res } = yield take(channel)
       console.log('progress', progress, 'err', err, 'res', res)
       if (progress) {
-        yield put(actions.downloadProgress(item, progress))
+        yield put(actions.downloadProgress(item.data, progress))
       } else if (res) {
         yield put(actions.setDownloading(false))
         yield put(actions.removeFromDownloadsQueue(item))
-        if (item.mediaType === MediaTypes.sermon) {
-          yield put(actions.downloads.add([item]))
+        if (item.data.mediaType === MediaTypes.sermon) {
+          yield put(actions.downloads.add([item.data]))
         }
         Toast.show(I18n.t('Downloaded'))
+        if (item.cb) {
+          yield call(item.cb)
+        }
         yield call(downloadNext)
       } else { // err
         yield put(actions.setDownloading(false))

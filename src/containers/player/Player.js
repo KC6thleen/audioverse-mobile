@@ -11,11 +11,11 @@ import PlayerControls from './PlayerControls'
 import PlayerOptions from './PlayerOptions'
 import imageBg from 'assets/bg.png'
 import I18n from 'locales'
-import { MediaTypes, Dirs } from 'src/constants'
+import { Dirs } from 'src/constants'
 
 class Player extends PureComponent {
 
-  downloadSermon = () => {
+  handleDownload = () => {
 	
     let bitratesIndex = [], options = []
 
@@ -58,30 +58,6 @@ class Player extends PureComponent {
         )
       }
     })
-  }
-
-  handleDownload = () => {
-    const { track, actions } = this.props
-    if ( track.mediaType == MediaTypes.sermon ) {
-      this.downloadSermon()
-    } else if ( track.mediaType == MediaTypes.book ) {
-      const mediaFile = track.mediaFiles[0]
-      actions.download(
-        track,
-        Dirs.audiobooks,
-        mediaFile.downloadURL,
-        mediaFile.filename,
-        mediaFile.bitrate,
-      )
-    } else if ( track.mediaType == MediaTypes.bible ) {
-      actions.download(
-        track,
-        Dirs.bible,
-        track.downloadURL,
-        track.fileName,
-        ''
-      )
-    }
   }
 
   handleOnSetRate = (rate) => {
