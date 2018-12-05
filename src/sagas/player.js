@@ -202,6 +202,15 @@ export function* playTracks() {
   const tracks = yield select(selectors.getTracks)
   const track = yield select(selectors.getCurrentTrack)
 
+  // Some of the Korean recordings do not have audio
+  // in that case play video
+  if (track.mediaType === MediaTypes.sermon &&
+    track.videoFiles.length &&
+    (!track.mediaFiles || track.mediaFiles.length === 0)) {
+    yield put(actions.playVideo(track))
+    return
+  }
+
   let getUrl = null
   if (track.mediaType === MediaTypes.bible) {
     getUrl = getBibleChapterUrl
