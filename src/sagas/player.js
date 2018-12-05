@@ -165,6 +165,10 @@ function* getVideoUrl(item) {
  * @param {object} item 
  */
 export function* playVideo({ item }) {
+  const state = yield call(TrackPlayer.getState)
+  if (state === TrackPlayer.STATE_PLAYING) {
+    yield call(TrackPlayer.pause)
+  }
   let videoUrl = yield call(getVideoUrl, item)
   yield call(NavigationService.navigate, 'VideoPlayer', {uri: videoUrl})
 }
