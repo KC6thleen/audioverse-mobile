@@ -86,7 +86,12 @@ export const getConferences = state => state.conferences.data.map(item => item.c
 export const getConferencesPagination = state => state.conferences
 export const getConference = state => state.conference.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getConferencePagination = state => state.conference
-export const getSponsors = state => state.sponsors.data.map(item => item.sponsors)
+export const getSponsors = state => state.sponsors.data.map(item =>  (
+  {
+    ...item.sponsors,
+    photo86: item.sponsors.logo !== '' ? item.sponsors.photo86 : defaultImage
+  }
+))
 export const getSponsorsPagination = state => state.sponsors
 export const getSponsor = state => state.sponsor.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getSponsorPagination = state => state.sponsor
@@ -106,7 +111,12 @@ export const getTagsAlbums = state => state.tagsAlbums.data.map(item => item.ser
 export const getTagsAlbumsPagination = state => state.tagsAlbums
 export const getTagAlbum = state => state.tagAlbum.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagAlbumPagination = state => state.tagAlbum
-export const getTagsSponsors = state => state.tagsSponsors.data.map(item => item.sponsors)
+export const getTagsSponsors = state => state.tagsSponsors.data.map(item => (
+  {
+    ...item.sponsors,
+    photo86: item.sponsors.logo !== '' ? item.sponsors.photo86 : defaultImage
+  }
+))
 export const getTagsSponsorsPagination = state => state.tagsSponsors
 export const getTagSponsor = state => state.tagSponsor.data.map(item => parseRecording(item.recordings, MediaTypes.sermon))
 export const getTagSponsorPagination = state => state.tagSponsor
