@@ -4951,6 +4951,10 @@ react-native-tab-view@^1.2.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-native-text-ticker@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-text-ticker/-/react-native-text-ticker-0.13.0.tgz#56f38187ac88689481672939367a7badcb9fe4e3"
+
 "react-native-track-player@git+https://github.com/react-native-kit/react-native-track-player":
   version "1.0.0"
   resolved "git+https://github.com/react-native-kit/react-native-track-player#54904d21a3461166c7fa8d7974a515b071af5d85"

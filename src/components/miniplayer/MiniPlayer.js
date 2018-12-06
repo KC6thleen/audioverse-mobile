@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, ActivityIndicator, Platform, StyleSheet } from 'react-native'
+import {
+  View,
+  ActivityIndicator,
+  Platform,
+  StyleSheet
+} from 'react-native'
 import TrackPlayer from 'react-native-track-player'
+import TextTicker from 'react-native-text-ticker'
 
 import ListItem from 'src/components/list/ListItem'
 import ImageButton from 'src/components/buttons/ImageButton'
@@ -29,7 +35,7 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
     <View style={styles.container}>
       <ListItem
         avatar={{source: track.artwork}}
-        title={track.title}
+        title={<TextTicker loop bounce style={styles.title}>{track.title}</TextTicker>}
         subtitle={track.artist}
         onPress={handlePress}
         rightElement={rightElement}
@@ -55,10 +61,9 @@ const styles = StyleSheet.create({
     width: 42,
     tintColor: '#000000'
   },
-  bar: {
-    height: 2,
-    backgroundColor: '#03A9F4'
-  },
+  title: {
+    fontSize: Platform.OS === 'ios' ? 17 : 16
+  }
 })
 
 MiniPlayer.propTypes = {

@@ -1,8 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { ImageBackground, View, TouchableOpacity, StatusBar, Platform, StyleSheet } from 'react-native'
+import {
+  ImageBackground,
+  View,
+  TouchableOpacity,
+  StatusBar,
+  Platform,
+  StyleSheet
+} from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import ActionSheet from 'react-native-action-sheet'
+import TextTicker from 'react-native-text-ticker'
 
 import ListItem from 'src/components/list/ListItem'
 import PlayerContent from './PlayerContent'
@@ -107,7 +115,7 @@ class Player extends PureComponent {
           />
           <ListItem
             avatar={{source: track.artwork}}
-            title={track.title}
+            title={<TextTicker loop bounce style={styles.title}>{track.title}</TextTicker>}
             subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}
@@ -158,6 +166,9 @@ const styles = StyleSheet.create({
     borderTopColor: '#E0E0E080',
     borderBottomWidth: 1,
     borderBottomColor: '#CCCCCC'
+  },
+  title: {
+    fontSize: Platform.OS === 'ios' ? 17 : 16
   },
   minimizeIcon: {
     fontSize: 42
