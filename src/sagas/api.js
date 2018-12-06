@@ -198,6 +198,11 @@ export function* loadBibleVerses() {
     yield RNFetchBlob.fs.writeFile(file, data)
   } else {
     let data = yield RNFetchBlob.fs.readFile(file)
+    // the previous version of the old app stringified the data before saving it
+    // so we need to parse it
+    if (data.charAt(0) === "\"") {
+      data = JSON.parse(data)
+    }
     yield put(actions.bibleVerses(data))
   }
 }
