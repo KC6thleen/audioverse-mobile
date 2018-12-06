@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native'
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
+import I18n from 'locales'
 
 class TrendingRecordings extends PureComponent {
 
@@ -25,7 +26,7 @@ class TrendingRecordings extends PureComponent {
       <ListItem
         avatar={{source: item.artwork}}
         title={item.title}
-        subtitle={item.artist + ' \u00B7 ' + item.duration}
+        subtitle={`${item.artist} \u00B7 ${item.duration} \u00B7 ${item.weightValue}/${I18n.t('day')}`}
         onPress={() => this.props.actions.resetAndPlayTrack([item])}
       />
     )
