@@ -17,6 +17,7 @@ class BibleVerses extends PureComponent {
     return (
       <View style={styles.container}>
         <WebView
+          originWhitelist={['*']}
           source={{ html: this.props.bible.verses }} />
         <MiniPlayer navigation={this.props.navigation} />
       </View>
