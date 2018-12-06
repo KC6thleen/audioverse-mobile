@@ -479,7 +479,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['settings', 'playback', 'bible', 'user', 'lists'],
+  whitelist: ['settings', 'playback', 'bible', 'user', 'lists', 'presenters'],
   timeout: 0, // disable timeout https://github.com/rt2zz/redux-persist/issues/717
 }
 

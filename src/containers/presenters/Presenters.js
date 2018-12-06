@@ -16,7 +16,9 @@ class Presenters extends PureComponent {
 
   componentDidMount() {
     this.props.actions.loadPresenters()
-    this.search.focus()
+    this.setState({
+      data: this.props.items
+    })
   }
 
   componentDidUpdate(prevProps) {
