@@ -165,7 +165,7 @@ const downloads = myLists(
     ActionTypes.DOWNLOADS.ADD,
     ActionTypes.DOWNLOADS.REMOVE
   ],
-  item => el => el.id !== item.id
+  item => el => !(el.id === item.id && el.bitRate === item.bitRate)
 )
 
 const favorites = myLists(

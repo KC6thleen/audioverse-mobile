@@ -96,7 +96,10 @@ export function* downloadNext() {
       } else if (res) {
         yield put(actions.setDownloading(false))
         yield put(actions.removeFromDownloadsQueue(item))
-        if (item.data.mediaType === MediaTypes.sermon) {
+        const downloads = yield select(selectors.getDownloads)
+        const exists = downloads.some(el => el.id === item.data.id && el.bitRate === item.data.bitRate)
+        // if it is a sermon and is not in the downloads list then add it to downloads list
+        if (item.data.mediaType === MediaTypes.sermon && !exists) {
           yield put(actions.downloads.add([item.data]))
         }
         Toast.show(I18n.t('Downloaded'))
