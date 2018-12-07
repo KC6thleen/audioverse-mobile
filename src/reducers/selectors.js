@@ -154,5 +154,6 @@ export const getDeletedPlaylistItems = (state, playlistId) =>state.lists.playlis
 
 export const getHistory = state => state.lists.history.map(el => parseRecording(el, MediaTypes.sermon))
 export const getDownloadsQueue = state => state.downloadsQueue.queue
+export const getDownloadsQueueItems = state => state.downloadsQueue.queue.map(el => el.data)
 export const getDownloading = state => state.downloadsQueue.downloading
 export const getUser = state => state.user

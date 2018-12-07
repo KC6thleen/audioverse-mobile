@@ -2,12 +2,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { removeFromDownloadsQueue } from 'src/actions'
-import { getDownloadsQueue } from 'src/reducers/selectors'
+import { getDownloadsQueueItems } from 'src/reducers/selectors'
 
 import DownloadsQueue from './DownloadsQueue'
 
 const mapStateToProps = (state) => ({
-  items: getDownloadsQueue(state)
+  items: getDownloadsQueueItems(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
