@@ -111,7 +111,7 @@ const PlayerContent = ({ data, language, navigation }) => {
               style={styles.image}
             />
             <View style={styles.info}>
-              <TextTicker style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.title}</TextTicker>
+              <TextTicker style={styles.title}>{sponsor.title}</TextTicker>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{recordingDate}</Text>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.location}</Text>
             </View>
