@@ -16,8 +16,7 @@ import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
 import {
   searchPresentations,
-  fetchPresenters,
-  fetchConferences
+  fetchData
 } from 'src/services'
 
 class Search extends PureComponent {
@@ -69,24 +68,27 @@ class Search extends PureComponent {
 
   handleSearch = async () => {
     if (this.state.search.trim() !== '') {
-      let url = '', searchFn = null
+      let url = '', searchFn = null, parseFn = null
       if (this.state.category === I18n.t('presentations')) {
         url = Endpoints.searchPresentations
         searchFn = searchPresentations
+        parseFn = data => data
       } else if (this.state.category === I18n.t('presenters')) {
         url = Endpoints.searchPresenters
-        searchFn = fetchPresenters
+        searchFn = fetchData
+        parseFn = data => data.map(el => el.presenters)
       } else { // conferences
         url = Endpoints.searchConferences
-        searchFn = fetchConferences
+        searchFn = fetchData
+        parseFn = data => data.map(el => el.conferences)
       }
 
       try {
         this.setState({ loading: true })
-        const response = await searchFn(url + this.state.search)
+        let response = await searchFn(url + this.state.search)
         this.setState({
           loading: false,
-          data: response.result,
+          data: parseFn(response.result),
           nextPageUrl: response.nextPageUrl
         })
       } catch(e) {

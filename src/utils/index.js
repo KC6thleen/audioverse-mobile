@@ -1,4 +1,5 @@
 import { NetInfo } from 'react-native'
+import { Endpoints, MediaTypes } from 'src/constants'
 import defaultImage from 'assets/av-logo.png'
 
 /**
@@ -64,6 +65,36 @@ export const getPresenterPicture = (item) => {
   }
   return defaultImage
 }
+
+/**
+ * Parses the data into Track strcutures
+ * https://github.com/react-native-kit/react-native-track-player/wiki/Documentation#track-structure
+ * @param {object} item 
+ */
+export const parseRecording = (item, mediaType) => ({
+  ...item,
+  artist: getPresenterName(item),
+  artwork: getPresenterPicture(item),
+  duration: formatTime(item.duration),
+  mediaType: mediaType
+})
+
+/**
+ * Parses Bible chapter
+ * @param {object} item 
+ * @param {object} bible 
+ */
+export const parseBibleChapter = (item, bible) => ({
+  id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
+  title: `${item.book_id} ${item.chapter_id}`,
+  artist: bible.version.name,
+  artwork: defaultImage,
+  fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
+  downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
+  chapter: item.chapter_id,
+  mediaType: MediaTypes.bible
+})
+
 
 /**
  * Gets NetInfo isConnected property

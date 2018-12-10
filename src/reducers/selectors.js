@@ -1,30 +1,6 @@
-import { Endpoints, MediaTypes } from 'src/constants'
-import * as utils from 'src/utils'
+import { MediaTypes } from 'src/constants'
+import { parseRecording, parseBibleChapter } from 'src/utils'
 import defaultImage from 'assets/av-logo.png'
-
-/**
- * Parses the data into Track strcutures
- * https://github.com/react-native-kit/react-native-track-player/wiki/Documentation#track-structure
- * @param {object} item 
- */
-const parseRecording = (item, mediaType) => ({
-  ...item,
-  artist: utils.getPresenterName(item),
-  artwork: utils.getPresenterPicture(item),
-  duration: utils.formatTime(item.duration),
-  mediaType: mediaType
-})
-
-const parseBibleChapter = (item, bible) => ({
-  id: `${bible.version.id}_${item.book_id}_${item.chapter_id}`,
-  title: `${item.book_id} ${item.chapter_id}`,
-  artist: bible.version.name,
-  artwork: defaultImage,
-  fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
-  downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
-  chapter: item.chapter_id,
-  mediaType: MediaTypes.bible
-})
 
 export const getLanguage = state => state.settings.language
 export const getBitRate = state => state.settings.bitRate
