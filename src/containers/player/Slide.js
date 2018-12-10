@@ -1,6 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+  StyleSheet
+} from 'react-native'
+import TextTicker from 'react-native-text-ticker'
 
 const Slide = ({ image, header, subtitle, onPress }) => (
   <View style={styles.container}>
@@ -9,8 +16,8 @@ const Slide = ({ image, header, subtitle, onPress }) => (
       style={styles.image}
     />
     <TouchableOpacity style={styles.center} onPress={onPress}>
-      <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{header}</Text>
-      <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{subtitle}</Text>
+      <TextTicker style={styles.title}>{header}</TextTicker>
+      <TextTicker style={styles.subtitle}>{subtitle}</TextTicker>
     </TouchableOpacity>
   </View>
 )

@@ -9,6 +9,7 @@ import {
   StyleSheet
 } from 'react-native'
 import Swiper from 'react-native-swiper'
+import TextTicker from 'react-native-text-ticker'
 
 import I18n from 'locales'
 import { MediaTypes } from 'src/constants'
@@ -110,7 +111,7 @@ const PlayerContent = ({ data, language, navigation }) => {
               style={styles.image}
             />
             <View style={styles.info}>
-              <Text style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.title}</Text>
+              <TextTicker style={styles.title} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.title}</TextTicker>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{recordingDate}</Text>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.location}</Text>
             </View>
