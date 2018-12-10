@@ -1,6 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import {
+  View,
+  ScrollView,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native'
 import Swiper from 'react-native-swiper'
 
 import I18n from 'locales'
@@ -29,7 +36,6 @@ const getSlides = (data, language) => {
   }
 
   if ( data.mediaType === MediaTypes.sermon && data.presenters && data.presenters.length === 1 ) {
-    presenter.subtitle = data.presenters[0].description
     presenter.route = 'Presenter'
     presenter.params = {
       url: data.presenters[0].recordingsURI,
@@ -110,7 +116,10 @@ const PlayerContent = ({ data, language, navigation }) => {
           </TouchableOpacity>
         </View>
       )}
-      <Swiper activeDotColor="#FFFFFF">
+      <Swiper
+        activeDotColor="#FFF"
+        removeClippedSubviews={false}
+        loop={false}>
         {slides.map(slide => {
           if (slide.type === 'description') {
             return (

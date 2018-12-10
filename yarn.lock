@@ -4933,9 +4933,9 @@ react-native-sqlite-storage@^3.3.7:
   dependencies:
     xcode "0.8.9"
 
-react-native-swiper@^1.5.13:
-  version "1.5.13"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
+react-native-swiper@^1.5.14:
+  version "1.5.14"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
   dependencies:
     prop-types "^15.5.10"
 
