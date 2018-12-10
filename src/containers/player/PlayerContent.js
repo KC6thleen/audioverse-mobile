@@ -39,7 +39,8 @@ const getSlides = (data, language) => {
     presenter.route = 'Presenter'
     presenter.params = {
       url: data.presenters[0].recordingsURI,
-      title: data.artist
+      title: data.artist,
+      description: data.presenters[0].description
     }
   }
 
