@@ -34,7 +34,7 @@ class BibleChapters extends PureComponent {
   handlePressItemAction = item => {
     if (item.local) {
       Alert.alert(
-        I18n.t('Are_you_sure'),
+        I18n.t('Are_you_sure_you_want_to_delete_this'),
         '',
         [
           {text: I18n.t('Cancel'), onPress: () => {}, style: 'cancel'},
