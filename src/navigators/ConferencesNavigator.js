@@ -6,7 +6,6 @@ import HeaderTitle from './headertitle'
 import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Conferences from 'src/containers/conferences'
-import Conference from 'src/containers/conferences/conference'
 
 const ConferencesStack = createStackNavigator({
   Conferences: {
@@ -15,12 +14,6 @@ const ConferencesStack = createStackNavigator({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="conferences" />,
       headerRight: <HeaderRight navigation={navigation} />
-    })
-  },
-  Conference: {
-    screen: Conference,
-    navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title
     })
   }
 }, {

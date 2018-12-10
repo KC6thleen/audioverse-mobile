@@ -6,7 +6,6 @@ import HeaderTitle from './headertitle'
 import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Presenters from 'src/containers/presenters'
-import Presenter from 'src/containers/presenters/presenter'
 
 const PresentersStack = createStackNavigator({
   Presenters: {
@@ -15,12 +14,6 @@ const PresentersStack = createStackNavigator({
       headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="presenters" />,
       headerRight: <HeaderRight navigation={navigation} />
-    })
-  },
-  Presenter: {
-    screen: Presenter,
-    navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title
     })
   }
 }, {

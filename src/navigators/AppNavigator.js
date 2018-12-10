@@ -27,6 +27,10 @@ import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
 import AboutNavigator from './AboutNavigator'
 import Search from 'src/containers/search'
+import Sponsor from 'src/containers/sponsors/sponsor'
+import Presenter from 'src/containers/presenters/presenter'
+import Conference from 'src/containers/conferences/conference'
+import Serie from 'src/containers/series/serie'
 
 const screenNavigationOptions = (title, icon) => ({
   drawerLabel: ({ tintColor }) => <DrawerLabel tintColor={tintColor} title={title} />,
@@ -60,12 +64,17 @@ const AppStack = createStackNavigator({
       header: null
     }
   },
-  Search
+  Search,
+  Sponsor,
+  Presenter,
+  Conference,
+  Serie
 }, {
-  defaultNavigationOptions: {
+  defaultNavigationOptions: ({ navigation }) => ({
     headerStyle: GlobalStyles.header,
-    headerTintColor: headerTintColor
-  }
+    headerTintColor: headerTintColor,
+    title: navigation.state.params ? navigation.state.params.title : ''
+  })
 })
 
 const AppNavigator = createStackNavigator({
