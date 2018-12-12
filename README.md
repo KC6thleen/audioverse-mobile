@@ -3,8 +3,7 @@ This is the repository for the next-generation iOS and Android apps for AudioVer
 
 AudioVerse is a website dedicated to spreading God's word through free sermon audio and much more. If you would like to learn more about AudioVerse please visit https://audioverse.org
 
-You can download our apps from the [App Store](https://itunes.apple.com/us/app/audioverse/id726998810?mt=8) or [Google Play Store](https://play.google.com/store/apps/details?id=org.audioverse.exodus) or build them yourself using this repository.
-We'll be updating the App Stores with this new version as soon as we reach version 1.0. Stay tuned!
+You can download our apps from the [App Store](https://itunes.apple.com/us/app/audioverse/id726998810?mt=8) or [Google Play Store](https://play.google.com/store/apps/details?id=org.audioverse.exodus) or build them yourself using this repository. For Android you can also get the latest version [here](https://github.com/AVORG/audioverse-mobile/releases).
 
 <img src="https://github.com/AVORG/audioverse-mobile/blob/master/screenshots/AudioVerse%20App.gif?raw=true">
 
@@ -24,17 +23,3 @@ We'll be updating the App Stores with this new version as soon as we reach versi
 1. `react-native run-ios` or `react-native run-android`
 1. Look in our [GitHub repository](https://github.com/avorg/audioverse-mobile/issues) for issues marked as [Help Wanted]
 1. Comment to let people know you're working on it
-
-
-## TODOs
-- [x] Bible
-- [x] Download Queue
-- [x] Offline support
-- [x] My Lists
-  - [x] Favorites,
-  - [x] History,
-  - [x] Downloads,
-  - [x] Playlists
-- [x] Login and Signup
-- [x] Video support
-- [x] Share
