@@ -7,7 +7,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
-import TextTicker from 'react-native-text-ticker'
+import MarqueeText from 'react-native-marquee'
 
 const Slide = ({ image, header, subtitle, onPress }) => (
   <View style={styles.container}>
@@ -16,8 +16,8 @@ const Slide = ({ image, header, subtitle, onPress }) => (
       style={styles.image}
     />
     <TouchableOpacity style={styles.center} onPress={onPress}>
-      <TextTicker style={styles.title}>{header}</TextTicker>
-      <TextTicker style={styles.subtitle}>{subtitle}</TextTicker>
+      <MarqueeText marqueeOnStart loop style={styles.title}>{header}</MarqueeText>
+      <MarqueeText marqueeOnStart loop style={styles.subtitle}>{subtitle}</MarqueeText>
     </TouchableOpacity>
   </View>
 )

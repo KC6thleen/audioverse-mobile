@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import ActionSheet from 'react-native-action-sheet'
-import TextTicker from 'react-native-text-ticker'
+import MarqueeText from 'react-native-marquee'
 
 import ListItem from 'src/components/list/ListItem'
 import PlayerContent from './PlayerContent'
@@ -115,7 +115,7 @@ class Player extends PureComponent {
           />
           <ListItem
             avatar={{source: track.artwork}}
-            title={<TextTicker loop bounce style={styles.title}>{track.title}</TextTicker>}
+            title={<MarqueeText marqueeOnStart loop style={styles.title}>{track.title}</MarqueeText>}
             subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}

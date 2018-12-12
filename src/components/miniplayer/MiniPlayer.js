@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
-import TextTicker from 'react-native-text-ticker'
+import MarqueeText from 'react-native-marquee'
 
 import ListItem from 'src/components/list/ListItem'
 import ImageButton from 'src/components/buttons/ImageButton'
@@ -35,7 +35,7 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
     <View style={styles.container}>
       <ListItem
         avatar={{source: track.artwork}}
-        title={<TextTicker loop bounce style={styles.title}>{track.title}</TextTicker>}
+        title={<MarqueeText marqueeOnStart loop style={styles.title}>{track.title}</MarqueeText>}
         subtitle={track.artist}
         onPress={handlePress}
         rightElement={rightElement}

@@ -95,10 +95,11 @@ exports[`ListItem component renders correctly with icon 1`] = `
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
+          Object {},
         ]
       }
     >
-      
+      
     </Text>
   </View>
   <View
