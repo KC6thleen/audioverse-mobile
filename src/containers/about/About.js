@@ -4,20 +4,22 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
   Linking,
   Share,
+  FlatList,
   Platform,
   StyleSheet
 } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
+import packageJson from '../../../package.json'
 import I18n from 'locales'
 import logo from 'assets/av-logo-red-gray.png'
 
 class Login extends PureComponent {
 
   handleDonate = () => {
-    Linking.openURL(`https://www.audioverse.org/english/about/2/donations.html`).catch(err => console.error(err))
+    Linking.openURL('https://www.audioverse.org/english/about/2/donations.html').catch(err => console.error(err))
   }
 
   handleSubmitTestimony = () => {
@@ -44,7 +46,52 @@ class Login extends PureComponent {
     Linking.openURL(url).catch(err => console.error(err))
   }
 
+  handleGitHub = () => {
+    Linking.openURL('https://github.com/avorg/audioverse-mobile').catch(err => console.error(err))
+  }
+
+  handleFacebook = () => {
+    Linking.openURL('https://www.facebook.com/AudioVerse').catch(err => console.error(err))
+  }
+
+  handleInstagram = () => {
+    Linking.openURL('https://www.instagram.com/audioverse').catch(err => console.error(err))
+  }
+
   render() {
+    const data = [
+      {
+        title: I18n.t('donate'),
+        onPress: this.handleDonate
+      },
+      {
+        title: I18n.t('submit_testimony'),
+        onPress: this.handleSubmitTestimony
+      },
+      {
+        title: I18n.t('share_app'),
+        onPress: this.handleShareApp
+      },
+      {
+        title: I18n.t('rate_us'),
+        onPress: this.handleRateUs
+      },
+      {
+        title: I18n.t('GitHub'),
+        onPress: this.handleGitHub
+      },
+      {
+        title: I18n.t('Facebook'),
+        onPress: this.handleFacebook
+      },
+      {
+        title: I18n.t('Instagram'),
+        onPress: this.handleInstagram
+      },
+      {
+        title: `${I18n.t('version')} ${packageJson.version}`
+      },
+    ]
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -56,46 +103,18 @@ class Login extends PureComponent {
             style={styles.support}>
             {I18n.t('support_av_text')}
           </Text>
-          <TouchableOpacity
-            activeOpacity={.5}
-            onPress={this.handleDonate}>
-            <View style={styles.button}>
-              <Text
-                style={styles.buttonText}>
-                {I18n.t('donate')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={.5}
-            onPress={this.handleSubmitTestimony}>
-            <View style={[styles.button, {backgroundColor: '#2096F3'}]}>
-              <Text
-                style={styles.buttonText}>
-                {I18n.t('submit_testimony')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={.5}
-            onPress={this.handleShareApp}>
-            <View style={[styles.button, {backgroundColor: '#009689'}]}>
-              <Text
-                style={styles.buttonText}>
-                {I18n.t('share_app')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={.5}
-            onPress={this.handleRateUs}>
-            <View style={[styles.button, {backgroundColor: '#8BC24B'}]}>
-              <Text
-                style={styles.buttonText}>
-                {I18n.t('rate_us')}
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <FlatList
+            data={data}
+            keyExtractor={item => item.title}
+            renderItem={
+              ({item}) => 
+                <ListItem
+                  title={item.title}
+                  onPress={item.onPress}
+                  chevron={item.onPress ? true : false}
+                  bottomDivider />
+            }
+          />
         </View>
       </View>
     )
@@ -113,24 +132,12 @@ const styles = StyleSheet.create({
     width: 300
   },
   logo: {
-    width: null,
-    marginBottom: 10
+    width: null
   },
   support: {
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 10
-  },
-  button: {
-    backgroundColor: "#D73352",
-    paddingVertical: 10,
-    marginTop: 15,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  buttonText: {
-    color: "#FFF",
-    fontSize: 16
+    marginBottom: 40
   }
 })
 
