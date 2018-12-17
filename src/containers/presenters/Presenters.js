@@ -49,7 +49,7 @@ class Presenters extends PureComponent {
       <ListItem
         avatar={{source: item.photo86}}
         title={item.givenName + ' ' + item.surname}
-        onPress={() => this.props.navigation.navigate({ routeName: 'Presenter', params: { url: item.recordingsURI, title: item.givenName + ' ' + item.surname, description: item.description } })}
+        onPress={() => this.props.navigation.navigate({ routeName: 'Presenter', params: { url: item.recordingsURI, title: item.givenName + ' ' + item.surname, description: item.description, image: item.photo256 } })}
       />
     )
   }

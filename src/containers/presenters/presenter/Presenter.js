@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
@@ -29,8 +29,17 @@ class Presenter extends PureComponent {
   
   render() {
     const { items, pagination, navigation } = this.props
-    const description = navigation.state.params.description
-    const Bio = description ? <View style={styles.bio}><Text style={styles.bioText}>{description}</Text></View> : null
+    const { image, description } = navigation.state.params
+    const Bio =
+      <View style={styles.bio}>
+        <View style={styles.bioImageContainer}>
+          <Image
+            style={styles.bioImage}
+            source={{uri: image}}
+          />
+        </View>
+        { description ? <Text style={styles.bioText}>{description}</Text> : null }
+      </View>
 
     return (
       <View style={styles.container}>
@@ -58,8 +67,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCCCCC50',
     textAlign: 'center'
   },
+  bioImageContainer: {
+    alignItems: 'center'
+  },
+  bioImage: {
+    width: 128,
+    height: 128,
+    borderRadius: 64
+  },
   bioText: {
-    textAlign: 'justify'
+    textAlign: 'justify',
+    marginTop: 10
   }
 })
 
