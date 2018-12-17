@@ -13,6 +13,7 @@ import {
   StyleSheet
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
+import { API_URL, BEARER_TOKEN } from 'react-native-dotenv'
 
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
@@ -79,12 +80,12 @@ class Login extends PureComponent {
 
   signIn = async () => {
     this.setState({ loading: true })
-    const url = `${process.env['API_URL']}${Endpoints.login}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}`
+    const url = `${API_URL}${Endpoints.login}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}`
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer ' + process.env['BEARER_TOKEN']
+          Authorization: `Bearer ${BEARER_TOKEN}`
         }
       })
       this.setState({ loading: false })
@@ -104,12 +105,12 @@ class Login extends PureComponent {
 
   signUp = async () => {
     this.setState({ loading: true })
-    const url = `${process.env['API_URL']}${Endpoints.signup}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}&password_confirmation=${encodeURIComponent(this.state.password)}&language=${this.props.language}`
+    const url = `${API_URL}${Endpoints.signup}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}&password_confirmation=${encodeURIComponent(this.state.password)}&language=${this.props.language}`
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer ' + process.env['BEARER_TOKEN']
+          Authorization: `Bearer ${BEARER_TOKEN}`
         }
       })
       this.setState({ loading: false })

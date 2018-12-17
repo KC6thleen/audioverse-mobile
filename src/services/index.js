@@ -1,5 +1,6 @@
 import { MediaTypes } from 'src/constants'
 import { parseRecording } from 'src/utils'
+import { BASE_URL, BASIC_TOKEN } from 'react-native-dotenv'
 
 /**
  * Fetches an API response and parses the result
@@ -7,11 +8,11 @@ import { parseRecording } from 'src/utils'
  * @param {function} parse 
  */
 async function callApi(endpoint, parse, method, body) {
-  const fullUrl = !endpoint.startsWith('http') ? process.env['BASE_URL'] + endpoint : endpoint
+  const fullUrl = !endpoint.startsWith('http') ? BASE_URL + endpoint : endpoint
   const response = await fetch(fullUrl, {
     method: method ? method : 'GET',
     headers: {
-      Authorization: 'Basic ' + process.env['BASIC_TOKEN']
+      Authorization: `Basic ${BASIC_TOKEN}`
     },
     body
   })
