@@ -41,7 +41,8 @@ const getSlides = (data, language) => {
     presenter.params = {
       url: data.presenters[0].recordingsURI,
       title: data.artist,
-      description: data.presenters[0].description
+      description: data.presenters[0].description,
+      image: data.presenters[0].photo256
     }
   }
 
