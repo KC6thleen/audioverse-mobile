@@ -13,10 +13,12 @@ import {
   StyleSheet
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import { API_URL, BEARER_TOKEN } from 'react-native-dotenv'
+import { LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
+import Toast from 'react-native-simple-toast'
 
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
+import * as api from 'src/services'
 import logo from 'assets/av-logo-red-gray.png'
 
 class Login extends PureComponent {
@@ -78,20 +80,49 @@ class Login extends PureComponent {
     }
   }
 
+  loginSocial = async (data, socialName) => {
+    const url = `${Endpoints.loginSocial}?socialId=${data.id}&socialName=${socialName}&firstName=${data.first_name}&lastName=${data.last_name}&email=${data.email}`
+    const result = await api.fetchData(url)
+    if (result && result.result) {
+      this.props.actions.setUser(result.result)
+      // navigate to the main screen
+      this.navigate()
+    }
+  }
+
+  handleLoginWithFB = async () => {
+    try {
+      LoginManager.logOut()
+      const result = await LoginManager.logInWithReadPermissions(["public_profile"])
+      if (!result.isCancelled) {
+        const infoRequest = new GraphRequest(
+          '/me',
+          { parameters: { fields: { string: 'name,email,first_name,last_name' } } },
+          (error, result) => {
+            if (error) {
+              console.log('Error fetching data: ' + error.toString())
+            } else {
+              console.log('Success fetching data: ',  result)
+              this.loginSocial(result, 'Facebook')
+            }
+          },
+        )
+        // Start the graph request
+        new GraphRequestManager().addRequest(infoRequest).start()
+      }
+    } catch (err) {
+      Toast.show(err)
+    }
+  }
+
   signIn = async () => {
     this.setState({ loading: true })
-    const url = `${API_URL}${Endpoints.login}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}`
+    const url = `${Endpoints.login}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}`
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${BEARER_TOKEN}`
-        }
-      })
+      const response = await api.signIn(url)
       this.setState({ loading: false })
-      const json = await response.json()
-      if (json.data) {
-        this.props.actions.setUser(json.data)
+      if (response.data) {
+        this.props.actions.setUser(response.data)
         // navigate to the main screen
         this.navigate()
       } else {
@@ -105,17 +136,11 @@ class Login extends PureComponent {
 
   signUp = async () => {
     this.setState({ loading: true })
-    const url = `${API_URL}${Endpoints.signup}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}&password_confirmation=${encodeURIComponent(this.state.password)}&language=${this.props.language}`
+    const url = `${Endpoints.signup}?email=${this.state.email}&password=${encodeURIComponent(this.state.password)}&password_confirmation=${encodeURIComponent(this.state.password)}&language=${this.props.language}`
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${BEARER_TOKEN}`
-        }
-      })
+      const response = await api.signUp(url)
       this.setState({ loading: false })
-      const json = await response.json()
-      if (json.data) {
+      if (response.data) {
         Alert.alert(I18n.t('Account_created._Please_check_your_email_to_activate_it.'))
         this.setState({ signin: true })
       } else {
@@ -197,6 +222,11 @@ class Login extends PureComponent {
               }
             </View>
           </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.5} onPress={this.handleLoginWithFB}>
+            <View style={[styles.button, styles.fb]}>
+              <Text style={styles.buttonText}>{I18n.t(this.state.signin ? 'Sign_in_with_facebook' : 'Sign_up_with_facebook')}</Text>
+            </View>
+          </TouchableOpacity>
           <View style={styles.options}>
             <TouchableOpacity activeOpacity={.5} onPress={this.handleCreateAccount}>
               <Text>{I18n.t(this.state.signin ? 'Create_account' : 'Sign_in')}</Text>
@@ -258,6 +288,9 @@ const styles = StyleSheet.create({
   },
   buttonDisabled: {
     opacity: 0.5
+  },
+  fb: {
+    backgroundColor: '#4E64B2'
   },
   buttonText: {
     color: "#FFF",

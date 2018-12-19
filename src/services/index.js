@@ -1,6 +1,6 @@
 import { MediaTypes } from 'src/constants'
 import { parseRecording } from 'src/utils'
-import { BASE_URL, BASIC_TOKEN } from 'react-native-dotenv'
+import { BASE_URL, BASIC_TOKEN, API_URL, BEARER_TOKEN } from 'react-native-dotenv'
 
 /**
  * Fetches an API response and parses the result
@@ -28,6 +28,22 @@ async function callApi(endpoint, parse, method, body) {
   }
 }
 
+/**
+ * Fetches an API response
+ * @param {string} endpoint 
+ */
+async function callApi2(endpoint) {
+  const fullUrl = !endpoint.startsWith('http') ? API_URL + endpoint : endpoint
+  const response = await fetch(fullUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    }
+  })
+
+  return await response.json()
+}
+
 export const fetchData = url => callApi(url, json => json.result)
 
 export const fetchBibleBooks = url => callApi(url, json => {
@@ -52,3 +68,6 @@ export const fetchPlaylistItems = url => callApi(url, null)
 export const postPlaylistItems = (url, body) => callApi(url, null, 'POST', body)
 export const deletePlaylistItems = url => callApi(url, null, 'DELETE')
 export const searchPresentations = url => callApi(url, json => json.result.presentation.map(item => parseRecording(item.recordings, MediaTypes.sermon)))
+
+export const signIn = url => callApi2(url)
+export const signUp = url => callApi2(url)
