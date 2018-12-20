@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   close: {
     zIndex: 10,
     position: 'absolute',
-    left: 10,
-    top: 40
+    left: 5,
+    top: 30
   },
   backgroundVideo: {
     position: 'absolute',

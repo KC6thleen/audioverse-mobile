@@ -7,6 +7,7 @@ import { MediaTypes, Dirs } from 'src/constants'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 import { getMediaFile } from 'src/utils'
+import * as api from 'src/services'
 import NavigationService from 'src/utils/navigation-service'
 
 const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
@@ -143,7 +144,9 @@ function* getBibleChapterUrl(item) {
  */
 function* getVideoUrl(item) {
 
-  let url = item.videoFiles && item.videoFiles.length ? item.videoFiles[0].downloadURL : null
+  const videoFile = item.videoFiles && item.videoFiles.length ? item.videoFiles[0] : {}
+  let url = videoFile.downloadURL
+  let logUrl = videoFile.container === 'm3u8_ios' ? videoFile.logURL : null
 
   const downloads = yield select(selectors.getDownloadsById, item.id)
   let currentUrl = null, exists = false
@@ -153,11 +156,12 @@ function* getVideoUrl(item) {
     exists = yield call(fileExists, currentUrl)
     if (exists) {
       url = `file://${currentUrl}`
+      logUrl = null
       break
     }
   }
-  console.log('url', url)
-  return url
+  console.log('url, logUrl', url, logUrl)
+  return { url, logUrl }
 }
 
 /**
@@ -169,8 +173,11 @@ export function* playVideo({ item }) {
   if (state === TrackPlayer.STATE_PLAYING) {
     yield call(TrackPlayer.pause)
   }
-  let videoUrl = yield call(getVideoUrl, item)
-  yield call(NavigationService.navigate, 'VideoPlayer', {uri: videoUrl})
+  const { url, logUrl } = yield call(getVideoUrl, item)
+  if (logUrl) {
+    yield call(api.fetchData, logUrl)
+  }
+  yield call(NavigationService.navigate, 'VideoPlayer', {uri: url})
 }
 
 /**
