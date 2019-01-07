@@ -5039,8 +5039,8 @@ react-native-tab-view@^1.2.0:
     prop-types "^15.6.1"
 
 "react-native-track-player@git+https://github.com/react-native-kit/react-native-track-player":
-  version "1.0.0"
-  resolved "git+https://github.com/react-native-kit/react-native-track-player#553a19f483fe9b6a3f1372b8d9bb852356549b48"
+  version "1.0.2"
+  resolved "git+https://github.com/react-native-kit/react-native-track-player#50828e19bc7fcee3624cf47859ffe3e8079efdb2"
 
 react-native-vector-icons@^6.1.0:
   version "6.1.0"
