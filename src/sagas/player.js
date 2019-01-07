@@ -255,10 +255,10 @@ export function* playTracks() {
 */
 export function* playPause() {
   const tracks = yield call(TrackPlayer.getQueue)
-  if (!tracks.length) {
+  const state = yield call(TrackPlayer.getState)
+  if (!tracks.length || state === TrackPlayer.STATE_STOPPED) {
     yield call(playTracks)
   } else {
-    const state = yield call(TrackPlayer.getState)
     if (state === TrackPlayer.STATE_PLAYING) {
       yield call(TrackPlayer.pause)
     } else {
