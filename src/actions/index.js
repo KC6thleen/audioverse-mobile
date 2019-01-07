@@ -1,3 +1,4 @@
+export const STARTUP = 'STARTUP'
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
 
 export const PLAYER_STATE = 'PLAYER_STATE'
@@ -315,6 +316,7 @@ export const loadTagSponsor = (loadMore, refresh, url) => action(LOAD_TAG_SPONSO
 export const loadTags = (loadMore, refresh) => action(LOAD_TAGS, {loadMore, refresh})
 export const loadTag = (loadMore, refresh, url) => action(LOAD_TAG, {loadMore, refresh, url})
 
+export const startup = () => action(STARTUP)
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
 
 export const playerState = state => action(PLAYER_STATE, {state})

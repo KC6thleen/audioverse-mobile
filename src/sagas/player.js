@@ -2,8 +2,9 @@ import { Platform } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 import { call, put, select } from 'redux-saga/effects'
 import RNFetchBlob from 'rn-fetch-blob'
+import firebase from 'react-native-firebase'
 
-import { MediaTypes, Dirs } from 'src/constants'
+import { ContentTypes, Dirs } from 'src/constants'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
 import { getMediaFile } from 'src/utils'
@@ -177,6 +178,14 @@ export function* playVideo({ item }) {
   if (logUrl) {
     yield call(api.fetchData, logUrl)
   }
+  // analytics
+  firebase.analytics().logEvent('playVideo', {
+    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
+    item_id: item.id,
+    title: item.title,
+    remote_url: url.startsWith('http') ? 1 : 0,
+  })
+  // show video player
   yield call(NavigationService.navigate, 'VideoPlayer', {uri: url})
 }
 
@@ -194,9 +203,9 @@ export function* resetAndPlayTrack({ tracks, id }) {
   yield put(actions.playbackTrackId(selectedTrack.id))
 
   const autoPlay = yield select(selectors.getAutoPlay)
-  if (autoPlay || selectedTrack.mediaType === MediaTypes.bible) {
+  if (autoPlay || selectedTrack.contentType === ContentTypes.bible) {
     yield call(playTracks)
-  } else if (selectedTrack.mediaType !== MediaTypes.bible) {
+  } else if (selectedTrack.contentType !== ContentTypes.bible) {
     yield call(NavigationService.navigate, 'Player')
   }
 }
@@ -211,7 +220,7 @@ export function* playTracks() {
 
   // Some of the Korean recordings do not have audio
   // in that case play video
-  if (track.mediaType === MediaTypes.sermon &&
+  if (track.contentType === ContentTypes.sermon &&
     track.videoFiles.length &&
     (!track.mediaFiles || track.mediaFiles.length === 0)) {
     yield put(actions.playVideo(track))
@@ -219,9 +228,9 @@ export function* playTracks() {
   }
 
   let getUrl = null
-  if (track.mediaType === MediaTypes.bible) {
+  if (track.contentType === ContentTypes.bible) {
     getUrl = getBibleChapterUrl
-  } else if (track.mediaType === MediaTypes.book) {
+  } else if (track.contentType === ContentTypes.book) {
     getUrl = getBookChapterUrl
   } else {
     getUrl = getSermonUrl
@@ -314,14 +323,24 @@ export function* setRate({ rate }) {
 }
 
 /** 
- * Sets the player rate
+ * Track initialized
 */
 export function* trackInitialized({ track }) {
+  console.log('track initialized', track)
+  
+  // analytics
+  firebase.analytics().logEvent('play', {
+    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
+    item_id: track.id,
+    title: track.title,
+    remote_url: track.url.startsWith('http') ? 1 : 0,
+  })
+
   track.lastPlayedDate = new Date()
   const history = yield select(selectors.getHistory)
   const exists = history.some(el => el.id === track.id)
   // if it's a sermon and is not in the history list add it
-  if (track.mediaType === MediaTypes.sermon && !exists) {
+  if (track.contentType === ContentTypes.sermon && !exists) {
     yield put(actions.history.add([track]))
   }
 

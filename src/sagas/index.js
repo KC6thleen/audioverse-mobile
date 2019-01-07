@@ -1,7 +1,6 @@
 import { all, takeLatest } from 'redux-saga/effects'
 
 import * as actions from 'src/actions'
-import recoverDB from './db'
 import { startup } from './startup'
 import * as settings from './settings'
 import * as player from './player'
@@ -14,8 +13,7 @@ import * as bible from './bible'
 
 function* rootSaga() {
   yield all([
-    startup(),
-    recoverDB(),
+    takeLatest(actions.STARTUP, startup),
     takeLatest(actions.CHANGE_LANGUAGE, settings.changeLanguage),
     takeLatest(actions.LOG_OUT, settings.logOut),
     takeLatest(actions.RESET_AND_PLAY_TRACK, player.resetAndPlayTrack),

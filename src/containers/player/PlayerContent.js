@@ -12,7 +12,7 @@ import Swiper from 'react-native-swiper'
 import MarqueeText from 'react-native-marquee'
 
 import I18n from 'locales'
-import { MediaTypes } from 'src/constants'
+import { ContentTypes } from 'src/constants'
 import defaultImage from 'assets/av-logo.png'
 import Slide from './Slide'
 
@@ -36,7 +36,7 @@ const getSlides = (data, language) => {
     subtitle: ''
   }
 
-  if ( data.mediaType === MediaTypes.sermon && data.presenters && data.presenters.length === 1 ) {
+  if ( data.contentType === ContentTypes.sermon && data.presenters && data.presenters.length === 1 ) {
     presenter.route = 'Presenter'
     presenter.params = {
       url: data.presenters[0].recordingsURI,
@@ -50,7 +50,7 @@ const getSlides = (data, language) => {
 	
 	// conference
 	// don't show conference for books/stories
-	if (data.mediaType != MediaTypes.book && data.conference && data.conference.length) {
+	if (data.contentType != ContentTypes.book && data.conference && data.conference.length) {
 		image = data.conference[0].logo != '' ? data.conference[0].photo86 : defaultImage
 		slides.push({
       type: 'conference',

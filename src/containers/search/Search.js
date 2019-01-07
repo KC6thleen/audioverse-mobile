@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 import { SearchBar } from 'react-native-elements'
+import firebase from 'react-native-firebase'
 
 import HeaderTitle from 'src/navigators/headertitle'
 import IconButton from 'src/components/buttons/IconButton'
@@ -68,6 +69,9 @@ class Search extends PureComponent {
 
   handleSearch = async () => {
     if (this.state.search.trim() !== '') {
+      // firebase analytics
+      firebase.analytics().logEvent('search', { search_term: this.state.search })
+      // search
       let url = '', searchFn = null, parseFn = null
       if (this.state.category === I18n.t('presentations')) {
         url = Endpoints.searchPresentations

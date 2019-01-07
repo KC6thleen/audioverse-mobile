@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
-import { persistReducer } from 'redux-persist'
+import { createMigrate, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import I18n from 'locales'
 import * as ActionTypes from 'src/actions'
 import paginate from './paginate'
+import { ContentTypes } from 'src/constants'
 
 function settings(state = {
   language: I18n.locale.substr(0,2),
@@ -475,12 +476,43 @@ const rootReducer = combineReducers({
   })
 })
 
+const migrations = {
+  1: (state) => {
+    // migration to add contentType since it was not coming on the API before
+    const lists = Object.keys(state.lists).reduce((acc, curr) => {
+      if (state.lists[curr] === 'playlists') {
+        acc[curr] = state.lists[curr]
+      } else {
+        acc[curr] = state.lists[curr].map(el => ({
+          ...el,
+          contentType: ContentTypes.sermon,
+        }))
+      }
+      return acc
+    }, {})
+
+    return {
+      ...state,
+      playback: {
+        ...state.playback,
+        tracks: state.playback.tracks.map(el => ({
+          ...el,
+          contentType: ContentTypes[el.mediaType],
+        })),
+      },
+      lists: lists,
+    }
+  }
+}
+
 // persist reducer
 const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['settings', 'playback', 'bible', 'user', 'lists', 'presenters'],
   timeout: 0, // disable timeout https://github.com/rt2zz/redux-persist/issues/717
+  version: 1,
+  migrate: createMigrate(migrations, { debug: false }),
 }
 
 export default persistReducer(persistConfig, rootReducer)

@@ -3,10 +3,11 @@ import { call, put, select, take } from 'redux-saga/effects'
 import { eventChannel, buffers, END } from 'redux-saga'
 import RNFetchBlob from 'rn-fetch-blob'
 import Toast from 'react-native-simple-toast'
+import firebase from 'react-native-firebase'
 
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
-import { MediaTypes } from 'src/constants'
+import { ContentTypes } from 'src/constants'
 import I18n from 'locales'
 
 const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
@@ -99,9 +100,18 @@ export function* downloadNext() {
         const downloads = yield select(selectors.getDownloads)
         const exists = downloads.some(el => el.id === item.data.id && el.bitRate === item.data.bitRate)
         // if it is a sermon and is not in the downloads list then add it to downloads list
-        if (item.data.mediaType === MediaTypes.sermon && !exists) {
+        if (item.data.contentType === ContentTypes.sermon && !exists) {
           yield put(actions.downloads.add([item.data]))
         }
+        // analytics
+        firebase.analytics().logEvent('download', {
+          content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.data.contentType),
+          item_id: item.data.id,
+          title: item.data.title,
+          bit_rate: item.data.bitRate,
+          file_name: item.data.fileName
+        })
+        // notification
         Toast.show(I18n.t('Downloaded'))
         if (item.cb) {
           yield call(item.cb)

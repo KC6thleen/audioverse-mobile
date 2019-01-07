@@ -1,6 +1,7 @@
 import { put, select, call } from 'redux-saga/effects'
+import firebase from 'react-native-firebase'
 
-import { Endpoints } from 'src/constants'
+import { Endpoints, ContentTypes } from 'src/constants'
 import * as api from 'src/services'
 import * as actions from 'src/actions'
 import * as selectors from 'src/reducers/selectors'
@@ -86,6 +87,12 @@ export function* add({ item }) {
   } else {
     yield put(actions.favorites.add([item]))
   }
+  // analytics
+  firebase.analytics().logEvent('favorite', {
+    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
+    item_id: item.id,
+    title: item.title,
+  })
 }
 
 export function* remove({ id }) {

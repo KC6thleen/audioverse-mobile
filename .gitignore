@@ -58,3 +58,10 @@ buck-out/
 # env
 #
 .env
+
+# ios/Pods
+ios/Pods/
+
+# Firebase conf files
+android/app/google-services.json
+ios/AudioVerse/GoogleService-Info.plist

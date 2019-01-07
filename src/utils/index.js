@@ -1,5 +1,5 @@
 import { NetInfo } from 'react-native'
-import { Endpoints, MediaTypes } from 'src/constants'
+import { Endpoints, ContentTypes } from 'src/constants'
 import defaultImage from 'assets/av-logo.png'
 
 /**
@@ -71,12 +71,11 @@ export const getPresenterPicture = (item) => {
  * https://github.com/react-native-kit/react-native-track-player/wiki/Documentation#track-structure
  * @param {object} item 
  */
-export const parseRecording = (item, mediaType) => ({
+export const parseRecording = (item) => ({
   ...item,
   artist: getPresenterName(item),
   artwork: getPresenterPicture(item),
-  duration: formatTime(item.duration),
-  mediaType: mediaType
+  duration: formatTime(item.duration)
 })
 
 /**
@@ -92,7 +91,7 @@ export const parseBibleChapter = (item, bible) => ({
   fileName: `${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3`,
   downloadURL: `${Endpoints.bibleCDN}${bible.version.id}_${item.book_id}_chapter_${item.chapter_id}.mp3/${encodeURIComponent(item.path)}`,
   chapter: item.chapter_id,
-  mediaType: MediaTypes.bible
+  contentType: ContentTypes.bible
 })
 
 

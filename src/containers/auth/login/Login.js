@@ -15,6 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather'
 import { LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
 import Toast from 'react-native-simple-toast'
+import firebase from 'react-native-firebase'
 
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
@@ -84,7 +85,12 @@ class Login extends PureComponent {
     const url = `${Endpoints.loginSocial}?socialId=${data.id}&socialName=${socialName}&firstName=${data.first_name}&lastName=${data.last_name}&email=${data.email}`
     const result = await api.fetchData(url)
     if (result && result.result) {
-      this.props.actions.setUser(result.result)
+      const user = result.result
+      // set user
+      this.props.actions.setUser(user)
+      // firebase analytics
+      firebase.analytics().setUserId(user.userId ? user.userId.toString() : null)
+      firebase.analytics().logEvent('login', { sign_up_method: 'email' })
       // navigate to the main screen
       this.navigate()
     }
@@ -122,7 +128,12 @@ class Login extends PureComponent {
       const response = await api.signIn(url)
       this.setState({ loading: false })
       if (response.data) {
-        this.props.actions.setUser(response.data)
+        const user = response.data
+        // set user
+        this.props.actions.setUser(user)
+        // firebase analytics
+        firebase.analytics().setUserId(user.userId ? user.userId.toString() : null)
+        firebase.analytics().logEvent('login', { sign_up_method: 'email' })
         // navigate to the main screen
         this.navigate()
       } else {
@@ -141,6 +152,9 @@ class Login extends PureComponent {
       const response = await api.signUp(url)
       this.setState({ loading: false })
       if (response.data) {
+        // firebase analytics
+        firebase.analytics().logEvent('sign_up', { sign_up_method: 'email' })
+        // alert user
         Alert.alert(I18n.t('Account_created._Please_check_your_email_to_activate_it.'))
         this.setState({ signin: true })
       } else {

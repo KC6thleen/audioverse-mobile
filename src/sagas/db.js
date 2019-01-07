@@ -5,6 +5,7 @@ import SQLite from 'react-native-sqlite-storage'
 import RNFetchBlob from 'rn-fetch-blob'
 
 import * as actions from 'src/actions'
+import { ContentTypes } from 'src/constants'
 
 /** 
  * Return an object with the data stored in the SQLite DB
@@ -40,11 +41,15 @@ const getDataFromDB = async () => {
             downloadUrl: data.downloadURL,
             fileName: data.fileName,
             bitRate: data.bitrate,
-            recovered: true
+            recovered: true,
+            contentType: ContentTypes.sermon,
           }
         })
 
-        const favorites = favoritesRows.map(el => JSON.parse(el.json_data))
+        const favorites = favoritesRows.map(el => ({
+          ...JSON.parse(el.json_data),
+          contentType: ContentTypes.sermon,
+        }))
 
         const playlists = playlistsRows.map(el => JSON.parse(el.json_data))
 
@@ -52,11 +57,15 @@ const getDataFromDB = async () => {
           const playlist = playlistsRows.find(item => item.id === el.reference_id)
           return {
             ...JSON.parse(el.json_data),
-            playlistId: playlist ? JSON.parse(playlist.json_data).id : 0
+            playlistId: playlist ? JSON.parse(playlist.json_data).id : 0,
+            contentType: ContentTypes.sermon,
           }
         })
 
-        const history = historyRows.map(el => JSON.parse(el.json_data))
+        const history = historyRows.map(el => ({
+          ...JSON.parse(el.json_data),
+          contentType: ContentTypes.sermon,
+        }))
 
         resolve({
           downloads,

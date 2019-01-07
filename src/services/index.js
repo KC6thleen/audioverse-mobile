@@ -1,4 +1,3 @@
-import { MediaTypes } from 'src/constants'
 import { parseRecording } from 'src/utils'
 import { BASE_URL, BASIC_TOKEN, API_URL, BEARER_TOKEN } from 'react-native-dotenv'
 
@@ -67,7 +66,7 @@ export const deletePlaylists = url => callApi(url, null, 'DELETE')
 export const fetchPlaylistItems = url => callApi(url, null)
 export const postPlaylistItems = (url, body) => callApi(url, null, 'POST', body)
 export const deletePlaylistItems = url => callApi(url, null, 'DELETE')
-export const searchPresentations = url => callApi(url, json => json.result.presentation.map(item => parseRecording(item.recordings, MediaTypes.sermon)))
+export const searchPresentations = url => callApi(url, json => json.result.presentation.map(item => parseRecording(item.recordings)))
 
 export const signIn = url => callApi2(url)
 export const signUp = url => callApi2(url)

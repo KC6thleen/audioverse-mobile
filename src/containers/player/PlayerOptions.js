@@ -1,10 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, Text, Share, Alert, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  Share,
+  Alert,
+  StyleSheet
+} from 'react-native'
+import firebase from 'react-native-firebase'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
-import { MediaTypes } from 'src/constants'
+import { ContentTypes } from 'src/constants'
 import I18n from 'locales'
 
 const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, onSetRate, onAddFavorite, onRemoveFavorite, onPlayVideo }) => {
@@ -40,16 +47,26 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
     }
   }
 
+  const handleShare = () => {
+    // firebase analytics
+    firebase.analytics().logEvent('share', {
+      content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
+      item_id: track.id
+    })
+    // share
+    Share.share({ message: `${I18n.t("share_this_blessing_with_you.")} ${track.shareUrl}` })
+  }
+
   return (
     <View style={styles.container}>
       { (!track.downloadDisabled || track.downloadDisabled === "0") &&
-        track.mediaType === MediaTypes.sermon && 
+        track.contentType === ContentTypes.sermon && 
         <IconButton
           name="download"
           iconStyle={styles.icon}
           onPress={onDownload} />
       }
-      { track.mediaType === MediaTypes.sermon && 
+      { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="heart"
           iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
@@ -64,19 +81,17 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
       <Text
         style={[styles.icon, styles.text]}
         onPress={onSetRate}>{`${rate}X`}</Text>
-      { track.mediaType === MediaTypes.sermon && 
+      { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="folder"
           iconStyle={styles.icon}
           onPress={handleAddToPlaylist} />
       }
-      { (track.mediaType === MediaTypes.sermon || track.mediaType === MediaTypes.book) && 
+      { (track.contentType === ContentTypes.sermon || track.contentType === ContentTypes.book) && 
         <IconButton
         name="share-2"
         iconStyle={styles.icon}
-        onPress={() => {
-          Share.share({ message: `${I18n.t("share_this_blessing_with_you.")} ${track.shareUrl}` }) 
-        }} />
+        onPress={handleShare} />
       }
     </View>
   )
