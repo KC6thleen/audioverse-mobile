@@ -15,6 +15,9 @@ async function callApi(endpoint, parse, method, body) {
     },
     body
   })
+  if (response.status === 401) {
+    throw new Error(response.status)
+  }
   const contentType = response.headers.get("content-type")
   if (contentType && contentType.indexOf("application/json") !== -1) {
     const json = await response.json()
