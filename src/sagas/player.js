@@ -29,14 +29,14 @@ export function* setupPlayer() {
       TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
       TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
       TrackPlayer.CAPABILITY_PLAY_FROM_ID, // required for android auto
-      TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH // required for android auto
+      TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH, // required for android auto
     ],
     compactCapabilities: [
       TrackPlayer.CAPABILITY_PLAY,
       TrackPlayer.CAPABILITY_PAUSE,
       TrackPlayer.CAPABILITY_SEEK_TO,
-      TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
-      TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS
+      TrackPlayer.CAPABILITY_JUMP_FORWARD,
+      TrackPlayer.CAPABILITY_JUMP_BACKWARD,
     ],
     stopWithApp: false
   })
