@@ -92,29 +92,34 @@ class Login extends PureComponent {
         title: `${I18n.t('version')} ${packageJson.version}`
       },
     ]
+
+    const header = <View>
+      <Image
+        source={logo}
+        style={styles.logo}
+        resizeMode="contain" />
+      <Text
+        style={styles.support}>
+        {I18n.t('support_av_text')}
+      </Text>
+    </View>
+
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          <Image
-            source={logo}
-            style={styles.logo}
-            resizeMode="contain" />
-          <Text
-            style={styles.support}>
-            {I18n.t('support_av_text')}
-          </Text>
-          <FlatList
-            data={data}
-            keyExtractor={item => item.title}
-            renderItem={
-              ({item}) => 
-                <ListItem
-                  title={item.title}
-                  onPress={item.onPress}
-                  chevron={item.onPress ? true : false}
-                  bottomDivider />
-            }
-          />
+            <FlatList
+              ListHeaderComponent={header}
+              data={data}
+              keyExtractor={item => item.title}
+              renderItem={
+                ({item}) => 
+                  <ListItem
+                    title={item.title}
+                    onPress={item.onPress}
+                    chevron={item.onPress ? true : false}
+                    bottomDivider />
+              }
+            />
         </View>
       </View>
     )
