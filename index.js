@@ -8,4 +8,4 @@ import createEventHandler from 'src/utils/event-handler'
 const { store, persistor } = configureStore()
 
 AppRegistry.registerComponent('AudioVerse', () => createApp(store, persistor))
-TrackPlayer.registerEventHandler(createEventHandler(store))
+TrackPlayer.registerPlaybackService(() => createEventHandler(store))
