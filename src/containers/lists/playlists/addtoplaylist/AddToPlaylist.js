@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, ScrollView, TouchableOpacity, Text, Button, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
+import throttle from 'lodash.throttle'
 
 import I18n from 'locales'
 
@@ -12,12 +13,15 @@ class AddToPlaylist extends PureComponent {
     this.props.navigation.navigate({ routeName: 'NewPlaylist' })
   }
 
+  throttledAddPlaylistItem = throttle(this.props.actions.addPlaylistItem, 5000, { 'trailing': false })
+  throttledRemovePlaylistItem = throttle(this.props.actions.removePlaylistItem, 5000, { 'trailing': false })
+
   handleOnPressPlaylist = (playlist) => {
-    const { track, actions } = this.props
+    const { track } = this.props
     if (!playlist.selected) {
-      actions.addPlaylistItem(playlist.id, track)
+      this.throttledAddPlaylistItem(playlist.id, track)
     } else {
-      actions.removePlaylistItem(playlist.id, track.id)
+      this.throttledRemovePlaylistItem(playlist.id, track.id)
     }
   }
 

@@ -8,6 +8,7 @@ import {
   StyleSheet
 } from 'react-native'
 import firebase from 'react-native-firebase'
+import throttle from 'lodash.throttle'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
@@ -27,12 +28,15 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
     )
   }
 
+  const throttledOnAddFavorite = throttle(onAddFavorite, 5000, { 'trailing': false })
+  const throttledOnRemoveFavorite = throttle(onRemoveFavorite, 5000, { 'trailing': false })
+
   const handlePressFavorite = () => {
     if (user) {
       if (!isFavorite) {
-        onAddFavorite(track)
+        throttledOnAddFavorite(track)
       } else {
-        onRemoveFavorite(track.id)
+        throttledOnRemoveFavorite(track.id)
       }
     } else {
       logIn()
