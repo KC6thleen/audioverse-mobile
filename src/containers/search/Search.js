@@ -32,7 +32,13 @@ class Search extends PureComponent {
 
   static navigationOptions = ({ navigation }) => ({
     headerTitle: <HeaderTitle title="search" />,
-    headerRight: <IconButton onPress={() => { navigation.state.params.handleMore() }} style={{paddingHorizontal: 15}} name="more-vertical" size={24} color="#FFFFFF" />
+    headerRight:<IconButton
+      name="more-vertical"
+      size={24}
+      color="#FFFFFF"
+      style={{paddingHorizontal: 15}}
+      onPress={() => { navigation.state.params.handleMore() }}
+      accessibilityLabel={I18n.t("search_filters")} />
   })  
 
   componentDidMount() {
@@ -117,7 +123,9 @@ class Search extends PureComponent {
         showLoadingIcon={this.state.loading}
         ref={search => this.search = search}
         onChangeText={this.handleChangeText}
-        onSubmitEditing={this.handleSearch} />
+        onSubmitEditing={this.handleSearch}
+        accessibilityRole="search"
+        accessibilityLabel={I18n.t("search")} />
     )
   }
 

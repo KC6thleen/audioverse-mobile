@@ -72,7 +72,11 @@ PlaylistItems.propTypes = {
 
 const RightElement = ({ data, onPress }) => {
   const _onPress = () => { onPress(data) }
-  return <IconButton onPress={_onPress} name="x" size={24} />
+  return <IconButton
+    name="x"
+    size={24}
+    onPress={_onPress}
+    accessibilityLabel={I18n.t('delete')} />
 }
 
 export default PlaylistItems

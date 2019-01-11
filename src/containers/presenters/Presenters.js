@@ -63,7 +63,9 @@ class Presenters extends PureComponent {
         placeholder={I18n.t('search')}
         focus
         ref={search => this.search = search}
-        onChangeText={this.handleChangeText} />
+        onChangeText={this.handleChangeText}
+        accessibilityRole="search"
+        accessibilityLabel={I18n.t("search")} />
     )
   }
 

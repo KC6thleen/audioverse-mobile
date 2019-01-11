@@ -14,6 +14,7 @@ import ImageButton from 'src/components/buttons/ImageButton'
 import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
 import iconPlay from 'assets/ic_play.png'
 import iconPause from 'assets/pause.png'
+import I18n from 'locales'
 
 const MiniPlayer = ({ navigation, track, state, actions}) => {
 
@@ -29,13 +30,13 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
       source={state == TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
       imageStyle={styles.playPause}
       onPress={actions.playPause}
-    />
+      accessibilityLabel={I18n.t(state === TrackPlayer.STATE_PLAYING ? "pause" : "play" )} />
 
   return (
     <View style={styles.container}>
       <ListItem
         avatar={{source: track.artwork}}
-        title={<MarqueeText marqueeOnStart loop style={styles.title}>{track.title}</MarqueeText>}
+        title={<MarqueeText marqueeOnStart loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
         subtitle={track.artist}
         onPress={handlePress}
         rightElement={rightElement}

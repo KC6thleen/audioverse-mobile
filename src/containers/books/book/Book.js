@@ -95,7 +95,11 @@ Book.propTypes = {
 
 const RightElement = ({ data, onPress }) => {
   const handlePress = () => { onPress(data) }
-  return <IconButton onPress={handlePress} name={data.local ? 'x' : 'download'} size={24} />
+  return <IconButton
+    name={data.local ? 'x' : 'download'}
+    size={24}
+    onPress={handlePress}
+    accessibilityLabel={I18n.t(data.local ? 'delete' : 'download_file')} />
 }
 
 export default Book

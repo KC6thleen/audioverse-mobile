@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, ActivityIndicator, Platform, StyleSheet } from 'react-native'
+import {
+  View,
+  ActivityIndicator,
+  Platform,
+  StyleSheet
+} from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 
 import ImageButton from 'src/components/buttons/ImageButton'
@@ -10,6 +15,7 @@ import iconPrevious from 'assets/previous.png'
 import iconNext from 'assets/next.png'
 import iconReplay from 'assets/ic_replay_10.png'
 import iconForward from 'assets/ic_forward_30.png'
+import I18n from 'locales'
 
 const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, forward }) => (
   <View style={styles.container}>
@@ -17,11 +23,13 @@ const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, 
       source={iconReplay}
       imageStyle={styles.icon}
       onPress={replay}
+      accessibilityLabel={I18n.t("rewind_10_seconds")}
     />
     <ImageButton
       source={iconPrevious}
       imageStyle={styles.icon}
       onPress={skipToPrevious}
+      accessibilityLabel={I18n.t("previous")}
     />
     { state === TrackPlayer.STATE_BUFFERING ?
       <ActivityIndicator size="large" /> :
@@ -30,17 +38,20 @@ const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, 
         style={styles.playPauseButton}
         imageStyle={[styles.playPauseIcon, {marginLeft: state === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
         onPress={playPause}
+        accessibilityLabel={I18n.t(state === TrackPlayer.STATE_PLAYING ? "pause" : "play" )}
       />
     }
     <ImageButton
       source={iconNext}
       imageStyle={styles.icon}
       onPress={skipToNext}
+      accessibilityLabel={I18n.t("next")}
     />
     <ImageButton
       source={iconForward}
       imageStyle={styles.icon}
       onPress={forward}
+      accessibilityLabel={I18n.t("fast_forward_30_seconds")}
     />
   </View>
 )

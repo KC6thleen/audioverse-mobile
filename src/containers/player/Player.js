@@ -13,6 +13,7 @@ import ActionSheet from 'react-native-action-sheet'
 import MarqueeText from 'react-native-marquee'
 
 import ListItem from 'src/components/list/ListItem'
+import IconButton from 'src/components/buttons/IconButton'
 import PlayerContent from './PlayerContent'
 import ProgressBar from 'src/components/progressbar/ProgressBar'
 import PlayerControls from './PlayerControls'
@@ -102,7 +103,12 @@ class Player extends PureComponent {
       return <View />
     }
 
-    const rightElement = <TouchableOpacity onPress={() => navigation.goBack()}><Icon name='chevron-down' style={styles.minimizeIcon} /></TouchableOpacity>
+    const rightElement =
+      <IconButton 
+        name='chevron-down'
+        iconStyle={styles.minimizeIcon}
+        onPress={() => navigation.goBack()}
+        accessibilityLabel={I18n.t("minimize_player")} />
 
     return (
       <ImageBackground
@@ -115,7 +121,7 @@ class Player extends PureComponent {
           />
           <ListItem
             avatar={{source: track.artwork}}
-            title={<MarqueeText marqueeOnStart loop style={styles.title}>{track.title}</MarqueeText>}
+            title={<MarqueeText marqueeOnStart loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
             subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}

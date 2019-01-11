@@ -2,9 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import IconButton from 'src/components/buttons/IconButton'
+import I18n from 'locales'
 
 const HeaderRight = ({ navigation }) => (
-  <IconButton onPress={() => { navigation.navigate({routeName: 'Search'}) }} style={{paddingHorizontal: 15}} name="search" size={24} color="#FFFFFF" />
+  <IconButton
+    name="search"
+    size={24}
+    color="#FFFFFF"
+    style={{paddingHorizontal: 15}}
+    onPress={() => navigation.navigate({routeName: 'Search'}) }
+    accessibilityLabel={I18n.t("search")} />
 )
 
 HeaderRight.propTypes = {

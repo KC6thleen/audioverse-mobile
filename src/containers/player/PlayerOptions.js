@@ -68,34 +68,42 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
         <IconButton
           name="download"
           iconStyle={styles.icon}
-          onPress={onDownload} />
+          onPress={onDownload}
+          accessibilityLabel={I18n.t("download_file")} />
       }
       { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="heart"
           iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
-          onPress={handlePressFavorite} />
+          onPress={handlePressFavorite}
+          accessibilityLabel={I18n.t("add_to_favorites")} />
       }
       { track.videoFiles && track.videoFiles.length > 0 &&
         <IconButton
           name="video"
           iconStyle={styles.icon}
-          onPress={onPlayVideo} />
+          onPress={onPlayVideo}
+          accessibilityLabel={I18n.t("play_video")} />
       }
       <Text
         style={[styles.icon, styles.text]}
-        onPress={onSetRate}>{`${rate}X`}</Text>
+        onPress={onSetRate}
+        accessibilityLabel={I18n.t("select_speed")}>
+        {`${rate}X`}
+      </Text>
       { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="folder"
           iconStyle={styles.icon}
-          onPress={handleAddToPlaylist} />
+          onPress={handleAddToPlaylist}
+          accessibilityLabel={I18n.t("add_to_playlists")} />
       }
       { (track.contentType === ContentTypes.sermon || track.contentType === ContentTypes.book) && 
         <IconButton
         name="share-2"
         iconStyle={styles.icon}
-        onPress={handleShare} />
+        onPress={handleShare}
+        accessibilityLabel={I18n.t("share")} />
       }
     </View>
   )

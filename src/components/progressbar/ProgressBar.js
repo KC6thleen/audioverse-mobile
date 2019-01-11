@@ -4,6 +4,7 @@ import TrackPlayer, { ProgressComponent } from 'react-native-track-player'
 
 import { formatTime } from 'src/utils'
 import flatDot from 'assets/flat_dot.png'
+import I18n from 'locales'
 
 class ProgressBar extends ProgressComponent {
 
@@ -37,8 +38,12 @@ class ProgressBar extends ProgressComponent {
             onSlidingComplete={this.handleSlidingComplete} />
         </TouchableWithoutFeedback>
         <View style={styles.info}>
-          <Text style={{marginLeft: 10}}>{position}</Text>
-          <Text style={{marginRight: 10}}>{duration}</Text>
+          <Text
+            style={{marginLeft: 10}}
+            accessibilityLabel={`${I18n.t("current_time")} ${position}`}>{position}</Text>
+          <Text
+            style={{marginRight: 10}}
+            accessibilityLabel={`${I18n.t("duration")} ${duration}`}>{duration}</Text>
         </View>
       </View>
     )

@@ -27,11 +27,13 @@ class NewPlaylist extends PureComponent {
             value={this.state.name}
             onChangeText={text => this.setState({...this.state, name: text})}
             placeholder={I18n.t('title')}
+            accessibilityLabel={I18n.t('title')}
             autoFocus />
           <View style={styles.public}>
             <Switch
               value={this.state.isPublic}
-              onValueChange={this.setPublic} />
+              onValueChange={this.setPublic}
+              accessibilityLabel={I18n.t('is_public')} />
             <Text style={styles.publicText}>{I18n.t('is_public')}</Text>
           </View>
           <View style={styles.options}>
