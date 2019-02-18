@@ -227,8 +227,8 @@ function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, 
       return {
         ...state,
         queue: state.queue.map( el => {
-          if (el.id == action.item.id) {
-            el.progress = action.progress
+          if (el.data.id == action.item.id) {
+            el.data.progress = action.progress
           }
           return el
         })

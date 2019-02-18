@@ -6,6 +6,7 @@ import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
 import IconButton from 'src/components/buttons/IconButton'
+import I18n from 'locales'
 
 class DownloadsQueue extends PureComponent {
 

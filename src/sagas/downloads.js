@@ -60,7 +60,7 @@ const fetchBlob = (item) => {
     .fetch('GET', item.downloadUrl)
     // .fetch('GET', 'https://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3')
     // listen to download progress event, every 1%
-    .progress({ count : 1 }, (received, total) => {
+    .progress({ count : 100 }, (received, total) => {
       emitter({ progress: (received / total).toFixed(2) })
     })
     .then(res => {
