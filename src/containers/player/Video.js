@@ -1,39 +1,38 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Platform, StyleSheet } from 'react-native'
+import {
+  View,
+  Dimensions,
+  Platform,
+  StyleSheet
+} from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import Video from 'react-native-video'
 import VideoControls from 'react-native-video-controls'
 
 class VideoPlayer extends PureComponent {
 
+  state = {
+    paddingTop: 0
+  }
+
+  onLayout(e) {
+    const {width, height} = Dimensions.get('window')
+    if (Platform.OS === 'ios' && height > width) { // on iOS when is in portrait mode
+      this.setState({ paddingTop: 12 })
+    } else {
+      this.setState({ paddingTop: 0 })
+    }
+  }
+
   render() {
 
     return (
-      <View style={styles.container}>
-        { Platform.OS === 'ios' &&
-          <Icon
-            name="x-circle"
-            color="#FFFFFF"
-            size={30}
-            style={styles.close}
-            onPress={() => { this.props.navigation.goBack() }} />
-        }
-        { Platform.OS === 'ios' &&
-          <Video
-            source={{uri: this.props.navigation.state.params.uri}}
-            controls
-            // onError={this.videoError}               // Callback when video cannot be loaded
-            style={styles.backgroundVideo}
-          />
-        }
-        { Platform.OS === 'android' &&
-          <VideoControls
-            source={{uri: this.props.navigation.state.params.uri}}
-            onBack={() => { this.props.navigation.goBack() }}
-            style={styles.backgroundVideo}
-          />
-        }
+      <View style={[styles.container, { paddingTop: this.state.paddingTop }]} onLayout={this.onLayout.bind(this)}>
+        <VideoControls
+          source={{uri: this.props.navigation.state.params.uri}}
+          onBack={() => { this.props.navigation.goBack() }}
+        />
       </View>
     )
   }
@@ -42,21 +41,9 @@ class VideoPlayer extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#000',
   },
-  close: {
-    zIndex: 10,
-    position: 'absolute',
-    left: 5,
-    top: 30
-  },
-  backgroundVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  }
 })
 
 VideoPlayer.propTypes = {
