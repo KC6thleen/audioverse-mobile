@@ -208,12 +208,12 @@ const history = myLists(
 function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, action) {
   switch(action.type) {
     case ActionTypes.ADD_TO_DOWNLOADS_QUEUE:
-      if (!state.queue.some(el => el.id == action.item.id)) {
+      if (!state.queue.some(el => el.data.id === action.item.data.id && el.data.bitRate === action.item.data.bitRate)) {
         return {
           ...state,
           queue: [
             ...state.queue,
-            action.item
+            { ...action.item }
           ]
         }
       }
@@ -221,13 +221,13 @@ function downloadsQueue(state = { downloading: false, progress: 0, queue: [] }, 
     case ActionTypes.REMOVE_FROM_DOWNLOADS_QUEUE:
       return {
         ...state,
-        queue: state.queue.filter( el => el.id != action.item.id )
+        queue: state.queue.filter( el => !(el.data.id === action.item.id && el.data.bitRate === action.item.bitRate) )
       }
     case ActionTypes.DOWNLOAD_PROGRESS:
       return {
         ...state,
         queue: state.queue.map( el => {
-          if (el.data.id == action.item.id) {
+          if (el.data.id === action.item.id && el.data.bitRate === action.item.bitRate) {
             el.data.progress = action.progress
           }
           return el

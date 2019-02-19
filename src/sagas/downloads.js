@@ -96,7 +96,7 @@ export function* downloadNext() {
         yield put(actions.downloadProgress(item.data, progress))
       } else if (res) {
         yield put(actions.setDownloading(false))
-        yield put(actions.removeFromDownloadsQueue(item))
+        yield put(actions.removeFromDownloadsQueue(item.data))
         const downloads = yield select(selectors.getDownloads)
         const exists = downloads.some(el => el.id === item.data.id && el.bitRate === item.data.bitRate)
         // if it is a sermon and is not in the downloads list then add it to downloads list
@@ -119,7 +119,7 @@ export function* downloadNext() {
         yield call(downloadNext)
       } else { // err
         yield put(actions.setDownloading(false))
-        yield put(actions.removeFromDownloadsQueue(item))
+        yield put(actions.removeFromDownloadsQueue(item.data))
       }
     }
   }

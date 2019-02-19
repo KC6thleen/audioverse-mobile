@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects'
+import { all, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import * as actions from 'src/actions'
 import { startup } from './startup'
@@ -54,7 +54,7 @@ function* rootSaga() {
     takeLatest(actions.LOAD_TAG_SPONSOR, api.loadTagSponsor),
     takeLatest(actions.LOAD_TAGS, api.loadTags),
     takeLatest(actions.LOAD_TAG, api.loadTag),
-    takeLatest(actions.DOWNLOAD, downloads.download),
+    takeEvery(actions.DOWNLOAD, downloads.download),
     takeLatest(actions.REMOVE_DOWNLOAD, downloads.remove),
     takeLatest(actions.SYNC_FAVORITES, favorites.sync),
     takeLatest(actions.ADD_FAVORITE, favorites.add),
