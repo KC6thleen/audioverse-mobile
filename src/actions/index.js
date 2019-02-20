@@ -1,5 +1,6 @@
 export const STARTUP = 'STARTUP'
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
+export const CHANGE_BITRATE = 'CHANGE_BITRATE'
 
 export const PLAYER_STATE = 'PLAYER_STATE'
 export const PLAYBACK_INIT = 'PLAYBACK_INIT'
@@ -8,6 +9,7 @@ export const PLAYBACK_TRACKS = 'PLAYBACK_TRACKS'
 
 export const RESET_AND_PLAY_TRACK = 'RESET_AND_PLAY_TRACK'
 export const PLAY_PAUSE = 'PLAY_PAUSE'
+export const SET_BITRATE_AND_RESET = 'SET_BITRATE_AND_RESET'
 
 export const SKIP_TO_PREVIOUS = 'SKIP_TO_PREVIOUS'
 export const SKIP_TO_NEXT = 'SKIP_TO_NEXT'
@@ -318,6 +320,7 @@ export const loadTag = (loadMore, refresh, url) => action(LOAD_TAG, {loadMore, r
 
 export const startup = () => action(STARTUP)
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
+export const changeBitRate = bitRate => action(CHANGE_BITRATE, {bitRate})
 
 export const playerState = state => action(PLAYER_STATE, {state})
 export const playbackInit = () => action(PLAYBACK_INIT)
@@ -326,6 +329,7 @@ export const playbackTracks = tracks => action(PLAYBACK_TRACKS, {tracks})
 
 export const resetAndPlayTrack = (tracks, id) => action(RESET_AND_PLAY_TRACK, {tracks, id})
 export const playPause = () => action(PLAY_PAUSE)
+export const setBitRateAndReset = (bitRate) => action(SET_BITRATE_AND_RESET, {bitRate})
 
 export const skipToPrevious = () => action(SKIP_TO_PREVIOUS)
 export const skipToNext = () => action(SKIP_TO_NEXT)

@@ -113,5 +113,6 @@
   "play": "遊びます",
   "pause": "一時停止",
   "next": "次",
-  "fast_forward_30_seconds": "早送り30秒"
+  "fast_forward_30_seconds": "早送り30秒",
+  "streaming_quality": "ストリーミング品質"
 }

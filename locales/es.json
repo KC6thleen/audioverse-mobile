@@ -113,5 +113,6 @@
   "play": "Reproducir",
   "pause": "Pausar",
   "next": "Siguiente",
-  "fast_forward_30_seconds": "Adelantar 30 segundos"
+  "fast_forward_30_seconds": "Adelantar 30 segundos",
+  "streaming_quality": "Calidad de transmisión"
 }

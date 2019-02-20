@@ -212,8 +212,9 @@ export function* resetAndPlayTrack({ tracks, id }) {
 
 /** 
  * Plays or pauses the current track
+ * @param {boolean} autoPlay
 */
-export function* playTracks() {
+export function* playTracks(autoPlay = true) {
 
   const tracks = yield select(selectors.getTracks)
   const track = yield select(selectors.getCurrentTrack)
@@ -247,7 +248,9 @@ export function* playTracks() {
   yield call(setupPlayer)
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, track.id)
-  yield call(TrackPlayer.play)
+  if (autoPlay) {
+    yield call(TrackPlayer.play)
+  }
 }
 
 /** 
@@ -264,6 +267,23 @@ export function* playPause() {
     } else {
       yield call(TrackPlayer.play)
     }
+  }
+}
+
+/**
+ * Sets the bitrate and resets the player
+ * @param {string} bitRate 
+ */
+export function* setBitRateAndReset({ bitRate }) {
+  // get the bit rate from the settings
+  const bitRateFromSettings = yield select(selectors.getBitRate)
+  const track = yield select(selectors.getCurrentTrack)
+  const mediaFile = getMediaFile(track.mediaFiles, bitRate, false)
+  if (bitRateFromSettings !== bitRate && mediaFile) {
+    yield put(actions.changeBitRate(bitRate))
+    const state = yield call(TrackPlayer.getState)
+    const isPlaying = state === TrackPlayer.STATE_PLAYING
+    yield call(playTracks, isPlaying)
   }
 }
 

@@ -113,5 +113,6 @@
   "play": "Jouer",
   "pause": "Pause",
   "next": "Suivant",
-  "fast_forward_30_seconds": "Avance rapide 30 secondes"
+  "fast_forward_30_seconds": "Avance rapide 30 secondes",
+  "streaming_quality": "Qualité de streaming"
 }

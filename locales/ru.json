@@ -113,5 +113,6 @@
   "play": "Играть",
   "pause": "Пауза",
   "next": "следующий",
-  "fast_forward_30_seconds": "Перемотка вперед 30 секунд"
+  "fast_forward_30_seconds": "Перемотка вперед 30 секунд",
+  "streaming_quality": "Потоковое качество"
 }

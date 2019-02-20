@@ -9,13 +9,25 @@ import {
 } from 'react-native'
 import firebase from 'react-native-firebase'
 import throttle from 'lodash.throttle'
+import ActionSheet from 'react-native-action-sheet'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
-import { ContentTypes } from 'src/constants'
+import { ContentTypes, Bitrates } from 'src/constants'
 import I18n from 'locales'
 
-const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, onSetRate, onAddFavorite, onRemoveFavorite, onPlayVideo }) => {
+const PlayerOptions = ({
+  navigation,
+  track,
+  onDownload,
+  rate,
+  user,
+  isFavorite,
+  onSetRate,
+  onAddFavorite,
+  onRemoveFavorite,
+  onPlayVideo,
+  onSetBitRateAndReset}) => {
 
   const logIn = () => {
     Alert.alert(
@@ -41,6 +53,21 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
     } else {
       logIn()
     }
+  }
+
+  const handleStreamingQuality = () => {
+    const options = [...Bitrates]
+    options.push(I18n.t('Cancel'))
+
+    ActionSheet.showActionSheetWithOptions({
+      title: I18n.t('streaming_quality'),
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        onSetBitRateAndReset(options[buttonIndex])
+      }
+    })
   }
 
   const handleAddToPlaylist = () => {
@@ -91,6 +118,13 @@ const PlayerOptions = ({ navigation, track, onDownload, rate, user, isFavorite, 
         accessibilityLabel={I18n.t("select_speed")}>
         {`${rate}X`}
       </Text>
+      { track.mediaFiles && track.mediaFiles.length > 1 && 
+        <IconButton
+          name="trending-down"
+          iconStyle={styles.icon}
+          onPress={handleStreamingQuality}
+          accessibilityLabel={I18n.t("streaming_quality")} />
+      }
       { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="folder"
@@ -138,7 +172,8 @@ PlayerOptions.propTypes = {
   onSetRate: PropTypes.func.isRequired,
   onAddFavorite: PropTypes.func,
   onRemoveFavorite: PropTypes.func,
-  onPlayVideo: PropTypes.func
+  onPlayVideo: PropTypes.func,
+  onSetBitRateAndReset: PropTypes.func,
 }
 
 export default PlayerOptions

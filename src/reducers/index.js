@@ -9,7 +9,7 @@ import { ContentTypes } from 'src/constants'
 
 function settings(state = {
   language: I18n.locale.substr(0,2),
-  bitRate: "16",
+  bitRate: "48",
   autoPlay: false
 }, action) {
   switch(action.type) {
@@ -22,6 +22,11 @@ function settings(state = {
       return {
         ...state,
         autoPlay: action.autoPlay
+      }
+    case ActionTypes.CHANGE_BITRATE:
+      return {
+        ...state,
+        bitRate: action.bitRate
       }
     default:
       return state
@@ -502,6 +507,15 @@ const migrations = {
       },
       lists: lists,
     }
+  },
+  2: (state) => { // change the default bitRate
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        bitRate: "48",
+      }
+    }
   }
 }
 
@@ -511,7 +525,7 @@ const persistConfig = {
   storage,
   whitelist: ['settings', 'playback', 'bible', 'user', 'lists', 'presenters'],
   timeout: 0, // disable timeout https://github.com/rt2zz/redux-persist/issues/717
-  version: 1,
+  version: 2,
   migrate: createMigrate(migrations, { debug: false }),
 }
 

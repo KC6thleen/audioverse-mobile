@@ -7,10 +7,11 @@ import {
   StyleSheet
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
+import { ListItem } from 'react-native-elements'
 
 import I18n from 'locales'
-import ListItem from 'src/components/list/ListItem'
 import MiniPlayer from 'src/components/miniplayer'
+import { Bitrates } from 'src/constants'
 
 class Settings extends PureComponent {
 
@@ -27,6 +28,23 @@ class Settings extends PureComponent {
     }, buttonIndex => {
       if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
         actions.changeLanguage(Object.keys(I18n.translations).find(el => I18n.translations[el].id === options[buttonIndex]))
+      }
+    })
+  }
+
+  showBitrates = () => {
+    const { language, actions } = this.props
+
+    const options = [...Bitrates]
+    options.push(I18n.t('Cancel'))
+
+    ActionSheet.showActionSheetWithOptions({
+      title: I18n.t('streaming_quality', {locale: language}),
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        actions.changeBitRate(options[buttonIndex])
       }
     })
   }
@@ -51,14 +69,39 @@ class Settings extends PureComponent {
   }
 
   render() {
-    const { language, autoPlay, user } = this.props
+    const { language, bitRate, autoPlay, user } = this.props
 
     return (
       <View style={styles.container}>
         <View>
-          <ListItem icon={{name: 'pocket'}} title={I18n.t(user ? 'Logout' : 'Login', {locale: language})} chevron onPress={this.handleLoginLogout} />
-          <ListItem icon={{name: 'map-pin'}} title={I18n.t('Language', {locale: language})} subtitle={I18n.t('id', {locale: language})} chevron onPress={this.showLanguages} />
-          <ListItem icon={{name: 'play-circle'}} title={I18n.t('Autoplay', {locale: language})} rightElement={<Switch value={autoPlay} onValueChange={this.setAutoPlay} />} onPress={this.showLanguages} />
+          <ListItem
+            leftIcon={{type: 'feather', name: 'pocket'}}
+            title={I18n.t(user ? 'Logout' : 'Login', {locale: language})}
+            chevron
+            bottomDivider
+            onPress={this.handleLoginLogout} />
+          <ListItem
+            leftIcon={{type: 'feather', name: 'map-pin'}}
+            title={I18n.t('Language', {locale: language})}
+            subtitle={I18n.t('id', {locale: language})}
+            chevron
+            bottomDivider
+            onPress={this.showLanguages} />
+          <ListItem
+            leftIcon={{type: 'feather', name: 'play-circle'}}
+            title={I18n.t('Autoplay', {locale: language})}
+            rightElement={<Switch value={autoPlay}
+            onValueChange={this.setAutoPlay} />}
+            bottomDivider
+            onPress={this.showLanguages} />
+          <ListItem
+            leftIcon={{type: 'feather', name: 'trending-down'}}
+            title={I18n.t('streaming_quality',
+            {locale: language})}
+            rightTitle={bitRate}
+            chevron
+            bottomDivider
+            onPress={this.showBitrates} />
         </View>
         <MiniPlayer navigation={this.props.navigation} />
       </View>
@@ -77,12 +120,14 @@ const styles = StyleSheet.create({
 Settings.propTypes = {
   navigation: PropTypes.object.isRequired,
   language: PropTypes.string.isRequired,
+  bitRate: PropTypes.string.isRequired,
   autoPlay: PropTypes.bool.isRequired,
   user: PropTypes.object,
   actions: PropTypes.shape({
     changeLanguage: PropTypes.func.isRequired,
     setAutoPlay: PropTypes.func.isRequired,
-    logOut: PropTypes.func.isRequired
+    logOut: PropTypes.func.isRequired,
+    changeBitRate: PropTypes.func.isRequired,
   })
 }
 

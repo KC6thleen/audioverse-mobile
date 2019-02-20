@@ -31,9 +31,16 @@ export const formatTime = seconds => {
  * @param {object} item 
  * @param {string} bitRate 
  */
-export const getMediaFile = (mediaFiles, bitRate) => {
-  const index = mediaFiles.findIndex(el => el.bitrate === bitRate)
-  return mediaFiles[index !== -1 ? index : mediaFiles.length - 1]
+export const getMediaFile = (mediaFiles, bitRate, defaultToFirst = true) => {
+  if (mediaFiles.length) {
+    const index = mediaFiles.findIndex(el => el.bitrate === bitRate)
+    if (index !== -1) {
+      return mediaFiles[index]
+    } else if (defaultToFirst) {
+      return mediaFiles[0]
+    }
+  }
+  return null
 }
 
 /**

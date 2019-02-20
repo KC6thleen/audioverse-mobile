@@ -142,7 +142,8 @@ class Player extends PureComponent {
           onSetRate={this.handleOnSetRate}
           onAddFavorite={actions.addFavorite}
           onRemoveFavorite={actions.removeFavorite}
-          onPlayVideo={this.handlePlayVideo} />
+          onPlayVideo={this.handlePlayVideo}
+          onSetBitRateAndReset={actions.setBitRateAndReset} />
         <View style={styles.bottomContainer}>
           <ProgressBar />
           <PlayerControls
@@ -204,7 +205,8 @@ Player.propTypes = {
     download: PropTypes.func.isRequired,
     addFavorite: PropTypes.func.isRequired,
     removeFavorite: PropTypes.func.isRequired,
-    playVideo: PropTypes.func.isRequired
+    playVideo: PropTypes.func.isRequired,
+    setBitRateAndReset: PropTypes.func.isRequired,
   })
 }
 

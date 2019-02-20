@@ -18,6 +18,7 @@ function* rootSaga() {
     takeLatest(actions.LOG_OUT, settings.logOut),
     takeLatest(actions.RESET_AND_PLAY_TRACK, player.resetAndPlayTrack),
     takeLatest(actions.PLAY_PAUSE, player.playPause),
+    takeLatest(actions.SET_BITRATE_AND_RESET, player.setBitRateAndReset),
     takeLatest(actions.SKIP_TO_PREVIOUS, player.skipToPrevious),
     takeLatest(actions.SKIP_TO_NEXT, player.skipToNext),
     takeLatest(actions.REPLAY, player.replay),
