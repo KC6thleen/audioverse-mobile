@@ -649,9 +649,9 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@react-navigation/core@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.0.2.tgz#8631801533a27d034a3b8421dfd0510a9f27dcf3"
+"@react-navigation/core@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.1.1.tgz#badf449ac7d2ae65b0f5aa1bf63a87e7888458d3"
   dependencies:
     create-react-context "0.2.2"
     hoist-non-react-statics "^3.0.1"
@@ -660,13 +660,13 @@
     react-is "^16.5.2"
     react-lifecycles-compat "^3.0.4"
 
-"@react-navigation/native@3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.0.3.tgz#6b1a6e15cde719e6c932bd78b23fa1417f6c0cab"
+"@react-navigation/native@3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.1.4.tgz#ff305d01e156077d06ff513bbcbb6ad54d4ca80d"
   dependencies:
     hoist-non-react-statics "^3.0.1"
-    react-native-gesture-handler "^1.0.0"
-    react-native-safe-area-view "^0.11.0"
+    react-native-gesture-handler "~1.0.14"
+    react-native-safe-area-view "^0.12.0"
     react-native-screens "^1.0.0 || ^1.0.0-alpha"
 
 "@types/node@*":
@@ -4974,17 +4974,17 @@ react-native-firebase@^5.1.1:
     opencollective-postinstall "^2.0.0"
     prop-types "^15.6.2"
 
-react-native-gesture-handler@^1.0.0:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.9.tgz#ddec4d19d51cb6fb54df6eca792ebd76aaef083f"
+react-native-gesture-handler@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-gesture-handler@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
+react-native-gesture-handler@~1.0.14:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.16.tgz#bee54981575e581857c2298e133ce2ffac240a3e"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
@@ -5000,9 +5000,13 @@ react-native-marquee@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/react-native-marquee/-/react-native-marquee-0.3.2.tgz#e86fcfe9ea2036637b079d4af0d19f92195aeef2"
 
-react-native-safe-area-view@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
+react-native-reanimated@^1.0.0-alpha.12:
+  version "1.0.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.0.0-alpha.12.tgz#535c84a9e87c919417aee0fa68f360b3bb9556b0"
+
+react-native-safe-area-view@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.12.0.tgz#5c312f087300ecf82e8541c3eac25d560e147f22"
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
@@ -5039,8 +5043,8 @@ react-native-tab-view@^1.2.0:
     prop-types "^15.6.1"
 
 "react-native-track-player@git+https://github.com/react-native-kit/react-native-track-player":
-  version "1.0.2"
-  resolved "git+https://github.com/react-native-kit/react-native-track-player#50828e19bc7fcee3624cf47859ffe3e8079efdb2"
+  version "1.1.2"
+  resolved "git+https://github.com/react-native-kit/react-native-track-player#686e7a4d9fe6607d58347c573ba83ed6010d7ee5"
 
 react-native-vector-icons@^6.1.0:
   version "6.1.0"
@@ -5121,15 +5125,15 @@ react-native@0.57.4:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation-drawer@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.5.tgz#d8cc71bd1779186261f3c3754b11f29aa98bd4f5"
+react-navigation-drawer@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.2.0.tgz#475dccb00bc0e5dd56aa65a46f71ed66545f7a6b"
   dependencies:
     react-native-tab-view "^1.2.0"
 
-react-navigation-stack@1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.6.tgz#5c2b6617dccc1de6001b387cd967baa6b205132d"
+react-navigation-stack@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.10.tgz#cf1f4f222bddbfae134cfb28362bafd42a64c485"
 
 react-navigation-tabs@1.0.2:
   version "1.0.2"
@@ -5140,14 +5144,14 @@ react-navigation-tabs@1.0.2:
     react-lifecycles-compat "^3.0.4"
     react-native-tab-view "^1.0.0"
 
-react-navigation@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.9.tgz#1c82f8ec2f87e2728816e79fb43d7b11ed265415"
+react-navigation@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.3.0.tgz#12d1c6da77a03e6a37bbd5d26f13867612725dc5"
   dependencies:
-    "@react-navigation/core" "3.0.2"
-    "@react-navigation/native" "3.0.3"
-    react-navigation-drawer "1.0.5"
-    react-navigation-stack "1.0.6"
+    "@react-navigation/core" "3.1.1"
+    "@react-navigation/native" "3.1.4"
+    react-navigation-drawer "1.2.0"
+    react-navigation-stack "1.0.10"
     react-navigation-tabs "1.0.2"
 
 react-proxy@^1.1.7:
