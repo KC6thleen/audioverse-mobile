@@ -78,16 +78,19 @@ async function eventHandler(store, data) {
     if (data.position) {
       store.dispatch(actions.playbackPosition(0))
     }
-    // set track id
-    store.dispatch(actions.playbackTrackId(data.nextTrack))
-    // get track
-    const track = await TrackPlayer.getTrack(data.nextTrack)
-    // track initialized
-    store.dispatch(actions.trackInitialized(track))
+    if (data.nextTrack) {
+      // set track id
+      store.dispatch(actions.playbackTrackId(data.nextTrack))
+      // get track
+      const track = await TrackPlayer.getTrack(data.nextTrack)
+      // track initialized
+      store.dispatch(actions.trackInitialized(track))
+    
       // Bible chapter
-    if (track.chapter) {
-      store.dispatch(actions.bibleChapter(track.chapter))
-      store.dispatch(actions.loadBibleVerses())
+      if (track.chapter) {
+        store.dispatch(actions.bibleChapter(track.chapter))
+        store.dispatch(actions.loadBibleVerses())
+      }
     }
   })
 
