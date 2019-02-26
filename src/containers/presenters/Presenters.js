@@ -41,7 +41,7 @@ class Presenters extends PureComponent {
 
   handleRefresh = () => {
     this.props.actions.loadPresenters(false, true)
-    this.search.clearText()
+    this.search.clear()
   }
 
   renderItem = ({ item }) => {
