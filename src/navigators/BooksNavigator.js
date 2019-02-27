@@ -7,6 +7,7 @@ import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Books from 'src/containers/books'
 import Book from 'src/containers/books/book'
+import HeaderRightBook from './headerrightbook'
 
 const BooksStack = createStackNavigator({
   Books: {
@@ -20,7 +21,8 @@ const BooksStack = createStackNavigator({
   Book: {
     screen: Book,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title
+      title: navigation.state.params.title,
+      headerRight: <HeaderRightBook />
     })
   }
 }, {
