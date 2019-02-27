@@ -78,7 +78,9 @@ async function eventHandler(store, data) {
     if (data.position) {
       store.dispatch(actions.playbackPosition(0))
     }
-    if (data.nextTrack) {
+    // This event is fired diferently on iOS and Android with different data values
+    // that's the reason we are using the following validation to only run this code once
+    if ((Platform.OS === 'ios' && data.track) || (Platform.OS === 'android' && data.nextTrack)) {
       // set track id
       store.dispatch(actions.playbackTrackId(data.nextTrack))
       // get track

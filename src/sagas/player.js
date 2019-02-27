@@ -283,6 +283,7 @@ export function* setBitRateAndReset({ bitRate }) {
     yield put(actions.changeBitRate(bitRate))
     const state = yield call(TrackPlayer.getState)
     const isPlaying = state === TrackPlayer.STATE_PLAYING
+    yield call(TrackPlayer.reset)
     yield call(playTracks, isPlaying)
   }
 }
