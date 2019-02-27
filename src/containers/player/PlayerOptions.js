@@ -13,7 +13,7 @@ import ActionSheet from 'react-native-action-sheet'
 
 import IconButton from 'src/components/buttons/IconButton'
 import { removeFavorite } from '../../actions';
-import { ContentTypes, Bitrates } from 'src/constants'
+import { ContentTypes } from 'src/constants'
 import I18n from 'locales'
 
 const PlayerOptions = ({
@@ -56,7 +56,7 @@ const PlayerOptions = ({
   }
 
   const handleStreamingQuality = () => {
-    const options = [...Bitrates]
+    const options = [ ...track.mediaFiles ].reverse().map(el => el.bitrate)
     options.push(I18n.t('Cancel'))
 
     ActionSheet.showActionSheetWithOptions({

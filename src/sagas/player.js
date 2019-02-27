@@ -277,9 +277,7 @@ export function* playPause() {
 export function* setBitRateAndReset({ bitRate }) {
   // get the bit rate from the settings
   const bitRateFromSettings = yield select(selectors.getBitRate)
-  const track = yield select(selectors.getCurrentTrack)
-  const mediaFile = getMediaFile(track.mediaFiles, bitRate, false)
-  if (bitRateFromSettings !== bitRate && mediaFile) {
+  if (bitRateFromSettings !== bitRate) {
     yield put(actions.changeBitRate(bitRate))
     const state = yield call(TrackPlayer.getState)
     const isPlaying = state === TrackPlayer.STATE_PLAYING
