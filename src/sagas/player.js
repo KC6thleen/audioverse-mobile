@@ -241,7 +241,7 @@ export function* playTracks(autoPlay = true) {
   for (let i of tracks) {
     newTracks.push({
       ...i,
-      url: yield call(getUrl, i)
+      url: encodeURI(yield call(getUrl, i))
     })
   }
 
