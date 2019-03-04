@@ -23,6 +23,7 @@ export function* setupPlayer() {
     capabilities: [
       TrackPlayer.CAPABILITY_PLAY,
       TrackPlayer.CAPABILITY_PAUSE,
+      TrackPlayer.CAPABILITY_STOP,
       TrackPlayer.CAPABILITY_SEEK_TO,
       TrackPlayer.CAPABILITY_JUMP_FORWARD,
       TrackPlayer.CAPABILITY_JUMP_BACKWARD,
@@ -34,6 +35,7 @@ export function* setupPlayer() {
     compactCapabilities: [
       TrackPlayer.CAPABILITY_PLAY,
       TrackPlayer.CAPABILITY_PAUSE,
+      TrackPlayer.CAPABILITY_STOP,
       TrackPlayer.CAPABILITY_SEEK_TO,
       TrackPlayer.CAPABILITY_JUMP_FORWARD,
       TrackPlayer.CAPABILITY_JUMP_BACKWARD,
