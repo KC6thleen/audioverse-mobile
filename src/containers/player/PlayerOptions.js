@@ -110,12 +110,18 @@ const PlayerOptions = ({
   }
 
   const handleMore = () => {
-    const options = [
-      I18n.t("streaming_quality"),
-      I18n.t("transcript"),
-      I18n.t("attachments"),
-    ]
-    options.push(I18n.t('Cancel'))
+    const options = []
+
+    if (track.mediaFiles && track.mediaFiles.length > 1) {
+      options.push(I18n.t("streaming_quality"))
+    }
+
+    if (track.contentType === ContentTypes.sermon) {
+      options.push(I18n.t("transcript"))
+      if (track.attachments && track.attachments.length) {
+        options.push(I18n.t("attachments"))
+      }
+    }
 
     ActionSheet.showActionSheetWithOptions({
       title: I18n.t('more_options'),
