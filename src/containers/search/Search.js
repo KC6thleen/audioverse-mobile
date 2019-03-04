@@ -65,7 +65,7 @@ class Search extends PureComponent {
             category: options[buttonIndex],
             data: []
           }, () => {
-            this.search.clearText()
+            this.search.clear()
             this.search.focus()
           })
         }
