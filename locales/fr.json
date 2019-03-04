@@ -114,5 +114,8 @@
   "pause": "Pause",
   "next": "Suivant",
   "fast_forward_30_seconds": "Avance rapide 30 secondes",
-  "streaming_quality": "Qualité de streaming"
+  "streaming_quality": "Qualité de streaming",
+  "more_options": "Plus d'options",
+  "transcript": "Transcription",
+  "attachments": "Les pièces jointes"
 }

@@ -5,6 +5,7 @@ import {
   Text,
   Share,
   Alert,
+  Linking,
   StyleSheet
 } from 'react-native'
 import firebase from 'react-native-firebase'
@@ -69,6 +70,26 @@ const PlayerOptions = ({
       }
     })
   }
+  
+  handleAttachments = () => {
+    const options = []
+
+    for ( let i = 0; i < track.attachments.length; i++ ) {
+      options.push(track.attachments[i].filename)
+    }
+    
+    options.push(I18n.t('Cancel'))
+
+    ActionSheet.showActionSheetWithOptions({
+      title: I18n.t('attachments'),
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        Linking.openURL(track.attachments[buttonIndex].downloadURL).catch(err => console.error(err))
+      }
+    })
+  }
 
   const handleAddToPlaylist = () => {
     if (user) {
@@ -86,6 +107,35 @@ const PlayerOptions = ({
     })
     // share
     Share.share({ message: `${I18n.t("share_this_blessing_with_you.")} ${track.shareUrl}` })
+  }
+
+  const handleMore = () => {
+    const options = [
+      I18n.t("streaming_quality"),
+      I18n.t("transcript"),
+      I18n.t("attachments"),
+    ]
+    options.push(I18n.t('Cancel'))
+
+    ActionSheet.showActionSheetWithOptions({
+      title: I18n.t('more_options'),
+      options: options,
+      cancelButtonIndex: options.length - 1,
+    }, buttonIndex => {
+      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
+        switch(options[buttonIndex]) {
+          case I18n.t("streaming_quality"):
+            handleStreamingQuality()
+            break
+          case I18n.t("transcript"):
+            navigation.navigate({ routeName: 'Transcript' })
+            break
+          case I18n.t("attachments"):
+            handleAttachments()
+            break
+        }
+      }
+    })
   }
 
   return (
@@ -118,13 +168,6 @@ const PlayerOptions = ({
         accessibilityLabel={I18n.t("select_speed")}>
         {`${rate}X`}
       </Text>
-      { track.mediaFiles && track.mediaFiles.length > 1 && 
-        <IconButton
-          name="trending-down"
-          iconStyle={styles.icon}
-          onPress={handleStreamingQuality}
-          accessibilityLabel={I18n.t("streaming_quality")} />
-      }
       { track.contentType === ContentTypes.sermon && 
         <IconButton
           name="folder"
@@ -139,6 +182,11 @@ const PlayerOptions = ({
         onPress={handleShare}
         accessibilityLabel={I18n.t("share")} />
       }
+      <IconButton
+        name="more-vertical"
+        iconStyle={styles.icon}
+        onPress={handleMore}
+        accessibilityLabel={I18n.t("more_options")} />
     </View>
   )
 }

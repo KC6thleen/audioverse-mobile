@@ -114,5 +114,8 @@
   "pause": "一時停止",
   "next": "次",
   "fast_forward_30_seconds": "早送り30秒",
-  "streaming_quality": "ストリーミング品質"
+  "streaming_quality": "ストリーミング品質",
+  "more_options": "より多くのオプション",
+  "transcript": "トランスクリプト",
+  "attachments": "添付ファイル"
 }

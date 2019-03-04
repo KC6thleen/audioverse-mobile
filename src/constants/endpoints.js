@@ -29,5 +29,6 @@ export default {
   signup: 'auth/signup',
   searchPresentations: 'search?query=',
   searchPresenters: 'presenters?search=',
-  searchConferences: 'conferences?search='
+  searchConferences: 'conferences?search=',
+  transcripts: 'transcripts'
 }

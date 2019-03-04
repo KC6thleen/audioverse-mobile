@@ -22,6 +22,7 @@ import TopicsNavigator from './TopicsNavigator'
 import SettingsNavigator from './SettingsNavigator'
 import DownloadsQueueNavigator from './DownloadsQueueNavigator'
 import Player from 'src/containers/player'
+import Transcript from 'src/containers/player/transcript'
 import VideoPlayer from 'src/containers/player/Video'
 import AddToPlaylist from 'src/containers/lists/playlists/addtoplaylist'
 import NewPlaylist from 'src/containers/lists/playlists/newplaylist'
@@ -82,9 +83,10 @@ const AppNavigator = createStackNavigator({
   Login,
   AppStack,
   Player,
+  Transcript,
   VideoPlayer,
   AddToPlaylist,
-  NewPlaylist
+  NewPlaylist,
 },{
   initialRouteName: 'Loading',
   transparentCard: true,

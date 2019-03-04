@@ -114,5 +114,8 @@
   "pause": "Пауза",
   "next": "следующий",
   "fast_forward_30_seconds": "Перемотка вперед 30 секунд",
-  "streaming_quality": "Потоковое качество"
+  "streaming_quality": "Потоковое качество",
+  "more_options": "Больше вариантов",
+  "transcript": "расшифровка",
+  "attachments": "Вложения"
 }
