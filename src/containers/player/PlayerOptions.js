@@ -123,6 +123,8 @@ const PlayerOptions = ({
       }
     }
 
+    options.push(I18n.t('Cancel'))
+
     ActionSheet.showActionSheetWithOptions({
       title: I18n.t('more_options'),
       options: options,
