@@ -6,6 +6,7 @@ import {
   Text,
   Button,
   ActivityIndicator,
+  Platform,
   StyleSheet,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
@@ -60,7 +61,7 @@ class Transcript extends PureComponent {
         {!this.state.loading &&
           <View style={styles.card}>
             <Text style={styles.title}>{I18n.t('transcript')}</Text>
-            <WebView source={{html: `<p style="font-size:58px;text-align:center">${this.state.transcript}</p>`}} />
+            <WebView source={{html: `<p style="font-size:${Platform.OS === 'ios'?'58':'29'}px;text-align:center">${this.state.transcript}</p>`}} />
           </View>
         }
         <MiniPlayer navigation={this.props.navigation} />
