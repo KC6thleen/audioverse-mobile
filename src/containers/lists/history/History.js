@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { View, FlatList, Alert, StyleSheet } from 'react-native'
 
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
@@ -42,7 +41,6 @@ class History extends PureComponent {
           renderItem={this.renderItem}
           keyExtractor={item => item.id}
         />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -52,12 +50,10 @@ class History extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 
 History.propTypes = {
-  navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   actions: PropTypes.shape({
     resetAndPlayTrack: PropTypes.func.isRequired,

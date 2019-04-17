@@ -8,7 +8,6 @@ import {
   Platform,
   StyleSheet
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
 import ActionSheet from 'react-native-action-sheet'
 import MarqueeText from 'react-native-marquee'
 
@@ -96,7 +95,8 @@ class Player extends PureComponent {
       language,
       user,
       actions,
-      isFavorite
+      isFavorite,
+      bitRate
     } = this.props
 
     if (!track) {
@@ -139,6 +139,7 @@ class Player extends PureComponent {
           rate={rate}
           user={user}
           isFavorite={isFavorite}
+          bitRate={bitRate}
           onSetRate={this.handleOnSetRate}
           onAddFavorite={actions.addFavorite}
           onRemoveFavorite={actions.removeFavorite}
@@ -195,6 +196,7 @@ Player.propTypes = {
   language: PropTypes.string.isRequired,
   user: PropTypes.object,
   isFavorite: PropTypes.bool.isRequired,
+  bitRate: PropTypes.string.isRequired,
   actions: PropTypes.shape({
     playPause: PropTypes.func.isRequired,
     skipToPrevious: PropTypes.func.isRequired,

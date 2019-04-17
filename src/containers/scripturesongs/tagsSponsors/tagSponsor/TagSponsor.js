@@ -4,7 +4,6 @@ import { View, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 
 class TagSponsor extends PureComponent {
 
@@ -38,7 +37,6 @@ class TagSponsor extends PureComponent {
     return (
       <View style={styles.container}>
         <List renderItem={this.renderItem} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -48,7 +46,6 @@ class TagSponsor extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 

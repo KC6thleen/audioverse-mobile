@@ -55,6 +55,7 @@ exports[`renders correctly 1`] = `
     }
   >
     <Text
+      accessibilityLabel="current_time NaN:NaN"
       style={
         Object {
           "marginLeft": 10,
@@ -64,6 +65,7 @@ exports[`renders correctly 1`] = `
       NaN:NaN
     </Text>
     <Text
+      accessibilityLabel="duration NaN:NaN"
       style={
         Object {
           "marginRight": 10,

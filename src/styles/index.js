@@ -1,13 +1,16 @@
 import { StyleSheet } from 'react-native'
+import image from 'assets/default.png'
+
+export const primaryColor = '#E53935'
 
 export const GlobalStyles = StyleSheet.create({
   header: {
-    backgroundColor: '#E53935',
+    backgroundColor: primaryColor,
     elevation: 0,
     borderBottomWidth: 0
   },
   tab: {
-    backgroundColor: '#E53935'
+    backgroundColor: primaryColor
   },
   tabIndicator: {
     backgroundColor: '#FFFFFF'
@@ -15,3 +18,4 @@ export const GlobalStyles = StyleSheet.create({
 })
 
 export const headerTintColor = '#FFFFFF'
+export const defaultImage = image

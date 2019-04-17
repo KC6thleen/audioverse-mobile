@@ -27,7 +27,7 @@ const HeaderRightBook = ({ items, actions }) => {
             mediaFile.bitrate,
             actions.addLocalFiles.bind(this, [item.id])
           )
-        });
+        })
       }
     })
   }

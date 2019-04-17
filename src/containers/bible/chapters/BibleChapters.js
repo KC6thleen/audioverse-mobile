@@ -9,7 +9,6 @@ import {
 
 import ListItem from 'src/components/list/ListItem'
 import IconButton from 'src/components/buttons/IconButton'
-import MiniPlayer from 'src/components/miniplayer'
 import I18n from 'locales'
 import { Dirs } from 'src/constants'
 
@@ -75,7 +74,6 @@ class BibleChapters extends PureComponent {
           keyExtractor={item => item.chapter}
           refreshing={pagination.isFetching}
         />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -85,7 +83,6 @@ class BibleChapters extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   },
   item: {
     width: '25%',

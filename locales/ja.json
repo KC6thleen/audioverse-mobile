@@ -14,7 +14,7 @@
   "settings":"設定",
   "new_presentations":"新しい",
   "trending_presentations":"トレンド",
-  "featured_presentations":"特集",
+  "featured_presentations":"おすすめ",
   "downloads":"ダウンロード",
   "favorites":"お気に入り",
   "playlists":"プレイリスト",
@@ -117,5 +117,7 @@
   "streaming_quality": "ストリーミング品質",
   "more_options": "より多くのオプション",
   "transcript": "トランスクリプト",
-  "attachments": "添付ファイル"
+  "attachments": "添付ファイル",
+  "home": "ホーム",
+  "discovery": "発見"
 }

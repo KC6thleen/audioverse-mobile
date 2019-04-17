@@ -13,7 +13,7 @@ import MarqueeText from 'react-native-marquee'
 
 import I18n from 'locales'
 import { ContentTypes } from 'src/constants'
-import defaultImage from 'assets/av-logo.png'
+import AVLogo from 'assets/av-logo.png'
 import Slide from './Slide'
 
 const getSlides = (data, language) => {
@@ -51,7 +51,7 @@ const getSlides = (data, language) => {
 	// conference
 	// don't show conference for books/stories
 	if (data.contentType != ContentTypes.book && data.conference && data.conference.length) {
-		image = data.conference[0].logo != '' ? data.conference[0].photo86 : defaultImage
+		image = data.conference[0].logo != '' ? data.conference[0].photo86 : AVLogo
 		slides.push({
       type: 'conference',
       image: image,
@@ -66,7 +66,7 @@ const getSlides = (data, language) => {
 	
 	// series
 	if (data.series && data.series.length) {
-		image = data.series[0].logo != '' ? data.series[0].photo86 : defaultImage
+		image = data.series[0].logo != '' ? data.series[0].photo86 : AVLogo
 		slides.push({
       type: 'serie',
       image: image,
@@ -89,7 +89,7 @@ const PlayerContent = ({ data, language, navigation }) => {
   let sponsor = null
   if (data.sponsor && data.sponsor.length) {
     sponsor = {...data.sponsor[0]}
-    sponsor.image = sponsor.logo != '' ? sponsor.photo86 : defaultImage
+    sponsor.image = sponsor.logo != '' ? sponsor.photo86 : AVLogo
   }
 
   const handleOnPressSponsor = () => {

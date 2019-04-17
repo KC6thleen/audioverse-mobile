@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 
 class NewRecordings extends PureComponent {
 
@@ -35,24 +33,13 @@ class NewRecordings extends PureComponent {
     const { items, pagination } = this.props
 
     return (
-      <View style={styles.container}>
-        <List renderItem={this.renderItem} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
-        <MiniPlayer navigation={this.props.navigation} />
-      </View>
+      <List renderItem={this.renderItem} items={items} {...pagination} onEndReached={this.handleEndReached} onRefresh={this.handleRefresh} />
     )
   }
 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between'
-  }
-})
-
 NewRecordings.propTypes = {
-  navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
   actions: PropTypes.shape({

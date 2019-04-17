@@ -10,7 +10,6 @@ import ActionSheet from 'react-native-action-sheet'
 import { ListItem } from 'react-native-elements'
 
 import I18n from 'locales'
-import MiniPlayer from 'src/components/miniplayer'
 import { Bitrates } from 'src/constants'
 
 class Settings extends PureComponent {
@@ -103,7 +102,6 @@ class Settings extends PureComponent {
             bottomDivider
             onPress={this.showBitrates} />
         </View>
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -113,7 +111,6 @@ class Settings extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 

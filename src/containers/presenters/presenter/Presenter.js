@@ -4,7 +4,6 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 
 class Presenter extends PureComponent {
 
@@ -50,7 +49,6 @@ class Presenter extends PureComponent {
           {...pagination}
           onRefresh={this.handleRefresh}
         />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -60,7 +58,6 @@ class Presenter extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   },
   bio: {
     padding: 20,

@@ -3,7 +3,6 @@ import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navig
 
 import HeaderRightBibleVerses from './headerrightbibleverses'
 import TabBarLabel from './tabbarlabel'
-import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Books from 'src/containers/bible/books'
@@ -42,7 +41,6 @@ const BibleStack = createStackNavigator({
   BibleTab: {
     screen: BibleTab,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
       headerTitle: <HeaderTitle title="bible" />,
       headerRight: <HeaderRightBibleVerses />
     })
@@ -52,16 +50,6 @@ const BibleStack = createStackNavigator({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor
   },
-  navigationOptions: ({ navigation }) => {
-    let drawerLockMode = 'unlocked'
-    if (navigation.state.index > 0) {
-      drawerLockMode = 'locked-closed'
-    }
-  
-    return {
-      drawerLockMode
-    }
-  }
 })
 
 export default BibleStack

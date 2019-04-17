@@ -1,16 +1,19 @@
 import React from 'react'
-import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
+import {
+  createStackNavigator,
+  createMaterialTopTabNavigator
+} from 'react-navigation'
 
 import TabBarLabel from './tabbarlabel'
-import HeaderLeft from './HeaderLeft'
 import HeaderTitle from './headertitle'
 import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import New from 'src/containers/recordings/new'
 import Trending from 'src/containers/recordings/trending'
 import Featured from 'src/containers/recordings/featured'
+import Search from 'src/containers/search'
 
-const PresentationsTab = createMaterialTopTabNavigator({
+const PresentationsTabNavigator = createMaterialTopTabNavigator({
   New: {
     screen: New,
     navigationOptions: {
@@ -37,30 +40,16 @@ const PresentationsTab = createMaterialTopTabNavigator({
   }
 })
 
-const PresentationsStack = createStackNavigator({
-  PresentationsTab: {
-    screen: PresentationsTab,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
-      headerTitle: <HeaderTitle title="presentations" />,
-      headerRight: <HeaderRight navigation={navigation} />
-    })
-  }
+const Navigator = createStackNavigator({
+  PresentationsTabNavigator,
+  Search,
 }, {
-  defaultNavigationOptions: {
+  defaultNavigationOptions: ({ navigation }) => ({
     headerStyle: GlobalStyles.header,
-    headerTintColor: headerTintColor
-  },
-  navigationOptions: ({ navigation }) => {
-    let drawerLockMode = 'unlocked'
-    if (navigation.state.index > 0) {
-      drawerLockMode = 'locked-closed'
-    }
-  
-    return {
-      drawerLockMode
-    }
-  }
+    headerTintColor: headerTintColor,
+    headerTitle: <HeaderTitle title="presentations" />,
+    headerRight: <HeaderRight navigation={navigation} />,
+  }),
 })
 
-export default PresentationsStack
+export default Navigator

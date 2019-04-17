@@ -14,7 +14,6 @@ import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 import {
   searchPresentations,
   fetchData
@@ -170,7 +169,6 @@ class Search extends PureComponent {
           keyExtractor={item => item.id}
           refreshing={false}
           onRefresh={this.handleSearch} />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -180,7 +178,6 @@ class Search extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 

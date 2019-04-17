@@ -1,6 +1,6 @@
 import { NetInfo } from 'react-native'
 import { Endpoints, ContentTypes } from 'src/constants'
-import defaultImage from 'assets/av-logo.png'
+import { defaultImage } from 'src/styles'
 
 /**
  * Format number to two digits
@@ -114,7 +114,7 @@ export const netInfoIsConnected = async () => {
   NetInfo.isConnected.addEventListener(
     'connectionChange',
     onInitialNetConnection
-  );
+  )
 
   await NetInfo.getConnectionInfo()
   return await NetInfo.isConnected.fetch()

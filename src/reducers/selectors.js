@@ -1,6 +1,6 @@
 import { ContentTypes } from 'src/constants'
 import { parseRecording, parseBibleChapter } from 'src/utils'
-import defaultImage from 'assets/av-logo.png'
+import { defaultImage } from 'src/styles'
 
 export const getLanguage = state => state.settings.language
 export const getBitRate = state => state.settings.bitRate

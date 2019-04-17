@@ -24,6 +24,7 @@ const PlayerOptions = ({
   rate,
   user,
   isFavorite,
+  bitRate,
   onSetRate,
   onAddFavorite,
   onRemoveFavorite,
@@ -57,7 +58,9 @@ const PlayerOptions = ({
   }
 
   const handleStreamingQuality = () => {
-    const options = [ ...track.mediaFiles ].reverse().map(el => el.bitrate)
+    const options = [ ...track.mediaFiles ].reverse().map(el => {
+      return el.bitrate + (el.bitrate === bitRate ? ' ✓' : '')
+    })
     options.push(I18n.t('Cancel'))
 
     ActionSheet.showActionSheetWithOptions({
@@ -224,6 +227,7 @@ PlayerOptions.propTypes = {
   rate: PropTypes.number,
   user: PropTypes.object,
   isFavorite: PropTypes.bool,
+  bitRate: PropTypes.string,
   onDownload: PropTypes.func.isRequired,
   onSetRate: PropTypes.func.isRequired,
   onAddFavorite: PropTypes.func,

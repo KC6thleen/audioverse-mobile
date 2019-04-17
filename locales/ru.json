@@ -13,12 +13,12 @@
   "download_queue":"Очередь загрузки",
   "settings":"настройки",
   "new_presentations":"новый",
-  "trending_presentations":"трендовом",
-  "featured_presentations":"ЛУЧШЕЕ",
-  "downloads":"ЗАГРУЗКИ",
-  "favorites":"В избранное",
-  "playlists":"ПЛЕЙЛИСТОВ",
-  "history":"ИСТОРИЯ",
+  "trending_presentations":"Trending",
+  "featured_presentations":"Рекомендуемые",
+  "downloads":"Загрузки",
+  "favorites":"Избранные",
+  "playlists":"Плейлисты",
+  "history":"история",
   "chapters":"Главы",
   "verses":"вирши",
   "Recorded":"записанный",
@@ -117,5 +117,7 @@
   "streaming_quality": "Потоковое качество",
   "more_options": "Больше вариантов",
   "transcript": "расшифровка",
-  "attachments": "Вложения"
+  "attachments": "Вложения",
+  "home": "Главная",
+  "discovery": "открытие"
 }

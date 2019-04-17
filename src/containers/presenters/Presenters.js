@@ -5,7 +5,6 @@ import { SearchBar } from 'react-native-elements'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 import I18n from 'locales'
 
 class Presenters extends PureComponent {
@@ -80,7 +79,6 @@ class Presenters extends PureComponent {
           items={this.state.data}
           {...pagination}
           onRefresh={this.handleRefresh} />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -90,7 +88,6 @@ class Presenters extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 

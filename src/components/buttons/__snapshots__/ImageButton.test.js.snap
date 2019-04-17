@@ -2,6 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <View
+  accessibilityRole="button"
   accessible={true}
   isTVSelectable={true}
   onResponderGrant={[Function]}

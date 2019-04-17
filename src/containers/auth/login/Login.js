@@ -34,7 +34,7 @@ class Login extends PureComponent {
 
   navigate = () => {
     const { navigation } = this.props
-    navigation.navigate('AppStack')
+    navigation.navigate('Home')
     if (navigation.state.params && navigation.state.params.screen) {
       navigation.navigate(navigation.state.params.screen)
     }

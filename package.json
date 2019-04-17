@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1",
+    "randomcolor": "^0.5.4",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-action-sheet": "^2.0.1",
@@ -18,7 +19,9 @@
     "react-native-i18n": "^2.0.12",
     "react-native-marquee": "^0.3.2",
     "react-native-reanimated": "^1.0.0-alpha.12",
+    "react-native-render-html": "^4.1.2",
     "react-native-simple-toast": "^0.0.8",
+    "react-native-snap-carousel": "^3.7.5",
     "react-native-sqlite-storage": "^3.3.7",
     "react-native-swiper": "^1.5.14",
     "react-native-track-player": "git+https://github.com/react-native-kit/react-native-track-player",

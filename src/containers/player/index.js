@@ -21,6 +21,7 @@ import {
   getLanguage,
   getUser,
   isFavorite,
+  getBitRate,
 } from 'src/reducers/selectors'
 
 import Player from './Player'
@@ -31,7 +32,8 @@ const  mapStateToProps = state => ({
   rate: getRate(state),
   language: getLanguage(state),
   user: getUser(state),
-  isFavorite: isFavorite(state)
+  isFavorite: isFavorite(state),
+  bitRate: getBitRate(state),
 })
 
 const mapDispatchToProps = dispatch => ({

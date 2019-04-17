@@ -4,7 +4,6 @@ import { View, StyleSheet } from 'react-native'
 
 import List from 'src/components/list/List'
 import ListItem from 'src/components/list/ListItem'
-import MiniPlayer from 'src/components/miniplayer'
 
 class Story extends PureComponent {
 
@@ -33,7 +32,6 @@ class Story extends PureComponent {
     return (
       <View style={styles.container}>
         <List renderItem={this.renderItem} items={items} {...pagination} onRefresh={this.handleRefresh} />
-        <MiniPlayer navigation={this.props.navigation} />
       </View>
     )
   }
@@ -43,7 +41,6 @@ class Story extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
   }
 })
 

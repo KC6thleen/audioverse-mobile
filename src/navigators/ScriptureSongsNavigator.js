@@ -2,9 +2,6 @@ import React from 'react'
 import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 
 import TabBarLabel from './tabbarlabel'
-import HeaderLeft from './HeaderLeft'
-import HeaderTitle from './headertitle'
-import HeaderRight from './HeaderRight'
 import { GlobalStyles, headerTintColor } from 'src/styles'
 import Tags from 'src/containers/scripturesongs/tags'
 import Tag from 'src/containers/scripturesongs/tags/tag'
@@ -50,14 +47,7 @@ const ScriptureSongsTab = createMaterialTopTabNavigator({
 })
 
 const ScriptureSongsStack = createStackNavigator({
-  ScriptureSongsTab: {
-    screen: ScriptureSongsTab,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: <HeaderLeft onPress={navigation.toggleDrawer} />,
-      headerTitle: <HeaderTitle title="Scripture_Songs" />,
-      headerRight: <HeaderRight navigation={navigation} />
-    })
-  },
+  ScriptureSongsTab,
   TagBook: {
     screen: TagBook,
     navigationOptions: ({ navigation }) => ({
@@ -83,20 +73,16 @@ const ScriptureSongsStack = createStackNavigator({
     })
   }
 }, {
-  defaultNavigationOptions: {
-    headerStyle: GlobalStyles.header,
-    headerTintColor: headerTintColor
+  defaultNavigationOptions: ({ navigation }) => {
+    const options  = {
+      headerStyle: GlobalStyles.header,
+      headerTintColor: headerTintColor,
+    }
+    if (navigation.state.index !== undefined) {
+      options.header = null
+    }
+    return options
   },
-  navigationOptions: ({ navigation }) => {
-    let drawerLockMode = 'unlocked'
-    if (navigation.state.index > 0) {
-      drawerLockMode = 'locked-closed'
-    }
-  
-    return {
-      drawerLockMode
-    }
-  }
 })
 
 export default ScriptureSongsStack

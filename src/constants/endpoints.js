@@ -8,8 +8,11 @@ export default {
   stories: 'audiobooks?story=1',
   presenters: 'presenters?all=true',
   conferences: 'conferences',
+  conference: 'recordings/conference',
   sponsors: 'sponsors',
+  sponsor: 'recordings/sponsor',
   series: 'series',
+  serie: 'recordings/serie',
   topics: 'topics',
   tagsBooks: 'tags/books',
   tagsAlbums: 'series?contentType=4',
@@ -30,5 +33,7 @@ export default {
   searchPresentations: 'search?query=',
   searchPresenters: 'presenters?search=',
   searchConferences: 'conferences?search=',
-  transcripts: 'transcripts'
+  transcripts: 'transcripts',
+  postsFeatured: 'posts/featured',
+  presentationsByContentType: 'recordings/content-type',
 }
