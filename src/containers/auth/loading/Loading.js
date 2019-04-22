@@ -18,7 +18,7 @@ class Loading extends PureComponent {
   navigate = async () => {
     const { navigation, user } = this.props
     const hideLogin = await AsyncStorage.getItem('hideLogin')
-    navigation.reset([NavigationActions.navigate({ routeName: !user && !hideLogin ? 'Login' : 'Home' })], 0)
+    navigation.navigate({ routeName: !user && !hideLogin ? 'Login' : 'Home' })
   }
 
   render() {

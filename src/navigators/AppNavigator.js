@@ -111,14 +111,12 @@ const PlayerStackNavigator = createStackNavigator({
 })
 
 const StackModalNavigator = createStackNavigator({
-  Loading,
   Home: BottomTabNavigator,
   Player: PlayerStackNavigator,
   VideoPlayer,
   AddToPlaylist,
   NewPlaylist,
 },{
-  initialRouteName: 'Loading',
   transparentCard: true,
   mode: 'modal',
   headerMode: 'none',
@@ -155,8 +153,9 @@ const StackModalNavigator = createStackNavigator({
 })
 
 const AppNavigator = createSwitchNavigator({
+  Loading,
+  Login,
   StackModalNavigator,
-  Login, 
 })
 
 export default createAppContainer(AppNavigator)
