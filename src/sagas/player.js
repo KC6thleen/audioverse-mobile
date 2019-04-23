@@ -247,7 +247,6 @@ export function* playTracks(autoPlay = true) {
     })
   }
 
-  yield call(setupPlayer)
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, track.id)
   if (autoPlay) {

@@ -10,6 +10,7 @@ import I18n from 'locales'
 class Presenters extends PureComponent {
 
   state = {
+    search: '',
     data: []
   }
 
@@ -28,8 +29,9 @@ class Presenters extends PureComponent {
     }
   }
 
-  handleChangeText = text => {
-    text = text.toLowerCase()
+  handleChangeText = search => {
+    this.setState({ search })
+    text = search.toLowerCase()
     const filteredData = this.props.items.filter(el => {
       return `${el.surname} ${el.givenName}`.toLowerCase().indexOf(text) > -1
     })
@@ -53,8 +55,8 @@ class Presenters extends PureComponent {
     )
   }
 
-  renderHeader = () => {
-    return(
+  get header() {
+    return (
       <SearchBar
         lightTheme
         round
@@ -62,6 +64,7 @@ class Presenters extends PureComponent {
         placeholder={I18n.t('search')}
         focus
         ref={search => this.search = search}
+        value={this.state.search}
         onChangeText={this.handleChangeText}
         accessibilityRole="search"
         accessibilityLabel={I18n.t("search")} />
@@ -74,7 +77,7 @@ class Presenters extends PureComponent {
     return (
       <View style={styles.container}>
         <List
-          ListHeaderComponent={this.renderHeader}
+          ListHeaderComponent={this.header}
           renderItem={this.renderItem}
           items={this.state.data}
           {...pagination}

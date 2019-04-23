@@ -111,7 +111,7 @@ class Search extends PureComponent {
     this.setState({search: text})
   }
 
-  renderHeader = () => {
+  get header() {
     return (
       <SearchBar
         lightTheme
@@ -121,6 +121,7 @@ class Search extends PureComponent {
         focus
         showLoadingIcon={this.state.loading}
         ref={search => this.search = search}
+        value={this.state.search}
         onChangeText={this.handleChangeText}
         onSubmitEditing={this.handleSearch}
         accessibilityRole="search"
@@ -163,7 +164,7 @@ class Search extends PureComponent {
     return (
       <View style={styles.container}>
         <FlatList
-          ListHeaderComponent={this.renderHeader}
+          ListHeaderComponent={this.header}
           renderItem={this.renderItem}
           data={this.state.data}
           keyExtractor={item => item.id}

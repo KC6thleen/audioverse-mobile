@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {
   ImageBackground,
   View,
-  TouchableOpacity,
   StatusBar,
   Platform,
   StyleSheet
@@ -107,7 +106,7 @@ class Player extends PureComponent {
       <IconButton 
         name='chevron-down'
         iconStyle={styles.minimizeIcon}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.pop()}
         accessibilityLabel={I18n.t("minimize_player")} />
 
     return (
@@ -125,7 +124,7 @@ class Player extends PureComponent {
             subtitle={track.artist}
             rightElement={rightElement}
             style={{backgroundColor: '#E0E0E080'}}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.pop()}
           />
         </View>
         <PlayerContent

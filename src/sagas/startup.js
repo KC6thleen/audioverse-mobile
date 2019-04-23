@@ -3,6 +3,7 @@ import firebase from 'react-native-firebase'
 
 import * as selectors from 'src/reducers/selectors'
 import I18n from 'locales'
+import { setupPlayer } from './player'
 import recoverDB from './db'
 
 /**
@@ -19,5 +20,6 @@ export function* startup(action) {
     firebase.analytics().setUserId(user.userId ? user.userId.toString() : null)
   }
   console.log('startup', I18n.locale, language, user)
+  yield call(setupPlayer)
   yield call(recoverDB)
 }
