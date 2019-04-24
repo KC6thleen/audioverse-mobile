@@ -94,7 +94,7 @@ function* getSermonUrl(item) {
   if (!exists) {
     const others = downloads.filter( el => el.bitRate !== mediaFile.bitrate )
     for (let i of others) {
-      currentUrl = `${Platform.OS === 'android' && download.recovered ? download.dir : DOWNLOAD_DIR}/${i.downloadPath}/${encodeURIComponent(i.fileName)}`
+      currentUrl = `${Platform.OS === 'android' && download && download.recovered ? download.dir : DOWNLOAD_DIR}/${i.downloadPath}/${encodeURIComponent(i.fileName)}`
       exists = yield call(fileExists, currentUrl)
       if (exists) {
         url = `file://${currentUrl}`
