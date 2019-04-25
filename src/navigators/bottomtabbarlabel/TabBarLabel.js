@@ -5,7 +5,11 @@ import { Text } from 'react-native'
 import I18n from 'locales'
 
 const TabBarLabel = ({ language, tintColor, title }) => (
-  <Text style={{marginHorizontal: 15, fontSize: 11, color: tintColor, textAlign: 'center'}}>{I18n.t(title, {locale: language})}</Text>
+  <Text
+    numberOfLines={1}
+    style={{marginHorizontal: 15, fontSize: 11, color: tintColor, textAlign: 'center'}}>
+      {I18n.t(title, {locale: language})}
+  </Text>
 )
 
 TabBarLabel.propTypes = {
