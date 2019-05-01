@@ -1,5 +1,6 @@
 import React from 'react'
-import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 
 import HeaderRightBibleVerses from './headerrightbibleverses'
 import TabBarLabel from './tabbarlabel'
@@ -9,7 +10,7 @@ import Books from 'src/containers/bible/books'
 import Chapters from 'src/containers/bible/chapters'
 import Verses from 'src/containers/bible/verses'
 
-const BibleTab = createMaterialTopTabNavigator({
+const BibleTabsNavigator = createMaterialTopTabNavigator({
   BibleBooks: {
     screen: Books,
     navigationOptions: {
@@ -37,9 +38,9 @@ const BibleTab = createMaterialTopTabNavigator({
   }
 })
 
-const BibleStack = createStackNavigator({
-  BibleTab: {
-    screen: BibleTab,
+const Navigator = createStackNavigator({
+  BibleTabsNavigator: {
+    screen: BibleTabsNavigator,
     navigationOptions: ({ navigation }) => ({
       headerTitle: <HeaderTitle title="bible" />,
       headerRight: <HeaderRightBibleVerses />
@@ -52,4 +53,4 @@ const BibleStack = createStackNavigator({
   },
 })
 
-export default BibleStack
+export default Navigator

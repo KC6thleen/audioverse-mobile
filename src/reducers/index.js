@@ -87,12 +87,9 @@ function bible(state = {
     abbr: 'ESV'
   },
   book: {
-    dam_id: 'ENGESV2',
     name: 'Genesis',
     book_id: 'Gen',
-    chapters: '50',
     testament: 'O',
-    drama: 2
   },
   chapter: 1,
   verses: ''

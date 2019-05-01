@@ -30,15 +30,18 @@ class Presenter extends PureComponent {
     const { items, pagination, navigation } = this.props
     const { image, description } = navigation.state.params
     const Bio =
-      <View style={styles.bio}>
-        <View style={styles.bioImageContainer}>
-          <Image
-            style={styles.bioImage}
-            source={{uri: image}}
-          />
+      image && description ?
+        <View style={styles.bio}>
+          <View style={styles.bioImageContainer}>
+            <Image
+              style={styles.bioImage}
+              source={{uri: image}}
+            />
+          </View>
+          { description ? <Text style={styles.bioText}>{description}</Text> : null }
         </View>
-        { description ? <Text style={styles.bioText}>{description}</Text> : null }
-      </View>
+        : null
+      
 
     return (
       <View style={styles.container}>

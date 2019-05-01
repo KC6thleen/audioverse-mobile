@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-  createStackNavigator,
-  createMaterialTopTabNavigator
-} from 'react-navigation'
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 
 import TabBarLabel from './tabbarlabel'
 import HeaderTitle from './headertitle'

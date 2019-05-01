@@ -3,12 +3,10 @@ import {
   Easing,
   Animated
 } from 'react-native'
-import {
-  createAppContainer,
-  createStackNavigator,
-  createSwitchNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation'
+import { createSwitchNavigator } from '@react-navigation/core'
+import { createAppContainer } from '@react-navigation/native'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import Icon from 'react-native-vector-icons/Feather'
 
 import { GlobalStyles, headerTintColor, primaryColor } from 'src/styles'

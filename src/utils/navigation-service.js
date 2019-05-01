@@ -1,4 +1,4 @@
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from '@react-navigation/core'
 
 let navigator
 
@@ -17,5 +17,5 @@ function navigate(routeName, params) {
 
 export default {
   setTopLevelNavigator,
-  navigate
+  navigate,
 }

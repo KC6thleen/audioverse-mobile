@@ -7,7 +7,6 @@ import {
   StatusBar,
   StyleSheet
 } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 
 class Loading extends PureComponent {
   constructor(props) {

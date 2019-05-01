@@ -341,7 +341,7 @@ export const trackInitialized = (track) => action(TRACK_INITIALIZED, {track})
 export const playbackRate = rate => action(PLAYBACK_RATE, {rate})
 export const playbackPosition = position => action(PLAYBACK_POSITION, {position})
 
-export const setBibleVersion = version => action(SET_BIBLE_VERSION, {version})
+export const setBibleVersion = (version, bookId) => action(SET_BIBLE_VERSION, {version, bookId})
 export const bibleVersion = version => action(BIBLE_VERSION, {version})
 export const bibleBook = (book) => action(BIBLE_BOOK, {book})
 export const bibleChapter = chapter => action(BIBLE_CHAPTER, {chapter})

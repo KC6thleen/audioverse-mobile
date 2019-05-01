@@ -5,7 +5,7 @@ import { View, WebView, StyleSheet } from 'react-native'
 class BibleVerses extends PureComponent {
 
   componentDidMount() {
-    if (this.props.bible.verses !== '') {
+    if (this.props.bible.verses === '') {
       this.props.actions.loadBibleVerses()
     }
   }

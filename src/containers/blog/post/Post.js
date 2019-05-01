@@ -63,17 +63,19 @@ class Post extends PureComponent {
       routeName = 'Sponsor'
       id = href.match(/\d+/)[0]
       url = `${Endpoints.sponsor}/${id}`
+    }
+
+    if (routeName !== '') {
+      this.props.navigation.navigate({
+        routeName: routeName,
+        params: {
+          id,
+          url,
+        }
+      })
     } else {
       Linking.openURL(href).catch(err => console.error(err))
     }
-
-    this.props.navigation.navigate({
-      routeName: routeName,
-      params: {
-        id,
-        url,
-      }
-    })
   }
 
   render() {

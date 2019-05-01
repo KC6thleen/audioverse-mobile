@@ -5,28 +5,11 @@ import Icon from 'react-native-vector-icons/Feather'
 import ActionSheet from 'react-native-action-sheet'
 
 import I18n from 'locales'
-
-const bibles = [
-  {
-    id: 'ENGESV2',
-    name: '2001 English Standard',
-    abbr: 'ESV'
-  },
-  {
-    id: 'ENGKJV1',
-    name: 'King James Version',
-    abbr: 'KJV'
-  },
-  {
-    id: 'ENGKJV2',
-    name: 'King James Version (Dramatized)',
-    abbr: 'KJV(D)'
-  }
-]
+import { Bibles } from 'src/constants'
 
 const HeaderRightBibleVerses = ({ bible, actions }) => {
   const handleOnPressVersion = () => {
-    const options = bibles.map(el => el.name)
+    const options = Bibles.map(el => el.name)
     options.push(I18n.t('Cancel'))
 
     ActionSheet.showActionSheetWithOptions({
@@ -35,8 +18,8 @@ const HeaderRightBibleVerses = ({ bible, actions }) => {
       cancelButtonIndex: options.length - 1,
     }, async (buttonIndex) => {
       if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
-        if (bible.version.id !== bibles[buttonIndex].id) {
-          actions.setBibleVersion(bibles[buttonIndex])
+        if (bible.version.id !== Bibles[buttonIndex].id) {
+          actions.setBibleVersion(Bibles[buttonIndex])
         }
       }
     })
