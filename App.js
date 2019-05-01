@@ -20,20 +20,29 @@ import { parseRecording } from "src/utils"
 class App extends PureComponent {
 
   componentDidMount() {
-    Linking.addEventListener('url', this._handleOpenURL.bind(this))
+    Linking.addEventListener('url', this.handleOpenURL.bind(this))
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        this.openURL(url)
+      }
+    }).catch(err => console.error('An error occurred', err));
   }
 
   componentWillUnmount() {
-    Linking.removeEventListener('url', this._handleOpenURL.bind(this))
+    Linking.removeEventListener('url', this.handleOpenURL.bind(this))
   }
 
-  async _handleOpenURL(event) {
+  handleOpenURL(event) {
+    this.openURL(event.url)
+  }
 
-    if (event.url.match("/sermons/recordings/")) { // recording
-      const id = event.url.match(/\d+/)[0]
-      const url = `${Endpoints.recordings}/${id}`
+  async openURL(url) {
+
+    if (url.match("/sermons/recordings/")) { // recording
+      const id = url.match(/\d+/)[0]
+      const recordingsUrl = `${Endpoints.recordings}/${id}`
       
-      const { result } = await fetchData(url)
+      const { result } = await fetchData(recordingsUrl)
       if (result && result.length) {
         const item = parseRecording(result[0].recordings)
         this.props.store.dispatch(actions.resetAndPlayTrack([item]))
@@ -45,72 +54,72 @@ class App extends PureComponent {
     let id = null
     let params = {}
     
-    if (event.url.match("/music/browse")) { // music
+    if (url.match("/music/browse")) { // music
       routeName = 'ScriptureSongs'
-    } else if (event.url.match(/audiobibles\/books\/\w+\/\w+\/\w+\/\d+/)) { // Bible
+    } else if (url.match(/audiobibles\/books\/\w+\/\w+\/\w+\/\d+/)) { // Bible
       routeName = 'Chapters'
-      const parts = event.url.split('/')
+      const parts = url.split('/')
       const versionId = parts[parts.length - 4] + parts[parts.length - 1]
       const version = Bibles.find(el => el.id === versionId)
       const bookId = parts[parts.length - 2]
       if (version && bookId) {
         this.props.store.dispatch(actions.setBibleVersion(version, bookId))
       }
-    } else if (event.url.match("/audiobooks/books/")) { // book
+    } else if (url.match("/audiobooks/books/")) { // book
       routeName = 'Book'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.book}/${id}`,
         id,
       }
-    } else if (event.url.match("/audiobooks/books")) { // books
+    } else if (url.match("/audiobooks/books")) { // books
       routeName = 'Books'
-    } else if (event.url.match("/conferences/")) { // conference
+    } else if (url.match("/conferences/")) { // conference
       routeName = 'Conference'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.conference}/${id}`,
       }
-    } else if (event.url.match("/conferences")) { // conferences
+    } else if (url.match("/conferences")) { // conferences
       routeName = 'Conferences'
-    } else if (event.url.match("/presenters/")) { // presenter
+    } else if (url.match("/presenters/")) { // presenter
       routeName = 'Presenter'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.presenter}/${id}`,
       }
-    } else if (event.url.match("/presenters")) { // presenters
+    } else if (url.match("/presenters")) { // presenters
       routeName = 'Presenters'
-    } else if (event.url.match("/topics/")) { // topic
+    } else if (url.match("/topics/")) { // topic
       routeName = 'Topic'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.topic}/${id}`,
       }
-    } else if (event.url.match("/topics")) { // topics
+    } else if (url.match("/topics")) { // topics
       routeName = 'Topics'
-    } else if (event.url.match("/sponsors/")) { // sponsor
+    } else if (url.match("/sponsors/")) { // sponsor
       routeName = 'Sponsor'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.sponsor}/${id}`,
       }
-    } else if (event.url.match("/sponsors")) { // sponsors
+    } else if (url.match("/sponsors")) { // sponsors
       routeName = 'Sponsors'
-    } else if (event.url.match("/seriess/")) { // serie
+    } else if (url.match("/seriess/")) { // serie
       routeName = 'Serie'
-      id = event.url.match(/\d+/)[0]
+      id = url.match(/\d+/)[0]
       params = {
         url: `${Endpoints.serie}/${id}`,
       }
-    } else if (event.url.match("/seriess")) { // series
+    } else if (url.match("/seriess")) { // series
       routeName = 'Series'
     }
 
     if (routeName !== '') {
       NavigationService.navigate(routeName, params)
     } else {
-      Linking.openURL(event.url).catch(err => console.error(err))
+      Linking.openURL(url).catch(err => console.error(err))
     }
   }
 
