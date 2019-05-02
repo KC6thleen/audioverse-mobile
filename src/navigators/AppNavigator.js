@@ -59,7 +59,7 @@ const screenNavigationOptions = (title, icon) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
     return <Icon name={icon} size={25} color={tintColor} />
   },
-  tabBarLabel: ({ tintColor }) => <BottomTabBarLabel tintColor={tintColor} title={title} />,
+  tabBarLabel: ({ tintColor, orientation }) => <BottomTabBarLabel tintColor={tintColor} orientation={orientation} title={title} />,
 })
 
 const BottomTabNavigator = createBottomTabNavigator({
