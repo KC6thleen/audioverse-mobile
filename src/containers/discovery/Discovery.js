@@ -93,7 +93,8 @@ class Discovery extends PureComponent {
   }
 
   renderItem = ({ item }) => {
-    const artwork = typeof item.artwork === 'string' ? item.artwork : undefined
+    const artwork = typeof item.artwork === 'string' || item.contentType === ContentTypes.sermon
+      ? item.artwork : undefined
     const text = artwork ? '' : item.title.split('-')
     const data = {
       title: item.title,
