@@ -37,6 +37,8 @@ target 'AudioVerse' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNLocalize', :path => '../node_modules/react-native-localize'
+
   post_install do |installer|
     installer.pods_project.targets.each do |target|
 

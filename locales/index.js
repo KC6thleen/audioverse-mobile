@@ -1,5 +1,6 @@
-import ReactNative, { AsyncStorage } from 'react-native'
-import I18n from 'react-native-i18n'
+import { I18nManager } from 'react-native'
+import * as RNLocalize from 'react-native-localize'
+import I18n from 'i18n-js'
 
 import de from './de.json'
 import en from './en.json'
@@ -9,9 +10,7 @@ import ja from './ja.json'
 import ru from './ru.json'
 import zh from './zh.json'
 
-I18n.fallbacks = true
-
-I18n.translations = {
+const translations = {
   de,
   en,
   es,
@@ -21,6 +20,22 @@ I18n.translations = {
   zh
 }
 
-I18n.defaultSeparator = '/'
+export const setI18nConfig = () => {
+  // fallback if no available language fits
+  const fallback = { languageTag: "en", isRTL: false }
+
+  const { languageTag, isRTL } =
+    RNLocalize.findBestAvailableLanguage(Object.keys(translations)) ||
+    fallback
+
+  // update layout direction
+  I18nManager.forceRTL(isRTL)
+
+  // set i18n-js config
+  I18n.translations = translations
+  I18n.locale = languageTag
+}
+
+setI18nConfig()
 
 export default I18n
