@@ -16,7 +16,7 @@ import BottomTabBarLabel from './bottomtabbarlabel'
 import withPlayer from 'src/components/withPlayer'
 import Loading from 'src/containers/auth/loading'
 import Login from 'src/containers/auth/login'
-import Discovery from 'src/containers/discovery'
+import Discover from 'src/containers/discover'
 import Post from 'src/containers/blog/post'
 import PresentationsNavigator from './PresentationsNavigator'
 import BibleNavigator from './BibleNavigator'
@@ -33,8 +33,8 @@ import Conference from 'src/containers/conferences/conference'
 import Sponsor from 'src/containers/sponsors/sponsor'
 import Serie from 'src/containers/series/serie'
 
-const DiscoveryNavigator = createStackNavigator({
-  Discovery,
+const DiscoverNavigator = createStackNavigator({
+  Discover,
   Search,
   Post,
   Conference,
@@ -44,13 +44,13 @@ const DiscoveryNavigator = createStackNavigator({
   defaultNavigationOptions: ({ navigation }) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
-    headerTitle: <HeaderTitle title="discovery" />,
+    headerTitle: <HeaderTitle title="discover" />,
     headerRight: <HeaderRight navigation={navigation} />,
   }),
 })
 
 const WithPlayerPresentationsNavigator = withPlayer(PresentationsNavigator)
-const WithPlayerDiscoveryNavigator = withPlayer(DiscoveryNavigator)
+const WithPlayerDiscoverNavigator = withPlayer(DiscoverNavigator)
 const WithPlayerBibleNavigator = withPlayer(BibleNavigator)
 const WithPlayerBooksNavigator = withPlayer(BooksNavigator)
 const WithPlayerMenuNavigator = withPlayer(MenuNavigator)
@@ -67,9 +67,9 @@ const BottomTabNavigator = createBottomTabNavigator({
     screen: WithPlayerPresentationsNavigator,
     navigationOptions: screenNavigationOptions('home', 'home'),
   },
-  Discovery: {
-    screen: WithPlayerDiscoveryNavigator,
-    navigationOptions: screenNavigationOptions('discovery', 'zap'),
+  Discover: {
+    screen: WithPlayerDiscoverNavigator,
+    navigationOptions: screenNavigationOptions('discover', 'zap'),
   },
   Bible: {
     screen: WithPlayerBibleNavigator,

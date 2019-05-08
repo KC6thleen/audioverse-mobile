@@ -18,7 +18,7 @@ import { fetchData } from "src/services"
 import { Endpoints, ContentTypes } from "src/constants"
 import { parseRecording } from 'src/utils'
 
-class Discovery extends PureComponent {
+class Discover extends PureComponent {
   
   state = {
     sliderActiveSlide: 0,
@@ -217,8 +217,8 @@ const styles = StyleSheet.create({
   },
 })
 
-Discovery.propTypes = {
+Discover.propTypes = {
   history: PropTypes.array.isRequired,
 }
 
-export default Discovery
+export default Discover
