@@ -73,12 +73,12 @@
   "added_to_playlist":"プレイリストに追加されました",
   "just_now":"ちょうど今",
   "one_minute_ago":"1分前",
-  "minutes_ago":"%1$d分前",
+  "minutes_ago":"{{minutes}}分前",
   "one_hour_ago":"1時間前",
   "one_day_ago":"1日前",
   "yesterday":"昨日",
-  "days_ago":"%1$d日前",
-  "weeks_ago":"%1$d週間前",
+  "days_ago":"{{days}}日前",
+  "weeks_ago":"{{weeks}}週間前",
   "filter_by":"フィルタリングする",
   "download_all":"すべてをダウンロードする",
   "support_av_text":"無料の説教のオーディオを通して福音を伝える使命をAudioVerseに支援することを検討してください。",
@@ -119,5 +119,6 @@
   "transcript": "トランスクリプト",
   "attachments": "添付ファイル",
   "home": "ホーム",
-  "discover": "発見"
+  "discover": "発見",
+  "note_transcript": "このトランスクリプトは自動生成されます。 このメッセージのあなた自身の書き起こしを提出するために、{{email}}で我々に電子メールを送ってください。"
 }

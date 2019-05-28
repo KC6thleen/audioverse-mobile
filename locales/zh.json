@@ -73,12 +73,12 @@
   "added_to_playlist":"添加到播放列表",
   "just_now":"現在",
   "one_minute_ago":"1分鐘前",
-  "minutes_ago":"%1$d分鐘前",
+  "minutes_ago":"{{minutes}}分鐘前",
   "one_hour_ago":"1小時前",
   "one_day_ago":"1天前",
   "yesterday":"昨天",
-  "days_ago":"%1$d天前",
-  "weeks_ago":"%1$d週前",
+  "days_ago":"{{days}}天前",
+  "weeks_ago":"{{weeks}}週前",
   "filter_by":"過濾",
   "download_all":"全部下載",
   "support_av_text":"考慮支持AudioVerse的使命是通過免費的講道音來傳播福音。",
@@ -119,5 +119,6 @@
   "transcript": "抄本",
   "attachments": "附件",
   "home": "家",
-  "discover": "發現"
+  "discover": "發現",
+  "note_transcript": "Этот транскрипт может быть сгенерирован автоматически. Чтобы отправить собственную транскрипцию этого сообщения, пожалуйста, напишите нам по адресу {{email}}。"
 }

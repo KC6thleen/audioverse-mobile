@@ -73,12 +73,12 @@
   "added_to_playlist":"Added to playlist",
   "just_now":"Just now",
   "one_minute_ago":"1 minute ago",
-  "minutes_ago":"%1$d minutes ago",
+  "minutes_ago":"{{minutes}} minutes ago",
   "one_hour_ago":"1 hour ago",
   "one_day_ago":"1 day ago",
   "yesterday":"yesterday",
-  "days_ago":"%1$d days ago",
-  "weeks_ago":"%1$d weeks ago",
+  "days_ago":"{{days}} days ago",
+  "weeks_ago":"{{weeks}} weeks ago",
   "filter_by":"Filter by",
   "download_all":"Download all",
   "support_av_text":"Consider supporting AudioVerse on its mission of spreading the gospel through free sermon audio.",
@@ -119,5 +119,6 @@
   "transcript": "Transcript",
   "attachments": "Attachments",
   "home": "Home",
-  "discover": "Discover"
+  "discover": "Discover",
+  "note_transcript": "This transcript may be auto-generated. To submit your own transcription of this message, please email us at {{email}}."
 }

@@ -73,12 +73,12 @@
   "added_to_playlist":"Agregado a la lista",
   "just_now":"Ahora",
   "one_minute_ago":"hace 1 min",
-  "minutes_ago":"hace %1$d mins",
+  "minutes_ago":"hace {{minutes}} mins",
   "one_hour_ago":"hace 1 hora",
   "one_day_ago":"hace 1 día",
   "yesterday":"ayer",
-  "days_ago":"hace %1$d días",
-  "weeks_ago":"hace %1$d semanas",
+  "days_ago":"hace {{days}} días",
+  "weeks_ago":"hace {{weeks}} semanas",
   "filter_by":"Filtrar por",
   "download_all":"Descargar todo",
   "support_av_text":"Considere apoyar a AudioVerse en su misión de difundir el evangelio a través de sermónes en audio.",
@@ -119,5 +119,6 @@
   "transcript": "Transcripción",
   "attachments": "Archivos adjuntos",
   "home": "Inicio",
-  "discover": "Descubrir"
+  "discover": "Descubrir",
+  "note_transcript": "Esta transcripción puede ser auto-generada. Para enviar su propia transcripción de este mensaje, envíenos un correo electrónico a {{email}}."
 }

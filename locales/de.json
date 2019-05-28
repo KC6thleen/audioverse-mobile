@@ -73,12 +73,12 @@
   "added_to_playlist":"Zur Playlist hinzugefügt",
   "just_now":"Gerade jetzt",
   "one_minute_ago":"Vor 1 Minute",
-  "minutes_ago":"vor %1$d Minuten",
+  "minutes_ago":"vor {{minutes}} Minuten",
   "one_hour_ago":"vor 1 Stunde",
   "one_day_ago":"Vor 1 Tag",
   "yesterday":"gestern",
-  "days_ago":"vor %1$d Tagen",
-  "weeks_ago":"vor %1$d Wochen",
+  "days_ago":"vor {{days}} Tagen",
+  "weeks_ago":"vor {{weeks}} Wochen",
   "filter_by":"Filtern nach",
   "download_all":"Alles herunterladen",
   "support_av_text":"Betrachten Sie die Unterstützung von AudioVerse auf seine Mission der Verbreitung des Evangeliums durch freie Predigt Audio.",
@@ -119,5 +119,6 @@
   "transcript": "Abschrift",
   "attachments": "Anlagen",
   "home": "Zuhause",
-  "discover": "Entdecken"
+  "discover": "Entdecken",
+  "note_transcript": "Dieses Transkript kann automatisch generiert werden. Um Ihre eigene Transkription dieser Nachricht einzureichen, senden Sie uns bitte eine E-Mail an {{email}}."
 }

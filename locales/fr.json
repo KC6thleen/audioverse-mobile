@@ -73,12 +73,12 @@
   "added_to_playlist":"Ajouté à la liste de lecture",
   "just_now":"Juste maintenant",
   "one_minute_ago":"il y a 1 minute",
-  "minutes_ago":"il y a %1$d minutes",
+  "minutes_ago":"il y a {{minutes}} minutes",
   "one_hour_ago":"Il ya 1 heure",
   "one_day_ago":"il y a 1 jour",
   "yesterday":"hier",
-  "days_ago":"il y a %1$d jours",
-  "weeks_ago":"il y a %1$d semaines",
+  "days_ago":"il y a {{hours}} jours",
+  "weeks_ago":"il y a {{weeks}} semaines",
   "filter_by":"Filtrer par",
   "download_all":"Tout télécharger",
   "support_av_text":"Envisagez de soutenir AudioVerse sur sa mission de diffusion de l'évangile grâce au sermon audio gratuit.",
@@ -119,5 +119,6 @@
   "transcript": "Transcription",
   "attachments": "Les pièces jointes",
   "home": "Accueil",
-  "discover": "Entdecken"
+  "discover": "Entdecken",
+  "note_transcript": "Cette transcription peut être générée automatiquement. Pour envoyer votre propre transcription de ce message, veuillez nous envoyer un courriel à {{email}}."
 }

@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native'
 
+import I18n from 'locales'
 import { fetchData } from "src/services"
 import { Endpoints } from "src/constants"
 
@@ -45,7 +46,7 @@ class Transcript extends PureComponent {
         {!this.state.loading &&
           <WebView
             style={styles.webView}
-            source={{html: `<p style="font-size:${Platform.OS === 'ios'?'58':'29'}px;text-align:center">${this.state.transcript}</p>`}} />
+            source={{html: `<p style="font-size:${Platform.OS === 'ios'?'58':'29'}px;text-align:center">${this.state.transcript}<br><br>${I18n.t('note_transcript', {email: 'media@audioverse.org'})}</p>`}} />
         }
       </View>
     )
