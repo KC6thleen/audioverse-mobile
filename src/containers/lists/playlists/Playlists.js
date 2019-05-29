@@ -1,12 +1,17 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { View, FlatList, Alert, StyleSheet } from 'react-native'
+import {
+  View,
+  FlatList,
+  Alert,
+  StyleSheet,
+} from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import ListItem from 'src/components/list/ListItem'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
-class Playlists extends PureComponent {
+class Playlists extends React.PureComponent {
 
   componentDidMount() {
     this.props.actions.sync()
@@ -27,10 +32,12 @@ class Playlists extends PureComponent {
     return (
       <ListItem
         style={styles.listItem}
-        icon={{name: 'check'}}
+        leftIcon={{type: 'feather', name: 'check'}}
         title={item.title}
+        titleProps={{numberOfLines: 1}}
         onPress={() => { this.props.navigation.navigate({ routeName: 'PlaylistItems', params: { playlistId: item.id, title: item.title } }) }}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
+        bottomDivider
       />
     )
   }
@@ -57,7 +64,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     height: 70,
-  }
+  },
 })
 
 Playlists.propTypes = {
@@ -65,8 +72,8 @@ Playlists.propTypes = {
   items: PropTypes.array,
   actions: PropTypes.shape({
     sync: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired
-  })
+    remove: PropTypes.func.isRequired,
+  }),
 }
 
 const RightElement = ({ data, onPress }) => {

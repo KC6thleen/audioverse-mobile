@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MiniPlayer component renders correctly when there is a track 1`] = `<ForwardRef(View) />`;
-
-exports[`MiniPlayer component renders empty component when no track 1`] = `<ForwardRef(View) />`;
+exports[`MiniPlayer component renders empty component when no track 1`] = `
+<MiniPlayer
+  actions={
+    Object {
+      "playPause": [Function],
+    }
+  }
+  navigation={
+    Object {
+      "navigate": [MockFunction],
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;

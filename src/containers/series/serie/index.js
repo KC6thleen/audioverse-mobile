@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadSerie, resetAndPlayTrack } from 'src/actions'
+import { loadSerie } from 'src/actions'
 import { getSerie, getSeriePagination } from 'src/reducers/selectors'
 
-import Serie from './Serie'
+import List from 'src/components/list'
 
 const mapStateToProps = (state) => ({
   items: getSerie(state),
-  pagination: getSeriePagination(state)
+  pagination: getSeriePagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadSerie,
-    resetAndPlayTrack
+    loadData: loadSerie,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Serie)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

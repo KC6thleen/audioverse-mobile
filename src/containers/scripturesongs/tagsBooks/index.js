@@ -4,17 +4,26 @@ import { connect } from 'react-redux'
 import { loadTagsBooks } from 'src/actions'
 import { getTagsBooks, getTagsBooksPagination } from 'src/reducers/selectors'
 
-import TagsBooks from './TagsBooks'
+import List from 'src/components/list'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   items: getTagsBooks(state),
-  pagination: getTagsBooksPagination(state)
+  pagination: getTagsBooksPagination(state),
+  titleExtractor: item => item.name,
+  subtitleExtractor: () => null,
+  onPress: item => props.navigation.navigate({
+    routeName: 'TagBook',
+    params: {
+      url: item.recordingsURI,
+      title: item.name,
+    },
+  }),
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    loadTagsBooks
+    loadData: loadTagsBooks,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagsBooks)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

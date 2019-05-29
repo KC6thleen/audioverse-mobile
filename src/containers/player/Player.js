@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 import MarqueeText from 'react-native-marquee'
+import { ListItem } from 'react-native-elements'
 
-import ListItem from 'src/components/list/ListItem'
 import IconButton from 'src/components/buttons/IconButton'
 import PlayerContent from './PlayerContent'
 import ProgressBar from 'src/components/progressbar/ProgressBar'
@@ -119,12 +119,18 @@ class Player extends PureComponent {
             barStyle="light-content"
           />
           <ListItem
-            avatar={{source: track.artwork}}
-            title={<MarqueeText marqueeOnStart loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
+            leftAvatar={
+              {
+                source: track.artwork && track.artwork.toString().startsWith('http') ? 
+                { uri: track.artwork } : track.artwork
+              }
+            }
+            title={<MarqueeText marqueeOnStart duration={3500} loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
             subtitle={track.artist}
             rightElement={rightElement}
-            style={{backgroundColor: '#E0E0E080'}}
+            containerStyle={{backgroundColor: '#E0E0E080'}}
             onPress={() => navigation.pop()}
+            underlayColor="#E0E0E080"
           />
         </View>
         <PlayerContent

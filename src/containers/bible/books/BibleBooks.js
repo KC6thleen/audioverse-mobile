@@ -1,21 +1,10 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { View, StyleSheet } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import List from 'src/components/list/List'
-import ListItem from 'src/components/list/ListItem'
+import List from 'src/components/list'
 
-class BibleBooks extends PureComponent {
-
-  componentDidMount() {
-    if (!this.props.items.length) {
-      this.props.actions.loadBibleBooks()
-    }
-  }
-
-  handleRefresh = () => {
-    this.props.actions.loadBibleBooks(false, true)
-  }
+class BibleBooks extends React.PureComponent {
 
   handlePressItem = item => {
     this.props.actions.loadBibleChapters(false, false, item)
@@ -25,39 +14,39 @@ class BibleBooks extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
-        icon={{name: 'volume-2'}}
+        leftIcon={{type: 'feather', name: 'volume-2'}}
         title={item.name}
         onPress={this.handlePressItem.bind(this, item)}
+        bottomDivider
       />
     )
   }
 
   render() {
-    const { items, pagination } = this.props
+    const { navigation, items, pagination, actions } = this.props
 
     return (
-      <View style={styles.container}>
-        <List renderItem={this.renderItem} items={items} keyExtractor={item => item.book_id} {...pagination} onRefresh={this.handleRefresh} />
-      </View>
+      <List
+        navigation={navigation}
+        items={items}
+        pagination={pagination}
+        actions={{loadData: actions.loadData}}
+        renderItem={this.renderItem}
+        keyExtractor={item => item.book_id}
+      />
     )
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
 
 BibleBooks.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
   actions: PropTypes.shape({
-    loadBibleBooks: PropTypes.func.isRequired,
+    loadData: PropTypes.func.isRequired,
     loadBibleChapters: PropTypes.func.isRequired
-  })
+  }),
 }
 
 export default BibleBooks

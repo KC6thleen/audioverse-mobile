@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadPresenter, resetAndPlayTrack } from 'src/actions'
+import { loadPresenter } from 'src/actions'
 import { getPresenter, getPresenterPagination } from 'src/reducers/selectors'
 
-import Presenter from './Presenter'
+import List from 'src/components/list'
 
 const mapStateToProps = (state) => ({
   items: getPresenter(state),
-  pagination: getPresenterPagination(state)
+  pagination: getPresenterPagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadPresenter,
-    resetAndPlayTrack
+    loadData: loadPresenter,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Presenter)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

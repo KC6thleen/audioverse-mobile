@@ -1,12 +1,17 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { View, FlatList, Alert, StyleSheet } from 'react-native'
+import {
+  View,
+  FlatList,
+  Alert,
+  StyleSheet,
+} from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import ListItem from 'src/components/list/ListItem'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
-class PlaylistItems extends PureComponent {
+class PlaylistItems extends React.PureComponent {
 
   componentDidMount() {
     this.props.actions.sync(this.props.navigation.state.params.playlistId)
@@ -26,11 +31,16 @@ class PlaylistItems extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
-        avatar={{source: item.artwork}}
+        leftAvatar={{
+          source: item.artwork && item.artwork.toString().startsWith('http') ? 
+          { uri: item.artwork } : item.artwork
+        }}
         title={item.title}
+        titleProps={{numberOfLines: 1}}
         subtitle={item.artist + ' \u00B7 ' + item.duration}
         onPress={() => this.props.actions.resetAndPlayTrack(this.props.items, item.id)}
         rightElement={<RightElement data={item} onPress={this.handleRemove} />}
+        bottomDivider
       />
     )
   }
@@ -54,7 +64,7 @@ class PlaylistItems extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 })
 
 PlaylistItems.propTypes = {
@@ -63,8 +73,8 @@ PlaylistItems.propTypes = {
   actions: PropTypes.shape({
     resetAndPlayTrack: PropTypes.func.isRequired,
     sync: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired
-  })
+    remove: PropTypes.func.isRequired,
+  }),
 }
 
 const RightElement = ({ data, onPress }) => {

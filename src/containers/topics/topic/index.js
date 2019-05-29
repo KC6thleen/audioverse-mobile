@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadTopic, resetAndPlayTrack } from 'src/actions'
+import { loadTopic } from 'src/actions'
 import { getTopic, getTopicPagination } from 'src/reducers/selectors'
 
-import Topic from './Topic'
+import List from 'src/components/list'
 
 const mapStateToProps = (state) => ({
   items: getTopic(state),
-  pagination: getTopicPagination(state)
+  pagination: getTopicPagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadTopic,
-    resetAndPlayTrack
+    loadData: loadTopic,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topic)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

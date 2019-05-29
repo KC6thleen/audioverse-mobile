@@ -8,8 +8,8 @@ import {
 } from 'react-native'
 import TrackPlayer from 'react-native-track-player'
 import MarqueeText from 'react-native-marquee'
+import { ListItem } from 'react-native-elements'
 
-import ListItem from 'src/components/list/ListItem'
 import ImageButton from 'src/components/buttons/ImageButton'
 import ProgressBarMini from 'src/components/progressbar/ProgressBarMini'
 import iconPlay from 'assets/ic_play.png'
@@ -35,12 +35,18 @@ const MiniPlayer = ({ navigation, track, state, actions}) => {
   return (
     <View style={styles.container}>
       <ListItem
-        avatar={{source: track.artwork}}
-        title={<MarqueeText marqueeOnStart loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
+        leftAvatar={
+          {
+            source: track.artwork && track.artwork.toString().startsWith('http') ? 
+            { uri: track.artwork } : track.artwork
+          }
+        }
+        title={<MarqueeText marqueeOnStart duration={3500} loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
         subtitle={track.artist}
         onPress={handlePress}
         rightElement={rightElement}
-        style={{backgroundColor: 'transparent'}}
+        containerStyle={{backgroundColor: 'transparent'}}
+        underlayColor="#E0E0E0"
       />
       <ProgressBarMini />
     </View>

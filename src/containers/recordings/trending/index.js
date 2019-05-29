@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadTrendingRecordings, resetAndPlayTrack } from 'src/actions'
+import { loadTrendingRecordings } from 'src/actions'
 import { getTrendingRecordings, getTrendingRecordingsPagination } from 'src/reducers/selectors'
 
-import TrendingRecordings from './TrendingRecordings'
+import List from 'src/components/list'
 
 const mapStateToProps = state => ({
   items: getTrendingRecordings(state),
-  pagination: getTrendingRecordingsPagination(state)
+  pagination: getTrendingRecordingsPagination(state),
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    loadTrendingRecordings,
-    resetAndPlayTrack
+    loadData: loadTrendingRecordings,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrendingRecordings)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

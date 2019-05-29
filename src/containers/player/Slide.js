@@ -16,8 +16,8 @@ const Slide = ({ image, header, subtitle, onPress }) => (
       style={styles.image}
     />
     <TouchableOpacity style={styles.center} onPress={onPress}>
-      <MarqueeText marqueeOnStart loop style={styles.title}>{header}</MarqueeText>
-      <MarqueeText marqueeOnStart loop style={styles.subtitle}>{subtitle}</MarqueeText>
+      <MarqueeText marqueeOnStart duration={3500} loop style={styles.title}>{header}</MarqueeText>
+      <MarqueeText marqueeOnStart duration={3500} loop style={styles.subtitle}>{subtitle}</MarqueeText>
     </TouchableOpacity>
   </View>
 )

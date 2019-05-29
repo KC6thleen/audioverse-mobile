@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadTagAlbum, resetAndPlayTrack } from 'src/actions'
+import { loadTagAlbum } from 'src/actions'
 import { getTagAlbum, getTagAlbumPagination } from 'src/reducers/selectors'
 
-import TagAlbum from './TagAlbum'
+import List from 'src/components/list'
 
 const mapStateToProps = (state) => ({
   items: getTagAlbum(state),
-  pagination: getTagAlbumPagination(state)
+  pagination: getTagAlbumPagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadTagAlbum,
-    resetAndPlayTrack
+    loadData: loadTagAlbum,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagAlbum)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

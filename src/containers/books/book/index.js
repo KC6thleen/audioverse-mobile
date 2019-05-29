@@ -8,16 +8,16 @@ import Book from './Book'
 
 const mapStateToProps = (state) => ({
   items: getBook(state),
-  pagination: getBookPagination(state)
+  pagination: getBookPagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadBook,
+    loadData: loadBook,
     addLocalFiles,
     removeLocalChapter,
     download,
-    resetAndPlayTrack
+    resetAndPlayTrack,
   }, dispatch)
 })
 

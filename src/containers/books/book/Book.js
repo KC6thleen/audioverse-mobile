@@ -1,28 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  View,
   Alert,
-  StyleSheet
 } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import List from 'src/components/list/List'
-import ListItem from 'src/components/list/ListItem'
+import List from 'src/components/list'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Dirs } from 'src/constants'
 
-class Book extends PureComponent {
-
-  componentDidMount() {
-    const { params } = this.props.navigation.state
-    this.props.actions.loadBook(false, false, params.url, params.id)
-  }
-
-  handleRefresh = () => {
-    const { params } = this.props.navigation.state
-    this.props.actions.loadBook(false, true, params.url, params.id)
-  }
+class Book extends React.PureComponent {
 
   handlePressItemAction = item => {
     if (item.local) {
@@ -50,43 +38,47 @@ class Book extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
-        avatar={{source: item.artwork}}
+        leftAvatar={
+          {
+            source: item.artwork && item.artwork.toString().startsWith('http') ? 
+            { uri: item.artwork } : item.artwork
+          }
+        }
         title={item.title}
+        titleProps={{numberOfLines: 1}}
         subtitle={item.artist}
         onPress={() => this.props.actions.resetAndPlayTrack(this.props.items, item.id)}
+        bottomDivider
         rightElement={<RightElement data={item} onPress={this.handlePressItemAction} />}
       />
     )
   }
   
   render() {
-    const { items, pagination } = this.props
+    const { navigation, items, pagination, actions } = this.props
 
     return (
-      <View style={styles.container}>
-        <List renderItem={this.renderItem} items={items} {...pagination} onRefresh={this.handleRefresh} />
-      </View>
+      <List
+        navigation={navigation}
+        items={items}
+        pagination={pagination}
+        actions={{loadData: actions.loadData}}
+        renderItem={this.renderItem}
+      />
     )
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-})
 
 Book.propTypes = {
   navigation: PropTypes.object.isRequired,
   items: PropTypes.array,
   pagination: PropTypes.object,
   actions: PropTypes.shape({
-    loadBook: PropTypes.func.isRequired,
+    loadData: PropTypes.func.isRequired,
     addLocalFiles: PropTypes.func.isRequired,
     removeLocalChapter: PropTypes.func.isRequired,
     download: PropTypes.func.isRequired,
-    resetAndPlayTrack: PropTypes.func.isRequired
   })
 }
 

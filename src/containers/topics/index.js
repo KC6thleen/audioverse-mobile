@@ -4,17 +4,26 @@ import { connect } from 'react-redux'
 import { getTopics, getTopicsPagination } from 'src/reducers/selectors'
 import { loadTopics } from 'src/actions'
 
-import Topics from './Topics'
+import List from 'src/components/list'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, props) => ({
   items: getTopics(state),
-  pagination: getTopicsPagination(state)
+  pagination: getTopicsPagination(state),
+  avatarExtractor: item => item.photo86,
+  subtitleExtractor: () => null,
+  onPress: item => props.navigation.navigate({
+    routeName: 'Topic',
+    params: {
+      url: item.recordingsURI,
+      title: item.title,
+    },
+  }),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadTopics
+    loadData: loadTopics,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topics)
+export default connect(mapStateToProps, mapDispatchToProps)(List)

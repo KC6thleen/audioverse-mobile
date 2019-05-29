@@ -1,25 +1,24 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
   FlatList,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
-import { SearchBar } from 'react-native-elements'
+import { SearchBar, ListItem } from 'react-native-elements'
 import firebase from 'react-native-firebase'
 
 import HeaderTitle from 'src/navigators/headertitle'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
-import ListItem from 'src/components/list/ListItem'
 import {
   searchPresentations,
   fetchData
 } from 'src/services'
 
-class Search extends PureComponent {
+class Search extends React.PureComponent {
 
   state = {
     search: '',
@@ -133,10 +132,15 @@ class Search extends PureComponent {
     if (this.state.category === I18n.t('presentations')) {
       return (
         <ListItem
-          avatar={{source: item.artwork}}
+          leftAvatar={{
+            source: item.artwork && item.artwork.toString().startsWith('http') ? 
+            { uri: item.artwork } : item.artwork
+          }}
           title={item.title}
+          titleProps={{numberOfLines: 1}}
           subtitle={item.artist + ' \u00B7 ' + item.duration}
           onPress={() => this.props.actions.resetAndPlayTrack([item])}
+          bottomDivider
         />
       )
     } else if (this.state.category === I18n.t('presenters')) {
@@ -159,7 +163,6 @@ class Search extends PureComponent {
   }
 
   render() {
-    const { items, pagination } = this.props
 
     return (
       <View style={styles.container}>
@@ -179,14 +182,14 @@ class Search extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 })
 
 Search.propTypes = {
   navigation: PropTypes.object.isRequired,
   actions: PropTypes.shape({
-    resetAndPlayTrack: PropTypes.func.isRequired
-  })
+    resetAndPlayTrack: PropTypes.func.isRequired,
+  }),
 }
 
 export default Search

@@ -112,7 +112,7 @@ const PlayerContent = ({ data, language, navigation }) => {
               style={styles.image}
             />
             <View style={styles.info}>
-              <MarqueeText marqueeOnStart loop style={styles.title}>{sponsor.title}</MarqueeText>
+              <MarqueeText marqueeOnStart duration={3500} loop style={styles.title}>{sponsor.title}</MarqueeText>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{recordingDate}</Text>
               <Text style={styles.subtitle} ellipsizeMode={'tail'} numberOfLines={1}>{sponsor.location}</Text>
             </View>

@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
   FlatList,
   Alert,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
-import ListItem from 'src/components/list/ListItem'
 import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Dirs } from 'src/constants'
 
-class BibleChapters extends PureComponent {
+class BibleChapters extends React.PureComponent {
 
   componentDidMount() {
     if (!this.props.items.length) {
@@ -58,6 +58,7 @@ class BibleChapters extends PureComponent {
         title={`${this.props.bible.book.name} ${item.chapter}`}
         onPress={this.handlePressItem.bind(this, item)}
         rightElement={<RightElement data={item} onPress={this.handlePressItemAction} />}
+        bottomDivider
       />
     )
   }
@@ -87,11 +88,11 @@ const styles = StyleSheet.create({
   item: {
     width: '25%',
     padding: 15,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   chapter: {
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 })
 
 BibleChapters.propTypes = {
@@ -105,8 +106,8 @@ BibleChapters.propTypes = {
     download: PropTypes.func.isRequired,
     addLocalFiles: PropTypes.func.isRequired,
     removeLocalBibleChapter: PropTypes.func.isRequired,
-    resetAndPlayTrack: PropTypes.func.isRequired
-  })
+    resetAndPlayTrack: PropTypes.func.isRequired,
+  }),
 }
 
 const RightElement = ({ data, onPress }) => {

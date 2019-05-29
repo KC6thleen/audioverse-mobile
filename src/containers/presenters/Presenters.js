@@ -1,13 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { View, StyleSheet } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native'
+import { SearchBar, ListItem } from 'react-native-elements'
 
-import List from 'src/components/list/List'
-import ListItem from 'src/components/list/ListItem'
 import I18n from 'locales'
 
-class Presenters extends PureComponent {
+class Presenters extends React.PureComponent {
 
   state = {
     search: '',
@@ -48,9 +51,24 @@ class Presenters extends PureComponent {
   renderItem = ({ item }) => {
     return (
       <ListItem
-        avatar={{source: item.photo86}}
+        leftAvatar={{
+          source: item.photo86 && item.photo86.toString().startsWith('http') ? 
+          { uri: item.photo86 } : item.photo86
+        }}
         title={item.givenName + ' ' + item.surname}
-        onPress={() => this.props.navigation.navigate({ routeName: 'Presenter', params: { url: item.recordingsURI, title: item.givenName + ' ' + item.surname, description: item.description, image: item.photo256 } })}
+        titleProps={{numberOfLines: 1}}
+        onPress={() => 
+          this.props.navigation.navigate({
+            routeName: 'Presenter',
+            params: {
+              url: item.recordingsURI,
+              title: item.givenName + ' ' + item.surname,
+              description: item.description,
+              image: item.photo256
+            }
+          })
+        }
+        bottomDivider
       />
     )
   }
@@ -72,15 +90,26 @@ class Presenters extends PureComponent {
   }
 
   render() {
-    const { items, pagination } = this.props
+    const { pagination } = this.props
+
+    if (!this.state.data.length && pagination.isFetching) {
+      return (
+        <ActivityIndicator
+          size="large"
+          color="#03A9F4"
+          style={{margin: 50}}
+        />
+      )
+    }
 
     return (
       <View style={styles.container}>
-        <List
+        <FlatList
           ListHeaderComponent={this.header}
           renderItem={this.renderItem}
-          items={this.state.data}
-          {...pagination}
+          keyExtractor={item => item.id}
+          data={this.state.data}
+          refreshing={pagination.isFetching}
           onRefresh={this.handleRefresh} />
       </View>
     )
@@ -91,7 +120,7 @@ class Presenters extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }
+  },
 })
 
 Presenters.propTypes = {
@@ -99,8 +128,8 @@ Presenters.propTypes = {
   items: PropTypes.array,
   pagination: PropTypes.object,
   actions: PropTypes.shape({
-    loadPresenters: PropTypes.func.isRequired
-  })
+    loadPresenters: PropTypes.func.isRequired,
+  }),
 }
 
 export default Presenters

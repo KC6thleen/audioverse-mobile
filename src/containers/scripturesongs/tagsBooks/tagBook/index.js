@@ -1,21 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { loadTagBook, resetAndPlayTrack } from 'src/actions'
+import { loadTagBook } from 'src/actions'
 import { getTagBook, getTagBookPagination } from 'src/reducers/selectors'
 
-import TagBook from './TagBook'
+import List from 'src/components/list'
 
 const mapStateToProps = (state) => ({
   items: getTagBook(state),
-  pagination: getTagBookPagination(state)
+  pagination: getTagBookPagination(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators({
-    loadTagBook,
-    resetAndPlayTrack
+    loadData: loadTagBook,
   }, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagBook)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
