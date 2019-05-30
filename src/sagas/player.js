@@ -267,6 +267,14 @@ export function* playPause() {
       yield call(TrackPlayer.pause)
     } else {
       yield call(TrackPlayer.play)
+      // workaround on iOS play/pause resets the playback speed to 1
+      // https://github.com/react-native-kit/react-native-track-player/issues/614
+      if (Platform.OS === 'ios') {
+        const rate = yield select(selectors.getRate)
+        if (rate !== 1) {
+          yield call(TrackPlayer.setRate, rate)
+        }
+      }
     }
   }
 }
