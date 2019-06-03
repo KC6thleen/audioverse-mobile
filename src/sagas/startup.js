@@ -1,10 +1,8 @@
 import { select, call } from 'redux-saga/effects'
-import TrackPlayer from 'react-native-track-player'
 import firebase from 'react-native-firebase'
 
 import * as selectors from 'src/reducers/selectors'
 import I18n from 'locales'
-import { setupPlayer } from './player'
 import recoverDB from './db'
 
 /**
@@ -21,9 +19,5 @@ export function* startup(action) {
     firebase.analytics().setUserId(user.userId ? user.userId.toString() : null)
   }
   console.log('startup', I18n.locale, language, user)
-  const state = yield call(TrackPlayer.getState)
-  if (state === TrackPlayer.STATE_NONE) {
-    yield call(setupPlayer)
-  }
   yield call(recoverDB)
 }

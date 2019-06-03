@@ -18,7 +18,10 @@ const BIBLE_AND_BOOKS_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.Document
  * Setup player with all the capabilities needed
  */
 export function* setupPlayer() {
-  yield call(TrackPlayer.setupPlayer)
+  const state = yield call(TrackPlayer.getState)
+  if (state === TrackPlayer.STATE_NONE) {
+    yield call(TrackPlayer.setupPlayer)
+  }
   yield call(TrackPlayer.updateOptions, {
     capabilities: [
       TrackPlayer.CAPABILITY_PLAY,
@@ -247,6 +250,7 @@ export function* playTracks(autoPlay = true) {
     })
   }
 
+  yield call(setupPlayer)
   yield call(TrackPlayer.add, newTracks)
   yield call(TrackPlayer.skip, track.id)
   if (autoPlay) {
