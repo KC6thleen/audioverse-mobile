@@ -48,7 +48,11 @@ class List extends React.PureComponent {
     if (this.props.onPress) {
       this.props.onPress(item)
     } else {
-      this.props.localActions.resetAndPlayTrack([item])
+      if (this.props.playlist) {
+        this.props.localActions.resetAndPlayTrack(this.props.items, item.id)
+      } else {
+        this.props.localActions.resetAndPlayTrack([item])
+      }
     }
   }
 
@@ -158,6 +162,7 @@ List.defaultProps = {
   avatarExtractor: item => item.artwork,
   titleExtractor: item => item.title,
   subtitleExtractor: item => item.artist + ' \u00B7 ' + item.duration,
+  playlist: false,
 }
 
 export default List

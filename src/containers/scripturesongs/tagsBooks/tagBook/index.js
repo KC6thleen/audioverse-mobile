@@ -9,6 +9,7 @@ import List from 'src/components/list'
 const mapStateToProps = (state) => ({
   items: getTagBook(state),
   pagination: getTagBookPagination(state),
+  playlist: true,
 })
 
 const mapDispatchToProps = (dispatch) => ({
