@@ -34,6 +34,7 @@ export const setI18nConfig = () => {
   // set i18n-js config
   I18n.translations = translations
   I18n.locale = languageTag
+  I18n.defaultSeparator = '/'
 }
 
 setI18nConfig()
