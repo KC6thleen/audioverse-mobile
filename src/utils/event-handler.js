@@ -72,15 +72,15 @@ async function eventHandler(store, data) {
 
   TrackPlayer.addEventListener('playback-track-changed', async (data) => {
     console.log('playback-track-changed', data)
-    // This event is also fired the first time a track is played
-    // we only want to reset the position whenever a track changes
-    // the way to know that is if data.position or data.track has a value
-    if (data.position) {
-      store.dispatch(actions.playbackPosition(0))
-    }
-    // This event is fired diferently on iOS and Android with different data values
+    // This event is fired twice and diferently on iOS and Android with different data values
     // that's the reason why we are using the following validation to only run this code once
     if ((Platform.OS === 'ios' && data.track) || (Platform.OS === 'android' && data.nextTrack)) {
+      // we only want to reset the position whenever a track changes and if it is part of a playlist
+      const queue = await TrackPlayer.getQueue()
+      if (queue.length > 1) {
+        store.dispatch(actions.playbackPosition(0))
+      }
+      
       // taking as an example that the Player is playing the track ENGESV2_Gen_1:
       // on iOS the data object has different values whether the playback finished playing and advances to the next track:
       // {track: "ENGESV2_Gen_2", nextTrack: "ENGESV2_Gen_3", position: 342.4391836734694}

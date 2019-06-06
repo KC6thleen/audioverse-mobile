@@ -205,6 +205,7 @@ export function* resetAndPlayTrack({ tracks, id }) {
 
   const selectedTrack = !id ? tracks[0] : tracks.find(el => el.id === id)
 
+  yield put(actions.playbackPosition(0))
   yield put(actions.playbackTracks(tracks))
   yield put(actions.playbackTrackId(selectedTrack.id))
 
