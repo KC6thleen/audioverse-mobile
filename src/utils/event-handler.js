@@ -79,9 +79,16 @@ async function eventHandler(store, data) {
       store.dispatch(actions.playbackPosition(0))
     }
     // This event is fired diferently on iOS and Android with different data values
-    // that's the reason we are using the following validation to only run this code once
+    // that's the reason why we are using the following validation to only run this code once
     if ((Platform.OS === 'ios' && data.track) || (Platform.OS === 'android' && data.nextTrack)) {
-      const trackId = Platform.OS === 'ios' && data.position ? data.track : data.nextTrack
+      // taking as an example that the Player is playing the track ENGESV2_Gen_1:
+      // on iOS the data object has different values whether the playback finished playing and advances to the next track:
+      // {track: "ENGESV2_Gen_2", nextTrack: "ENGESV2_Gen_3", position: 342.4391836734694}
+      // or the user click the next option (TrackPlayer.skipToNext):
+      // {nextTrack: "ENGESV2_Gen_2", track: "ENGESV2_Gen_1", position: 5.142959181}
+      // the latter data is the correct one
+      // that's why we are using TrackPlayer.getCurrentTrack() to get the current track id
+      const trackId = await TrackPlayer.getCurrentTrack()
       // set track id
       store.dispatch(actions.playbackTrackId(trackId))
       // get track

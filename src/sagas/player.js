@@ -14,37 +14,38 @@ import NavigationService from 'src/utils/navigation-service'
 const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
 const BIBLE_AND_BOOKS_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : `${RNFetchBlob.fs.dirs.MainBundleDir}/app_appdata`
 
+export const playerOptions = {
+  capabilities: [
+    TrackPlayer.CAPABILITY_PLAY,
+    TrackPlayer.CAPABILITY_PAUSE,
+    TrackPlayer.CAPABILITY_STOP,
+    TrackPlayer.CAPABILITY_SEEK_TO,
+    TrackPlayer.CAPABILITY_JUMP_FORWARD,
+    TrackPlayer.CAPABILITY_JUMP_BACKWARD,
+    TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
+    TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
+    TrackPlayer.CAPABILITY_PLAY_FROM_ID, // required for android auto
+    TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH, // required for android auto
+  ],
+  compactCapabilities: [
+    TrackPlayer.CAPABILITY_PLAY,
+    TrackPlayer.CAPABILITY_PAUSE,
+    TrackPlayer.CAPABILITY_STOP,
+    TrackPlayer.CAPABILITY_SEEK_TO,
+    TrackPlayer.CAPABILITY_JUMP_FORWARD,
+    TrackPlayer.CAPABILITY_JUMP_BACKWARD,
+  ],
+  stopWithApp: false,
+}
+
 /**
  * Setup player with all the capabilities needed
  */
 export function* setupPlayer() {
-  const state = yield call(TrackPlayer.getState)
-  if (state === TrackPlayer.STATE_NONE) {
-    yield call(TrackPlayer.setupPlayer)
+  // on Android is needed to call updateOptions otherwise it doesn't show the notification media controls
+  if (Platform.OS === 'android') {
+    yield call(TrackPlayer.updateOptions, playerOptions)
   }
-  yield call(TrackPlayer.updateOptions, {
-    capabilities: [
-      TrackPlayer.CAPABILITY_PLAY,
-      TrackPlayer.CAPABILITY_PAUSE,
-      TrackPlayer.CAPABILITY_STOP,
-      TrackPlayer.CAPABILITY_SEEK_TO,
-      TrackPlayer.CAPABILITY_JUMP_FORWARD,
-      TrackPlayer.CAPABILITY_JUMP_BACKWARD,
-      TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
-      TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
-      TrackPlayer.CAPABILITY_PLAY_FROM_ID, // required for android auto
-      TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH, // required for android auto
-    ],
-    compactCapabilities: [
-      TrackPlayer.CAPABILITY_PLAY,
-      TrackPlayer.CAPABILITY_PAUSE,
-      TrackPlayer.CAPABILITY_STOP,
-      TrackPlayer.CAPABILITY_SEEK_TO,
-      TrackPlayer.CAPABILITY_JUMP_FORWARD,
-      TrackPlayer.CAPABILITY_JUMP_BACKWARD,
-    ],
-    stopWithApp: false
-  })
   yield put(actions.playbackInit())
 }
 
