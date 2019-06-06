@@ -384,9 +384,10 @@ export function* trackInitialized({ track }) {
     yield call(TrackPlayer.setRate, rate)
   }
 
-  // set position
+  // set the playback position if there is a position stored and is only one track
   const position = yield select(selectors.getPosition)
-  if (position) {
+  const queue = yield call(TrackPlayer.getQueue)
+  if (position && queue.length === 1) {
     yield call(TrackPlayer.seekTo, position)
   }
 }
