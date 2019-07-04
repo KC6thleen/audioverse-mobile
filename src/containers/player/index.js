@@ -16,7 +16,6 @@ import {
 } from 'src/actions'
 import {
   getCurrentTrack,
-  getPlayerState, 
   getRate,
   getLanguage,
   getUser,
@@ -27,7 +26,6 @@ import {
 import Player from './Player'
 
 const  mapStateToProps = state => ({
-  state: getPlayerState(state),
   track: getCurrentTrack(state),
   rate: getRate(state),
   language: getLanguage(state),

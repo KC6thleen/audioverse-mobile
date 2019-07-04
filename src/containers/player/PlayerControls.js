@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
   ActivityIndicator,
-  Platform,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
-import TrackPlayer from 'react-native-track-player'
+import TrackPlayer, {
+  usePlaybackState,
+  useTrackPlayerEvents,
+} from "react-native-track-player"
 
 import ImageButton from 'src/components/buttons/ImageButton'
 import iconPlay from 'assets/ic_play.png'
@@ -17,44 +19,66 @@ import iconReplay from 'assets/ic_replay_10.png'
 import iconForward from 'assets/ic_forward_30.png'
 import I18n from 'locales'
 
-const PlayerControls = ({ state, playPause, skipToPrevious, skipToNext, replay, forward }) => (
-  <View style={styles.container}>
-    <ImageButton
-      source={iconReplay}
-      imageStyle={styles.icon}
-      onPress={replay}
-      accessibilityLabel={I18n.t("rewind_10_seconds")}
-    />
-    <ImageButton
-      source={iconPrevious}
-      imageStyle={styles.icon}
-      onPress={skipToPrevious}
-      accessibilityLabel={I18n.t("previous")}
-    />
-    { state === TrackPlayer.STATE_BUFFERING ?
-      <ActivityIndicator size="large" /> :
-      <ImageButton
-        source={state === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
-        style={styles.playPauseButton}
-        imageStyle={[styles.playPauseIcon, {marginLeft: state === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
-        onPress={playPause}
-        accessibilityLabel={I18n.t(state === TrackPlayer.STATE_PLAYING ? "pause" : "play" )}
-      />
+const PlayerControls = ({ playPause, skipToPrevious, skipToNext, replay, forward }) => {
+
+  const playbackState = usePlaybackState()
+  console.log('playbackState', playbackState)
+  const [loading, setLoading] = useState(false)
+  // on iOS the Media Player library that we are using does not
+  // enter the loading state until it has loaded/buffered the mp3 file, however
+  // in order to let the user know that the file is being loaded we are
+  // using our own loading state, it is set to true when the a track is changed
+  // and is set to false when the playback-state change.
+  useTrackPlayerEvents(["playback-track-changed"], event => {
+    setLoading(true) // show activity indicator
+  })
+
+  useTrackPlayerEvents(["playback-state"], event => {
+    if (loading) {
+      setLoading(false) // hide activity indicator
     }
-    <ImageButton
-      source={iconNext}
-      imageStyle={styles.icon}
-      onPress={skipToNext}
-      accessibilityLabel={I18n.t("next")}
-    />
-    <ImageButton
-      source={iconForward}
-      imageStyle={styles.icon}
-      onPress={forward}
-      accessibilityLabel={I18n.t("fast_forward_30_seconds")}
-    />
-  </View>
-)
+  })
+  
+  return (
+    <View style={styles.container}>
+      <ImageButton
+        source={iconReplay}
+        imageStyle={styles.icon}
+        onPress={replay}
+        accessibilityLabel={I18n.t("rewind_10_seconds")}
+      />
+      <ImageButton
+        source={iconPrevious}
+        imageStyle={styles.icon}
+        onPress={skipToPrevious}
+        accessibilityLabel={I18n.t("previous")}
+      />
+      { loading || playbackState === TrackPlayer.STATE_BUFFERING
+        ? <ActivityIndicator size="large" />
+        : <ImageButton
+            source={playbackState === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
+            style={styles.playPauseButton}
+            imageStyle={[styles.playPauseIcon, {marginLeft: playbackState === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
+            onPress={playPause}
+            accessibilityLabel={I18n.t(playbackState === TrackPlayer.STATE_PLAYING ? "pause" : "play" )}
+          />
+      }
+      <ImageButton
+        source={iconNext}
+        imageStyle={styles.icon}
+        onPress={skipToNext}
+        accessibilityLabel={I18n.t("next")}
+      />
+      <ImageButton
+        source={iconForward}
+        imageStyle={styles.icon}
+        onPress={forward}
+        accessibilityLabel={I18n.t("fast_forward_30_seconds")}
+      />
+    </View>
+  )
+
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   icon: {
     width: 40,
@@ -77,22 +101,21 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#E53935',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   playPauseIcon: {
     width: 28,
     height: 28,
-    tintColor: '#FFFFFF'
-  }
+    tintColor: '#FFFFFF',
+  },
 })
 
 PlayerControls.propTypes = {
-  state: Platform.OS == 'ios' ? PropTypes.string : PropTypes.number,
   playPause: PropTypes.func.isRequired,
   skipToPrevious: PropTypes.func.isRequired,
   skipToNext: PropTypes.func.isRequired,
   replay: PropTypes.func.isRequired,
-  forward: PropTypes.func.isRequired
+  forward: PropTypes.func.isRequired,
 }
 
 export default PlayerControls

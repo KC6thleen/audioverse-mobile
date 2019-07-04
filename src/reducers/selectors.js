@@ -6,8 +6,6 @@ export const getLanguage = state => state.settings.language
 export const getBitRate = state => state.settings.bitRate
 export const getAutoPlay = state => state.settings.autoPlay
 
-export const getPlayerState = state => state.playerState
-
 export const getTracks = state => state.playback.tracks
 export const getCurrentTrack = state => state.playback.tracks.find(el => el.id === state.playback.currentTrackId)
 export const getCurrentTrackId = state => state.playback.currentTrackId

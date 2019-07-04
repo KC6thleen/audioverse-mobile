@@ -2,7 +2,6 @@ export const STARTUP = 'STARTUP'
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
 export const CHANGE_BITRATE = 'CHANGE_BITRATE'
 
-export const PLAYER_STATE = 'PLAYER_STATE'
 export const PLAYBACK_INIT = 'PLAYBACK_INIT'
 export const PLAYBACK_TRACK_ID = 'PLAYBACK_TRACK_ID'
 export const PLAYBACK_TRACKS = 'PLAYBACK_TRACKS'
@@ -322,7 +321,6 @@ export const startup = () => action(STARTUP)
 export const changeLanguage = language => action(CHANGE_LANGUAGE, {language})
 export const changeBitRate = bitRate => action(CHANGE_BITRATE, {bitRate})
 
-export const playerState = state => action(PLAYER_STATE, {state})
 export const playbackInit = () => action(PLAYBACK_INIT)
 export const playbackTrackId = trackId => action(PLAYBACK_TRACK_ID, {trackId})
 export const playbackTracks = tracks => action(PLAYBACK_TRACKS, {tracks})

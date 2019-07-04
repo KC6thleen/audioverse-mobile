@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 import MiniPlayer from 'src/components/miniplayer'
-import Player from 'src/containers/player'
 
 function withPlayer(WrappedComponent) {
-  class WithPlayer extends PureComponent {
+  class WithPlayer extends React.Component {
     static router = WrappedComponent.router
   
     render() {

@@ -42,10 +42,8 @@ export const playerOptions = {
  * Setup player with all the capabilities needed
  */
 export function* setupPlayer() {
-  // on Android is needed to call updateOptions otherwise it doesn't show the notification media controls
-  if (Platform.OS === 'android') {
-    yield call(TrackPlayer.updateOptions, playerOptions)
-  }
+  yield call(TrackPlayer.setupPlayer, { waitForBuffer: true })
+  yield call(TrackPlayer.updateOptions, playerOptions)
   yield put(actions.playbackInit())
 }
 
@@ -254,7 +252,9 @@ export function* playTracks(autoPlay = true) {
 
   yield call(setupPlayer)
   yield call(TrackPlayer.add, newTracks)
-  yield call(TrackPlayer.skip, track.id)
+  if (newTracks.length > 1 && newTracks[0].id !== track.id) {
+    yield call(TrackPlayer.skip, track.id)
+  }
   if (autoPlay) {
     yield call(TrackPlayer.play)
   }
@@ -361,14 +361,6 @@ export function* setRate({ rate }) {
 */
 export function* trackInitialized({ track }) {
   console.log('track initialized', track)
-  
-  // analytics
-  firebase.analytics().logEvent('play', {
-    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
-    item_id: track.id,
-    title: track.title,
-    remote_url: track.url.startsWith('http') ? 1 : 0,
-  })
 
   track.lastPlayedDate = new Date()
   const history = yield select(selectors.getHistory)
@@ -390,4 +382,12 @@ export function* trackInitialized({ track }) {
   if (position && queue.length === 1) {
     yield call(TrackPlayer.seekTo, position)
   }
+
+  // analytics
+  firebase.analytics().logEvent('play', {
+    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
+    item_id: track.id,
+    title: track.title,
+    remote_url: track.url.startsWith('http') ? 1 : 0,
+  })
 }

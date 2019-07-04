@@ -66,8 +66,6 @@ async function eventHandler(store, data) {
       // reset the position
       store.dispatch(actions.playbackPosition(0))
     }
-    // player state
-    store.dispatch(actions.playerState(data.state))
   })
 
   TrackPlayer.addEventListener('playback-track-changed', async (data) => {

@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   ImageBackground,
   View,
   StatusBar,
   Platform,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 import MarqueeText from 'react-native-marquee'
@@ -20,17 +20,28 @@ import imageBg from 'assets/bg.png'
 import I18n from 'locales'
 import { Dirs } from 'src/constants'
 
-class Player extends PureComponent {
+const getSize = size => (
+  parseInt(size) > 0 ? `${Math.round((parseInt(size)/8)/100000)} MB` : ''
+)
+
+const Player = props => {
+
+  const {
+    navigation,
+    track,
+    rate,
+    language,
+    user,
+    actions,
+    isFavorite,
+    bitRate
+  } = props
 
   handleDownload = () => {
 	
     let bitratesIndex = [], options = []
 
-    const getSize = size => (
-      parseInt(size) > 0 ? `${Math.round((parseInt(size)/8)/100000)} MB` : ''
-    )
-
-    const { track, language, actions } = this.props
+    const { track, language, actions } = props
       
     // audio
     for ( let i = track.mediaFiles.length - 1; i >= 0; i-- ) {
@@ -67,8 +78,8 @@ class Player extends PureComponent {
     })
   }
 
-  handleOnSetRate = (rate) => {
-    const { language, actions } = this.props
+  handleOnSetRate = () => {
+    const { language, actions } = props
     const options = ['0.25', '0.5', '0.75', '1', '1.25', '1.5', '1.75', '2', I18n.t('Cancel', {locale: language})]
     ActionSheet.showActionSheetWithOptions({
       options: options,
@@ -81,88 +92,73 @@ class Player extends PureComponent {
   }
 
   handlePlayVideo = () => {
-    this.props.actions.playVideo(this.props.track)
+    props.actions.playVideo(props.track)
   }
 
-  render() {
-    
-    const {
-      navigation,
-      state,
-      track,
-      rate,
-      language,
-      user,
-      actions,
-      isFavorite,
-      bitRate
-    } = this.props
+  if (!track) {
+    return <View />
+  }
 
-    if (!track) {
-      return <View />
-    }
+  const rightElement =
+    <IconButton 
+      name='chevron-down'
+      iconStyle={styles.minimizeIcon}
+      onPress={() => navigation.pop()}
+      accessibilityLabel={I18n.t("minimize_player")} />
 
-    const rightElement =
-      <IconButton 
-        name='chevron-down'
-        iconStyle={styles.minimizeIcon}
-        onPress={() => navigation.pop()}
-        accessibilityLabel={I18n.t("minimize_player")} />
-
-    return (
-      <ImageBackground
-        source={imageBg}
-        style={styles.container}>
-        <View style={styles.bar}>
-          <StatusBar
-            backgroundColor="#E53935"
-            barStyle="light-content"
-          />
-          <ListItem
-            leftAvatar={
-              {
-                source: track.artwork && track.artwork.toString().startsWith('http') ? 
-                { uri: track.artwork } : track.artwork
-              }
+  return (
+    <ImageBackground
+      source={imageBg}
+      style={styles.container}>
+      <View style={styles.bar}>
+        <StatusBar
+          backgroundColor="#E53935"
+          barStyle="light-content"
+        />
+        <ListItem
+          leftAvatar={
+            {
+              source: track.artwork && track.artwork.toString().startsWith('http') ? 
+              { uri: track.artwork } : track.artwork
             }
-            title={<MarqueeText marqueeOnStart duration={3500} loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
-            subtitle={track.artist}
-            rightElement={rightElement}
-            containerStyle={{backgroundColor: '#E0E0E080'}}
-            onPress={() => navigation.pop()}
-            underlayColor="#E0E0E080"
-          />
-        </View>
-        <PlayerContent
-          data={track}
-          language={language}
-          navigation={navigation} />
-        <PlayerOptions
-          navigation={navigation}
-          track={track}
-          onDownload={this.handleDownload}
-          rate={rate}
-          user={user}
-          isFavorite={isFavorite}
-          bitRate={bitRate}
-          onSetRate={this.handleOnSetRate}
-          onAddFavorite={actions.addFavorite}
-          onRemoveFavorite={actions.removeFavorite}
-          onPlayVideo={this.handlePlayVideo}
-          onSetBitRateAndReset={actions.setBitRateAndReset} />
-        <View style={styles.bottomContainer}>
-          <ProgressBar />
-          <PlayerControls
-            state={state}
-            playPause={actions.playPause}
-            skipToPrevious={actions.skipToPrevious}
-            skipToNext={actions.skipToNext}
-            replay={actions.replay}
-            forward={actions.forward} />
-        </View>
-      </ImageBackground>
-    )
-  }
+          }
+          title={<MarqueeText marqueeOnStart duration={3500} loop style={styles.title} accessibilityHint={I18n.t("maximize_player")}>{track.title}</MarqueeText>}
+          subtitle={track.artist}
+          subtitleProps={{numberOfLines: 1}}
+          rightElement={rightElement}
+          containerStyle={{backgroundColor: '#E0E0E080'}}
+          onPress={() => navigation.pop()}
+          underlayColor="#E0E0E080"
+        />
+      </View>
+      <PlayerContent
+        data={track}
+        language={language}
+        navigation={navigation} />
+      <PlayerOptions
+        navigation={navigation}
+        track={track}
+        onDownload={handleDownload}
+        rate={rate}
+        user={user}
+        isFavorite={isFavorite}
+        bitRate={bitRate}
+        onSetRate={handleOnSetRate}
+        onAddFavorite={actions.addFavorite}
+        onRemoveFavorite={actions.removeFavorite}
+        onPlayVideo={handlePlayVideo}
+        onSetBitRateAndReset={actions.setBitRateAndReset} />
+      <View style={styles.bottomContainer}>
+        <ProgressBar />
+        <PlayerControls
+          playPause={actions.playPause}
+          skipToPrevious={actions.skipToPrevious}
+          skipToNext={actions.skipToNext}
+          replay={actions.replay}
+          forward={actions.forward} />
+      </View>
+    </ImageBackground>
+  )
 
 }
 
@@ -171,31 +167,30 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: '#DDDDDD'
+    backgroundColor: '#DDDDDD',
   },
   bar: {
     elevation: 2,
     borderTopWidth: Platform.OS === 'ios' ? 30 : 0,
     borderTopColor: '#E0E0E080',
     borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC'
+    borderBottomColor: '#CCCCCC',
   },
   title: {
-    fontSize: Platform.OS === 'ios' ? 17 : 16
+    fontSize: Platform.OS === 'ios' ? 17 : 16,
   },
   minimizeIcon: {
-    fontSize: 42
+    fontSize: 42,
   },
   bottomContainer: {
     width: '100%',
     flexDirection: 'column',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 })
 
 Player.propTypes = {
   navigation: PropTypes.object.isRequired,
-  state: Platform.OS == 'ios' ? PropTypes.string : PropTypes.number,
   track: PropTypes.object,
   rate: PropTypes.number.isRequired,
   language: PropTypes.string.isRequired,
@@ -214,7 +209,7 @@ Player.propTypes = {
     removeFavorite: PropTypes.func.isRequired,
     playVideo: PropTypes.func.isRequired,
     setBitRateAndReset: PropTypes.func.isRequired,
-  })
+  }),
 }
 
 export default Player
