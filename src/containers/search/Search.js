@@ -6,11 +6,14 @@ import {
   StyleSheet,
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
-import { SearchBar, ListItem } from 'react-native-elements'
+import {
+  SearchBar,
+  ListItem,
+  Button,
+} from 'react-native-elements'
 import firebase from 'react-native-firebase'
 
 import HeaderTitle from 'src/navigators/headertitle'
-import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Endpoints } from 'src/constants'
 import {
@@ -30,11 +33,14 @@ class Search extends React.PureComponent {
 
   static navigationOptions = ({ navigation }) => ({
     headerTitle: <HeaderTitle title="search" />,
-    headerRight:<IconButton
-      name="more-vertical"
-      size={24}
-      color="#FFFFFF"
-      style={{paddingHorizontal: 15}}
+    headerRight: <Button
+      icon={{
+        type: 'feather',
+        name: 'more-vertical',
+        size: 24,
+        color: '#FFFFFF',
+      }}
+      type="clear"
       onPress={() => { navigation.state.params.handleMore() }}
       accessibilityLabel={I18n.t("search_filters")} />
   })  

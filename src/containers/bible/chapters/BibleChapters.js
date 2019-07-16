@@ -6,9 +6,11 @@ import {
   Alert,
   StyleSheet,
 } from 'react-native'
-import { ListItem } from 'react-native-elements'
+import {
+  ListItem,
+  Button,
+} from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 import { Dirs } from 'src/constants'
 
@@ -112,11 +114,18 @@ BibleChapters.propTypes = {
 
 const RightElement = ({ data, onPress }) => {
   const handlePress = () => { onPress(data) }
-  return <IconButton
-    name={data.local ? 'x' : 'download'}
-    size={24}
-    onPress={handlePress}
-    accessibilityLabel={I18n.t(data.local ? 'delete' : 'download_file')} />
+  return (
+    <Button
+      icon={{
+        type: 'feather',
+        name: data.local ? 'x' : 'download',
+        size: 24,
+      }}
+      buttonStyle={{padding: 0}}
+      type="clear"
+      onPress={handlePress}
+      accessibilityLabel={I18n.t(data.local ? 'delete' : 'download_file')} />
+  )
 }
 
 export default BibleChapters

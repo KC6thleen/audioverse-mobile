@@ -1,15 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Button } from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
 const HeaderRight = ({ navigation }) => (
-  <IconButton
-    name="search"
-    size={24}
-    color="#FFFFFF"
-    style={{paddingHorizontal: 15}}
+  <Button
+    icon={{
+      type: 'feather',
+      name: 'search',
+      size: 24,
+      color: '#FFFFFF',
+    }}
+    type="clear"
     onPress={() => navigation.navigate({routeName: 'Search'}) }
     accessibilityLabel={I18n.t("search")} />
 )

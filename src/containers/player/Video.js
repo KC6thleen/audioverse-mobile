@@ -6,8 +6,6 @@ import {
   Platform,
   StyleSheet
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
-import Video from 'react-native-video'
 import VideoControls from 'react-native-video-controls'
 
 class VideoPlayer extends PureComponent {

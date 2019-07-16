@@ -12,7 +12,7 @@ import {
   Linking,
   StyleSheet
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
+import { Icon, Button } from 'react-native-elements'
 import { LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk'
 import Toast from 'react-native-simple-toast'
 import firebase from 'react-native-firebase'
@@ -181,10 +181,14 @@ class Login extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <Icon
-          name="x-circle"
-          size={30}
-          style={styles.close}
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'x-circle',
+            size: 30,
+          }}
+          type="clear"
+          containerStyle={styles.close}
           onPress={this.handleClose} />
         <View style={styles.form}>
           <Image
@@ -193,7 +197,7 @@ class Login extends PureComponent {
             resizeMode="contain" />
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
-              <Icon name="user" size={20} color="#FFF" />
+              <Icon type="feather" name="user" size={20} color="#FFF" />
             </View>
             <TextInput
               placeholder={I18n.t('Email')}
@@ -208,7 +212,7 @@ class Login extends PureComponent {
           </View>
           <View style={styles.inputWrap}>
             <View style={styles.iconWrap}>
-              <Icon name="lock" size={20} color="#FFF" />
+              <Icon type="feather" name="lock" size={20} color="#FFF" />
             </View>
             <TextInput
               placeholder={I18n.t('Password')}

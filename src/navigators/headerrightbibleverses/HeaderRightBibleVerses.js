@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
+import { Icon } from 'react-native-elements'
 import ActionSheet from 'react-native-action-sheet'
 
 import I18n from 'locales'
@@ -31,7 +31,7 @@ const HeaderRightBibleVerses = ({ bible, actions }) => {
         style={[styles.container, styles.option]}
         onPress={handleOnPressVersion}>
         <Text style={{color: '#FFFFFF'}}>{bible.version.abbr}</Text>
-        <Icon name="chevron-down" size={24} color="#FFFFFF" />
+        <Icon type="feather" name="chevron-down" size={24} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
   )

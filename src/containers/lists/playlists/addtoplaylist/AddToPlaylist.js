@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View, ScrollView, TouchableOpacity, Text, Button, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
+import { Icon } from 'react-native-elements'
 import throttle from 'lodash.throttle'
 
 import I18n from 'locales'
 
-class AddToPlaylist extends PureComponent {
+class AddToPlaylist extends React.PureComponent {
 
   handleOnPressNewPlaylist = () => {
     this.props.navigation.goBack()
@@ -34,12 +34,12 @@ class AddToPlaylist extends PureComponent {
         <View style={styles.card}>
           <ScrollView>
             <TouchableOpacity style={styles.row} onPress={this.handleOnPressNewPlaylist}>
-              <Icon name="list" size={18} />
+              <Icon type="feather" name="list" size={18} />
               <Text style={styles.text}>{I18n.t('new_playlist')}</Text>
             </TouchableOpacity>
             {playlists.map(el => (
               <TouchableOpacity style={styles.row} key={el.id} onPress={() => { this.handleOnPressPlaylist(el) }}>
-                <Icon name={!el.selected ? 'square' : 'check-square'} size={18} />
+                <Icon type="feather" name={!el.selected ? 'square' : 'check-square'} size={18} />
                 <Text style={styles.text}>{el.title}</Text>
               </TouchableOpacity>
             ))}

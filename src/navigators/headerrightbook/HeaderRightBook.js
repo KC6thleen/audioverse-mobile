@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ActionSheet from 'react-native-action-sheet'
+import { Button } from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
 import { Dirs } from 'src/constants'
 import I18n from 'locales'
 
@@ -33,11 +33,14 @@ const HeaderRightBook = ({ items, actions }) => {
   }
 
   return (
-    <IconButton
-      name="download"
-      size={24}
-      color="#FFFFFF"
-      style={{paddingHorizontal: 15}}
+    <Button
+      icon={{
+        type: 'feather',
+        name: 'download',
+        size: 24,
+        color: '#FFFFFF',
+      }}
+      type="clear"
       onPress={handleOnPress}
       accessibilityLabel={I18n.t("download_all")} />
   )

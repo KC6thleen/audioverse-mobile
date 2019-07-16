@@ -5,9 +5,11 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native'
-import { ListItem } from 'react-native-elements'
+import {
+  ListItem,
+  Button,
+} from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
 import I18n from 'locales'
 
 class DownloadsQueue extends React.PureComponent {
@@ -63,11 +65,18 @@ DownloadsQueue.propTypes = {
 
 const RightElement = ({ data, onPress }) => {
   const _onPress = () => { onPress(data) }
-  return <IconButton
-    name="x"
-    size={24}
-    onPress={_onPress}
-    accessibilityLabel={I18n.t('delete')} />
+  return (
+    <Button
+      icon={{
+        type: 'feather',
+        name: 'x',
+        size: 24,
+      }}
+      buttonStyle={{padding: 0}}
+      type="clear"
+      onPress={_onPress}
+      accessibilityLabel={I18n.t('delete')} />
+  )
 }
 
 export default DownloadsQueue

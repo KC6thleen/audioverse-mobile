@@ -11,9 +11,8 @@ import {
 import firebase from 'react-native-firebase'
 import throttle from 'lodash.throttle'
 import ActionSheet from 'react-native-action-sheet'
+import { Button } from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
-import { removeFavorite } from '../../actions';
 import { ContentTypes } from 'src/constants'
 import I18n from 'locales'
 
@@ -153,23 +152,41 @@ const PlayerOptions = ({
     <View style={styles.container}>
       { (!track.downloadDisabled || track.downloadDisabled === "0") &&
         track.contentType === ContentTypes.sermon && 
-        <IconButton
-          name="download"
-          iconStyle={styles.icon}
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'download',
+            size: 24,
+            color: '#FFFFFF',
+          }}
+          type="clear"
+          containerStyle={styles.icon}
           onPress={onDownload}
           accessibilityLabel={I18n.t("download_file")} />
       }
       { track.contentType === ContentTypes.sermon && 
-        <IconButton
-          name="heart"
-          iconStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'heart',
+            size: 24,
+            color: '#FFFFFF',
+          }}
+          type="clear"
+          containerStyle={[styles.icon, {color: isFavorite ? '#E53935' : '#FFFFFF'}]}
           onPress={handlePressFavorite}
           accessibilityLabel={I18n.t("add_to_favorites")} />
       }
       { track.videoFiles && track.videoFiles.length > 0 &&
-        <IconButton
-          name="video"
-          iconStyle={styles.icon}
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'video',
+            size: 24,
+            color: '#FFFFFF',
+          }}
+          type="clear"
+          containerStyle={styles.icon}
           onPress={onPlayVideo}
           accessibilityLabel={I18n.t("play_video")} />
       }
@@ -180,22 +197,40 @@ const PlayerOptions = ({
         {`${rate}X`}
       </Text>
       { track.contentType === ContentTypes.sermon && 
-        <IconButton
-          name="folder"
-          iconStyle={styles.icon}
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'folder',
+            size: 24,
+            color: '#FFFFFF',
+          }}
+          type="clear"
+          containerStyle={styles.icon}
           onPress={handleAddToPlaylist}
           accessibilityLabel={I18n.t("add_to_playlists")} />
       }
       { (track.contentType === ContentTypes.sermon || track.contentType === ContentTypes.book) && 
-        <IconButton
-        name="share-2"
-        iconStyle={styles.icon}
-        onPress={handleShare}
-        accessibilityLabel={I18n.t("share")} />
+        <Button
+          icon={{
+            type: 'feather',
+            name: 'share-2',
+            size: 24,
+            color: '#FFFFFF',
+          }}
+          type="clear"
+          containerStyle={styles.icon}
+          onPress={handleShare}
+          accessibilityLabel={I18n.t("share")} />
       }
-      <IconButton
-        name="more-vertical"
-        iconStyle={styles.icon}
+      <Button
+        icon={{
+          type: 'feather',
+          name: 'more-vertical',
+          size: 24,
+          color: '#FFFFFF',
+        }}
+        type="clear"
+        containerStyle={styles.icon}
         onPress={handleMore}
         accessibilityLabel={I18n.t("more_options")} />
     </View>
@@ -211,14 +246,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingHorizontal: 15,
-    fontSize: 24,
-    color: '#FFFFFF'
   },
   text: {
     fontSize: 20,
     width: 86,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    color: "#FFFFFF",
+  },
 })
 
 PlayerOptions.propTypes = {

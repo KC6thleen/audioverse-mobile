@@ -9,9 +9,11 @@ import {
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 import MarqueeText from 'react-native-marquee'
-import { ListItem } from 'react-native-elements'
+import {
+  ListItem,
+  Button,
+} from 'react-native-elements'
 
-import IconButton from 'src/components/buttons/IconButton'
 import PlayerContent from './PlayerContent'
 import ProgressBar from 'src/components/progressbar/ProgressBar'
 import PlayerControls from './PlayerControls'
@@ -99,12 +101,18 @@ const Player = props => {
     return <View />
   }
 
-  const rightElement =
-    <IconButton 
-      name='chevron-down'
-      iconStyle={styles.minimizeIcon}
+  const rightElement = (
+    <Button 
+      icon={{
+        type: 'feather',
+        name: 'chevron-down',
+        size: 42,
+      }}
+      buttonStyle={{padding: 0}}
+      type="clear"
       onPress={() => navigation.pop()}
       accessibilityLabel={I18n.t("minimize_player")} />
+  )
 
   return (
     <ImageBackground
@@ -178,9 +186,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Platform.OS === 'ios' ? 17 : 16,
-  },
-  minimizeIcon: {
-    fontSize: 42,
   },
   bottomContainer: {
     width: '100%',

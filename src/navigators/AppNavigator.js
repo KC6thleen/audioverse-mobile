@@ -7,7 +7,7 @@ import { createSwitchNavigator } from '@react-navigation/core'
 import { createAppContainer } from '@react-navigation/native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import Icon from 'react-native-vector-icons/Feather'
+import { Icon } from 'react-native-elements'
 
 import { GlobalStyles, headerTintColor, primaryColor } from 'src/styles'
 import HeaderTitle from './headertitle'
@@ -57,7 +57,7 @@ const WithPlayerMenuNavigator = withPlayer(MenuNavigator)
 
 const screenNavigationOptions = (title, icon) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }) => {
-    return <Icon name={icon} size={25} color={tintColor} />
+    return <Icon type="feather" name={icon} size={25} color={tintColor} />
   },
   tabBarLabel: ({ tintColor, orientation }) => <BottomTabBarLabel tintColor={tintColor} orientation={orientation} title={title} />,
 })
