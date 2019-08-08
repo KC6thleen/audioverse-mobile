@@ -18,7 +18,6 @@ import com.actionsheet.ActionSheetPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
-import org.pgsqlite.SQLitePluginPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -55,8 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ActionSheetPackage(),
             new RNFetchBlobPackage(),
             new VectorIconsPackage(),
-            new TrackPlayer(),
-            new SQLitePluginPackage()
+            new TrackPlayer()
       );
     }
 

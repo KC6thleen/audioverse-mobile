@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -42,7 +41,6 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* AudioVerseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AudioVerseTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		30176A05AA2C447389385062 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D589E820A3F346B7820C81D8 /* libSQLite.a */; };
 		328E4650D8E8460B82F4265E /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABB2EBF221A4D21843A3478 /* libRNFirebase.a */; };
 		466D4480BE46413EAF328238 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 486B118EC163409FB2257868 /* MaterialIcons.ttf */; };
 		5AC4D16D23F044029605DA1F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C696C654D64EC697A57C46 /* SimpleLineIcons.ttf */; };
@@ -330,13 +328,6 @@
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
 		};
-		B02751472177B3E400CD7A91 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5A63AA79D0F4660917B80B9 /* SQLite.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E23D7B471ACEFE2A00C59171;
-			remoteInfo = SQLite;
-		};
 		B028EDE420BDE7DC005D6BAB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A51079E4EA7749A3A924373E /* RNTrackPlayer.xcodeproj */;
@@ -513,12 +504,10 @@
 		B0FD5DCC21CA95E2002990AB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		B56B5BCC79FB4DAE8273EF77 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		B5816DC4EE3B4B799159892A /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
-		B5A63AA79D0F4660917B80B9 /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		B5DDC4F399C75523EB8A7398 /* Pods-AudioVerse-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse-tvOS/Pods-AudioVerse-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BB8F608786B44934B1A1580E /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		C13C59476E034079A65BCD7D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		D5351487A5FF4C7799C3C344 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
-		D589E820A3F346B7820C81D8 /* libSQLite.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSQLite.a; sourceTree = "<group>"; };
 		D7DA5CA893FF4660AFE01D91 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
 		E04C8E5F00B7F786A8AF2026 /* Pods-AudioVerse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse/Pods-AudioVerse.debug.xcconfig"; sourceTree = "<group>"; };
 		E535E51EA4594D7D8BEB8D35 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -563,7 +552,6 @@
 				71A0F648AC6C4CF1BC79731A /* libRNTrackPlayer.a in Frameworks */,
 				DF8552F5ED124DA2B1B6DDF8 /* libRNVectorIcons.a in Frameworks */,
 				10E30FEC34744D7B822A67C5 /* libRNFetchBlob.a in Frameworks */,
-				30176A05AA2C447389385062 /* libSQLite.a in Frameworks */,
 				FA5DAEB67FAA4AAB8C4CD161 /* libsqlite3.0.tbd in Frameworks */,
 				033D8E94E10942FFBCB1BF1B /* libLRDRCTSimpleToast.a in Frameworks */,
 				6E50784AAB634B208A736239 /* libRCTVideo.a in Frameworks */,
@@ -777,7 +765,6 @@
 				A51079E4EA7749A3A924373E /* RNTrackPlayer.xcodeproj */,
 				829E2E28B4A0462E8B29486F /* RNVectorIcons.xcodeproj */,
 				B5816DC4EE3B4B799159892A /* RNFetchBlob.xcodeproj */,
-				B5A63AA79D0F4660917B80B9 /* SQLite.xcodeproj */,
 				ABBC0B269ACF46B1B4E23FA6 /* LRDRCTSimpleToast.xcodeproj */,
 				8B03B4EEBE2B43C482BBB340 /* RCTVideo.xcodeproj */,
 				A6D965ED059D45BC9B506A16 /* RNGestureHandler.xcodeproj */,
@@ -844,14 +831,6 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B027513F2177B3E000CD7A91 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B02751482177B3E400CD7A91 /* libSQLite.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1180,10 +1159,6 @@
 					ProductGroup = B028EDD720BDE7DA005D6BAB /* Products */;
 					ProjectRef = 829E2E28B4A0462E8B29486F /* RNVectorIcons.xcodeproj */;
 				},
-				{
-					ProductGroup = B027513F2177B3E000CD7A91 /* Products */;
-					ProjectRef = B5A63AA79D0F4660917B80B9 /* SQLite.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1432,13 +1407,6 @@
 			fileType = archive.ar;
 			path = libRNFetchBlob.a;
 			remoteRef = B02751442177B3E400CD7A91 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B02751482177B3E400CD7A91 /* libSQLite.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSQLite.a;
-			remoteRef = B02751472177B3E400CD7A91 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B028EDE520BDE7DC005D6BAB /* libRNTrackPlayer.a */ = {
@@ -1782,7 +1750,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1816,7 +1783,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1856,7 +1822,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1899,7 +1864,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1941,7 +1905,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1982,7 +1945,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -2021,7 +1983,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -2060,7 +2021,6 @@
 					"$(SRCROOT)/../node_modules/react-native-track-player/ios/RNTrackPlayer/**",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
