@@ -351,7 +351,7 @@ export const skipToNext = () => action(SKIP_TO_NEXT)
 export const replay = () => action(REPLAY)
 export const forward = () => action(FORWARD)
 export const download = (item: {}, downloadPath: string, downloadUrl: string, fileName: string, bitRate: string, cb?: () => {}) => action(DOWNLOAD, {item, downloadPath, downloadUrl, fileName, bitRate, cb})
-export const setRate = (rate: string) => action(SET_RATE, {rate})
+export const setRate = (rate: number) => action(SET_RATE, {rate})
 export const trackInitialized = (track: Track) => action(TRACK_INITIALIZED, {track})
 
 export const REMOVE_DOWNLOAD = 'REMOVE_DOWNLOAD'

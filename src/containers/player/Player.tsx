@@ -151,7 +151,7 @@ const Player: React.FC<Props> = ({
       cancelButtonIndex: options.length - 1,
     }, buttonIndex => {
       if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
-        actions.setRate(options[buttonIndex])
+        actions.setRate(parseFloat(options[buttonIndex]))
       }
     })
   }
