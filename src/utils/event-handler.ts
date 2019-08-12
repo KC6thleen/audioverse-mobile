@@ -59,6 +59,12 @@ async function eventHandler(store: Store, data: Data) {
     if (data.state === TrackPlayer.STATE_BUFFERING) {
       // clear interval
       clearInterval(interval)
+    } else if (data.state === TrackPlayer.STATE_READY) {
+      // TrackPlayer.STATE_READY is not triggered on Android
+      // so we call playbackReady on playback-track-changed
+      if (Platform.OS === 'ios') {
+        playbackReady()
+      }
     } else if (data.state === TrackPlayer.STATE_PLAYING) {
       // set a new interval to save the current position
       interval = setInterval(async () => {
@@ -76,31 +82,28 @@ async function eventHandler(store: Store, data: Data) {
     }
   })
 
-  TrackPlayer.addEventListener('playback-track-changed', async (data) => {
+  const playbackReady = async () => {
+    const trackId = await TrackPlayer.getCurrentTrack()
+    // set track id
+    store.dispatch(playbackTrackId(trackId))
+    // get track
+    const track = await TrackPlayer.getTrack(trackId)
+    // track initialized
+    store.dispatch(actions.trackInitialized(track))
+  
+    // Bible chapter
+    if (track.chapter) {
+      store.dispatch(bibleChapter(track.chapter))
+      store.dispatch(actions.loadBibleVerses())
+    }
+  }
+
+  TrackPlayer.addEventListener('playback-track-changed', (data) => {
     console.log('playback-track-changed', data)
-    // This event is fired twice and diferently on iOS and Android with different data values
-    // that's the reason why we are using the following validation to only run this code once
-    if ((Platform.OS === 'ios' && data.track) || (Platform.OS === 'android' && data.nextTrack)) {      
-      // taking as an example that the Player is playing the track ENGESV2_Gen_1:
-      // on iOS the data object has different values whether the playback finished playing and advances to the next track:
-      // {track: "ENGESV2_Gen_2", nextTrack: "ENGESV2_Gen_3", position: 342.4391836734694}
-      // or the user click the next option (TrackPlayer.skipToNext):
-      // {nextTrack: "ENGESV2_Gen_2", track: "ENGESV2_Gen_1", position: 5.142959181}
-      // the latter data is the correct one
-      // that's why we are using TrackPlayer.getCurrentTrack() to get the current track id
-      const trackId = await TrackPlayer.getCurrentTrack()
-      // set track id
-      store.dispatch(playbackTrackId(trackId))
-      // get track
-      const track = await TrackPlayer.getTrack(trackId)
-      // track initialized
-      store.dispatch(actions.trackInitialized(track))
-    
-      // Bible chapter
-      if (track.chapter) {
-        store.dispatch(bibleChapter(track.chapter))
-        store.dispatch(actions.loadBibleVerses())
-      }
+    // react-native-track-player doesn't fire the ready event on Android,
+    // that's why we are using the playback-track-changed event
+    if ((Platform.OS === 'android' && data.nextTrack)) {
+      playbackReady()
     }
   })
 
