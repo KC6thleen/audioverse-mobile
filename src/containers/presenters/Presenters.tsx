@@ -89,21 +89,19 @@ const Presenters: React.FC<Props> = ({ navigation, items, pagination, actions })
     )
   }
 
-  const header = () => {
-    return (
-      <SearchBar
-        lightTheme
-        round
-        autoCorrect={false}
-        placeholder={I18n.t('search')}
-        autoFocus
-        ref={searchRef}
-        value={search}
-        onChangeText={handleChangeText}
-        accessibilityRole="search"
-        accessibilityLabel={I18n.t("search")} />
-    )
-  }
+  const header = (
+    <SearchBar
+      lightTheme
+      round
+      autoCorrect={false}
+      placeholder={I18n.t('search')}
+      autoFocus
+      ref={searchRef}
+      value={search}
+      onChangeText={handleChangeText}
+      accessibilityRole="search"
+      accessibilityLabel={I18n.t("search")} />
+  )
   
   if (!data.length && pagination.isFetching) {
     return (

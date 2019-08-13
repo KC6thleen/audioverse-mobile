@@ -108,23 +108,21 @@ const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, action
     }
   }
 
-  const header = () => {
-    return (
-      <SearchBar
-        lightTheme
-        round
-        autoCorrect={false}
-        placeholder={I18n.t('search')}
-        autoFocus
-        showLoading={loading}
-        ref={searchRef}
-        value={search}
-        onChangeText={setSearch}
-        onSubmitEditing={handleSearch}
-        accessibilityRole="search"
-        accessibilityLabel={I18n.t("search")} />
-    )
-  }
+  const header = (
+    <SearchBar
+      lightTheme
+      round
+      autoCorrect={false}
+      placeholder={I18n.t('search')}
+      autoFocus
+      showLoading={loading}
+      ref={searchRef}
+      value={search}
+      onChangeText={setSearch}
+      onSubmitEditing={handleSearch}
+      accessibilityRole="search"
+      accessibilityLabel={I18n.t("search")} />
+  )
 
   const renderItem: ListRenderItem<Item> = ({ item }) => {
     if (category === I18n.t('presentations')) {
