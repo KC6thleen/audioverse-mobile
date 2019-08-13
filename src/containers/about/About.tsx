@@ -78,7 +78,7 @@ const handleInstagram = () => {
   Linking.openURL('https://www.instagram.com/audioverse').catch(err => console.error(err))
 }
 
-const Login: React.FC<Props> = ({ language }) => {
+const About: React.FC<Props> = ({ language }) => {
   const data = [
     {
       title: I18n.t('donate'),
@@ -145,4 +145,4 @@ const Login: React.FC<Props> = ({ language }) => {
   )
 }
 
-export default Login
+export default About
