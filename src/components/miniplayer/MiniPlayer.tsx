@@ -99,6 +99,7 @@ const MiniPlayer: React.FC<Props> = ({ navigation, track, actions }) => {
         rightAvatar={rightAvatar}
         rightElement={rightElement}
         containerStyle={{backgroundColor: 'transparent'}}
+        underlayColor="#E0E0E0"
       />
       <ProgressBarMini />
     </View>

@@ -201,6 +201,7 @@ const Player: React.FC<Props> = ({
           rightElement={rightElement}
           containerStyle={{backgroundColor: '#E0E0E080'}}
           onPress={() => navigation.pop()}
+          underlayColor="#E0E0E080"
         />
       </View>
       <PlayerContent
