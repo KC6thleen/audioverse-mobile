@@ -210,8 +210,6 @@ export function* playVideo({ item }: { type: string, item: Track }) {
  * @param {object} id
  */
 export function* resetAndPlayTrack({ tracks, id }: { type: string, tracks: Track[], id: string }) {
-  yield call(TrackPlayer.reset)
-
   const selectedTrack = !id ? tracks[0] : tracks.find(el => el.id === id)
 
   yield put(playbackPosition(0))
@@ -220,9 +218,11 @@ export function* resetAndPlayTrack({ tracks, id }: { type: string, tracks: Track
 
   const autoPlay = yield select(selectors.getAutoPlay)
   if (autoPlay || selectedTrack!.contentType === ContentTypes.bible) {
+    yield call(TrackPlayer.reset)
     yield call(playTracks)
   } else if (selectedTrack!.contentType !== ContentTypes.bible) {
     yield call(NavigationService.navigate, 'Player')
+    yield call(TrackPlayer.reset)
   }
 }
 
