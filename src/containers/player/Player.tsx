@@ -222,7 +222,7 @@ const Player: React.FC<Props> = ({
         onPlayVideo={handlePlayVideo}
         onSetBitRateAndReset={actions.setBitRateAndReset} />
       <View style={styles.bottomContainer}>
-        <ProgressBar />
+        <ProgressBar rate={rate} />
         <PlayerControls
           playPause={actions.playPause}
           skipToPrevious={actions.skipToPrevious}

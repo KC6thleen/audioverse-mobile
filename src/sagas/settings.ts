@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { all, put, call } from 'redux-saga/effects'
 
 import I18n from '../../locales'

@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import {
   View,
   ActivityIndicator,
+  Platform,
   StyleSheet,
 } from 'react-native'
-import TrackPlayer, {
+import {
+  State as PlayerState,
+  Event as PlayerEvent,
   usePlaybackState,
   useTrackPlayerEvents,
 } from "react-native-track-player"
@@ -59,23 +62,25 @@ const styles = StyleSheet.create({
 const PlayerControls: React.FC<Props> = ({ playPause, skipToPrevious, skipToNext, replay, forward }) => {
 
   const playbackState = usePlaybackState()
-  console.log('playbackState', playbackState)
+  console.log('playbackState', playbackState, PlayerState)
   const [loading, setLoading] = useState(false)
   // on iOS the Media Player library that we are using does not
   // enter the loading state until it has loaded/buffered the mp3 file, however
   // in order to let the user know that the file is being loaded we are
   // using our own loading state, it is set to true when the a track is changed
   // and is set to false when the playback-state change.
-  useTrackPlayerEvents(["playback-track-changed"], () => {
-    setLoading(true) // show activity indicator
+  useTrackPlayerEvents([PlayerEvent.PlaybackTrackChanged], () => {
+    if (Platform.OS === 'ios') {
+      setLoading(true) // show activity indicator
+    }
   })
 
-  useTrackPlayerEvents(["playback-state"], () => {
-    if (loading) {
+  useTrackPlayerEvents([PlayerEvent.PlaybackState], (event) => {
+    if (event.state === PlayerState.Playing && loading) {
       setLoading(false) // hide activity indicator
     }
   })
-  
+
   return (
     <View style={styles.container}>
       <ImageButton
@@ -90,14 +95,14 @@ const PlayerControls: React.FC<Props> = ({ playPause, skipToPrevious, skipToNext
         onPress={skipToPrevious}
         accessibilityLabel={I18n.t("previous")}
       />
-      { loading || playbackState === TrackPlayer.STATE_BUFFERING
+      { loading || playbackState === PlayerState.Buffering
         ? <ActivityIndicator size="large" />
         : <ImageButton
-            source={playbackState === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
+            source={playbackState === PlayerState.Playing ? iconPause : iconPlay}
             style={styles.playPauseButton}
-            imageStyle={[styles.playPauseIcon, {marginLeft: playbackState === TrackPlayer.STATE_PAUSED ? 1 : 0}]}
+            imageStyle={[styles.playPauseIcon, {marginLeft: playbackState === PlayerState.Paused ? 1 : 0}]}
             onPress={playPause}
-            accessibilityLabel={I18n.t(playbackState === TrackPlayer.STATE_PLAYING ? "pause" : "play" )}
+            accessibilityLabel={I18n.t(playbackState === PlayerState.Playing ? "pause" : "play" )}
           />
       }
       <ImageButton

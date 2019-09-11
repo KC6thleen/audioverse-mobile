@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
-  AsyncStorage,
   Linking,
   StyleSheet,
 } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { Icon, Button } from 'react-native-elements'
 import {
   LoginManager,

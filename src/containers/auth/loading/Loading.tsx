@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import {
   View,
   ActivityIndicator,
-  AsyncStorage,
   StatusBar,
   StyleSheet,
 } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { NavigationScreenProps } from 'react-navigation'
 
 import { UserState } from '../../../store/user/types'

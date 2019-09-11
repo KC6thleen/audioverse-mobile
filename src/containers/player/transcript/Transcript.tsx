@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {
   View,
-  WebView,
   ActivityIndicator,
   Platform,
   StyleSheet,
 } from 'react-native'
+import { WebView } from 'react-native-webview'
 import { Track } from 'react-native-track-player'
 
 import I18n from '../../../../locales'

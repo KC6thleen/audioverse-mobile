@@ -1,4 +1,4 @@
-import { NetInfo } from 'react-native'
+import NetInfo from "@react-native-community/netinfo"
 import { Endpoints, ContentTypes } from '../constants'
 import { defaultImage } from '../styles'
 import { Track } from 'react-native-track-player'
@@ -113,16 +113,6 @@ export const parseBibleChapter = (item: {[key: string]: any}, bible: {[key: stri
  * Gets NetInfo isConnected property
 */
 export const netInfoIsConnected = async () => {
-  // iOS: NetInfo.isConnected returns always false
-  // workaround https://github.com/facebook/react-native/issues/8615#issuecomment-389358993
-  const onInitialNetConnection = () => {
-    NetInfo.isConnected.removeEventListener('connectionChange', onInitialNetConnection)
-  }
-  NetInfo.isConnected.addEventListener(
-    'connectionChange',
-    onInitialNetConnection
-  )
-
-  await NetInfo.getConnectionInfo()
-  return await NetInfo.isConnected.fetch()
+  const state = await NetInfo.fetch()
+  return state.isConnected
 }

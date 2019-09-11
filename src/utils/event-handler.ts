@@ -1,5 +1,8 @@
 import { Alert, Platform } from 'react-native'
-import TrackPlayer from 'react-native-track-player'
+import TrackPlayer, {
+  State as PlayerState,
+  Event as PlayerEvent,
+} from 'react-native-track-player'
 import { Store } from 'redux'
 
 import I18n from '../../locales'
@@ -16,65 +19,59 @@ interface Data {
 
 async function eventHandler(store: Store, data: Data) {
 
-  TrackPlayer.addEventListener('remote-play', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemotePlay, () => {
     TrackPlayer.play()
   })
 
-  TrackPlayer.addEventListener('remote-pause', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemotePause, () => {
     TrackPlayer.pause()
   })
 
-  TrackPlayer.addEventListener('remote-stop', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemoteStop, () => {
     TrackPlayer.stop()
   })
 
-  TrackPlayer.addEventListener('remote-next', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemoteNext, () => {
     store.dispatch(actions.skipToNext())
   })
 
-  TrackPlayer.addEventListener('remote-previous', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemotePrevious, () => {
     store.dispatch(actions.skipToPrevious())
   })
 
-  TrackPlayer.addEventListener('remote-seek', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemoteSeek, () => {
     TrackPlayer.seekTo(data.position)
   })
 
-  TrackPlayer.addEventListener('remote-jump-backward', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemoteJumpBackward, () => {
     store.dispatch(actions.replay())
   })
 
-  TrackPlayer.addEventListener('remote-jump-forward', () => {
+  TrackPlayer.addEventListener(PlayerEvent.RemoteJumpForward, () => {
     store.dispatch(actions.forward())
   })
 
   if (Platform.OS !== 'ios') { // this event type is not supported on iOS
-    TrackPlayer.addEventListener('remote-duck', () => {
+    TrackPlayer.addEventListener(PlayerEvent.RemoteDuck, () => {
       TrackPlayer.setVolume(data.ducking ? 0.5 : 1)
     })
   }
 
-  TrackPlayer.addEventListener('playback-state', async (data) => {
-    console.log('playback-state', data)
-    if (data.state === TrackPlayer.STATE_BUFFERING) {
+  TrackPlayer.addEventListener(PlayerEvent.PlaybackState, async (data) => {
+    console.log('playback-state', data, PlayerState)
+    if (data.state === PlayerState.Buffering) {
       // clear interval
       clearInterval(interval)
-    } else if (data.state === TrackPlayer.STATE_READY) {
-      // TrackPlayer.STATE_READY is not triggered on Android
-      // so we call playbackReady on playback-track-changed
-      if (Platform.OS === 'ios') {
-        playbackReady()
-      }
-    } else if (data.state === TrackPlayer.STATE_PLAYING) {
+    } else if (data.state === PlayerState.Playing) {
       // set a new interval to save the current position
       interval = setInterval(async () => {
         const position = await TrackPlayer.getPosition()
         store.dispatch(playbackPosition(position))
       }, 10000)
-    } else if (data.state === TrackPlayer.STATE_PAUSED) {
+    } else if (data.state === PlayerState.Paused) {
       // clear interval
       clearInterval(interval)
-    } else if (data.state === TrackPlayer.STATE_STOPPED) {
+    } else if (data.state === PlayerState.Stopped) {
       // clear interval
       clearInterval(interval)
       // reset the position
@@ -98,16 +95,14 @@ async function eventHandler(store: Store, data: Data) {
     }
   }
 
-  TrackPlayer.addEventListener('playback-track-changed', (data) => {
+  TrackPlayer.addEventListener(PlayerEvent.PlaybackTrackChanged, (data) => {
     console.log('playback-track-changed', data)
-    // react-native-track-player doesn't fire the ready event on Android,
-    // that's why we are using the playback-track-changed event
-    if ((Platform.OS === 'android' && data.nextTrack)) {
+    if (Platform.OS === 'ios' || (Platform.OS === 'android' && data.nextTrack)) {
       playbackReady()
     }
   })
 
-  TrackPlayer.addEventListener('playback-error', (data) => {
+  TrackPlayer.addEventListener(PlayerEvent.PlaybackError, (data) => {
     Alert.alert(I18n.t('Unable_to_download_this_media._Try_again_later.'))
     console.log('playback-error', data)
   })

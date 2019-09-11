@@ -10,6 +10,7 @@ jest.mock('react-native-track-player', () => {
   }
 
   return {
-    ProgressComponent: ProgressComponent
+    ProgressComponent: ProgressComponent,
+    useProgress: jest.fn(() => ({position: 0, duration: 0, buffered: 0}))
   }
 })

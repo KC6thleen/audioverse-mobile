@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { View, WebView, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { WebView } from 'react-native-webview'
 
 import { BibleState } from '../../../store/Bible/types'
 import {

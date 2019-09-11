@@ -5,8 +5,10 @@ import {
   Platform,
   StyleSheet,
 } from 'react-native'
-import TrackPlayer, {
+import {
   Track,
+  State as PlayerState,
+  Event as PlayerEvent,
   usePlaybackState,
   useTrackPlayerEvents,
 } from "react-native-track-player"
@@ -55,12 +57,14 @@ const MiniPlayer: React.FC<Props> = ({ navigation, track, actions }) => {
   // in order to let the user know that the file is being loaded we are
   // using our own loading state, it is set to true when the a track is changed
   // and is set to false when the playback-state change.
-  useTrackPlayerEvents(["playback-track-changed"], () => {
-    setLoading(true) // show activity indicator
+  useTrackPlayerEvents([PlayerEvent.PlaybackTrackChanged], () => {
+    if (Platform.OS === 'ios') {
+      setLoading(true) // show activity indicator
+    }
   })
 
-  useTrackPlayerEvents(["playback-state"], () => {
-    if (loading) {
+  useTrackPlayerEvents([PlayerEvent.PlaybackState], (event) => {
+    if (event.state === PlayerState.Playing && loading) {
       setLoading(false) // hide activity indicator
     }
   })
@@ -71,15 +75,15 @@ const MiniPlayer: React.FC<Props> = ({ navigation, track, actions }) => {
 
   const handlePress = () => { navigation.navigate({ routeName: 'Player' }) }
 
-  const rightAvatar = loading || playbackState === TrackPlayer.STATE_BUFFERING
+  const rightAvatar = loading || playbackState === PlayerState.Buffering
     ? <ActivityIndicator size="large" />
     : undefined
 
   const rightElement = <ImageButton
-    source={playbackState === TrackPlayer.STATE_PLAYING ? iconPause : iconPlay}
+    source={playbackState === PlayerState.Playing ? iconPause : iconPlay}
     imageStyle={styles.playPause}
     onPress={actions.playPause}
-    accessibilityLabel={I18n.t(playbackState === TrackPlayer.STATE_PLAYING ? "pause" : "play" )} />
+    accessibilityLabel={I18n.t(playbackState === PlayerState.Playing ? "pause" : "play" )} />
 
   return (
     <View style={styles.container}>

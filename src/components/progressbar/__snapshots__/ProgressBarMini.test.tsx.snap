@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   style={
     Array [
       Object {
-        "width": "NaN%",
+        "width": "0%",
       },
       Object {
         "backgroundColor": "#E53935",

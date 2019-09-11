@@ -1,5 +1,9 @@
 import { Platform } from 'react-native'
-import TrackPlayer, { Track } from 'react-native-track-player'
+import TrackPlayer, {
+  Track,
+  State as PlayerState,
+  Capability,
+} from 'react-native-track-player'
 import { call, put, select } from 'redux-saga/effects'
 import RNFetchBlob from 'rn-fetch-blob'
 import firebase from 'react-native-firebase'
@@ -27,24 +31,24 @@ const BIBLE_AND_BOOKS_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.Document
 
 export const playerOptions = {
   capabilities: [
-    TrackPlayer.CAPABILITY_PLAY,
-    TrackPlayer.CAPABILITY_PAUSE,
-    TrackPlayer.CAPABILITY_STOP,
-    TrackPlayer.CAPABILITY_SEEK_TO,
-    TrackPlayer.CAPABILITY_JUMP_FORWARD,
-    TrackPlayer.CAPABILITY_JUMP_BACKWARD,
-    TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
-    TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
-    TrackPlayer.CAPABILITY_PLAY_FROM_ID, // required for android auto
-    TrackPlayer.CAPABILITY_PLAY_FROM_SEARCH, // required for android auto
+    Capability.Play,
+    Capability.Pause,
+    Capability.Stop,
+    Capability.SeekTo,
+    Capability.JumpForward,
+    Capability.JumpBackward,
+    Capability.SkipToNext,
+    Capability.SkipToPrevious,
+    Capability.PlayFromId, // required for android auto
+    Capability.PlayFromSearch, // required for android auto
   ],
   compactCapabilities: [
-    TrackPlayer.CAPABILITY_PLAY,
-    TrackPlayer.CAPABILITY_PAUSE,
-    TrackPlayer.CAPABILITY_STOP,
-    TrackPlayer.CAPABILITY_SEEK_TO,
-    TrackPlayer.CAPABILITY_JUMP_FORWARD,
-    TrackPlayer.CAPABILITY_JUMP_BACKWARD,
+    Capability.Play,
+    Capability.Pause,
+    Capability.Stop,
+    Capability.SeekTo,
+    Capability.JumpForward,
+    Capability.JumpBackward,
   ],
   stopWithApp: false,
 }
@@ -186,7 +190,7 @@ function* getVideoUrl(item: Track) {
  */
 export function* playVideo({ item }: { type: string, item: Track }) {
   const state = yield call(TrackPlayer.getState)
-  if (state === TrackPlayer.STATE_PLAYING) {
+  if (state === PlayerState.Playing) {
     yield call(TrackPlayer.pause)
   }
   const { url, logUrl } = yield call(getVideoUrl, item)
@@ -277,10 +281,10 @@ export function* playTracks(autoPlay = true) {
 export function* playPause() {
   const tracks = yield call(TrackPlayer.getQueue)
   const state = yield call(TrackPlayer.getState)
-  if (!tracks.length || state === TrackPlayer.STATE_STOPPED) {
+  if (!tracks.length || state === PlayerState.Stopped) {
     yield call(playTracks)
   } else {
-    if (state === TrackPlayer.STATE_PLAYING) {
+    if (state === PlayerState.Playing) {
       yield call(TrackPlayer.pause)
     } else {
       yield call(TrackPlayer.play)
@@ -306,7 +310,7 @@ export function* setBitRateAndReset({ bitRate }: ChangeBitRateAction) {
   if (bitRateFromSettings !== bitRate) {
     yield put(changeBitRate(bitRate))
     const state = yield call(TrackPlayer.getState)
-    const isPlaying = state === TrackPlayer.STATE_PLAYING
+    const isPlaying = state === PlayerState.Playing
     yield call(TrackPlayer.reset)
     yield call(playTracks, isPlaying)
   }

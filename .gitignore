@@ -59,8 +59,8 @@ buck-out/
 #
 .env
 
-# ios/Pods
-ios/Pods/
+# CocoaPods
+/ios/Pods/
 
 # Firebase conf files
 android/app/google-services.json

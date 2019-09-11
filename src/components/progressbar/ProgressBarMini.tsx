@@ -1,22 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { ProgressComponent } from 'react-native-track-player'
-
-class ProgressBarMini extends ProgressComponent {
-
-  render() {
-    
-    return (
-      <View
-        style={[
-          {width: (this.getProgress() * 100) + '%'},
-          styles.container
-        ]}
-      />
-    )
-  }
-
-}
+import { useProgress } from 'react-native-track-player'
 
 const styles = StyleSheet.create({
   container: {
@@ -24,5 +8,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#E53935',
   },
 })
+
+const ProgressBarMini: React.FC<{}> = () => {
+  const progress = useProgress()
+
+  return (
+    <View
+      style={[
+        {width: (progress.duration > 0 ? (progress.position / progress.duration * 100) : 0) + '%'},
+        styles.container
+      ]}
+    />
+  )
+
+}
 
 export default ProgressBarMini

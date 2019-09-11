@@ -12,12 +12,14 @@ exports[`renders correctly 1`] = `
 >
   <RCTSlider
     accessible={true}
+    clickable={false}
     disabled={false}
     enabled={true}
-    maximumValue={1}
+    maximumValue={0}
     minimumTrackTintColor="#E53935"
     minimumValue={0}
     onChange={[Function]}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
