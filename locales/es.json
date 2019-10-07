@@ -120,5 +120,11 @@
   "attachments": "Archivos adjuntos",
   "home": "Inicio",
   "discover": "Descubrir",
-  "note_transcript": "Esta transcripción puede ser auto-generada. Para enviar su propia transcripción de este mensaje, envíenos un correo electrónico a {{email}}."
+  "note_transcript": "Esta transcripción puede ser auto-generada. Para enviar su propia transcripción de este mensaje, envíenos un correo electrónico a {{email}}.",
+  "donate_copy": "AudioVerse es financiado por oyentes como usted. ¡Considere un regalo hoy!",
+  "donate_now": "Donar ahora",
+  "enjoying_av": "¿Estás disfrutando de la aplicación AudioVerse?",
+  "leave_a_review": "Dejar un comentario",
+  "have_you_been_blessed": "¿Has sido bendecido? ¡Ayuda a difundir la Palabra!",
+  "share_this_message": "Comparte este mensaje"
 }

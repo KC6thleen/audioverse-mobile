@@ -120,5 +120,11 @@
   "attachments": "Attachments",
   "home": "Home",
   "discover": "Discover",
-  "note_transcript": "This transcript may be auto-generated. To submit your own transcription of this message, please email us at {{email}}."
+  "note_transcript": "This transcript may be auto-generated. To submit your own transcription of this message, please email us at {{email}}.",
+  "donate_copy": "AudioVerse is funded by listeners just like you. Consider a gift today!",
+  "donate_now": "Donate Now",
+  "enjoying_av": "Are you enjoying the AudioVerse app?",
+  "leave_a_review": "Leave a Review",
+  "have_you_been_blessed": "Have you been blessed? Help spread the Word!",
+  "share_this_message": "Share this Message"
 }

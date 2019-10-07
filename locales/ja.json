@@ -120,5 +120,11 @@
   "attachments": "添付ファイル",
   "home": "ホーム",
   "discover": "発見",
-  "note_transcript": "このトランスクリプトは自動生成されます。 このメッセージのあなた自身の書き起こしを提出するために、{{email}}で我々に電子メールを送ってください。"
+  "note_transcript": "このトランスクリプトは自動生成されます。 このメッセージのあなた自身の書き起こしを提出するために、{{email}}で我々に電子メールを送ってください。",
+  "donate_copy": "AudioVerseは、あなたと同じようにリスナーから資金提供を受けています。 今日の贈り物を考えてみてください！",
+  "donate_now": "寄付をお願いします",
+  "enjoying_av": "AudioVerseアプリを楽しんでいますか？",
+  "leave_a_review": "レビューを残す",
+  "have_you_been_blessed": "あなたは祝福されましたか？ 言葉を広める助けて！",
+  "share_this_message": "このメッセージを共有"
 }

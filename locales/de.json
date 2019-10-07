@@ -120,5 +120,11 @@
   "attachments": "Anlagen",
   "home": "Zuhause",
   "discover": "Entdecken",
-  "note_transcript": "Dieses Transkript kann automatisch generiert werden. Um Ihre eigene Transkription dieser Nachricht einzureichen, senden Sie uns bitte eine E-Mail an {{email}}."
+  "note_transcript": "Dieses Transkript kann automatisch generiert werden. Um Ihre eigene Transkription dieser Nachricht einzureichen, senden Sie uns bitte eine E-Mail an {{email}}.",
+  "donate_copy": "AudioVerse wird von Zuhörern wie Ihnen finanziert. Betrachten Sie ein Geschenk heute!",
+  "donate_now": "Spende jetzt",
+  "enjoying_av": "Gefällt dir die AudioVerse App?",
+  "leave_a_review": "Hinterlassen Sie eine Bewertung",
+  "have_you_been_blessed": "Wurdest du gesegnet? Helfen Sie mit, das Wort zu verbreiten!",
+  "share_this_message": "Teilen Sie diese Nachricht"
 }

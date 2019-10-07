@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 })
 
 const handleDonate = () => {
-  Linking.openURL('https://www.audioverse.org/english/about/2/donations.html').catch(err => console.error(err))
+  Linking.openURL('https://donorbox.org/audioverse-give').catch(err => console.error(err))
 }
 
 const handleSubmitTestimony = (language: string) => {
