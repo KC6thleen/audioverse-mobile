@@ -209,7 +209,7 @@ const Discover: React.FC<Props> = ({ navigation, history, actions }) => {
             inactiveDotColor="#1a1917"
             inactiveDotOpacity={0.4}
             inactiveDotScale={0.6}
-            carouselRef={sliderRef}
+            carouselRef={sliderRef.current}
             tappableDots={!!sliderRef}
           />
           {renderList(history, 'history')}
