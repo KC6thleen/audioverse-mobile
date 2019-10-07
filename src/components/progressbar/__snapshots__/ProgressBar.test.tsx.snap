@@ -10,24 +10,26 @@ exports[`renders correctly 1`] = `
     }
   }
 >
-  <RCTSlider
+  <RNCSlider
     accessible={true}
     clickable={false}
     disabled={false}
     enabled={true}
+    inverted={false}
     maximumValue={0}
     minimumTrackTintColor="#E53935"
     minimumValue={0}
     onChange={[Function]}
     onClick={[Function]}
+    onRNCSliderSlidingComplete={[Function]}
+    onRNCSliderSlidingStart={null}
+    onRNCSliderValueChange={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
-    onSlidingComplete={[Function]}
     onStartShouldSetResponder={[Function]}
-    onValueChange={[Function]}
     step={1}
     style={
       Array [
@@ -41,7 +43,15 @@ exports[`renders correctly 1`] = `
         },
       ]
     }
-    thumbImage={1}
+    thumbImage={
+      Object {
+        "__packager_asset": true,
+        "height": 100,
+        "scale": 2,
+        "uri": "file://assets/full/path/to/directory/icon@2x.png",
+        "width": 100,
+      }
+    }
     thumbTintColor="#E53935"
     value={0}
   />

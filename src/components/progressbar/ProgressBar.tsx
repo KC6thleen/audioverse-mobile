@@ -3,10 +3,10 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  Slider,
   Platform,
   StyleSheet,
 } from 'react-native'
+import Slider from '@react-native-community/slider'
 import TrackPlayer, {
   useProgress,
 } from 'react-native-track-player'
