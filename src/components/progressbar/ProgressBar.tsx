@@ -71,7 +71,7 @@ const ProgressBar: React.FC<Props> = ({ rate }) => {
           step={1}
           minimumTrackTintColor="#E53935"
           thumbTintColor="#E53935"
-          thumbImage={flatDot}
+          thumbImage={Platform.OS === 'ios' ? flatDot : null}
           style={styles.slider}
           onValueChange={handleValueChange}
           onSlidingComplete={handleSlidingComplete} />
