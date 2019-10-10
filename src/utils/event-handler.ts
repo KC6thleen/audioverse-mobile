@@ -119,7 +119,7 @@ async function eventHandler(store: Store, data: Data) {
         }
         Linking.openURL(url).catch(err => console.error(err))
       }
-    } else if (prompt.name === 'share_message') {
+    } else if (prompt.name === 'share') {
       message = 'have_you_been_blessed'
       confirmText = 'share_this_message'
       action =  async () => {
