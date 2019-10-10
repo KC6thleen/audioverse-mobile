@@ -113,7 +113,7 @@ async function eventHandler(store: Store, data: Data) {
       action = () => {
         let url = ''
         if (Platform.OS === 'ios') {
-          url = 'https://itunes.apple.com/us/app/audioverse/id726998810'
+          url = 'https://itunes.apple.com/app/id726998810?action=write-review'
         } else {
           url = 'https://play.google.com/store/apps/details?id=org.audioverse.exodus'
         }
