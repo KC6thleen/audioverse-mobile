@@ -9,12 +9,12 @@ import {
   StyleSheet,
 } from 'react-native'
 import Toast from 'react-native-simple-toast'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../../../locales'
 import { addPlaylist } from '../../../../actions'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   actions: {
     addPlaylist: typeof addPlaylist
   }

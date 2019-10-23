@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import { GlobalStyles, headerTintColor } from '../styles'
 import Menu from '../containers/menu'
@@ -24,12 +24,12 @@ import Topic from '../containers/topics/topic'
 import DownloadsQueue from '../containers/downloadsqueue'
 import Settings from '../containers/settings'
 import About from '../containers/about'
-import Search from '../containers/search'
+import SearchNavigator from './SearchNavigator'
 
 MyListsNavigator.params = {
   title: 'my_lists',
 }
-MyListsNavigator.navigationOptions = ({ navigation }: NavigationScreenProps) => {
+MyListsNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => {
   const options: {[key: string]: any} = {}
   if (navigation.state.index > 0) {
     options.header = null
@@ -40,7 +40,7 @@ MyListsNavigator.navigationOptions = ({ navigation }: NavigationScreenProps) => 
 ScriptureSongsNavigator.params = {
   title: 'Scripture_Songs',
 }
-ScriptureSongsNavigator.navigationOptions = ({ navigation }: NavigationScreenProps) => {
+ScriptureSongsNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => {
   const options: {[key: string]: any} = {}
   if (navigation.state.index > 0) {
     options.header = null
@@ -48,7 +48,7 @@ ScriptureSongsNavigator.navigationOptions = ({ navigation }: NavigationScreenPro
   return options
 }
 
-const navigationOptionsFunction = ({ navigation }: NavigationScreenProps) => ({
+const navigationOptionsFunction = ({ navigation }: NavigationInjectedProps) => ({
   headerTitle: null,
   title: navigation.state.params ? navigation.state.params.title : '',
 })
@@ -146,9 +146,9 @@ const Navigator = createStackNavigator({
       title: 'about',
     },
   },
-  Search,
+  SearchNavigator,
 }, {
-  defaultNavigationOptions: ({ navigation }: NavigationScreenProps) => ({
+  defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
     headerTitle: <HeaderTitle title={navigation.state.params ? navigation.state.params.title : ''} />,

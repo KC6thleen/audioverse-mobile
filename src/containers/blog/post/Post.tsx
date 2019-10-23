@@ -10,7 +10,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import HTML from 'react-native-render-html'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import { fetchData } from '../../../services'
 import { Endpoints } from '../../../constants'
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Post: React.FC<NavigationScreenProps> = ({ navigation }) => {
+const Post: React.FC<NavigationInjectedProps> = ({ navigation }) => {
 
   const [post, setPost] = useState<Post | null>(null)
   const [loading, setLoading] = useState(true)

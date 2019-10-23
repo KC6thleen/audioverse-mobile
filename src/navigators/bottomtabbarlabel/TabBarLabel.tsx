@@ -6,16 +6,15 @@ import I18n from '../../../locales'
 interface Props {
   language: string
   tintColor: string
-  orientation: string
   title: string
 }
 
-const TabBarLabel: React.FC<Props> = ({ language, tintColor, orientation, title }) => (
+const TabBarLabel: React.FC<Props> = ({ language, tintColor, title }) => (
   <Text
     numberOfLines={1}
     style={{
-      marginLeft: orientation === 'horizontal' ? 15 : 0,
-      fontSize: 11,
+      paddingTop: 2,
+      fontSize: 12,
       color: tintColor,
       textAlign: 'center',
     }}>

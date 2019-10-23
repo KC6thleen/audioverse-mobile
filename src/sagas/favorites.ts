@@ -6,7 +6,7 @@ import { Endpoints, ContentTypes } from '../constants'
 import * as api from '../services'
 import { setFavorites, addFavorites, removeFavorites } from '../store/lists/actions'
 import * as selectors from '../reducers/selectors'
-import { netInfoIsConnected } from '../utils'
+import { netInfoIsConnected, typedKeys } from '../utils'
 import { UserState } from '../store/user/types'
 
 function* syncLocalToServer(user: UserState) {
@@ -91,7 +91,7 @@ export function* add({ item }: { type: string, item: Track }) {
   }
   // analytics
   firebase.analytics().logEvent('favorite', {
-    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
+    content_type: typedKeys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
     item_id: item.id,
     title: item.title,
   })

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../locales'
 
-const HeaderRight: React.FC<NavigationScreenProps> = ({ navigation }) => (
+const HeaderRight: React.FC<NavigationInjectedProps> = ({ navigation }) => (
   <Button
     icon={{
       type: 'feather',

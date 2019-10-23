@@ -1,106 +1,119 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
-  View,
   FlatList,
-  StyleSheet,
   ListRenderItem,
+  Dimensions,
+  ActivityIndicator,
 } from 'react-native'
-import ActionSheet from 'react-native-action-sheet'
 import {
-  SearchBar,
   ListItem,
-  Button,
 } from 'react-native-elements'
 import firebase from 'react-native-firebase'
-import { NavigationScreenProps, NavigationNavigatorProps } from 'react-navigation'
+import { NavigationNavigatorProps, NavigationInjectedProps } from 'react-navigation'
+import { TabView, TabBar } from 'react-native-tab-view'
+import SearchLayout from 'react-navigation-addon-search-layout'
+import { Track } from 'react-native-track-player'
 
-import HeaderTitle from '../../navigators/headertitle'
 import I18n from '../../../locales'
 import { Endpoints } from '../../constants'
-import {
-  searchPresentations,
-  fetchData
-} from '../../services'
+import * as services from '../../services'
 import { resetAndPlayTrack } from '../../actions'
+import { GlobalStyles, primaryColor } from '../../styles'
+import { parseRecording } from '../../utils'
+import { defaultImage } from '../../styles'
 
 interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface SearchResult {
+  presentation: {
+    recordings: Track
+  }[]
+  presenter: {
+    presenters: Item
+  }[]
+  conference: {
+    conferences: Item
+  }[]
+  series: {
+    series: Item
+  }[]
+  sponsor: {
+    sponsors: Item
+  }[]
+}
+
+interface Props extends NavigationInjectedProps {
   actions: {
     resetAndPlayTrack: typeof resetAndPlayTrack
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+interface ResultsRouteI {
+  data: any[]
+  renderItem: ListRenderItem<Item>
+  onRefresh?: () => void
+}
+
+const ResultsRoute: React.FC<ResultsRouteI> = ({ data, renderItem, onRefresh }) => {
+  return (
+    <FlatList
+      renderItem={renderItem}
+      data={data}
+      keyExtractor={item => item.id}
+      refreshing={false}
+      onRefresh={onRefresh} />
+  )
+}
 
 const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, actions }) => {
 
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState(I18n.t('presentations'))
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState([])
-  const searchRef: any = useRef(null)
-
-  useEffect(() => {
-    searchRef.current.focus()
-    navigation.setParams({handleMore: handleMore})
-  }, [])
-
-  const handleMore = () => {
-    const options = [
-      I18n.t('presentations'),
-      I18n.t('presenters'),
-      I18n.t('conferences'),
-      I18n.t('Cancel')
-    ]
-
-    ActionSheet.showActionSheetWithOptions({
-      title: '',
-      options: options,
-      cancelButtonIndex: options.length - 1,
-    }, buttonIndex => {
-      if (typeof buttonIndex !== 'undefined' && buttonIndex !== options.length - 1) {
-        if (category !== options[buttonIndex]) {
-          setCategory(options[buttonIndex])
-          setData([])
-          searchRef.current.clear()
-          searchRef.current.focus()
-        }
-      }
-    })
-  }
+  const [presentations, setPresentations] = useState([] as Track[])
+  const [presenters, setPresenters] = useState([] as Item[])
+  const [conferences, setConferences] = useState([] as Item[])
+  const [series, setSeries] = useState([] as Item[])
+  const [sponsors, setSponsors] = useState([] as Item[])
+  const [tabViewNavigationState, setTabViewNavigationState] = useState({
+    index: 0,
+    routes: [
+      { key: 'presentations', title: I18n.t('presentations') },
+      { key: 'presenters', title: I18n.t('presenters') },
+      { key: 'conferences', title: I18n.t('conferences') },
+      { key: 'series', title: I18n.t('series') },
+      { key: 'sponsors', title: I18n.t('sponsors') },
+    ],
+  })
 
   const handleSearch = async () => {
     if (search.trim() !== '') {
       // firebase analytics
       firebase.analytics().logEvent('search', { search_term: search })
       // search
-      let url = '', searchFn = null, parseFn = null
-      if (category === I18n.t('presentations')) {
-        url = Endpoints.searchPresentations
-        searchFn = searchPresentations
-        parseFn = (data: Item[]) => data
-      } else if (category === I18n.t('presenters')) {
-        url = Endpoints.searchPresenters
-        searchFn = fetchData
-        parseFn = (data: Item[]) => data.map(el => el.presenters)
-      } else { // conferences
-        url = Endpoints.searchConferences
-        searchFn = fetchData
-        parseFn = (data: Item[]) => data.map(el => el.conferences)
-      }
+      let url = Endpoints.search
 
       try {
         setLoading(true)
-        let response = await searchFn(url + search)
+        const response = await services.search(url + search)
         setLoading(false)
-        setData(parseFn(response.result) as [])
+        const data: SearchResult = response.result
+        setPresentations(
+          data.presentation.map((item) => parseRecording(item.recordings))
+        )
+        setPresenters(
+          data.presenter.map((item) => item.presenters)
+        )
+        setConferences(
+          data.conference.map((item) => item.conferences)
+        )
+        setSeries(
+          data.series.map((item) => item.series)
+        )
+        setSponsors(
+          data.sponsor.map((item) => item.sponsors)
+        )
       } catch(e) {
         console.log(e)
         setLoading(false)
@@ -108,82 +121,124 @@ const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, action
     }
   }
 
-  const header = (
-    <SearchBar
-      lightTheme
-      round
-      autoCorrect={false}
-      placeholder={I18n.t('search')}
-      autoFocus
-      showLoading={loading}
-      ref={searchRef}
-      value={search}
-      onChangeText={setSearch}
-      onSubmitEditing={handleSearch}
-      accessibilityRole="search"
-      accessibilityLabel={I18n.t("search")} />
+  const renderPresentationItem: ListRenderItem<Item> = ({ item }) => (
+    <ListItem
+      leftAvatar={{
+        source: item.artwork && item.artwork.toString().startsWith('http') ? 
+        { uri: item.artwork } : item.artwork
+      }}
+      title={item.title}
+      titleProps={{numberOfLines: 1}}
+      subtitle={item.artist + ' \u00B7 ' + item.durationFormatted}
+      onPress={() => actions.resetAndPlayTrack([item])}
+      bottomDivider
+    />
+  )
+  
+  const renderPresenterItem: ListRenderItem<Item> = ({ item }) => (
+    <ListItem
+      leftAvatar={{
+        source: item.photo !== '' ? {uri: item.photo86} : defaultImage
+      }}
+      title={item.givenName + ' ' + item.surname}
+      onPress={() => {
+        navigation.navigate({
+          routeName: 'Presenter',
+          params: {
+            url: item.recordingsURI,
+            title: item.givenName + ' ' + item.surname,
+            description: item.description,
+            image: item.photo256,
+          }
+        })}
+      }
+      bottomDivider
+    />
+  )
+  
+  const renderConferenceItem: ListRenderItem<Item> = ({ item }) => (
+    <ListItem
+      leftAvatar={{
+        source: item.logo !== '' || item.sponsorLogo !== '' ? {uri: item.photo86} : defaultImage
+      }}
+      title={item.title}
+      onPress={() => navigation.navigate({ routeName: 'Conference', params: { url: item.recordingsURI, title: item.title } })}
+      bottomDivider
+    />
   )
 
-  const renderItem: ListRenderItem<Item> = ({ item }) => {
-    if (category === I18n.t('presentations')) {
-      return (
-        <ListItem
-          leftAvatar={{
-            source: item.artwork && item.artwork.toString().startsWith('http') ? 
-            { uri: item.artwork } : item.artwork
-          }}
-          title={item.title}
-          titleProps={{numberOfLines: 1}}
-          subtitle={item.artist + ' \u00B7 ' + item.durationFormatted}
-          onPress={() => actions.resetAndPlayTrack([item])}
-          bottomDivider
-        />
-      )
-    } else if (category === I18n.t('presenters')) {
-      return (
-        <ListItem
-          leftAvatar={{source: {uri: item.photo86}}}
-          title={item.givenName + ' ' + item.surname}
-          onPress={() => navigation.navigate({ routeName: 'Presenter', params: { url: item.recordingsURI, title: item.givenName + ' ' + item.surname } })}
-        />
-      )
-    } else { // conferences
-      return (
-        <ListItem
-          leftAvatar={{source: {uri: item.photo86}}}
-          title={item.title}
-          onPress={() => navigation.navigate({ routeName: 'Conference', params: { url: item.recordingsURI, title: item.title } })}
-        />
-      )
-    }
-  }
+  const renderSerieItem: ListRenderItem<Item> = ({ item }) => (
+    <ListItem
+      leftAvatar={{
+        source: item.logo !== '' ? {uri: item.photo86} : defaultImage
+      }}
+      title={item.title}
+      onPress={() => navigation.navigate({ routeName: 'Serie', params: { url: item.recordingsURI, title: item.title } })}
+      bottomDivider
+    />
+  )
+
+  const renderSponsorItem: ListRenderItem<Item> = ({ item }) => (
+    <ListItem
+      leftAvatar={{
+        source: item.logo !== '' ? {uri: item.photo86} : defaultImage
+      }}
+      title={item.title}
+      onPress={() => navigation.navigate({ routeName: 'Sponsor', params: { url: item.recordingsURI, title: item.title } })}
+      bottomDivider
+    />
+  )
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        ListHeaderComponent={header}
-        renderItem={renderItem}
-        data={data}
-        keyExtractor={item => item.id}
-        refreshing={false}
-        onRefresh={handleSearch} />
-    </View>
+    <SearchLayout
+      headerBackgroundColor={primaryColor}
+      onChangeQuery={setSearch}
+      onSubmit={handleSearch}
+      cancelButtonText={I18n.t('Cancel')}
+      headerTintColor="#FFF">
+      {loading && 
+        <ActivityIndicator
+          size="large"
+          color="#03A9F4"
+          style={{marginTop: 10}}
+        />
+      }
+      {!loading &&
+        <TabView
+          navigationState={tabViewNavigationState}
+          renderScene={({ route }) => {
+            switch (route.key) {
+              case 'presentations':
+                return <ResultsRoute data={presentations} renderItem={renderPresentationItem} onRefresh={handleSearch} />
+              case 'presenters':
+                return <ResultsRoute data={presenters} renderItem={renderPresenterItem} onRefresh={handleSearch} />
+              case 'conferences':
+                return <ResultsRoute data={conferences} renderItem={renderConferenceItem} onRefresh={handleSearch} />
+              case 'series':
+                return <ResultsRoute data={series} renderItem={renderSerieItem} onRefresh={handleSearch} />
+              case 'sponsors':
+                return <ResultsRoute data={sponsors} renderItem={renderSponsorItem} onRefresh={handleSearch} />
+            }
+          }}
+          renderTabBar={props =>
+            <TabBar
+              {...props}
+              indicatorStyle={GlobalStyles.tabIndicator}
+              style={GlobalStyles.tab}
+              scrollEnabled={true}
+            />
+          }
+          onIndexChange={index => setTabViewNavigationState({ ...tabViewNavigationState, index })}
+          initialLayout={{ width: Dimensions.get('window').width }}
+        />
+      }
+    </SearchLayout>
   )
 
 }
 
-Search.navigationOptions = ({ navigation }: any) => ({
-  headerTitle: <HeaderTitle title="search" />,
-  headerRight: <Button
-    icon={{
-      type: 'feather',
-      name: 'more-vertical',
-      size: 24,
-      color: '#FFFFFF',
-    }}
-    type="clear"
-    onPress={() => { navigation.state.params.handleMore() }}
-    accessibilityLabel={I18n.t("search_filters")} />
+Search.navigationOptions = () => ({
+  header: null,
 })
 
 export default Search

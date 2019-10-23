@@ -8,7 +8,7 @@ import {
   StyleSheet,
   ListRenderItem,
 } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 import { ListItem } from 'react-native-elements'
 import { Track } from 'react-native-track-player'
 
@@ -19,7 +19,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: any[]
   pagination: PaginationState
   renderItem?: ListRenderItem<Item>

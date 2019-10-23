@@ -7,7 +7,7 @@ import {
   ListItem,
   Button,
 } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import List from '../../../components/list'
 import I18n from '../../../../locales'
@@ -25,7 +25,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: any[]
   pagination: PaginationState
   actions: {

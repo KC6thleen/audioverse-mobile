@@ -16,7 +16,7 @@ import {
   resetAndPlayTrack,
 } from '../../../actions'
 import { removeHistory } from '../../../store/lists/actions'
-import { Track } from 'react-native-track-player';
+import { Track } from 'react-native-track-player'
 
 interface Props {
   items: Track[]

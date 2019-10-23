@@ -1,7 +1,7 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
-import { NavigationTabScreenOptions, NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import TabBarLabel from './tabbarlabel'
 import { GlobalStyles, headerTintColor } from '../styles'
@@ -14,30 +14,34 @@ import TagAlbum from '../containers/scripturesongs/tagsAlbums/tagAlbum'
 import TagsSponsors from '../containers/scripturesongs/tagsSponsors'
 import TagSponsor from '../containers/scripturesongs/tagsSponsors/tagSponsor'
 
+interface TabBarLabelProps {
+  tintColor: string
+}
+
 const ScriptureSongsTab = createMaterialTopTabNavigator({
   TagsBooks: {
     screen: TagsBooks,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="books" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="books" />
+    }
   },
   TagsAlbums: {
     screen: TagsAlbums,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="Albums" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="Albums" />
+    }
   },
   TagsSponsors: {
     screen: TagsSponsors,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="sponsors" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="sponsors" />
+    }
   },
   Tags: {
     screen: Tags,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="Tags" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="Tags" />
+    }
   },
 }, {
   lazy: true,
@@ -52,30 +56,30 @@ const ScriptureSongsStack = createStackNavigator({
   ScriptureSongsTab,
   TagBook: {
     screen: TagBook,
-    navigationOptions: ({ navigation }: NavigationScreenProps) => ({
+    navigationOptions: ({ navigation }: NavigationInjectedProps) => ({
       title: navigation.state.params ? navigation.state.params.title : '',
     }),
   },
   TagAlbum: {
     screen: TagAlbum,
-    navigationOptions: ({ navigation }: NavigationScreenProps) => ({
+    navigationOptions: ({ navigation }: NavigationInjectedProps) => ({
       title: navigation.state.params ? navigation.state.params.title : '',
     }),
   },
   TagSponsor: {
     screen: TagSponsor,
-    navigationOptions: ({ navigation }: NavigationScreenProps) => ({
+    navigationOptions: ({ navigation }: NavigationInjectedProps) => ({
       title: navigation.state.params ? navigation.state.params.title : '',
     }),
   },
   Tag: {
     screen: Tag,
-    navigationOptions: ({ navigation }: NavigationScreenProps) => ({
+    navigationOptions: ({ navigation }: NavigationInjectedProps) => ({
       title: navigation.state.params ? navigation.state.params.title : '',
     }),
   }
 }, {
-  defaultNavigationOptions: ({ navigation }: NavigationScreenProps) => {
+  defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => {
     const options: {[key: string]: any}  = {
       headerStyle: GlobalStyles.header,
       headerTintColor: headerTintColor,

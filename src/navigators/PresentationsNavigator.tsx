@@ -1,7 +1,7 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
-import { NavigationScreenProps, NavigationTabScreenOptions } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import TabBarLabel from './tabbarlabel'
 import HeaderTitle from './headertitle'
@@ -10,26 +10,30 @@ import { GlobalStyles, headerTintColor } from '../styles'
 import New from '../containers/recordings/new'
 import Trending from '../containers/recordings/trending'
 import Featured from '../containers/recordings/featured'
-import Search from '../containers/search'
+import SearchNavigator from './SearchNavigator'
+
+interface TabBarLabelProps {
+  tintColor: string
+}
 
 const PresentationsTabNavigator = createMaterialTopTabNavigator({
   New: {
     screen: New,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="new_presentations" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="new_presentations" />
+    }
   },
   Trendings: {
     screen: Trending,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="trending_presentations" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="trending_presentations" />
+    }
   },
   Featured: {
     screen: Featured,
     navigationOptions: {
-      tabBarLabel: ({ tintColor }) => <TabBarLabel tintColor={tintColor} title="featured_presentations" />
-    } as NavigationTabScreenOptions
+      tabBarLabel: ({ tintColor }: TabBarLabelProps) => <TabBarLabel tintColor={tintColor} title="featured_presentations" />
+    }
   },
 }, {
   lazy: true,
@@ -41,9 +45,9 @@ const PresentationsTabNavigator = createMaterialTopTabNavigator({
 
 const Navigator = createStackNavigator({
   PresentationsTabNavigator,
-  Search,
+  SearchNavigator,
 }, {
-  defaultNavigationOptions: ({ navigation }: NavigationScreenProps) => ({
+  defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
     headerTitle: <HeaderTitle title="presentations" />,

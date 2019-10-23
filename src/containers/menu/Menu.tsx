@@ -3,7 +3,7 @@ import {
   View,
   FlatList,
 } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 import { ListItem } from 'react-native-elements'
 
 import I18n from '../../../locales'
@@ -77,7 +77,7 @@ const data: Item[] = [
   },
 ]
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   language: string
 }
 

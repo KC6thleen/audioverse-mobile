@@ -13,7 +13,7 @@ import {
   Button,
 } from 'react-native-elements'
 import { Track } from 'react-native-track-player'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import PlayerContent from './PlayerContent'
 import ProgressBar from '../../components/progressbar/ProgressBar'
@@ -45,7 +45,7 @@ interface Bitrate {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   track: Track | undefined
   rate: number
   language: string

@@ -1,13 +1,13 @@
 import React from 'react'
 import { ListRenderItem } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import List from '../../../components/list'
 import { LoadDataType, LoadBibleChaptersType } from '../../../actions'
 import { PaginationState } from '../../../store/paginate'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: {}[]
   pagination: PaginationState
   actions: {

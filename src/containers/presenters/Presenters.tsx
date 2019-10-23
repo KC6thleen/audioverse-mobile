@@ -11,7 +11,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import { SearchBar, ListItem } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../locales'
 import { PaginationState } from '../../store/paginate'
@@ -21,7 +21,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: any[]
   pagination: PaginationState
   actions: {

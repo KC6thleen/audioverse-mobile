@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native'
 import VideoControls from 'react-native-video-controls'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const VideoPlayer: React.FC<NavigationScreenProps> = ({ navigation }) => {
+const VideoPlayer: React.FC<NavigationInjectedProps> = ({ navigation }) => {
 
   const [paddingTop, setPaddingTop] = useState(0)
 

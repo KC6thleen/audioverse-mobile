@@ -6,11 +6,11 @@ import {
   StyleSheet,
 } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import { UserState } from '../../../store/user/types'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   user: UserState
 }
 

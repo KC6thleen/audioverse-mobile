@@ -11,7 +11,7 @@ import firebase from 'react-native-firebase'
 import throttle from 'lodash.throttle'
 import ActionSheet from 'react-native-action-sheet'
 import { Button } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 import { Track } from 'react-native-track-player'
 
 import { ContentTypes } from '../../constants'
@@ -22,8 +22,9 @@ import {
   removeFavorite,
   setBitRateAndReset,
 } from '../../actions'
+import { typedKeys } from '../../utils'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   track: Track
   rate: number
   user: UserState
@@ -144,7 +145,7 @@ const PlayerOptions: React.FC<Props> = ({
   const handleShare = () => {
     // firebase analytics
     firebase.analytics().logEvent('share', {
-      content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
+      content_type: typedKeys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
       item_id: track.id
     })
     // share

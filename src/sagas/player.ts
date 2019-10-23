@@ -19,7 +19,7 @@ import {
 } from '../store/playback/actions'
 import { addHistory } from '../store/lists/actions'
 import * as selectors from '../reducers/selectors'
-import { getMediaFile } from '../utils'
+import { getMediaFile, typedKeys } from '../utils'
 import * as api from '../services'
 import NavigationService from '../utils/navigation-service'
 import { changeBitRate } from '../store/settings/actions'
@@ -199,7 +199,7 @@ export function* playVideo({ item }: { type: string, item: Track }) {
   }
   // analytics
   firebase.analytics().logEvent('playVideo', {
-    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
+    content_type: typedKeys(ContentTypes).find(key => ContentTypes[key] === item.contentType),
     item_id: item.id,
     title: item.title,
     remote_url: url.startsWith('http') ? 1 : 0,
@@ -400,9 +400,9 @@ export function* trackInitialized({ track }: { type: string, track: Track }) {
 
   // analytics
   firebase.analytics().logEvent('play', {
-    content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
+    content_type: typedKeys(ContentTypes).find(key => ContentTypes[key] === track.contentType),
     item_id: track.id,
     title: track.title,
-    remote_url: track.url.startsWith('http') ? 1 : 0,
+    remote_url: track.url!.startsWith('http') ? 1 : 0,
   })
 }

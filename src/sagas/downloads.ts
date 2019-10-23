@@ -19,6 +19,7 @@ import {
 import * as selectors from '../reducers/selectors'
 import { ContentTypes } from '../constants'
 import I18n from '../../locales'
+import { typedKeys } from '../utils'
 
 const DOWNLOAD_DIR = Platform.OS === 'ios' ? RNFetchBlob.fs.dirs.DocumentDir : RNFetchBlob.fs.dirs.DownloadDir
 
@@ -139,7 +140,7 @@ export function* downloadNext(): any {
         }
         // analytics
         firebase.analytics().logEvent('download', {
-          content_type: Object.keys(ContentTypes).find(key => ContentTypes[key] === item.data.contentType),
+          content_type: typedKeys(ContentTypes).find(key => ContentTypes[key] === item.data.contentType),
           item_id: item.data.id,
           title: item.data.title,
           bit_rate: item.data.bitRate,

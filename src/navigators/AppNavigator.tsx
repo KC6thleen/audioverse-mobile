@@ -3,10 +3,9 @@ import {
   Easing,
   Animated,
 } from 'react-native'
-import { createSwitchNavigator } from '@react-navigation/core'
-import { createAppContainer } from '@react-navigation/native'
+import { createSwitchNavigator, createAppContainer, NavigationInjectedProps } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { Icon } from 'react-native-elements'
 
 import { GlobalStyles, headerTintColor, primaryColor } from '../styles'
@@ -27,22 +26,21 @@ import Transcript from '../containers/player/transcript'
 import VideoPlayer from '../containers/player/Video'
 import AddToPlaylist from '../containers/lists/playlists/addtoplaylist'
 import NewPlaylist from '../containers/lists/playlists/newplaylist'
-import Search from '../containers/search'
 import Presenter from '../containers/presenters/presenter'
 import Conference from '../containers/conferences/conference'
 import Sponsor from '../containers/sponsors/sponsor'
 import Serie from '../containers/series/serie'
-import { NavigationScreenProps } from 'react-navigation'
+import SearchNavigator from './SearchNavigator'
 
 const DiscoverNavigator = createStackNavigator({
   Discover,
-  Search,
+  SearchNavigator,
   Post,
   Conference,
   Sponsor,
   Serie,
 },{
-  defaultNavigationOptions: ({ navigation }: NavigationScreenProps) => ({
+  defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
     headerTitle: <HeaderTitle title="discover" />,
@@ -58,25 +56,25 @@ const WithPlayerMenuNavigator = withPlayer(MenuNavigator)
 
 const screenNavigationOptions = (title: string, icon: string) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }: {[key: string]: any}) => {
-    return <Icon type="feather" name={icon} size={25} color={tintColor} />
+    return <Icon type="material" name={icon} size={25} color={tintColor} />
   },
-  tabBarLabel: ({ tintColor, orientation }: {[key: string]: any}) => {
-   return <BottomTabBarLabel tintColor={tintColor} orientation={orientation} title={title} />
+  renderLabel: ({ route, focused, color }: {[key: string]: any}) => {
+   return <BottomTabBarLabel tintColor={color} title={title} />
   },
 })
 
-const BottomTabNavigator = createBottomTabNavigator({
+const BottomTabNavigator = createMaterialBottomTabNavigator({
   Presentations: {
     screen: WithPlayerPresentationsNavigator,
     navigationOptions: screenNavigationOptions('home', 'home'),
   },
   Discover: {
     screen: WithPlayerDiscoverNavigator,
-    navigationOptions: screenNavigationOptions('discover', 'zap'),
+    navigationOptions: screenNavigationOptions('discover', 'view-carousel'),
   },
   Bible: {
     screen: WithPlayerBibleNavigator,
-    navigationOptions: screenNavigationOptions('bible', 'bookmark'),
+    navigationOptions: screenNavigationOptions('bible', 'add-box'),
   },
   Books: {
     screen: WithPlayerBooksNavigator,
@@ -87,8 +85,9 @@ const BottomTabNavigator = createBottomTabNavigator({
     navigationOptions: screenNavigationOptions('menu', 'menu'),
   },
 }, {
-  tabBarOptions: {
-    activeTintColor: primaryColor,
+  activeColor: primaryColor,
+  barStyle: {
+    backgroundColor: '#FFF',
   },
 })
 
@@ -123,9 +122,6 @@ const StackModalNavigator = createStackNavigator({
   headerMode: 'none',
   defaultNavigationOptions: {
     gesturesEnabled: true,
-    gestureResponseDistance: {
-      vertical: 400
-    }
   },
   transitionConfig: () => ({
     transitionSpec: {

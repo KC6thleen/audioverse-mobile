@@ -10,7 +10,7 @@ import {
 import { Track } from 'react-native-track-player'
 import { Icon } from 'react-native-elements'
 import throttle from 'lodash.throttle'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../../../locales'
 import {
@@ -22,7 +22,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   track: Track | undefined
   playlists: {}[]
   actions: {

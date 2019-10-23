@@ -10,7 +10,7 @@ import {
   ListItem,
   Button,
 } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../../../locales'
 import {
@@ -23,7 +23,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: {}[]
   actions: {
     resetAndPlayTrack: typeof resetAndPlayTrack

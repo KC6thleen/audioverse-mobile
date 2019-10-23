@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import ActionSheet from 'react-native-action-sheet'
 import { ListItem } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import { UserState } from '../../store/user/types'
 import I18n from '../../../locales'
@@ -23,7 +23,7 @@ interface Translation {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   language: string
   bitRate: string
   autoPlay: boolean

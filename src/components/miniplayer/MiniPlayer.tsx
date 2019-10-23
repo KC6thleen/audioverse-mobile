@@ -14,7 +14,7 @@ import {
 } from "react-native-track-player"
 import MarqueeText from 'react-native-marquee'
 import { ListItem } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import ImageButton from '../buttons/ImageButton'
 import ProgressBarMini from '../progressbar/ProgressBarMini'
@@ -22,7 +22,7 @@ import iconPlay from '../../../assets/ic_play.png'
 import iconPause from '../../../assets/pause.png'
 import I18n from '../../../locales'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   track: Track | undefined
   actions: {
     playPause: () => void

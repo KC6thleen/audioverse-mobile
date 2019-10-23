@@ -10,7 +10,7 @@ import {
 import { Track } from 'react-native-track-player'
 import Swiper from 'react-native-swiper'
 import MarqueeText from 'react-native-marquee'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../locales'
 import { ContentTypes } from '../../constants'
@@ -21,7 +21,7 @@ interface Item {
   [key: string]: any
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   data: Track
   language: string
 }

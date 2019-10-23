@@ -4,6 +4,15 @@ import { defaultImage } from '../styles'
 import { Track } from 'react-native-track-player'
 
 /**
+ * Typed keys
+ * https://stackoverflow.com/questions/41993515/access-object-key-using-variable-in-typescript
+ */
+export function typedKeys<T>(o: T): (keyof T)[] {
+  // type cast should be safe because that's what really Object.keys() does
+  return Object.keys(o) as (keyof T)[]
+}
+
+/**
  * Format number to two digits
  * @param {int} n number
  */

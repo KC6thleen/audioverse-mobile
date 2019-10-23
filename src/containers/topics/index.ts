@@ -1,6 +1,6 @@
 import { bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import { AppState } from '../../store'
 import { getTopics, getTopicsPagination } from '../../reducers/selectors'
@@ -12,7 +12,7 @@ interface Item {
   [key: string]: any
 }
 
-const mapStateToProps = (state: AppState, props: NavigationScreenProps) => ({
+const mapStateToProps = (state: AppState, props: NavigationInjectedProps) => ({
   items: getTopics(state),
   pagination: getTopicsPagination(state),
   avatarExtractor: (item: Item) => item.photo86,

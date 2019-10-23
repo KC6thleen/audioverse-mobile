@@ -77,7 +77,7 @@ export const deletePlaylists = (url: string) => callApi(url, null, 'DELETE')
 export const fetchPlaylistItems = (url: string) => callApi(url, null)
 export const postPlaylistItems = (url: string, body: {}) => callApi(url, null, 'POST', body)
 export const deletePlaylistItems = (url: string) => callApi(url, null, 'DELETE')
-export const searchPresentations = (url: string) => callApi(url, json => json.result.presentation.map((item: {recordings: Track}) => parseRecording(item.recordings)))
+export const search = (url: string) => callApi(url, json => json.result)
 
 export const signIn = (url: string) => callApi2(url)
 export const signUp = (url: string) => callApi2(url)

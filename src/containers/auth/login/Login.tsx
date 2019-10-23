@@ -22,7 +22,7 @@ import {
 } from 'react-native-fbsdk'
 import Toast from 'react-native-simple-toast'
 import firebase from 'react-native-firebase'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../../locales'
 import { Endpoints } from '../../../constants'
@@ -30,7 +30,7 @@ import * as api from '../../../services'
 import logo from '../../../../assets/av-logo-red-gray.png'
 import { setUser } from '../../../store/user/actions'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   language: string
   actions: {
     setUser: typeof setUser

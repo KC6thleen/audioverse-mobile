@@ -1,4 +1,4 @@
-import { NavigationActions } from '@react-navigation/core'
+import { NavigationActions } from 'react-navigation'
 
 let navigator: {[key: string]: any}
 

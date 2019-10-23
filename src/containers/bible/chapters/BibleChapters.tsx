@@ -10,7 +10,7 @@ import {
   ListItem,
   Button,
 } from 'react-native-elements'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import I18n from '../../../../locales'
 import { Dirs } from '../../../constants'
@@ -25,7 +25,7 @@ import { BibleState } from '../../../store/Bible/types'
 import { addLocalFiles } from '../../../store/localFiles/actions'
 import { PaginationState } from '../../../store/paginate'
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationInjectedProps {
   items: {[key: string]: any}[]
   pagination: PaginationState
   bible: BibleState

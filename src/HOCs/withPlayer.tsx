@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import MiniPlayer from '../components/miniplayer'
 
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 })
 
 function withPlayer(WrappedComponent: any) {
-  class WithPlayer extends React.Component<NavigationScreenProps> {
+  class WithPlayer extends React.Component<NavigationInjectedProps> {
     static router = WrappedComponent.router
   
     render() {
