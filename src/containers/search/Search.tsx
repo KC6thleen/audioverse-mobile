@@ -21,6 +21,7 @@ import { resetAndPlayTrack } from '../../actions'
 import { GlobalStyles, primaryColor } from '../../styles'
 import { parseRecording } from '../../utils'
 import { defaultImage } from '../../styles'
+import TabBarLabel from '../../navigators/tabbarlabel'
 
 interface Item {
   [key: string]: any
@@ -79,11 +80,11 @@ const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, action
   const [tabViewNavigationState, setTabViewNavigationState] = useState({
     index: 0,
     routes: [
-      { key: 'presentations', title: I18n.t('presentations') },
-      { key: 'presenters', title: I18n.t('presenters') },
-      { key: 'conferences', title: I18n.t('conferences') },
-      { key: 'series', title: I18n.t('series') },
-      { key: 'sponsors', title: I18n.t('sponsors') },
+      { key: 'presentations', title: 'presentations' },
+      { key: 'presenters', title: 'presenters' },
+      { key: 'conferences', title: 'conferences' },
+      { key: 'series', title: 'series' },
+      { key: 'sponsors', title: 'sponsors' },
     ],
   })
 
@@ -226,6 +227,7 @@ const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, action
               indicatorStyle={GlobalStyles.tabIndicator}
               style={GlobalStyles.tab}
               scrollEnabled={true}
+              renderLabel={({ route, focused, color }) => <TabBarLabel tintColor={color} title={route.title} />}
             />
           }
           onIndexChange={index => setTabViewNavigationState({ ...tabViewNavigationState, index })}
