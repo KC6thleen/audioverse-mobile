@@ -711,7 +711,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AudioVerse/AudioVerse.entitlements;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T636GPF37H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -724,7 +724,7 @@
 				);
 				INFOPLIST_FILE = AudioVerse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.2.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -748,7 +748,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AudioVerse/AudioVerse.entitlements;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = T636GPF37H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(HOME)/Documents/FacebookSDK",
@@ -760,7 +760,7 @@
 				);
 				INFOPLIST_FILE = AudioVerse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.2.1;
+				MARKETING_VERSION = 3.2.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
