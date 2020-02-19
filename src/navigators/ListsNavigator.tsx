@@ -48,8 +48,8 @@ const Navigator = createStackNavigator({
   ListsTab: {
     screen: ListsTab,
     navigationOptions: ({ navigation }: NavigationInjectedProps) => ({
-      headerTitle: <HeaderTitle title="my_lists" />,
-      headerRight: <HeaderRight navigation={navigation} />,
+      headerTitle: () => <HeaderTitle title="my_lists" />,
+      headerRight: () => <HeaderRight navigation={navigation} />,
     }),
   },
   PlaylistItems: {
@@ -65,7 +65,7 @@ const Navigator = createStackNavigator({
       headerTintColor: headerTintColor,
     }
     if (navigation.state.index !== undefined) {
-      options.header = null
+      options.headerShown = false
     }
     return options
   },

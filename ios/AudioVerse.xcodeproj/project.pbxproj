@@ -57,13 +57,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AudioVerse/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AudioVerse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AudioVerse/main.m; sourceTree = "<group>"; };
-		145BA0449BED33FF580CD062 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse-tvOSTests/Pods-AudioVerse-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* AudioVerse-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AudioVerse-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* AudioVerse-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AudioVerse-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46B354FD92626772799E499A /* Pods-AudioVerse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse/Pods-AudioVerse.release.xcconfig"; sourceTree = "<group>"; };
 		57C5FC3927A07868701F3D53 /* Pods-AudioVerse-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse-tvOSTests/Pods-AudioVerse-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		62AD334B313AB78226380469 /* Pods-AudioVerse-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse-tvOS/Pods-AudioVerse-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		6702911CD3573AFC0F8FF0B9 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerse-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerse-tvOSTests/Pods-AudioVerse-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6EF067DC98447415A570841D /* libPods-AudioVerse-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AudioVerse-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8151F6455B8E94157CCE7C /* Pods-AudioVerseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioVerseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AudioVerseTests/Pods-AudioVerseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		93A9C0F3409FB46556A0E5E7 /* libPods-AudioVerseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AudioVerseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,10 +218,10 @@
 				46B354FD92626772799E499A /* Pods-AudioVerse.release.xcconfig */,
 				B5DDC4F399C75523EB8A7398 /* Pods-AudioVerse-tvOS.debug.xcconfig */,
 				62AD334B313AB78226380469 /* Pods-AudioVerse-tvOS.release.xcconfig */,
-				145BA0449BED33FF580CD062 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */,
 				57C5FC3927A07868701F3D53 /* Pods-AudioVerse-tvOSTests.release.xcconfig */,
 				8C8151F6455B8E94157CCE7C /* Pods-AudioVerseTests.debug.xcconfig */,
 				040C2A8A26760C04FF98C003 /* Pods-AudioVerseTests.release.xcconfig */,
+				6702911CD3573AFC0F8FF0B9 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -337,6 +337,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = T636GPF37H;
 						LastSwiftMigration = 930;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -711,7 +712,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AudioVerse/AudioVerse.entitlements;
-				CURRENT_PROJECT_VERSION = 71;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 72;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T636GPF37H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -724,7 +727,7 @@
 				);
 				INFOPLIST_FILE = AudioVerse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.3.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -732,6 +735,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audioverse.mobile;
 				PRODUCT_NAME = AudioVerse;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioVerse-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -748,7 +752,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AudioVerse/AudioVerse.entitlements;
-				CURRENT_PROJECT_VERSION = 71;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = T636GPF37H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(HOME)/Documents/FacebookSDK",
@@ -760,7 +766,7 @@
 				);
 				INFOPLIST_FILE = AudioVerse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.3.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -768,6 +774,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audioverse.mobile;
 				PRODUCT_NAME = AudioVerse;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AudioVerse-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -843,7 +850,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 145BA0449BED33FF580CD062 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 6702911CD3573AFC0F8FF0B9 /* Pods-AudioVerse-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

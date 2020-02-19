@@ -240,7 +240,7 @@ const Search: React.FC<Props> & NavigationNavigatorProps = ({ navigation, action
 }
 
 Search.navigationOptions = () => ({
-  header: null,
+  headerShown: false,
 })
 
 export default Search

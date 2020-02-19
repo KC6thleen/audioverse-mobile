@@ -12,9 +12,9 @@ exports[`renders correctly 1`] = `
 >
   <RNCSlider
     accessible={true}
-    clickable={false}
     disabled={false}
     enabled={true}
+    focusable={false}
     inverted={false}
     maximumValue={0}
     minimumTrackTintColor="#E53935"
@@ -43,15 +43,7 @@ exports[`renders correctly 1`] = `
         },
       ]
     }
-    thumbImage={
-      Object {
-        "__packager_asset": true,
-        "height": 100,
-        "scale": 2,
-        "uri": "file://assets/full/path/to/directory/icon@2x.png",
-        "width": 100,
-      }
-    }
+    thumbImage={null}
     thumbTintColor="#E53935"
     value={0}
   />

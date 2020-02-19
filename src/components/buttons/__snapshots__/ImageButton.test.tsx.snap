@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `
 <View
   accessibilityRole="button"
   accessible={true}
-  clickable={true}
+  focusable={true}
   isTVSelectable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
   }
 >
   <Image
-    source={1}
+    source="assets/default.png"
   />
 </View>
 `;

@@ -366,7 +366,7 @@ export function* forward() {
 /** 
  * Sets the player rate
 */
-export function* setRate({ rate }: { rate: number }) {
+export function* setRate({ rate }: { type: string, rate: number }) {
   yield call(TrackPlayer.setRate, rate)
   yield put(playbackRate(rate))
 }

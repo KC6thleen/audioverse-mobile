@@ -1,0 +1,38 @@
+diff --git a/node_modules/react-native-swiper/src/index.js b/node_modules/react-native-swiper/src/index.js
+index d9deeb4..2d6251b 100644
+--- a/node_modules/react-native-swiper/src/index.js
++++ b/node_modules/react-native-swiper/src/index.js
+@@ -7,14 +7,13 @@ import PropTypes from 'prop-types'
+ import {
+   Text,
+   View,
+-  ViewPropTypes,
+   ScrollView,
+   Dimensions,
+   TouchableOpacity,
+-  ViewPagerAndroid,
+   Platform,
+   ActivityIndicator
+ } from 'react-native'
++import ViewPager from '@react-native-community/viewpager'
+ 
+ /**
+  * Default styles
+@@ -649,7 +648,7 @@ export default class extends Component {
+        )
+     }
+     return (
+-      <ViewPagerAndroid ref={this.refScrollView}
++      <ViewPager ref={this.refScrollView}
+         {...this.props}
+         initialPage={this.props.loop ? this.state.index + 1 : this.state.index}
+         onPageScrollStateChanged={this.onPageScrollStateChanged}
+@@ -657,7 +656,7 @@ export default class extends Component {
+         key={pages.length}
+         style={[styles.wrapperAndroid, this.props.style]}>
+         {pages}
+-      </ViewPagerAndroid>
++      </ViewPager>
+     )
+   }
+ 

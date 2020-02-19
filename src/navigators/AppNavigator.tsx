@@ -1,11 +1,7 @@
 import React from 'react'
-import {
-  Easing,
-  Animated,
-} from 'react-native'
 import { createSwitchNavigator, createAppContainer, NavigationInjectedProps } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Icon } from 'react-native-elements'
 
 import { GlobalStyles, headerTintColor, primaryColor } from '../styles'
@@ -43,8 +39,8 @@ const DiscoverNavigator = createStackNavigator({
   defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
-    headerTitle: <HeaderTitle title="discover" />,
-    headerRight: <HeaderRight navigation={navigation} />,
+    headerTitle: () => <HeaderTitle title="discover" />,
+    headerRight: () => <HeaderRight navigation={navigation} />,
   }),
 })
 
@@ -56,38 +52,37 @@ const WithPlayerMenuNavigator = withPlayer(MenuNavigator)
 
 const screenNavigationOptions = (title: string, icon: string) => ({
   tabBarIcon: ({ focused, horizontal, tintColor }: {[key: string]: any}) => {
-    return <Icon type="material" name={icon} size={25} color={tintColor} />
+    return <Icon type="feather" name={icon} size={25} color={tintColor} />
   },
-  renderLabel: ({ route, focused, color }: {[key: string]: any}) => {
-   return <BottomTabBarLabel tintColor={color} title={title} />
+  renderLabel: ({ tintColor }: {[key: string]: any}) => {
+   return <BottomTabBarLabel tintColor={tintColor} title={title} />
   },
 })
 
-const BottomTabNavigator = createMaterialBottomTabNavigator({
+const BottomTabNavigator = createBottomTabNavigator({
   Presentations: {
     screen: WithPlayerPresentationsNavigator,
     navigationOptions: screenNavigationOptions('home', 'home'),
   },
   Discover: {
     screen: WithPlayerDiscoverNavigator,
-    navigationOptions: screenNavigationOptions('discover', 'view-carousel'),
+    navigationOptions: screenNavigationOptions('discover', 'grid'),
   },
   Bible: {
     screen: WithPlayerBibleNavigator,
-    navigationOptions: screenNavigationOptions('bible', 'add-box'),
+    navigationOptions: screenNavigationOptions('bible', 'book'),
   },
   Books: {
     screen: WithPlayerBooksNavigator,
-    navigationOptions: screenNavigationOptions('books', 'book'),
+    navigationOptions: screenNavigationOptions('books', 'book-open'),
   },
   Menu: {
     screen: WithPlayerMenuNavigator,
     navigationOptions: screenNavigationOptions('menu', 'menu'),
   },
 }, {
-  activeColor: primaryColor,
-  barStyle: {
-    backgroundColor: '#FFF',
+  tabBarOptions: {
+    activeTintColor: primaryColor,
   },
 })
 
@@ -95,7 +90,7 @@ const PlayerStackNavigator = createStackNavigator({
   Player: {
     screen: Player,
     navigationOptions: {
-      header: null,
+      headerShown: false,
     },
   },
   Transcript,
@@ -117,36 +112,13 @@ const StackModalNavigator = createStackNavigator({
   AddToPlaylist,
   NewPlaylist,
 },{
-  transparentCard: true,
   mode: 'modal',
   headerMode: 'none',
   defaultNavigationOptions: {
-    gesturesEnabled: true,
+    gestureEnabled: true,
+    cardStyle: { backgroundColor: 'transparent' },
+    ...TransitionPresets.ModalSlideFromBottomIOS
   },
-  transitionConfig: () => ({
-    transitionSpec: {
-      duration: 300,
-      easing: Easing.out(Easing.poly(4)),
-      timing: Animated.timing,
-    },
-    screenInterpolator: (sceneProps: {[key: string]: any}) => {
-      const { layout, position, scene } = sceneProps
-      const { index } = scene
-
-      const height = layout.initHeight
-      const translateY = position.interpolate({
-        inputRange: [index - 1, index, index + 1],
-        outputRange: [height, 0, 0],
-      })
-
-      const opacity = position.interpolate({
-        inputRange: [index - 1, index - 0.10, index],
-        outputRange: [0, 1, 1],
-      })
-
-      return { opacity, transform: [{ translateY }] }
-    },
-  })
 })
 
 const AppNavigator = createSwitchNavigator({

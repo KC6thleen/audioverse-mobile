@@ -26,6 +26,16 @@ const data: Item[] = [
     icon: 'list',
   },
   {
+    title: 'bible',
+    routeName: 'Bible',
+    icon: 'book',
+  },
+  {
+    title: 'books',
+    routeName: 'Books',
+    icon: 'book-open',
+  },
+  {
     title: 'Scripture_Songs',
     routeName: 'ScriptureSongs',
     icon: 'music',

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { createMigrate, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import AsyncStorage from '@react-native-community/async-storage';
 import { Track } from 'react-native-track-player'
 
 import * as ActionTypes from '../actions'
@@ -284,7 +284,7 @@ const migrations: any = {
 // persist reducer
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
   whitelist: ['settings', 'playback', 'bible', 'user', 'lists', 'presenters'],
   timeout: 0, // disable timeout https://github.com/rt2zz/redux-persist/issues/717
   version: 2,

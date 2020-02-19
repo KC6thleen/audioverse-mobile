@@ -7,7 +7,8 @@ export const GlobalStyles = StyleSheet.create({
   header: {
     backgroundColor: primaryColor,
     elevation: 0,
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    shadowOpacity: 0,
   },
   tab: {
     backgroundColor: primaryColor

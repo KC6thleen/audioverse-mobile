@@ -8,6 +8,8 @@ import HeaderTitle from './headertitle'
 import HeaderRight from './HeaderRight'
 import Downloads from '../containers/lists/downloads'
 import MyListsNavigator from './ListsNavigator'
+import BibleNavigator from './BibleNavigator'
+import BooksNavigator from './BooksNavigator'
 import ScriptureSongsNavigator from './ScriptureSongsNavigator'
 import Stories from '../containers/stories'
 import Story from '../containers/stories/story'
@@ -32,10 +34,26 @@ MyListsNavigator.params = {
 MyListsNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => {
   const options: {[key: string]: any} = {}
   if (navigation.state.index > 0) {
-    options.header = null
+    options.headerShown = false
   }
   return options
 }
+
+BibleNavigator.params = {
+  title: 'bible',
+  showBackButton: true,
+}
+BibleNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => ({
+  headerShown: false,
+})
+
+BooksNavigator.params = {
+  title: 'books',
+  showBackButton: true,
+}
+BooksNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => ({
+  headerShown: false,
+})
 
 ScriptureSongsNavigator.params = {
   title: 'Scripture_Songs',
@@ -43,7 +61,7 @@ ScriptureSongsNavigator.params = {
 ScriptureSongsNavigator.navigationOptions = ({ navigation }: NavigationInjectedProps) => {
   const options: {[key: string]: any} = {}
   if (navigation.state.index > 0) {
-    options.header = null
+    options.headerShown = false
   }
   return options
 }
@@ -67,6 +85,8 @@ const Navigator = createStackNavigator({
     },
   },
   MyLists: MyListsNavigator,
+  Bible: BibleNavigator,
+  Books: BooksNavigator,
   ScriptureSongs: ScriptureSongsNavigator,
   Stories: {
     screen: Stories,
@@ -151,8 +171,8 @@ const Navigator = createStackNavigator({
   defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
-    headerTitle: <HeaderTitle title={navigation.state.params ? navigation.state.params.title : ''} />,
-    headerRight: <HeaderRight navigation={navigation} />,
+    headerTitle: () => <HeaderTitle title={navigation.state.params ? navigation.state.params.title : ''} />,
+    headerRight: () => <HeaderRight navigation={navigation} />,
   }),
 })
 

@@ -85,7 +85,7 @@ const ScriptureSongsStack = createStackNavigator({
       headerTintColor: headerTintColor,
     }
     if (navigation.state.index !== undefined) {
-      options.header = null
+      options.headerShown = false
     }
     return options
   },

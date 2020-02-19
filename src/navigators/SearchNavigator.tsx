@@ -17,7 +17,7 @@ const Navigator = createStackNavigator({
   Serie,
 }, {
   navigationOptions: {
-    header: null,
+    headerShown: false,
   },
   defaultNavigationOptions: {
     headerStyle: GlobalStyles.header,

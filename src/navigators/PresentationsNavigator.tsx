@@ -50,8 +50,8 @@ const Navigator = createStackNavigator({
   defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => ({
     headerStyle: GlobalStyles.header,
     headerTintColor: headerTintColor,
-    headerTitle: <HeaderTitle title="presentations" />,
-    headerRight: <HeaderRight navigation={navigation} />,
+    headerTitle: () => <HeaderTitle title="presentations" />,
+    headerRight: () => <HeaderRight navigation={navigation} />,
   }),
 })
 

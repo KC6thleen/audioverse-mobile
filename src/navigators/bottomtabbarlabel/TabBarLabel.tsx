@@ -13,7 +13,6 @@ const TabBarLabel: React.FC<Props> = ({ language, tintColor, title }) => (
   <Text
     numberOfLines={1}
     style={{
-      paddingTop: 2,
       fontSize: 12,
       color: tintColor,
       textAlign: 'center',

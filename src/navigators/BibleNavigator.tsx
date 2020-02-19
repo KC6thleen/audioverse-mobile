@@ -1,6 +1,7 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
-import { createStackNavigator } from 'react-navigation-stack'
+import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack'
+import { NavigationInjectedProps } from 'react-navigation'
 
 import HeaderRightBibleVerses from './headerrightbibleverses'
 import TabBarLabel from './tabbarlabel'
@@ -46,14 +47,20 @@ const Navigator = createStackNavigator({
   BibleTabsNavigator: {
     screen: BibleTabsNavigator,
     navigationOptions: () => ({
-      headerTitle: <HeaderTitle title="bible" />,
-      headerRight: <HeaderRightBibleVerses />,
+      headerTitle: () => <HeaderTitle title="bible" />,
+      headerRight: () => <HeaderRightBibleVerses />,
     }),
   }
 }, {
-  defaultNavigationOptions: {
-    headerStyle: GlobalStyles.header,
-    headerTintColor: headerTintColor,
+  defaultNavigationOptions: ({ navigation }: NavigationInjectedProps) => {
+    const options: {[key: string]: any}  = {
+      headerStyle: GlobalStyles.header,
+      headerTintColor: headerTintColor,
+    }
+    if (navigation.state.params && navigation.state.params.showBackButton) {
+      options.headerLeft = () => <HeaderBackButton tintColor={headerTintColor} onPress={() => {navigation.pop()}} />
+    }
+    return options
   },
 })
 
