@@ -1,9 +1,9 @@
 # AudioVerse Mobile
 
-This is the repository for the next-generation iOS and Android apps for AudioVerse in React Native
+This is the repository for the next-generation iOS and Android apps for AudioVerse in React Native.
 
 AudioVerse is a website dedicated to spreading God's word through free sermon audio and much more. If you would like to 
-learn more about AudioVerse please visit https://audioverse.org
+learn more about AudioVerse please visit [https://audioverse.org](https://audioverse.org).
 
 You can download our apps from the [App Store](https://itunes.apple.com/us/app/audioverse/id726998810?mt=8) or 
 [Google Play Store](https://play.google.com/store/apps/details?id=org.audioverse.exodus) or build them yourself using 
