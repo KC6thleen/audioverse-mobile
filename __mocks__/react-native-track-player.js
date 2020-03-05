@@ -1,5 +1,5 @@
 jest.mock('react-native-track-player', () => {
-  const React = require('React')
+  const React = require('react')
   class ProgressComponent extends React.PureComponent {
     constructor(props) {
       super(props)
