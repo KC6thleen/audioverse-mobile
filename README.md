@@ -14,7 +14,7 @@ this repository. For Android you can also get the latest version
 
 # How to contribute
 
-## Testing
+## Contributing
 
 1. Report bugs by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
 2. Make feature requests by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
@@ -77,6 +77,15 @@ If you see this error inside the iOS emulator, it means the [Metro Bundler](http
 accessible inside the emulator. This may be because you forgot to start it. Run either `npm start` or 
 `docker-compose up`, check that the bundler has finished starting up by visiting [localhost:8081](http://localhost:8081/) 
 in a browser, and then re-run `react-native run-ios`.
+
+## Testing
+
+To run the test suite, run one of the following commands, depending on whether or not you're using Docker:
+
+```bash
+npm test
+docker-compose run --rm node npm test
+```
 
 ## Deployment
 
