@@ -76,7 +76,7 @@ const MiniPlayer: React.FC<Props> = ({ navigation, track, actions }) => {
   const handlePress = () => { navigation.navigate({ routeName: 'Player' }) }
 
   const rightAvatar = loading || playbackState === PlayerState.Buffering
-    ? <ActivityIndicator size="large" />
+    ? <ActivityIndicator size="large" color="black" />
     : undefined
 
   const rightElement = <ImageButton

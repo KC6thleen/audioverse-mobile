@@ -96,7 +96,7 @@ const PlayerControls: React.FC<Props> = ({ playPause, skipToPrevious, skipToNext
         accessibilityLabel={I18n.t("previous")}
       />
       { loading || playbackState === PlayerState.Buffering
-        ? <ActivityIndicator size="large" />
+        ? <ActivityIndicator size="large" color="black" />
         : <ImageButton
             source={playbackState === PlayerState.Playing ? iconPause : iconPlay}
             style={styles.playPauseButton}

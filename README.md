@@ -62,6 +62,22 @@ this repository. For Android you can also get the latest version
 1. Keep the GoogleService-Info.plist file in your ~/Downloads folder
 1. `react-native run-ios`
 
+#### Debugging
+
+##### error: Multiple commands produce '...'
+
+If you have Xcode >= 11 installed and receive this error when running `react-native run-ios`, you may need to 
+[remove the offending assets](https://github.com/oblador/react-native-vector-icons/issues/1074#issuecomment-534027196)
+from the list of assets in the "Copy Bundle Resources" [build phase](https://help.apple.com/xcode/mac/10.2/#/dev50bab713d)
+from within the Xcode IDE. After doing so, rerun `react-native run-ios`.
+
+##### No bundle URL present.
+
+If you see this error inside the iOS emulator, it means the [Metro Bundler](https://facebook.github.io/metro/) isn't 
+accessible inside the emulator. This may be because you forgot to start it. Run either `npm start` or 
+`docker-compose up`, check that the bundler has finished starting up by visiting [localhost:8081](http://localhost:8081/) 
+in a browser, and then re-run `react-native run-ios`.
+
 ## Deployment
 
 These instructions are for use by the AudioVerse internal team.
