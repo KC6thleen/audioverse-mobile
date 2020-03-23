@@ -14,12 +14,27 @@ this repository. For Android you can also get the latest version
 
 # How to contribute
 
-## Testing
+## Contributing
 
-1. Report bugs by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
-2. Make feature requests by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
+- Report bugs by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
+- Make feature requests by filing a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues)
+- Find a [GitHub issue](https://github.com/avorg/audioverse-mobile/issues) to work on and leave a comment to let other
+  people know you're working on it
 
 ## Development
+
+### Usage
+
+Complete first-time setup before running these commands.
+
+1. Start Metro Bundler: `npm start` or `docker-compose up`
+1. Open [http://localhost:8081/debugger-ui/](http://localhost:8081/debugger-ui/) in Chrome on host machine, and open
+   Chrome console
+1. Check that the bundler has finished starting up by visiting [localhost:8081](http://localhost:8081/) 
+   in another tab
+1. `react-native run-android` or `react-native run-ios`
+
+### First-time setup
 
 1. Ensure you have react-native installed locally
 1. Ensure you have npm and/or Docker installed locally
@@ -28,11 +43,8 @@ this repository. For Android you can also get the latest version
 1. Setup your [Firebase project](https://console.firebase.google.com/)
 1. Email technical@audioverse.org to request a .env file for API access
 1. Place the .env file you receive in the project root
-1. Look in our [GitHub repository](https://github.com/avorg/audioverse-mobile/issues) for issues marked as [Help Wanted]
-1. Comment to let people know you're working on it
-1. Start Metro Bundler: `npm start` or `docker-compose up`
 
-### Android
+#### Android
 
 1. Install [Android Studio](https://developer.android.com/studio/) (optionally via 
    [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/))
@@ -48,10 +60,9 @@ this repository. For Android you can also get the latest version
 1. During the registration process, download the google-services.json file 
    ([reference](https://rnfirebase.io/docs/v5.x.x/installation/initial-setup))
 1. Place the google-services.json file in the android/app directory
-1. Create and launch an AVD (Android Virtual Device) from Android Studio
-1. `react-native run-android`
+1. Create an AVD (Android Virtual Device) from Android Studio
 
-### iOS
+#### iOS
 
 1. Install [Xcode](https://developer.apple.com/xcode/)
 1. Install [Cocoapods](https://cocoapods.org/): `sudo gem install cocoapods` or `brew install cocoapods`
@@ -60,7 +71,38 @@ this repository. For Android you can also get the latest version
 1. During the registration process, download the GoogleService-Info.plist file 
    ([reference](https://rnfirebase.io/docs/v5.x.x/installation/initial-setup))
 1. Keep the GoogleService-Info.plist file in your ~/Downloads folder
-1. `react-native run-ios`
+
+### Debugging
+
+#### error: Multiple commands produce '...'
+
+If you have Xcode >= 11 installed and receive this error when running `react-native run-ios`, you may need to 
+[remove the offending assets](https://github.com/oblador/react-native-vector-icons/issues/1074#issuecomment-534027196)
+from the list of assets in the "Copy Bundle Resources" [build phase](https://help.apple.com/xcode/mac/10.2/#/dev50bab713d)
+from within the Xcode IDE. After doing so, rerun `react-native run-ios`.
+
+#### No bundle URL present.
+
+If you see this error inside the iOS emulator, it means the [Metro Bundler](https://facebook.github.io/metro/) isn't 
+accessible inside the emulator. This may be because you forgot to start it. Run either `npm start` or 
+`docker-compose up`, check that the bundler has finished starting up by visiting [localhost:8081](http://localhost:8081/) 
+in a browser, and then re-run `react-native run-ios`.
+
+#### Runtime is not ready for debugging.
+
+- Confirm that the bundler has finished starting up by visiting [localhost:8081](http://localhost:8081/) in a browser
+- Open [http://localhost:8081/debugger-ui/](http://localhost:8081/debugger-ui/) in Chrome on host machine, and open
+  Chrome console
+- Reload the app by hitting command-R with the emulator focused
+
+## Testing
+
+To run the test suite, run one of the following commands, depending on whether or not you're using Docker:
+
+```bash
+npm test
+docker-compose run --rm node npm test
+```
 
 ## Deployment
 
