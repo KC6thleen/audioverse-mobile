@@ -15,7 +15,8 @@ import { parseRecording } from '../utils'
  * @param {object} body
  */
 async function callApi(endpoint: string, parse: ((json: {[key: string]: any}) => {}) | null, method: string = 'GET', body: any = null) {
-  const fullUrl = !endpoint.match('^http') ? BASE_URL + endpoint : endpoint
+  // Removing the semicolon at the end of the following line breaks API calls in the iOS simulator.
+  const fullUrl = !endpoint.match('^http') ? BASE_URL + endpoint : endpoint;
   const response: {[key: string]: any} = await fetch(fullUrl, {
     method: method,
     headers: {
