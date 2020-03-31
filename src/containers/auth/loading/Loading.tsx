@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import {
   View,
   ActivityIndicator,
-  StatusBar,
   StyleSheet,
 } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -37,7 +36,6 @@ const Loading: React.FC<Props> = ({ navigation, user }) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator />
-      <StatusBar barStyle="default" />
     </View>
   )
 }

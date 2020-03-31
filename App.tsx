@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react'
-import { Linking } from 'react-native'
+import {Linking, StatusBar, View} from 'react-native'
 import { NavigationState, NavigationRoute } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -157,6 +157,10 @@ export const App: React.FC<Props> = ({ store, persistor }) => {
     <Provider store={store}>
       {/* PersistGate delays the rendering of the UI until the persisted state has been retrieved and saved to redux */}
       <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
+        <StatusBar
+          backgroundColor="#000000"
+          barStyle="light-content"
+        />
         <AppNavigator
           ref={(navigatorRef: any) => { NavigationService.setTopLevelNavigator(navigatorRef) }}
           onNavigationStateChange={(prevState: NavigationState, currentState: NavigationState) => {

@@ -2,7 +2,6 @@ import React from 'react'
 import {
   ImageBackground,
   View,
-  StatusBar,
   Platform,
   StyleSheet,
 } from 'react-native'
@@ -184,10 +183,6 @@ const Player: React.FC<Props> = ({
       source={imageBg}
       style={styles.container}>
       <View style={styles.bar}>
-        <StatusBar
-          backgroundColor="#E53935"
-          barStyle="light-content"
-        />
         <ListItem
           leftAvatar={
             {
